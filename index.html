@@ -53,6 +53,8 @@
   tr:last-child th,tr:last-child td{border-bottom:none;}
   tr.grp td{background:#F1F4FB;font-size:12px;font-weight:700;letter-spacing:.04em;color:#3B4A66;text-transform:uppercase;padding:10px 18px;}
   td.both{color:#3B4A66;}
+  .cmp-sw{display:flex;gap:5px;margin-bottom:7px;}
+  .cmp-sw span{width:18px;height:18px;border-radius:5px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06);}
   .common{margin-top:22px;background:#fff;border-radius:20px;box-shadow:0 18px 40px rgba(112,144,176,.1);padding:26px 28px;}
   .common h3{font-size:15px;font-weight:800;margin-bottom:14px;}
   .chips{display:flex;flex-wrap:wrap;gap:9px;}
@@ -103,7 +105,7 @@
           <tbody>
             <tr class="grp"><td colspan="3">디자인 차이</td></tr>
             <tr><th>내비게이션</th><td>상단 가로 탭 + 메가메뉴</td><td>좌측 접이식 사이드바</td></tr>
-            <tr><th>브랜드 컬러</th><td>민트 / Teal (#4FD1C5)</td><td>인디고 / Indigo (#4318FF)</td></tr>
+            <tr><th>브랜드 컬러</th><td><div class="cmp-sw"><span style="background:#4FD1C5"></span><span style="background:#38B2AC"></span><span style="background:#2D3748"></span><span style="background:#EDF2F7"></span></div>민트 / Teal (#4FD1C5)</td><td><div class="cmp-sw"><span style="background:#4318FF"></span><span style="background:#7551FF"></span><span style="background:#2B3674"></span><span style="background:#F4F7FE"></span></div>인디고 / Indigo (#4318FF)</td></tr>
             <tr><th>정보 밀도</th><td>높음 (컴팩트·실무형)</td><td>중간 (여백·카드형)</td></tr>
             <tr><th>레이아웃</th><td>목록 + 상세 분할 (너비 조절)</td><td>카드 구획 + 슬라이드 상세</td></tr>
             <tr><th>세로 공간</th><td>넓음 (상단 바 1줄)</td><td>보통 (상단 바 + 여백)</td></tr>
