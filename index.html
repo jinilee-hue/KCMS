@@ -6,30 +6,51 @@
 <title>POLY KCMS · 학생 등록 화면 리디자인 시안</title>
 <style>
   *{box-sizing:border-box;margin:0;padding:0;}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
+  body{min-height:100vh;padding:48px 20px 60px;
     font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-    background:linear-gradient(135deg,#F4F7FE 0%,#EDF2F7 100%);color:#1A202C;}
-  .wrap{width:100%;max-width:760px;}
-  .head{text-align:center;margin-bottom:36px;}
+    background:linear-gradient(135deg,#F4F7FE 0%,#EDF2F7 100%);color:#1A202C;line-height:1.5;}
+  .wrap{width:100%;max-width:960px;margin:0 auto;}
+  .head{text-align:center;margin-bottom:40px;}
   .kicker{font-size:13px;font-weight:700;letter-spacing:.08em;color:#4318FF;text-transform:uppercase;margin-bottom:10px;}
-  h1{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
-  .sub{font-size:15px;color:#5A6B87;line-height:1.6;}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-  @media(max-width:620px){.cards{grid-template-columns:1fr;}}
-  .card{display:block;text-decoration:none;color:inherit;background:#fff;border-radius:18px;padding:28px 24px;
-    box-shadow:0 18px 40px rgba(112,144,176,.14);transition:transform .18s ease,box-shadow .18s ease;border:1px solid #fff;}
-  .card:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(112,144,176,.22);}
-  .tag{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:70px;font-size:12px;font-weight:700;margin-bottom:14px;}
+  h1{font-size:31px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;}
+  .sub{font-size:15px;color:#5A6B87;line-height:1.65;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
+  @media(max-width:720px){.cards{grid-template-columns:1fr;}}
+  .card{display:flex;flex-direction:column;background:#fff;border-radius:20px;padding:30px 28px;
+    box-shadow:0 18px 40px rgba(112,144,176,.14);border:1px solid #fff;}
+  .tag{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 13px;border-radius:70px;font-size:12px;font-weight:700;margin-bottom:14px;}
   .a .tag{background:#DCF3F1;color:#2C9A90;}
   .b .tag{background:#E9E3FF;color:#4318FF;}
-  .card h2{font-size:20px;font-weight:800;margin-bottom:6px;}
-  .card p{font-size:13.5px;color:#5A6B87;line-height:1.6;}
-  .swatch{display:flex;gap:6px;margin-top:16px;}
-  .swatch span{width:22px;height:22px;border-radius:6px;}
-  .go{margin-top:18px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;}
-  .a .go{color:#2C9A90;}
-  .b .go{color:#4318FF;}
-  .foot{text-align:center;margin-top:30px;font-size:12.5px;color:#8493AD;}
+  .card h2{font-size:21px;font-weight:800;margin-bottom:6px;}
+  .lead{font-size:14px;color:#5A6B87;margin-bottom:20px;}
+  .spec{list-style:none;display:flex;flex-direction:column;gap:13px;margin-bottom:22px;}
+  .spec li{display:flex;gap:12px;font-size:13.5px;}
+  .spec .k{flex:0 0 78px;font-weight:700;color:#2D3748;}
+  .spec .v{color:#5A6B87;}
+  .swatch{display:flex;gap:6px;margin-bottom:20px;}
+  .swatch span{width:24px;height:24px;border-radius:7px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.05);}
+  .go{margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:7px;height:46px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,background .15s ease;}
+  .a .go{background:#4FD1C5;color:#0C3B37;}
+  .a .go:hover{background:#38B2AC;color:#fff;transform:translateY(-2px);box-shadow:0 10px 22px rgba(56,178,172,.35);}
+  .b .go{background:#4318FF;color:#fff;}
+  .b .go:hover{background:#3311DB;transform:translateY(-2px);box-shadow:0 10px 22px rgba(67,24,255,.32);}
+
+  .section-title{font-size:13px;font-weight:700;letter-spacing:.06em;color:#8493AD;text-transform:uppercase;text-align:center;margin:48px 0 18px;}
+  .cmp{background:#fff;border-radius:20px;box-shadow:0 18px 40px rgba(112,144,176,.1);overflow:hidden;}
+  .cmp-scroll{overflow-x:auto;}
+  table{width:100%;border-collapse:collapse;min-width:560px;font-size:13.5px;}
+  th,td{padding:14px 18px;text-align:left;border-bottom:1px solid #EDF2F7;vertical-align:top;}
+  thead th{font-size:12.5px;font-weight:700;color:#2D3748;background:#F8FAFC;}
+  thead th.col-a{color:#2C9A90;}
+  thead th.col-b{color:#4318FF;}
+  tbody th{font-weight:700;color:#2D3748;width:130px;white-space:nowrap;}
+  td{color:#5A6B87;}
+  tr:last-child th,tr:last-child td{border-bottom:none;}
+  .common{margin-top:22px;background:#fff;border-radius:20px;box-shadow:0 18px 40px rgba(112,144,176,.1);padding:26px 28px;}
+  .common h3{font-size:15px;font-weight:800;margin-bottom:14px;}
+  .chips{display:flex;flex-wrap:wrap;gap:9px;}
+  .chip{display:inline-flex;align-items:center;height:30px;padding:0 13px;border-radius:70px;background:#F4F7FE;color:#3B4A66;font-size:12.5px;font-weight:600;}
+  .foot{text-align:center;margin-top:34px;font-size:12.5px;color:#8493AD;}
 </style>
 </head>
 <body>
@@ -37,25 +58,80 @@
     <div class="head">
       <div class="kicker">POLY KCMS Redesign</div>
       <h1>학생 등록 화면 리디자인 시안</h1>
-      <p class="sub">동일 화면(학생 등록)을 두 가지 디자인 방향으로 구현했습니다.<br>각 시안을 클릭해 실제 동작(필터·폼·상세·차트·스크롤)을 확인하세요.</p>
+      <p class="sub">동일한 '학생 등록' 화면을 서로 다른 두 디자인 철학으로 구현했습니다.<br>두 시안은 <b>같은 데이터·같은 기능</b>을 담되, 내비게이션 구조·색·정보 밀도에서 뚜렷이 갈립니다.</p>
     </div>
+
     <div class="cards">
-      <a class="card a" href="A%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.dc.html">
+      <!-- A -->
+      <div class="card a">
         <span class="tag">A형 · Teal Workbench</span>
         <h2>밀도형 업무 화면</h2>
-        <p>상단 탭 내비게이션, 민트(Teal) 포인트, 정보 밀도를 높인 실무 중심 레이아웃.</p>
+        <p class="lead">한 화면에서 최대한 많은 정보를 빠르게 다루는 <b>실무 집중형</b> 레이아웃입니다.</p>
+        <ul class="spec">
+          <li><span class="k">내비게이션</span><span class="v">상단 가로 탭 + 메가메뉴 드롭다운 (화면 폭을 세로로 더 확보)</span></li>
+          <li><span class="k">화면 구성</span><span class="v">좌측 목록 + 우측 상세 패널 동시 표시 · 가운데 핸들로 너비 조절</span></li>
+          <li><span class="k">색·톤</span><span class="v">민트(Teal) 포인트, 촘촘한 테이블, 컴팩트한 여백</span></li>
+          <li><span class="k">강점</span><span class="v">높은 정보 밀도 · 목록↔상세 즉시 전환 · 반복 입력에 유리</span></li>
+          <li><span class="k">추천 상황</span><span class="v">데이터 입·출력이 잦은 데스크톱 업무 담당자</span></li>
+        </ul>
         <div class="swatch"><span style="background:#4FD1C5"></span><span style="background:#38B2AC"></span><span style="background:#2D3748"></span><span style="background:#EDF2F7"></span></div>
-        <div class="go">A형 열기 →</div>
-      </a>
-      <a class="card b" href="B%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D%20(Horizon%20LEFT).dc.html">
+        <a class="go" href="A%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.dc.html">A형 열기 →</a>
+      </div>
+
+      <!-- B -->
+      <div class="card b">
         <span class="tag">B형 · Horizon</span>
         <h2>대시보드형 화면</h2>
-        <p>좌측 사이드바 내비게이션, 인디고(Indigo) 브랜드, 카드·여백 중심의 모던 대시보드 레이아웃.</p>
+        <p class="lead">여백과 카드로 정돈한 <b>모던 대시보드형</b> 레이아웃입니다.</p>
+        <ul class="spec">
+          <li><span class="k">내비게이션</span><span class="v">좌측 접이식 사이드바 (대·중·소 메뉴를 한눈에 · 접어서 확장)</span></li>
+          <li><span class="k">화면 구성</span><span class="v">카드 단위 구획 + 우측 슬라이드 상세 패널 · 넉넉한 여백</span></li>
+          <li><span class="k">색·톤</span><span class="v">인디고(Indigo) 브랜드, 부드러운 그림자, 라운드 카드</span></li>
+          <li><span class="k">강점</span><span class="v">시각적 위계·가독성 · 메뉴 탐색 직관적 · 심미적 완성도</span></li>
+          <li><span class="k">추천 상황</span><span class="v">관리자·대시보드 뷰, 브랜드 인상을 중시하는 화면</span></li>
+        </ul>
         <div class="swatch"><span style="background:#4318FF"></span><span style="background:#7551FF"></span><span style="background:#2B3674"></span><span style="background:#F4F7FE"></span></div>
-        <div class="go">B형 열기 →</div>
-      </a>
+        <a class="go" href="B%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D%20(Horizon%20LEFT).dc.html">B형 열기 →</a>
+      </div>
     </div>
-    <div class="foot">© POLY KCMS · 내부 검토용 시안</div>
+
+    <!-- comparison -->
+    <div class="section-title">한눈에 비교</div>
+    <div class="cmp">
+      <div class="cmp-scroll">
+        <table>
+          <thead>
+            <tr><th>항목</th><th class="col-a">A형 · Teal Workbench</th><th class="col-b">B형 · Horizon</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>내비게이션</th><td>상단 가로 탭 + 메가메뉴</td><td>좌측 접이식 사이드바</td></tr>
+            <tr><th>브랜드 컬러</th><td>민트 / Teal (#4FD1C5)</td><td>인디고 / Indigo (#4318FF)</td></tr>
+            <tr><th>정보 밀도</th><td>높음 (컴팩트·실무형)</td><td>중간 (여백·카드형)</td></tr>
+            <tr><th>레이아웃</th><td>목록 + 상세 분할 (너비 조절)</td><td>카드 구획 + 슬라이드 상세</td></tr>
+            <tr><th>인상</th><td>빠르고 효율적인 업무 도구</td><td>모던하고 정돈된 대시보드</td></tr>
+            <tr><th>세로 공간</th><td>넓음 (상단 바 1줄)</td><td>보통 (상단 바 + 여백)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- common -->
+    <div class="common">
+      <h3>두 시안 공통 구현 기능</h3>
+      <div class="chips">
+        <span class="chip">검색 필터 (상태·학번·레벨·학급)</span>
+        <span class="chip">인라인 폼 입력·저장</span>
+        <span class="chip">커스텀 셀렉트·드롭다운</span>
+        <span class="chip">학생 목록 ↔ 상세 연동</span>
+        <span class="chip">상세 탭 (기본·배정·출결·성적·수납·메모)</span>
+        <span class="chip">성적 차트 (반평균 비교)</span>
+        <span class="chip">출결 캘린더</span>
+        <span class="chip">상태 배지·페이지네이션</span>
+        <span class="chip">커스텀 오버레이 스크롤바</span>
+      </div>
+    </div>
+
+    <div class="foot">© POLY KCMS · 내부 검토용 시안 · 데스크톱 Chrome 권장</div>
   </div>
 </body>
 </html>
