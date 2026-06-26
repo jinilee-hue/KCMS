@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/tokens/colors.css">
+<link rel="stylesheet" href="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/tokens/typography.css">
+<link rel="stylesheet" href="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/tokens/spacing.css">
+<link rel="stylesheet" href="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/styles.css">
+<script src="_ds/dashboard-pb-design-system-ea160bbf-cd6f-4742-81fd-33d33d67750a/_ds_bundle.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+<style>
+  html,body{margin:0;padding:0;}
+  *{box-sizing:border-box;}
+  :root{--radius-xl:14px;}
+  ::-webkit-scrollbar{width:6px;height:6px;}
+  ::-webkit-scrollbar-thumb{background:#D6DEEC;border-radius:8px;}
+  ::-webkit-scrollbar-track{background:transparent;}
+  .num{font-variant-numeric:tabular-nums;}
+  .kc-filter-grid{grid-template-columns:repeat(6,1fr);}
+  @media (max-width:1280px){.kc-filter-grid{grid-template-columns:repeat(3,1fr);}}
+  @media (max-width:720px){.kc-filter-grid{grid-template-columns:repeat(2,1fr);}}
+  .kc-dom:hover{background:var(--gray-100)!important;}
+  .kc-dom:hover span{color:var(--neutral-700)!important;}
+  .kc-dom-on:hover{background:var(--brand-hover)!important;}
+  .kc-dom-on:hover span{color:#fff!important;}
+  .kc-filter-head:hover .kc-filter-chev{color:var(--brand)!important;}
+  .kc-th{position:relative;}
+  .kc-th::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:1px;height:13px;background:var(--gray-200);}
+  @keyframes kc-fill{from{transform:scaleX(0);}to{transform:scaleX(1);}}
+  .kc-bar{transform-origin:left center;animation:kc-fill .7s cubic-bezier(0.16,1,0.3,1);}
+  @media (prefers-reduced-motion:reduce){.kc-bar{animation:none;}}
+  .kc-scroll::-webkit-scrollbar{width:6px;height:6px;}
+  .kc-scroll::-webkit-scrollbar-thumb{background:#D6DEEC;border-radius:8px;}
+  .kc-scroll::-webkit-scrollbar-track{background:transparent;}
+  .noscroll::-webkit-scrollbar{height:0;width:0;}
+  .kc-rows{overflow-y:auto;overflow-x:hidden;scrollbar-width:none;height:100%;}
+  .kc-rows::-webkit-scrollbar{display:none;}
+  .kc-rows::-webkit-scrollbar-track{background:transparent;}
+  .kc-thumb{position:absolute;top:0;right:4px;width:6px;border-radius:6px;background:rgba(214,222,236,.9);opacity:0;transition:opacity .25s ease;cursor:pointer;display:none;z-index:10;}
+  .kc-thumb:hover,.kc-thumb.kc-dragging{background:rgba(194,205,227,1);}
+  .kc-lnb{scrollbar-width:none;}
+  .kc-lnb::-webkit-scrollbar{display:none;}
+  .kc-rows .kc-row-sel:hover{background:var(--white)!important;}
+</style>
+</helmet>
+
+<div style="display:flex;height:100vh;width:100%;overflow:hidden;background:var(--gray-50);font-family:'DM Sans','Pretendard',sans-serif;color:var(--navy);">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside style="flex:0 0 auto;width:{{ sidebarW }};background:var(--white);display:flex;flex-direction:column;box-shadow:0 0 0 1px var(--gray-200);transition:width .2s var(--ease-standard);position:relative;z-index:30;">
+
+    <!-- collapse/expand toggle (edge) -->
+    <div onClick="{{ toggleSidebar }}" title="{{ toggleTitle }}" style="position:absolute;top:20px;right:-16px;z-index:40;width:32px;height:32px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;color:var(--gray-600);cursor:pointer;" style-hover="color:var(--brand)!important;">
+      <span style="display:inline-flex;transform:rotate({{ toggleRot }});transition:transform .2s ease;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></span>
+    </div>
+
+    <!-- brand -->
+    <div style="flex:0 0 auto;display:flex;align-items:center;gap:11px;height:72px;padding:0 18px;">
+      <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+        <div style="line-height:1.05;">
+          <div style="font-family:var(--font-display);font-weight:800;font-size:26px;letter-spacing:-.03em;color:var(--navy);">POLY <span style="color:var(--brand);">KCMS</span></div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ collapsed }}" hint-placeholder-val="{{ false }}">
+        <div style="width:100%;display:flex;justify-content:center;"><div style="flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--font-display);font-weight:800;font-size:18px;">P</div></div>
+      </sc-if>
+    </div>
+    <div style="height:1px;background:var(--gray-200);margin:0 22px 12px;"></div>
+
+    <!-- NAV (expanded accordion) -->
+    <sc-if value="{{ expanded }}" hint-placeholder-val="{{ true }}">
+    <div style="position:relative;flex:1;min-height:0;">
+    <nav class="kc-lnb" style="height:100%;overflow-y:auto;padding:4px 14px 14px;display:flex;flex-direction:column;gap:4px;">
+      <sc-for list="{{ navItems }}" as="d" hint-placeholder-count="8">
+        <div onClick="{{ d.onClick }}" class="{{ d.cls }}" style="position:relative;flex-shrink:0;display:flex;align-items:center;gap:12px;height:44px;padding:0 14px;border-radius:12px;cursor:pointer;background:{{ d.rowBg }};">
+          <span style="flex:0 0 auto;display:inline-flex;color:{{ d.iconColor }};">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.iconPath }}"></path></svg>
+          </span>
+          <span style="flex:1;font-size:15px;font-weight:{{ d.weight }};color:{{ d.labelColor }};white-space:nowrap;">{{ d.name }}</span>
+          <span style="flex:0 0 auto;display:inline-flex;color:var(--gray-400);transform:rotate({{ d.chev }});transition:transform .18s ease;color:{{ d.chevColor }};">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+          </span>
+        </div>
+        <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
+          <div style="flex-shrink:0;padding:2px 0 8px 21px;margin:2px 0 4px 23px;border-left:1px solid var(--gray-200);display:flex;flex-direction:column;gap:2px;">
+            <sc-for list="{{ d.cats }}" as="c" hint-placeholder-count="3">
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--gray-500);text-transform:uppercase;padding:9px 12px 4px;">{{ c.cat }}</div>
+              <sc-for list="{{ c.items }}" as="it" hint-placeholder-count="3">
+                <div onClick="{{ it.onClick }}" style="position:relative;display:flex;align-items:center;height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-size:13.5px;font-weight:{{ it.weight }};color:{{ it.color }};background:{{ it.bg }};white-space:nowrap;" style-hover="color:var(--neutral-700)!important;">
+                  {{ it.name }}
+                  <sc-if value="{{ it.active }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:-22px;top:0;bottom:0;width:1px;background:var(--brand);"></span></sc-if>
+                </div>
+              </sc-for>
+            </sc-for>
+          </div>
+        </sc-if>
+      </sc-for>
+    </nav>
+    <div class="kc-thumb kc-lnb-thumb"></div>
+    </div>
+    </sc-if>
+
+    <!-- NAV (collapsed icon rail + flyout) -->
+    <sc-if value="{{ collapsed }}" hint-placeholder-val="{{ false }}">
+    <div style="position:relative;flex:1;min-height:0;">
+    <nav class="kc-lnb" style="height:100%;overflow-y:auto;overflow-x:visible;padding:4px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;">
+      <sc-for list="{{ navItems }}" as="d" hint-placeholder-count="11">
+        <div onMouseEnter="{{ d.onHover }}" onClick="{{ d.onClick }}" title="{{ d.name }}" style="position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;cursor:pointer;background:{{ d.rowBg }};" style-hover="background:var(--gray-100)!important;">
+          <span style="display:inline-flex;color:{{ d.iconColor }};"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.iconPath }}"></path></svg></span>
+        </div>
+      </sc-for>
+    </nav>
+    <div class="kc-thumb kc-lnb-thumb"></div>
+    </div>
+    </sc-if>
+  </aside>
+
+  <!-- collapsed flyout panel -->
+  <sc-if value="{{ flyout }}" hint-placeholder-val="{{ false }}">
+    <div onMouseLeave="{{ closeFlyout }}" style="position:absolute;left:84px;top:84px;z-index:60;min-width:220px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:14px 12px;">
+      <div style="font-family:var(--font-display);font-weight:800;font-size:14px;color:var(--navy);padding:2px 10px 10px;">{{ flyoutName }}</div>
+      <sc-for list="{{ flyoutCats }}" as="c" hint-placeholder-count="3">
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--gray-500);text-transform:uppercase;padding:8px 10px 3px;">{{ c.cat }}</div>
+        <sc-for list="{{ c.items }}" as="it" hint-placeholder-count="3">
+          <div onClick="{{ it.onClick }}" style="display:flex;align-items:center;height:32px;padding:0 10px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:{{ it.weight }};color:{{ it.color }};white-space:nowrap;" style-hover="background:var(--brand-wash)!important;color:var(--brand)!important;">{{ it.name }}</div>
+        </sc-for>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <!-- ================= MAIN ================= -->
+  <div style="flex:1;min-width:0;display:flex;flex-direction:column;overflow:visible;">
+
+    <!-- NAVBAR -->
+    <header style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px 12px;">
+      <div style="display:flex;align-items:center;gap:14px;min-width:0;">
+        <div style="min-width:0;">
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--gray-600);">
+            <span title="대시보드 홈" style="display:inline-flex;align-items:center;color:var(--gray-500);cursor:pointer;" style-hover="color:var(--brand)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path><path d="M9.5 21v-6h5v6"></path></svg></span>
+            <span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생관리</span><span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생정보</span><span style="color:var(--gray-400);">›</span><span style="color:var(--navy);font-weight:700;">학생 등록</span>
+          </div>
+          <h1 style="margin:3px 0 0;font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--navy);">학생 등록</h1>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:12px;flex:0 0 auto;">
+        <button style="height:52px;padding:0 22px;border:none;border-radius:var(--radius-pill);background:var(--cyan-bright);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;" style-hover="background:#03a8e0!important;box-shadow:0 12px 26px rgba(4,190,254,0.30)!important;">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex-shrink:0;"><path d="M12 5v14M5 12h14"/></svg>
+          신규 등록
+        </button>
+        <div style="display:flex;align-items:center;gap:12px;background:var(--white);border-radius:var(--radius-pill);padding:7px;box-shadow:var(--shadow-sm);">
+        <div style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;position:relative;" style-hover="background:var(--gray-100)!important;">
+          <x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="NotificationsNone" size="19" hint-size="19px,19px"></x-import>
+          <span style="position:absolute;top:7px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--brand);border:1.5px solid var(--white);"></span>
+        </div>
+        <div style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;" style-hover="background:var(--gray-100)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="InfoOutline" size="19" hint-size="19px,19px"></x-import></div>
+        <div style="display:flex;align-items:center;gap:9px;padding-left:4px;cursor:pointer;">
+          <div style="width:38px;height:38px;border-radius:50%;background:var(--gray-100);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;">김</div>
+        </div>
+      </div>
+      <div title="로그아웃" style="flex:0 0 auto;width:46px;height:46px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;" style-hover="color:var(--neutral-700)!important;">
+        <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
+      </div>
+      </div>
+    </header>
+
+    <!-- WORK TABS -->
+    <div class="noscroll" style="flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:2px 28px 14px;overflow-x:auto;">
+      <sc-for list="{{ worktabs }}" as="w" hint-placeholder-count="5">
+        <div onClick="{{ w.onClick }}" style="display:flex;align-items:center;gap:9px;height:34px;padding:0 9px 0 15px;border-radius:var(--radius-pill);font-size:13px;font-weight:{{ w.weight }};white-space:nowrap;color:{{ w.color }};background:{{ w.bg }};box-shadow:{{ w.ring }};cursor:pointer;flex:0 0 auto;" style-hover="background:var(--gray-50)!important;">
+          <span>{{ w.name }}</span>
+          <span style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:12px;" style-hover="background:var(--gray-200)!important;">✕</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- CONTENT ROW -->
+    <div style="flex:1;min-height:0;display:flex;gap:20px;padding:8px 30px 40px;overflow:visible;position:relative;">
+
+      <!-- LIST CARD -->
+      <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:18px;overflow:visible;">
+
+        <!-- filter card -->
+        <div style="flex:0 0 auto;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);overflow:visible;position:relative;z-index:20;padding:0 24px;">
+          <div onClick="{{ toggleFilters }}" class="kc-filter-head" style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;cursor:pointer;">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0;flex-shrink:0;">
+              <span style="display:inline-flex;color:var(--brand);flex-shrink:0;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdFilter3Line" size="18" hint-size="18px,18px"></x-import></span>
+              <span style="font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--navy);white-space:nowrap;">검색 필터</span>
+              <span style="font-size:12.5px;color:var(--gray-500);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">상태 · 학번 · 레벨 · 학급</span>
+            </div>
+            <span class="kc-filter-chev" style="display:inline-flex;color:var(--gray-500);transform:rotate({{ filterRot }});transition:transform .18s ease,color .12s ease;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+          <sc-if value="{{ filtersOpen }}" hint-placeholder-val="{{ true }}">
+            <div style="padding:2px 0 22px;border-top:1px solid var(--gray-200);">
+              <div class="kc-filter-grid" style="display:grid;gap:16px;padding-top:18px;">
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학생구분</span><div style="position:relative;"><div onClick="{{ filType.onToggle }}" style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:{{ filType.bg }};border-radius:var(--radius-lg);font-size:13.5px;color:var(--navy);cursor:pointer;box-shadow:{{ filType.ring }};"><span>{{ filType.value }}</span><span style="display:inline-flex;color:var(--gray-500);transform:rotate({{ filType.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ filType.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeSelect }}" style="position:fixed;inset:0;z-index:49;"></div><div style="position:absolute;top:48px;left:0;right:0;z-index:50;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:5px;max-height:240px;overflow:auto;display:flex;flex-direction:column;gap:3px;"><sc-for list="{{ filType.options }}" as="opt" hint-placeholder-count="3"><sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:var(--brand-wash);color:var(--brand);font-weight:700;"><span>{{ opt.name }}</span><span style="display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span></div></sc-if><sc-if value="{{ opt.notSelected }}" hint-placeholder-val="{{ true }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:transparent;color:var(--navy);font-weight:500;" style-hover="background:var(--gray-100)!important;"><span>{{ opt.name }}</span></div></sc-if></sc-for></div></sc-if></div></label>
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">상태</span><div style="position:relative;"><div onClick="{{ filStatus.onToggle }}" style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:{{ filStatus.bg }};border-radius:var(--radius-lg);font-size:13.5px;color:var(--navy);cursor:pointer;box-shadow:{{ filStatus.ring }};"><span>{{ filStatus.value }}</span><span style="display:inline-flex;color:var(--gray-500);transform:rotate({{ filStatus.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ filStatus.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeSelect }}" style="position:fixed;inset:0;z-index:49;"></div><div style="position:absolute;top:48px;left:0;right:0;z-index:50;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:5px;max-height:240px;overflow:auto;display:flex;flex-direction:column;gap:3px;"><sc-for list="{{ filStatus.options }}" as="opt" hint-placeholder-count="5"><sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:var(--brand-wash);color:var(--brand);font-weight:700;"><span>{{ opt.name }}</span><span style="display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span></div></sc-if><sc-if value="{{ opt.notSelected }}" hint-placeholder-val="{{ true }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:transparent;color:var(--navy);font-weight:500;" style-hover="background:var(--gray-100)!important;"><span>{{ opt.name }}</span></div></sc-if></sc-for></div></sc-if></div></label>
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학번</span><input value="{{ filterStudentNo }}" onChange="{{ onFilterStudentNo }}" onKeyDown="{{ onFilterKey }}" class="num" placeholder="학번 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"/></label>
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학생명</span><input value="{{ filterName }}" onChange="{{ onFilterName }}" onKeyDown="{{ onFilterKey }}" placeholder="이름 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"/></label>
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">레벨</span><div style="position:relative;"><div onClick="{{ filLevel.onToggle }}" style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:{{ filLevel.bg }};border-radius:var(--radius-lg);font-size:13.5px;color:var(--navy);cursor:pointer;box-shadow:{{ filLevel.ring }};"><span>{{ filLevel.value }}</span><span style="display:inline-flex;color:var(--gray-500);transform:rotate({{ filLevel.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ filLevel.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeSelect }}" style="position:fixed;inset:0;z-index:49;"></div><div style="position:absolute;top:48px;left:0;right:0;z-index:50;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:5px;max-height:240px;overflow:auto;display:flex;flex-direction:column;gap:3px;"><sc-for list="{{ filLevel.options }}" as="opt" hint-placeholder-count="6"><sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:var(--brand-wash);color:var(--brand);font-weight:700;"><span>{{ opt.name }}</span><span style="display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span></div></sc-if><sc-if value="{{ opt.notSelected }}" hint-placeholder-val="{{ true }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:transparent;color:var(--navy);font-weight:500;" style-hover="background:var(--gray-100)!important;"><span>{{ opt.name }}</span></div></sc-if></sc-for></div></sc-if></div></label>
+                <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학급</span><div style="position:relative;"><div onClick="{{ filKlass.onToggle }}" style="height:44px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:{{ filKlass.bg }};border-radius:var(--radius-lg);font-size:13.5px;color:var(--navy);cursor:pointer;box-shadow:{{ filKlass.ring }};"><span>{{ filKlass.value }}</span><span style="display:inline-flex;color:var(--gray-500);transform:rotate({{ filKlass.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ filKlass.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeSelect }}" style="position:fixed;inset:0;z-index:49;"></div><div style="position:absolute;top:48px;left:0;right:0;z-index:50;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-card);padding:5px;max-height:240px;overflow:auto;display:flex;flex-direction:column;gap:3px;"><sc-for list="{{ filKlass.options }}" as="opt" hint-placeholder-count="6"><sc-if value="{{ opt.selected }}" hint-placeholder-val="{{ false }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:var(--brand-wash);color:var(--brand);font-weight:700;"><span>{{ opt.name }}</span><span style="display:inline-flex;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></span></div></sc-if><sc-if value="{{ opt.notSelected }}" hint-placeholder-val="{{ true }}"><div onClick="{{ opt.onClick }}" style="height:36px;flex-shrink:0;display:flex;align-items:center;padding:0 12px;border-radius:var(--radius-sm);font-size:13px;cursor:pointer;background:transparent;color:var(--navy);font-weight:500;" style-hover="background:var(--gray-100)!important;"><span>{{ opt.name }}</span></div></sc-if></sc-for></div></sc-if></div></label>
+              </div>
+              <div style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin-top:16px;">
+                <button onClick="{{ resetFilters }}" style="height:40px;padding:0 18px;border:none;box-shadow:var(--shadow-inset-border);border-radius:var(--radius-sm);background:transparent;color:var(--gray-600);font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">초기화</button>
+                <button onClick="{{ applyFilters }}" style="height:40px;padding:0 22px;border:none;border-radius:var(--radius-sm);background:var(--brand);color:#fff;font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-hover)!important;box-shadow:0 8px 18px rgba(67,24,255,0.28)!important;">검색</button>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+
+        <!-- table card -->
+        <div style="flex:1;min-height:0;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);display:flex;flex-direction:column;overflow:hidden;padding:0 24px;">
+          <!-- toolbar -->
+          <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 0 14px;flex-wrap:wrap;">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <span style="font-family:var(--font-display);font-weight:600;font-size:18px;color:var(--navy);white-space:nowrap;">학생 목록</span>
+              <span style="font-size:13px;color:var(--gray-500);white-space:nowrap;">전체 <b class="num" style="color:var(--navy);">4,932</b>명 · <b class="num" style="color:var(--navy);">{{ shownCount }}</b>건 표시</span>
+              <sc-if value="{{ hasChecked }}" hint-placeholder-val="{{ false }}">
+                <span style="display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 12px;background:var(--brand-wash);border-radius:var(--radius-pill);font-size:12.5px;font-weight:700;color:var(--brand);"><b class="num">{{ checkedCount }}</b>명 선택</span>
+              </sc-if>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button style="height:38px;width:38px;display:flex;align-items:center;justify-content:center;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;" title="컬럼 설정"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdLayoutColumnLine" size="17" hint-size="17px,17px"></x-import></button>
+              <button style="height:38px;padding:0 15px;display:flex;align-items:center;gap:7px;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--neutral-700);font-family:var(--font-display);font-size:13px;font-weight:700;cursor:pointer;" style-hover="color:var(--green-strong)!important;box-shadow:inset 0 0 0 1px var(--green-strong)!important;"><span style="display:inline-flex;color:var(--green-strong);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg></span>Excel</button>
+            </div>
+          </div>
+
+          <!-- table header -->
+          <div style="flex:0 0 auto;overflow:hidden;display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:rgba(67,24,255,0.02);border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
+            <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
+            <div style="text-align:center;">#</div>
+            <div class="kc-th">이름</div><div class="kc-th">학급</div><div class="kc-th">레벨</div><div class="kc-th">구분</div><div class="kc-th">상태</div><div class="kc-th">학번</div><div class="kc-th">학부모 전화</div><div class="kc-th" style="text-align:center;">성별</div><div class="kc-th">생년월일</div><div class="kc-th">입학일</div><div></div>
+          </div>
+
+          <!-- rows -->
+          <div style="position:relative;flex:1;min-height:0;">
+          <div class="kc-rows">
+            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+              <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
+                <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
+                  <div style="width:18px;height:18px;border:1.5px solid {{ r.checkBorder }};border-radius:6px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
+                    <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
+                  </div>
+                </div>
+                <div class="num" style="text-align:center;font-size:12.5px;color:var(--gray-500);">{{ r.idx }}</div>
+                <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
+                  <span style="font-weight:700;font-size:13.5px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
+                </div>
+                <div style="font-size:13px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
+                <div style="font-size:12.5px;color:var(--gray-600);">{{ r.level }}</div>
+                <div style="font-size:12.5px;color:var(--gray-600);">{{ r.type }}</div>
+                <div><span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ r.statusBg }};color:{{ r.statusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ r.status }}</span></div>
+                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.studentNo }}</div>
+                <div class="num" style="font-size:12.5px;color:var(--navy);">{{ r.phone }}</div>
+                <div style="text-align:center;font-size:12.5px;color:var(--gray-600);">{{ r.gender }}</div>
+                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.birth }}</div>
+                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.enroll }}</div>
+                <div style="display:flex;align-items:center;justify-content:center;color:var(--gray-400);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="16" hint-size="16px,16px"></x-import></div>
+              </div>
+            </sc-for>
+          </div>
+          <div class="kc-thumb"></div>
+          </div>
+
+          <!-- pagination -->
+          <div style="flex:0 0 auto;border-top:1px solid var(--gray-200);display:flex;align-items:center;justify-content:space-between;padding:12px 0;">
+            <span class="num" style="font-size:12.5px;color:var(--gray-500);">1 – 14 / 4,932</span>
+            <div style="display:flex;align-items:center;gap:5px;">
+              <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;box-shadow:var(--shadow-inset-border);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">‹</div>
+              <div class="num" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;background:var(--brand);color:#fff;font-weight:700;font-size:13px;">1</div>
+              <div class="num" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:var(--gray-600);cursor:pointer;font-size:13px;" style-hover="background:var(--brand-wash)!important;">2</div>
+              <div class="num" style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:var(--gray-600);cursor:pointer;font-size:13px;" style-hover="background:var(--brand-wash)!important;">3</div>
+              <span style="color:var(--gray-400);padding:0 4px;">…</span>
+              <div class="num" style="width:36px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;color:var(--gray-600);cursor:pointer;font-size:13px;" style-hover="background:var(--brand-wash)!important;">353</div>
+              <div style="width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:9px;box-shadow:var(--shadow-inset-border);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">›</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DETAIL DRAWER -->
+      <sc-if value="{{ showBackdrop }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ closeDrawer }}" style="position:absolute;inset:-8px -30px -30px 0;z-index:50;background:rgba(27,37,89,.28);"></div>
+      </sc-if>
+      <sc-if value="{{ selected }}" hint-placeholder-val="{{ true }}">
+        <div style="{{ drawerStyle }}">
+          <!-- drawer header -->
+          <div style="flex:0 0 auto;padding:22px 24px 0;">
+            <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:10px;">
+              <div style="display:flex;align-items:center;gap:14px;min-width:0;">
+                <div style="flex:0 0 auto;width:54px;height:54px;border-radius:16px;background:var(--gray-100);border:1px solid var(--gray-200);color:var(--gray-400);display:flex;align-items:center;justify-content:center;"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="3.2"></circle><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></div>
+                <div style="min-width:0;">
+                  <div style="display:flex;align-items:center;gap:9px;">
+                    <span style="font-family:var(--font-display);font-weight:800;font-size:21px;color:var(--navy);">{{ selName }}</span>
+                    <span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ selStatusBg }};color:{{ selStatusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ selStatus }}</span>
+                  </div>
+                  <div class="num" style="font-size:13px;color:var(--gray-500);margin-top:4px;">{{ selNo }} · {{ selKlass }} · {{ selGender }}</div>
+                </div>
+              </div>
+              <div onClick="{{ closeDrawer }}" style="flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;" style-hover="background:var(--gray-100)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdCloseLine" size="18" hint-size="18px,18px"></x-import></div>
+            </div>
+
+            <!-- action hierarchy -->
+            <div style="display:flex;align-items:center;gap:9px;margin-top:18px;">
+              <button onClick="{{ saveForm }}" style="flex:1;height:42px;border:none;border-radius:var(--radius-sm);background:var(--brand);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;" style-hover="background:var(--brand-hover)!important;box-shadow:var(--shadow-brand)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="CloudDone" size="17" hint-size="17px,17px"></x-import>{{ saveLabel }}</button>
+              <button style="height:42px;padding:0 16px;border:none;border-radius:var(--radius-sm);background:transparent;box-shadow:var(--shadow-inset-border);color:var(--neutral-700);font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">수납</button>
+              <button style="height:42px;padding:0 16px;border:none;border-radius:var(--radius-sm);background:transparent;box-shadow:var(--shadow-inset-border);color:var(--neutral-700);font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">전환</button>
+              <button style="height:42px;width:42px;border:none;border-radius:var(--radius-sm);background:transparent;box-shadow:var(--shadow-inset-border);color:var(--gray-600);cursor:pointer;display:flex;align-items:center;justify-content:center;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="18" hint-size="18px,18px"></x-import></button>
+            </div>
+
+            <!-- drawer tabs -->
+            <div class="noscroll" style="display:flex;align-items:center;gap:4px;margin-top:18px;border-bottom:1px solid var(--gray-200);overflow-x:auto;">
+              <sc-for list="{{ detailTabs }}" as="dt" hint-placeholder-count="6">
+                <div onClick="{{ dt.onClick }}" style="height:38px;display:flex;align-items:center;padding:0 13px;font-size:13.5px;font-weight:{{ dt.weight }};color:{{ dt.color }};border-bottom:2.5px solid {{ dt.bar }};cursor:pointer;white-space:nowrap;" style-hover="color:var(--brand)!important;">{{ dt.name }}</div>
+              </sc-for>
+            </div>
+          </div>
+
+          <!-- drawer body -->
+          <div class="kc-scroll" style="flex:1;min-height:0;overflow-y:auto;padding:20px 24px 24px;">
+            <sc-if value="{{ tabBasic }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:22px;">
+                <div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--gray-500);text-transform:uppercase;margin-bottom:13px;">인적 사항</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">이름 <span style="color:var(--red-soft);">*</span></span><input value="{{ fName }}" onChange="{{ onName }}" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">성별</span><input value="{{ fGender }}" onChange="{{ onGender }}" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">학번</span><input value="{{ selNo }}" readonly="readonly" class="num" style="height:42px;padding:0 13px;background:var(--gray-100);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--gray-600);outline:none;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">생년월일 <span style="color:var(--red-soft);">*</span></span><input value="{{ fBirth }}" onChange="{{ onBirth }}" class="num" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;grid-column:span 2;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">학부모 휴대폰 <span style="color:var(--red-soft);">*</span></span><input value="{{ fPhone }}" onChange="{{ onPhone }}" class="num" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                  </div>
+                </div>
+                <div>
+                  <div style="font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--gray-500);text-transform:uppercase;margin-bottom:13px;">학적 정보</div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">학교</span><input value="{{ fSchool }}" onChange="{{ onSchool }}" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">학년</span><input value="{{ fGrade }}" onChange="{{ onGrade }}" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">레벨</span><input value="{{ fLevel }}" onChange="{{ onLevel }}" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                    <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:12px;font-weight:600;color:var(--gray-600);">입학일</span><input value="{{ fEnroll }}" onChange="{{ onEnroll }}" class="num" style="height:42px;padding:0 13px;background:var(--white);border:1px solid var(--gray-300);border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="border-color:var(--brand)!important;"/></label>
+                  </div>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ tabAssign }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <sc-for list="{{ assignments }}" as="a" hint-placeholder-count="3">
+                  <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:14px 16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+                      <div style="display:flex;align-items:center;gap:8px;"><span style="font-size:14px;font-weight:700;color:var(--navy);">{{ a.klass }}</span><span style="font-size:12px;color:var(--gray-600);">{{ a.level }} · {{ a.room }}</span></div>
+                      <span style="display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:var(--radius-pill);font-size:12px;font-weight:700;color:{{ a.fg }};background:{{ a.bg }};">{{ a.status }}</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;">
+                      <span class="num" style="font-size:12px;color:var(--gray-600);flex:0 0 auto;">정원 {{ a.cap }}</span>
+                      <div style="flex:1;height:6px;border-radius:var(--radius-pill);background:var(--gray-200);overflow:hidden;"><div class="kc-bar" style="height:100%;width:{{ a.pct }}%;background:{{ a.capColor }};border-radius:var(--radius-pill);"></div></div>
+                      <span class="num" style="font-size:11.5px;color:var(--gray-500);flex:0 0 auto;">{{ a.term }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ tabAttend }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:14px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;">
+                  <div style="font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--navy);">{{ attMonthLabel }}</div>
+                  <div style="display:flex;gap:6px;">
+                    <div style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);box-shadow:var(--shadow-inset-border);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">‹</div>
+                    <div style="width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:var(--radius-sm);box-shadow:var(--shadow-inset-border);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;">›</div>
+                  </div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;">
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--red-soft);">일</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-500);">월</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-500);">화</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-500);">수</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-500);">목</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--gray-500);">금</div>
+                  <div style="text-align:center;font-size:11px;font-weight:700;color:var(--cyan-bright);">토</div>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:5px;">
+                  <sc-for list="{{ attCells }}" as="c" hint-placeholder-count="35">
+                    <sc-if value="{{ c.blank }}" hint-placeholder-val="{{ false }}"><div></div></sc-if>
+                    <sc-if value="{{ c.day }}" hint-placeholder-val="{{ true }}">
+                      <div style="min-height:42px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:var(--radius-sm);border:1px solid var(--gray-200);">
+                        <span class="num" style="font-size:12px;color:var(--navy);">{{ c.day }}</span>
+                        <sc-if value="{{ c.has }}" hint-placeholder-val="{{ false }}"><span style="width:5px;height:5px;border-radius:50%;background:{{ c.dotColor }};"></span></sc-if>
+                      </div>
+                    </sc-if>
+                  </sc-for>
+                </div>
+                <div style="display:flex;align-items:center;gap:14px;font-size:11.5px;color:var(--gray-600);">
+                  <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--brand);"></span>출석</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--orange);"></span>지각</span>
+                  <span style="display:inline-flex;align-items:center;gap:5px;"><span style="width:8px;height:8px;border-radius:50%;background:var(--red-soft);"></span>결석</span>
+                </div>
+              </div>
+            </sc-if>
+            <sc-if value="{{ tabScore }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:12px;">
+                <div style="display:flex;align-items:center;gap:16px;padding:0 2px 2px;font-size:11.5px;color:var(--gray-600);">
+                  <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:14px;height:8px;border-radius:var(--radius-pill);background:var(--gray-500);"></span>학생 점수</span>
+                  <span style="display:inline-flex;align-items:center;gap:6px;"><span style="width:2px;height:13px;background:var(--navy);"></span>반 평균</span>
+                </div>
+                <sc-for list="{{ scoreViz }}" as="s" hint-placeholder-count="3">
+                  <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:14px 18px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:11px;">
+                      <div><div style="font-size:13px;font-weight:700;color:var(--navy);">{{ s.name }}</div><div style="font-size:11.5px;color:var(--gray-600);margin-top:2px;">{{ s.subject }} · {{ s.date }}</div></div>
+                      <span class="num" style="font-size:22px;font-weight:800;color:{{ s.color }};">{{ s.score }}</span>
+                    </div>
+                    <div style="position:relative;height:8px;border-radius:var(--radius-pill);background:var(--gray-200);">
+                      <div class="kc-bar" style="height:100%;width:{{ s.pct }}%;background:{{ s.color }};border-radius:var(--radius-pill);"></div>
+                      <div style="position:absolute;left:{{ s.avgPct }}%;top:-3px;transform:translateX(-50%);width:2px;height:14px;background:var(--navy);border-radius:1px;"></div>
+                    </div>
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-top:9px;">
+                      <span style="font-size:12px;color:var(--gray-600);">반평균 <b class="num" style="color:var(--navy);">{{ s.avg }}</b></span>
+                      <span class="num" style="font-size:12px;font-weight:700;color:{{ s.diffColor }};">{{ s.diffTxt }}</span>
+                    </div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ tabPay }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <sc-for list="{{ payments }}" as="p" hint-placeholder-count="3">
+                  <div style="display:flex;align-items:center;justify-content:space-between;background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:13px 16px;">
+                    <div><div style="font-size:13px;font-weight:700;color:var(--navy);">{{ p.item }}</div><div class="num" style="font-size:11.5px;color:var(--gray-600);">{{ p.month }}</div></div>
+                    <div style="display:flex;align-items:center;gap:10px;"><span class="num" style="font-size:14px;font-weight:700;color:var(--navy);">{{ p.amount }}원</span><span style="display:inline-flex;align-items:center;height:24px;padding:0 11px;border-radius:var(--radius-pill);font-size:12px;font-weight:700;color:{{ p.fg }};background:{{ p.bg }};">{{ p.status }}</span></div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ tabMemo }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <button style="height:40px;border:1px dashed var(--gray-300);border-radius:var(--radius-lg);background:var(--white);color:var(--brand);font-family:var(--font-display);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;" style-hover="border-color:var(--brand)!important;background:var(--brand-wash)!important;">+ 메모 추가</button>
+                <sc-for list="{{ memos }}" as="m" hint-placeholder-count="2">
+                  <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:var(--radius-lg);padding:13px 16px;">
+                    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:7px;"><span style="font-size:12.5px;font-weight:700;color:var(--navy);">{{ m.author }}</span><span class="num" style="font-size:11px;color:var(--gray-500);">{{ m.date }}</span></div>
+                    <div style="font-size:13px;line-height:1.6;color:var(--navy);">{{ m.text }}</div>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.state = {
+      sidebarCollapsed: false,
+      openDomain: '학생관리',
+      hoverDomain: null,
+      density: 'compact',
+      filtersOpen: true,
+      selectedId: null,
+      detailTab: '기본정보',
+      checked: {},
+      form: null,
+      justSaved: false,
+      filters: null,
+      appliedFilters: null,
+      openSelect: null,
+      worktabs: ['학생 등록','학급배정','출석','학급등록','셔틀운행정보'],
+      activeWorktab: '학생 등록',
+      narrow: false,
+    };
+  }
+
+  componentDidMount(){
+    this._onResize = () => {
+      const n = window.innerWidth < 1280;
+      if(n !== this.state.narrow) this.setState({ narrow:n });
+    };
+    window.addEventListener('resize', this._onResize);
+    this._onResize();
+    this._initThumb();
+    this._initLnbThumb();
+  }
+  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); }
+
+  _initLnbThumb(){
+    const sync = () => {
+      const sc = document.querySelector('.kc-lnb');
+      const thumb = document.querySelector('.kc-lnb-thumb');
+      if(!sc || !thumb) return;
+      if(sc._kcBound){ if(sc._kcUpd) sc._kcUpd(); return; }
+      sc._kcBound = true;
+      let hideT;
+      const show = () => { thumb.style.opacity='1'; clearTimeout(hideT); hideT=setTimeout(()=>{ if(!this._dragging) thumb.style.opacity='0'; }, 1200); };
+      const update = () => {
+        const sh=sc.scrollHeight, ch=sc.clientHeight, stp=sc.scrollTop, pad=6, trackH=ch-2*pad;
+        if(sh<=ch+1){ thumb.style.display='none'; return; }
+        thumb.style.display='block';
+        const th=Math.max(24, trackH*ch/sh);
+        thumb.style.height=th+'px';
+        thumb.style.transform='translateY('+(pad+((sh-ch)?(stp/(sh-ch))*(trackH-th):0))+'px)';
+      };
+      sc._kcUpd = update;
+      sc.addEventListener('scroll', ()=>{ update(); show(); });
+      sc.addEventListener('mouseenter', ()=>{ update(); show(); });
+      thumb.addEventListener('mouseenter', show);
+      thumb.addEventListener('mousedown', (e)=>{
+        e.preventDefault(); this._dragging=true; thumb.classList.add('kc-dragging'); thumb.style.opacity='1';
+        const sh=sc.scrollHeight, ch=sc.clientHeight, pad=6, trackH=ch-2*pad, th=Math.max(24, trackH*ch/sh);
+        const startY=e.clientY, startTop=sc.scrollTop;
+        const onMove=(ev)=>{ const dy=ev.clientY-startY; sc.scrollTop = startTop + dy*(sh-ch)/(trackH-th); };
+        const onUp=()=>{ this._dragging=false; thumb.classList.remove('kc-dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); };
+        document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp);
+      });
+      const ro = new ResizeObserver(update); ro.observe(sc); sc._kcRO = ro;
+      update();
+    };
+    this._syncLnb = sync;
+    const tryAttach = (n) => { sync(); if(n>0 && !document.querySelector('.kc-lnb')) setTimeout(()=>tryAttach(n-1), 80); };
+    tryAttach(10);
+  }
+
+  _initThumb(){
+    const attach = () => {
+      const sc = document.querySelector('.kc-rows');
+      const thumb = document.querySelector('.kc-thumb:not(.kc-lnb-thumb)');
+      if(!sc || !thumb){ setTimeout(attach, 80); return; }
+      let hideT;
+      const show = () => { thumb.style.opacity='1'; clearTimeout(hideT); hideT=setTimeout(()=>{ if(!this._dragging) thumb.style.opacity='0'; }, 1200); };
+      const update = () => {
+        const sh=sc.scrollHeight, ch=sc.clientHeight, stp=sc.scrollTop, pad=6, trackH=ch-2*pad;
+        if(sh<=ch+1){ thumb.style.display='none'; return; }
+        thumb.style.display='block';
+        const th=Math.max(24, trackH*ch/sh);
+        thumb.style.height=th+'px';
+        thumb.style.transform='translateY('+(pad+((sh-ch)?(stp/(sh-ch))*(trackH-th):0))+'px)';
+      };
+      this._updThumb = update;
+      sc.addEventListener('scroll', ()=>{ update(); show(); });
+      sc.addEventListener('mouseenter', ()=>{ update(); show(); });
+      thumb.addEventListener('mouseenter', show);
+      thumb.addEventListener('mousedown', (e)=>{
+        e.preventDefault(); this._dragging=true; thumb.classList.add('kc-dragging'); thumb.style.opacity='1';
+        const sh=sc.scrollHeight, ch=sc.clientHeight, pad=6, trackH=ch-2*pad, th=Math.max(24, trackH*ch/sh);
+        const startY=e.clientY, startTop=sc.scrollTop;
+        const onMove=(ev)=>{ const dy=ev.clientY-startY; sc.scrollTop = startTop + dy*(sh-ch)/(trackH-th); };
+        const onUp=()=>{ this._dragging=false; thumb.classList.remove('kc-dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); };
+        document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp);
+      });
+      this._thumbRO = new ResizeObserver(update); this._thumbRO.observe(sc);
+      update();
+    };
+    attach();
+  }
+  componentWillUnmount(){ window.removeEventListener('resize', this._onResize); if(this._thumbRO) this._thumbRO.disconnect(); }
+
+  students = [
+    {id:1,name:'김서연',gender:'여',klass:'ECP6-Bee',level:'ECP6',type:'정규',status:'재학',studentNo:'06032648',phone:'010-9590-4515',birth:'2015/03/12',enroll:'2022/03/02',school:'인천효성남초',grade:'3학년'},
+    {id:2,name:'이준호',gender:'남',klass:'GT1',level:'GT1',type:'정규',status:'재학',studentNo:'06032657',phone:'010-4469-0104',birth:'2014/07/21',enroll:'2021/09/01',school:'부평초',grade:'4학년'},
+    {id:3,name:'박지우',gender:'여',klass:'MGT2',level:'MGT2',type:'정규',status:'휴학',studentNo:'06032660',phone:'010-6338-4189',birth:'2013/11/05',enroll:'2020/03/02',school:'산곡초',grade:'5학년'},
+    {id:4,name:'최민준',gender:'남',klass:'PAS 7',level:'PAS8',type:'정규',status:'재학',studentNo:'06032666',phone:'010-5091-6130',birth:'2012/02/18',enroll:'2019/03/04',school:'갈산초',grade:'6학년'},
+    {id:5,name:'정하윤',gender:'여',klass:'R&D 2025',level:'R&D',type:'특강',status:'대기',studentNo:'06032711',phone:'010-2540-9331',birth:'2016/05/30',enroll:'2026/03/02',school:'인천부일초',grade:'2학년'},
+    {id:6,name:'강도윤',gender:'남',klass:'SSPB',level:'SSPB',type:'정규',status:'재학',studentNo:'06040253',phone:'010-9614-7659',birth:'2015/12/03',enroll:'2022/12/03',school:'인천효성남초',grade:'3학년'},
+    {id:7,name:'윤서아',gender:'여',klass:'Honors1',level:'Honors1',type:'정규',status:'재학',studentNo:'06032713',phone:'010-2020-1111',birth:'2013/08/14',enroll:'2020/07/06',school:'부개초',grade:'5학년'},
+    {id:8,name:'임시우',gender:'남',klass:'ECP7-Whale',level:'ECP7',type:'정규',status:'재학',studentNo:'07030090',phone:'010-3131-3934',birth:'2014/01/22',enroll:'2021/04/21',school:'인천서림초',grade:'4학년'},
+    {id:9,name:'한지호',gender:'남',klass:'2022_Pepper',level:'ECP6',type:'정규',status:'탈퇴',studentNo:'07030091',phone:'010-0092-0092',birth:'2014/10/10',enroll:'2021/03/01',school:'청천초',grade:'4학년'},
+    {id:10,name:'오예린',gender:'여',klass:'NAC_DTTT',level:'MGT1',type:'특강',status:'재학',studentNo:'07040233',phone:'010-5662-0856',birth:'2015/06/15',enroll:'2022/12/27',school:'부평동초',grade:'3학년'},
+    {id:11,name:'서지안',gender:'여',klass:'SSPB',level:'SSPB',type:'정규',status:'재학',studentNo:'09030733',phone:'010-4690-6584',birth:'2015/09/09',enroll:'2022/03/02',school:'인천효성남초',grade:'3학년'},
+    {id:12,name:'문하준',gender:'남',klass:'GT2',level:'GT2',type:'정규',status:'재학',studentNo:'09030734',phone:'010-5662-0857',birth:'2013/04/01',enroll:'2020/09/29',school:'산곡남초',grade:'5학년'},
+    {id:13,name:'배은우',gender:'여',klass:'PAS 6',level:'PAS6',type:'정규',status:'휴학',studentNo:'09030735',phone:'010-7746-7603',birth:'2016/01/30',enroll:'2024/01/22',school:'갈산북초',grade:'2학년'},
+    {id:14,name:'신아린',gender:'여',klass:'ECP6-Bee',level:'ECP6',type:'정규',status:'재학',studentNo:'09030740',phone:'010-4567-8901',birth:'2015/07/18',enroll:'2022/03/02',school:'부평서초',grade:'3학년'},
+  ];
+
+  menu = {
+    '입학관리':[ {cat:'예비생관리', items:['예비생정보']}, {cat:'MAP', items:['MAP종합정보','예약표','응시료 납부 현황']} ],
+    '학생관리':[ {cat:'학생정보', items:['학생 등록','학생 정보','학생이름변경']}, {cat:'대기/휴/탈퇴', items:['대기생','휴/탈퇴생']}, {cat:'전략관리', items:['전입생','전출생']}, {cat:'교재레벨', items:['교재레벨일괄변경']} ],
+    '학급관리':[ {cat:'학급정보', items:['학급등록']}, {cat:'학급배정', items:['학급배정','전체배정정보']}, {cat:'시간표', items:['시간표 조회','시간표 등록','교시 설정','종합시간표']}, {cat:'강의실', items:['강의실 등록']} ],
+    '수업관리':[ {cat:'출결', items:['출석','출석(COVID-19)']}, {cat:'숙제', items:['숙제조회']}, {cat:'성적', items:['성적조회']} ],
+    '도서관리':[ {cat:'대여/반납/미납', items:['대여','반납','미납']}, {cat:'도서등록', items:['학원도서등록','본사도서등록요청']}, {cat:'도서운영조회', items:['도서운영정보조회','학생별도서운영정보조회']}, {cat:'독서지도', items:['최다대여도서','최다대여학생']} ],
+    '수납회계':[ {cat:'수납', items:['개인수납']}, {cat:'청구', items:['일괄청구']}, {cat:'수납종합조회', items:['납부내역조회','청구미납조회']}, {cat:'수입/지출', items:['수입','지출','지출결재','수입지출','현금흐름표']}, {cat:'결산(월말마감)', items:['결산(일일마감)','결산 마감 처리']}, {cat:'수납현황', items:['e-POLY 등록현황']} ],
+    '업무관리':[ {cat:'마이페이지', items:['마이페이지']}, {cat:'일정', items:['금일의 학원 업무']}, {cat:'메모', items:['메모','메모 등록']}, {cat:'담당학급', items:['담당학급']}, {cat:'월일보고서', items:['일일보고서']} ],
+    '행정관리':[ {cat:'셔틀', items:['셔틀운행정보']}, {cat:'게시판', items:['본사공지사항','직원게시판','자료실','본사업무지원','이용문의']} ],
+    '직원관리':[ {cat:'직원', items:['직원']} ],
+    '학원운영':[ {cat:'학원운영보고', items:['학원업무일지','본사업무일지']}, {cat:'Complaint', items:['Complaint']}, {cat:'업무별조회', items:['MAP','상담','출결','숙제']}, {cat:'분석자료', items:['학생상태분석','매출분석','학원현황','학생현황']}, {cat:'상담계획', items:['상담계획','상담건별조회','상담횟수조회']}, {cat:'설명회', items:['설명회']} ],
+    '홈페이지':[ {cat:'메뉴관리', items:['차량 운행 정보']}, {cat:'설문관리', items:['COVID-19 자가진단','POLY직원건강체크']} ],
+  };
+
+  domPaths = {
+    '입학관리':'M3 10l9-5 9 5 M4 10h16 M6 10v9 M10 10v9 M14 10v9 M18 10v9 M3 21h18',
+    '학생관리':'M21.42 10.92a1 1 0 0 0-.02-1.84L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.84l8.57 3.9a2 2 0 0 0 1.66 0z M22 10v6 M6 12.5V16a6 3 0 0 0 12 0v-3.5',
+    '학급관리':'M3 3h7v7H3z M14 3h7v7h-7z M14 14h7v7h-7z M3 14h7v7H3z',
+    '수업관리':'M12 7v14 M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z',
+    '도서관리':'M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20',
+    '수납회계':'M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1z M2 10h20 M6 15h4',
+    '업무관리':'M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2 M9 3h6a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1z M9 14l2 2 4-4',
+    '행정관리':'M20 7h-9 M14 17H5 M17 14a3 3 0 1 0 0 6 3 3 0 0 0 0-6z M7 4a3 3 0 1 0 0 6 3 3 0 0 0 0-6z',
+    '직원관리':'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2 M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z M22 21v-2a4 4 0 0 0-3-3.87 M16 3.13a4 4 0 0 1 0 7.75',
+    '학원운영':'M3 3v16a2 2 0 0 0 2 2h16 M7 16l4-4 4 4 5-6',
+    '홈페이지':'M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z M2 12h20 M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z',
+  };
+
+  statusColors(s){
+    const m = {
+      '재학':{bg:'rgba(117,81,255,0.09)',fg:'var(--navy)',avBg:'rgba(117,81,255,0.09)',avFg:'var(--brand-400)'},
+      '휴학':{bg:'rgba(255,181,71,0.13)',fg:'var(--navy)',avBg:'rgba(255,181,71,0.13)',avFg:'var(--orange)'},
+      '탈퇴':{bg:'#F1F2F4',fg:'var(--navy)',avBg:'#F1F2F4',avFg:'#71757B'},
+      '대기':{bg:'rgba(6,190,254,0.09)',fg:'var(--navy)',avBg:'rgba(6,190,254,0.09)',avFg:'var(--cyan-bright)'},
+    };
+    return m[s] || {bg:'var(--gray-100)',fg:'var(--gray-600)',avBg:'var(--gray-100)',avFg:'var(--gray-600)'};
+  }
+  statusTone(s){
+    return ({'재학':'success','휴학':'warning','탈퇴':'error','대기':'brand'})[s] || 'secondary';
+  }
+  statusAvatar(s){
+    const m = {
+      '재학':['var(--green-wash)','var(--green-strong)'],
+      '휴학':['var(--orange-wash)','var(--orange)'],
+      '탈퇴':['var(--red-wash)','var(--red)'],
+      '대기':['var(--brand-wash)','var(--brand)'],
+    };
+    return m[s] || ['var(--gray-100)','var(--gray-600)'];
+  }
+
+  openItem(domain, name){
+    const tabs = this.state.worktabs.includes(name) ? this.state.worktabs : [name, ...this.state.worktabs];
+    this.setState({ openDomain:domain, worktabs:tabs });
+  }
+
+  renderVals(){
+    const st = this.state;
+    const activeDomain = '학생관리', activeScreen = '학생 등록';
+    const collapsed = st.sidebarCollapsed;
+
+    const navItems = Object.keys(this.menu).map(n => {
+      const open = !collapsed && st.openDomain===n;
+      const isActiveDom = st.openDomain===n;
+      return {
+        name:n,
+        iconPath:this.domPaths[n] || '',
+        open,
+        rowBg: isActiveDom ? 'var(--brand)' : 'transparent',
+        cls: isActiveDom ? 'kc-dom kc-dom-on' : 'kc-dom',
+        iconColor: isActiveDom ? '#fff' : 'var(--gray-500)',
+        labelColor: isActiveDom ? '#fff' : 'var(--gray-600)',
+        chevColor: isActiveDom ? 'rgba(255,255,255,.8)' : 'var(--gray-400)',
+        weight: isActiveDom ? 700 : 500,
+        chev: open ? '180deg' : '0deg',
+        onClick: ()=> this.setState({ openDomain: st.openDomain===n ? null : n }),
+        onHover: ()=> this.setState({ hoverDomain:n }),
+        cats: open ? this.menu[n].map(c => ({
+          cat:c.cat,
+          items:c.items.map(it => {
+            const on = (n===activeDomain && it===activeScreen);
+            return { name:it, active:on, weight: on?700:500, color: on?'var(--brand)':'var(--gray-600)', bg:'transparent', onClick: ()=> this.openItem(n, it) };
+          }),
+        })) : [],
+      };
+    });
+
+    // flyout for collapsed
+    const fd = st.hoverDomain;
+    const flyoutCats = (collapsed && fd && this.menu[fd]) ? this.menu[fd].map(c => ({
+      cat:c.cat,
+      items:c.items.map(it => {
+        const on = (fd===activeDomain && it===activeScreen);
+        return { name:it, weight:on?700:500, color:on?'var(--brand)':'var(--gray-600)', onClick: ()=> this.openItem(fd, it) };
+      }),
+    })) : [];
+
+    // worktabs
+    const worktabs = st.worktabs.map(n => {
+      const on = n===st.activeWorktab;
+      return {
+        name:n,
+        weight: on?700:600,
+        color: on?'var(--brand)':'var(--gray-600)',
+        bg: 'var(--white)',
+        ring: 'var(--shadow-inset-border)',
+        onClick: ()=> this.setState({ activeWorktab:n }),
+      };
+    });
+
+    // rows
+    const rowH = st.density==='standard' ? 56 : 44;
+    const af = st.appliedFilters;
+    const flist = this.students.filter(s => {
+      if (!af) return true;
+      if (af.type && af.type!=='전체' && s.type!==af.type) return false;
+      if (af.status && af.status!=='전체' && s.status!==af.status) return false;
+      if (af.level && af.level!=='전체' && s.level!==af.level) return false;
+      if (af.klass && af.klass!=='전체' && s.klass!==af.klass) return false;
+      if (af.studentNo && !s.studentNo.includes(af.studentNo)) return false;
+      if (af.name && !s.name.includes(af.name)) return false;
+      return true;
+    });
+    const rows = flist.map((s,i) => {
+      const sel = s.id===st.selectedId;
+      const isLast = i===flist.length-1;
+      const chk = !!st.checked[s.id];
+      const sc = this.statusColors(s.status);
+      return {
+        ...s, idx:i+1, initial:s.name.charAt(0),
+        statusBg:sc.bg, statusFg:sc.fg, avBg:sc.avBg, avFg:sc.avFg,
+        rowBg: sel ? 'var(--white)' : (s.status==='탈퇴' ? 'rgba(112,144,176,0.07)' : 'transparent'),
+        rowMark: sel ? '0 0 24px rgba(67,24,255,0.20)' : 'none',
+        rowBorder: (sel || isLast) ? '1px solid transparent' : '1px solid var(--gray-200)',
+        z: sel ? 5 : 1,
+        rowCls: sel ? 'kc-row-sel' : '',
+        checked: chk,
+        checkBorder: chk ? 'var(--brand)' : 'var(--gray-400)',
+        checkBg: chk ? 'var(--brand)' : 'transparent',
+        onClick: ()=> this.setState({ selectedId:s.id, detailTab:'기본정보' }),
+        onCheck: (e)=>{ e.stopPropagation(); const c={...st.checked}; if(c[s.id]) delete c[s.id]; else c[s.id]=true; this.setState({checked:c}); },
+      };
+    });
+
+    const checkedCount = Object.keys(st.checked).length;
+    const selAllOn = flist.length>0 && flist.every(s=> st.checked[s.id]);
+    const selAllSome = checkedCount>0 && !selAllOn;
+    const toggleAll = (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); if(selAllOn){ this.setState({checked:{}}); } else { const c={...st.checked}; flist.forEach(s=> c[s.id]=true); this.setState({checked:c}); } };
+
+    // detail
+    const sel = this.students.find(s=> s.id===st.selectedId);
+    const selSc = sel ? this.statusColors(sel.status) : {bg:'var(--gray-100)',fg:'var(--gray-600)',avBg:'var(--gray-100)',avFg:'var(--gray-600)'};
+
+    // editable 기본정보 form buffer
+    const formBase = sel ? { __id:sel.id, name:sel.name, gender:sel.gender, birth:sel.birth, phone:sel.phone, school:sel.school, grade:sel.grade, level:sel.level, enroll:sel.enroll } : {};
+    const f = (st.form && st.form.__id===st.selectedId) ? st.form : formBase;
+    const setField = (k) => (e) => {
+      const cs = this.state;
+      const base = (cs.form && cs.form.__id===cs.selectedId) ? cs.form : formBase;
+      this.setState({ form:{ ...base, __id:cs.selectedId, [k]:e.target.value }, justSaved:false });
+    };
+    const saveForm = () => {
+      if(!sel) return;
+      sel.name=f.name; sel.gender=f.gender; sel.birth=f.birth; sel.phone=f.phone;
+      sel.school=f.school; sel.grade=f.grade; sel.level=f.level; sel.enroll=f.enroll;
+      this.setState({ form:{ ...f, __id:sel.id }, justSaved:true });
+      if(this._svT) clearTimeout(this._svT);
+      this._svT = setTimeout(()=> this.setState({ justSaved:false }), 1600);
+    };
+
+    // ===== detail tabs data (Horizon) =====
+    const assignments = [
+      {klass:'SSP-B-Test', level:'SSPB', room:'201호', cap:'9/12', pct:75, capColor:'var(--brand)', status:'수강', fg:'var(--navy)', bg:'rgba(117,81,255,0.09)', term:'2025/02'},
+      {klass:'R&D 2025', level:'R&D', room:'203호', cap:'11/12', pct:92, capColor:'var(--cyan-bright)', status:'대기', fg:'var(--navy)', bg:'rgba(6,190,254,0.09)', term:'2025/01'},
+      {klass:'QA 2024', level:'PAS 7', room:'201호', cap:'12/12', pct:100, capColor:'var(--navy)', status:'수료', fg:'var(--navy)', bg:'#F1F2F4', term:'2024/02'},
+    ];
+    const scores = [
+      {name:'6월 Unit Test', subject:'Reading', date:'06/18', score:'92'},
+      {name:'6월 Unit Test', subject:'Listening', date:'06/18', score:'88'},
+      {name:'5월 Monthly', subject:'Speaking', date:'05/28', score:'A'},
+    ];
+    const gradeToNum = { 'A+':98,'A':95,'B+':88,'B':85,'C+':78,'C':75,'D':65,'F':50 };
+    const scoreNum = (sc)=>{ const p=parseInt(sc); return isNaN(p)?(gradeToNum[sc]||0):p; };
+    const scorePalette = ['var(--brand)','var(--cyan-bright)','var(--green-strong)','var(--orange)','var(--red-soft)'];
+    const testColorMap = {}; let _tci=0;
+    scores.forEach(s=>{ if(!(s.name in testColorMap)){ testColorMap[s.name]=scorePalette[_tci%scorePalette.length]; _tci++; } });
+    const scoreAvgBySubj = { 'Reading':85, 'Listening':82, 'Speaking':83 };
+    const scoreViz = scores.map(s=> {
+      const n = Math.max(0,Math.min(100,scoreNum(s.score)));
+      const avgN = scoreAvgBySubj[s.subject] || 80;
+      const d = n - avgN;
+      return { ...s, color:testColorMap[s.name],
+        pct:n, avgPct:Math.max(0,Math.min(100,avgN)), avg:avgN,
+        diffTxt:(d>=0?'▲ ':'▼ ')+Math.abs(d),
+        diffColor: d>=0 ? 'var(--green-strong)' : 'var(--red-soft)',
+      };
+    });
+    const payments = [
+      {item:'정규 수업료', month:'2025-06', amount:'440,000', status:'완납', fg:'var(--navy)', bg:'rgba(117,81,255,0.09)'},
+      {item:'정규 수업료', month:'2025-05', amount:'440,000', status:'완납', fg:'var(--navy)', bg:'rgba(117,81,255,0.09)'},
+      {item:'교재비', month:'2025-04', amount:'85,000', status:'미납', fg:'var(--navy)', bg:'rgba(238,93,80,0.10)'},
+    ];
+    const memos = [
+      {author:'김민지 T', date:'2025/06/12', text:'응급처치 동의 완료. 알레르기: 견과류. 비상연락 1순위 母 010-4690-6584.'},
+      {author:'이수현 실장', date:'2025/05/03', text:'레벨테스트 결과 SSPB 적합. 7월 정규 전환 예정. 학부모 상담 완료.'},
+    ];
+    const attMap = { 2:'출석',3:'출석',5:'지각',6:'출석',9:'출석',10:'출석',12:'출석',13:'결석',16:'출석',17:'출석',19:'결석',20:'지각',23:'출석',24:'출석',26:'출석',27:'출석' };
+    const attMeta = { '출석':'var(--brand)', '지각':'var(--orange)', '결석':'var(--red-soft)' };
+    const attCells = [];
+    for (let d=1; d<=30; d++){ const s2=attMap[d]||null; attCells.push({ blank:false, day:d, has:!!s2, dotColor: s2?attMeta[s2]:'transparent' }); }
+    while (attCells.length % 7 !== 0) attCells.push({ blank:true });
+    const detailNames = ['기본정보','배정','출결','성적','수납','메모'];
+    const detailTabs = detailNames.map(n => ({
+      name:n,
+      weight: st.detailTab===n ? 700 : 500,
+      color: st.detailTab===n ? 'var(--brand)' : 'var(--gray-600)',
+      bar: st.detailTab===n ? 'var(--brand)' : 'transparent',
+      onClick: ()=> this.setState({ detailTab:n }),
+    }));
+
+    // ===== search filter =====
+    const FILTER_DEFAULT = { type:'전체', status:'전체', level:'전체', klass:'전체', studentNo:'', name:'' };
+    const fdraft = st.filters || FILTER_DEFAULT;
+    const uniq = (arr)=> arr.filter((v,i)=> arr.indexOf(v)===i);
+    const setFilter = (k,v)=>{ const d=this.state.filters||FILTER_DEFAULT; this.setState({ filters:{...d,[k]:v}, openSelect:null }); };
+    const mkSelect = (key, options)=>{ const open = st.openSelect===key; return {
+      value: fdraft[key], open,
+      rot: open?'180deg':'0deg',
+      ring: open?'inset 0 0 0 2px var(--brand)':'none',
+      bg: open?'var(--white)':'var(--brand-wash)',
+      onToggle: ()=> this.setState({ openSelect: this.state.openSelect===key?null:key }),
+      options: options.map(o=> ({ name:o, selected:fdraft[key]===o, notSelected:fdraft[key]!==o, onClick:()=>setFilter(key,o) })),
+    }; };
+    const filType = mkSelect('type', ['전체','정규','특강']);
+    const filStatus = mkSelect('status', ['전체','재학','휴학','탈퇴','대기']);
+    const filLevel = mkSelect('level', ['전체', ...uniq(this.students.map(s=>s.level))]);
+    const filKlass = mkSelect('klass', ['전체', ...uniq(this.students.map(s=>s.klass))]);
+    const onFilterField = (k)=> (e)=>{ const d=this.state.filters||FILTER_DEFAULT; this.setState({ filters:{...d,[k]:e.target.value} }); };
+    const applyFilters = ()=> this.setState({ appliedFilters:{...fdraft}, openSelect:null });
+    const onFilterKey = (e)=>{ if(e.key==='Enter') applyFilters(); };
+    const resetFilters = ()=> this.setState({ filters:null, appliedFilters:null, openSelect:null });
+
+    const std = st.density==='standard';
+    return {
+      filType, filStatus, filLevel, filKlass,
+      closeSelect: ()=> this.setState({ openSelect:null }),
+      filterStudentNo: fdraft.studentNo, filterName: fdraft.name,
+      onFilterStudentNo: onFilterField('studentNo'), onFilterName: onFilterField('name'), onFilterKey,
+      applyFilters, resetFilters,
+      sidebarW: collapsed ? '84px' : '256px',
+      expanded: !collapsed,
+      collapsed,
+      rolePad: collapsed ? '14px' : '18px',
+      navItems,
+      flyout: collapsed && !!fd, flyoutName: fd || '', flyoutCats,
+      closeFlyout: ()=> this.setState({ hoverDomain:null }),
+      toggleSidebar: ()=> this.setState({ sidebarCollapsed: !collapsed, hoverDomain:null }),
+      toggleRot: collapsed ? '180deg' : '0deg',
+      toggleTitle: collapsed ? '메뉴 펼치기' : '메뉴 접기',
+      worktabs,
+      filtersOpen: st.filtersOpen,
+      toggleFilters: ()=> this.setState({ filtersOpen: !st.filtersOpen }),
+      filterRot: st.filtersOpen ? '180deg' : '0deg',
+      rows, rowH, shownCount: rows.length,
+      hasChecked: checkedCount>0, checkedCount,
+      selAllOn, selAllSome, toggleAll,
+      selAllBg: (selAllOn||selAllSome) ? 'var(--brand)' : 'transparent',
+      selAllBorder: (selAllOn||selAllSome) ? 'var(--brand)' : 'var(--gray-400)',
+      setStandard: ()=> this.setState({density:'standard'}),
+      setCompact: ()=> this.setState({density:'compact'}),
+      stdColor: std?'var(--navy)':'var(--gray-600)', stdBg: std?'var(--white)':'transparent', stdShadow: std?'var(--shadow-sm)':'none',
+      cmpColor: !std?'var(--navy)':'var(--gray-600)', cmpBg: !std?'var(--white)':'transparent', cmpShadow: !std?'var(--shadow-sm)':'none',
+      selected: !!sel,
+      drawerStyle: st.narrow
+        ? 'position:fixed;top:0;right:0;bottom:0;width:440px;max-width:90vw;z-index:55;background:var(--white);border-radius:var(--radius-xl) 0 0 var(--radius-xl);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;'
+        : 'flex:0 0 auto;width:430px;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-card);display:flex;flex-direction:column;overflow:hidden;',
+      showBackdrop: false,
+      selName: sel?sel.name:'', selStatus: sel?sel.status:'', selStatusBg:selSc.bg, selStatusFg:selSc.fg,
+      selInitial: sel?sel.name.charAt(0):'', selAvBg:selSc.avBg, selAvFg:selSc.avFg,
+      selNo: sel?sel.studentNo:'', selKlass: sel?sel.klass:'', selGender: sel?sel.gender:'',
+      selBirth: sel?sel.birth:'', selPhone: sel?sel.phone:'', selSchool: sel?sel.school:'',
+      selGrade: sel?sel.grade:'', selLevel: sel?sel.level:'', selEnroll: sel?sel.enroll:'',
+      fName: f.name||'', fGender: f.gender||'', fBirth: f.birth||'', fPhone: f.phone||'',
+      fSchool: f.school||'', fGrade: f.grade||'', fLevel: f.level||'', fEnroll: f.enroll||'',
+      onName: setField('name'), onGender: setField('gender'), onBirth: setField('birth'), onPhone: setField('phone'),
+      onSchool: setField('school'), onGrade: setField('grade'), onLevel: setField('level'), onEnroll: setField('enroll'),
+      saveForm, saveLabel: st.justSaved ? '저장됨' : '저장',
+      detailTabs,
+      assignments, scoreViz, payments, memos, attCells, attMonthLabel: '2025년 6월',
+      tabBasic: st.detailTab==='기본정보',
+      tabAssign: st.detailTab==='배정',
+      tabAttend: st.detailTab==='출결',
+      tabScore: st.detailTab==='성적',
+      tabPay: st.detailTab==='수납',
+      tabMemo: st.detailTab==='메모',
+      activeTabName: st.detailTab,
+      closeDrawer: ()=> this.setState({ selectedId:null }),
+      openNew: ()=>{},
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>POLY KCMS · 학생 등록 화면 리디자인 시안</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px;
+    font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:linear-gradient(135deg,#F4F7FE 0%,#EDF2F7 100%);color:#1A202C;}
+  .wrap{width:100%;max-width:760px;}
+  .head{text-align:center;margin-bottom:36px;}
+  .kicker{font-size:13px;font-weight:700;letter-spacing:.08em;color:#4318FF;text-transform:uppercase;margin-bottom:10px;}
+  h1{font-size:30px;font-weight:800;letter-spacing:-.02em;margin-bottom:10px;}
+  .sub{font-size:15px;color:#5A6B87;line-height:1.6;}
+  .cards{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+  @media(max-width:620px){.cards{grid-template-columns:1fr;}}
+  .card{display:block;text-decoration:none;color:inherit;background:#fff;border-radius:18px;padding:28px 24px;
+    box-shadow:0 18px 40px rgba(112,144,176,.14);transition:transform .18s ease,box-shadow .18s ease;border:1px solid #fff;}
+  .card:hover{transform:translateY(-4px);box-shadow:0 24px 50px rgba(112,144,176,.22);}
+  .tag{display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:70px;font-size:12px;font-weight:700;margin-bottom:14px;}
+  .a .tag{background:#DCF3F1;color:#2C9A90;}
+  .b .tag{background:#E9E3FF;color:#4318FF;}
+  .card h2{font-size:20px;font-weight:800;margin-bottom:6px;}
+  .card p{font-size:13.5px;color:#5A6B87;line-height:1.6;}
+  .swatch{display:flex;gap:6px;margin-top:16px;}
+  .swatch span{width:22px;height:22px;border-radius:6px;}
+  .go{margin-top:18px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;}
+  .a .go{color:#2C9A90;}
+  .b .go{color:#4318FF;}
+  .foot{text-align:center;margin-top:30px;font-size:12.5px;color:#8493AD;}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="head">
+      <div class="kicker">POLY KCMS Redesign</div>
+      <h1>학생 등록 화면 리디자인 시안</h1>
+      <p class="sub">동일 화면(학생 등록)을 두 가지 디자인 방향으로 구현했습니다.<br>각 시안을 클릭해 실제 동작(필터·폼·상세·차트·스크롤)을 확인하세요.</p>
+    </div>
+    <div class="cards">
+      <a class="card a" href="A%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.dc.html">
+        <span class="tag">A형 · Teal Workbench</span>
+        <h2>밀도형 업무 화면</h2>
+        <p>상단 탭 내비게이션, 민트(Teal) 포인트, 정보 밀도를 높인 실무 중심 레이아웃.</p>
+        <div class="swatch"><span style="background:#4FD1C5"></span><span style="background:#38B2AC"></span><span style="background:#2D3748"></span><span style="background:#EDF2F7"></span></div>
+        <div class="go">A형 열기 →</div>
+      </a>
+      <a class="card b" href="B%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D%20(Horizon%20LEFT).dc.html">
+        <span class="tag">B형 · Horizon</span>
+        <h2>대시보드형 화면</h2>
+        <p>좌측 사이드바 내비게이션, 인디고(Indigo) 브랜드, 카드·여백 중심의 모던 대시보드 레이아웃.</p>
+        <div class="swatch"><span style="background:#4318FF"></span><span style="background:#7551FF"></span><span style="background:#2B3674"></span><span style="background:#F4F7FE"></span></div>
+        <div class="go">B형 열기 →</div>
+      </a>
+    </div>
+    <div class="foot">© POLY KCMS · 내부 검토용 시안</div>
+  </div>
+</body>
+</html>
