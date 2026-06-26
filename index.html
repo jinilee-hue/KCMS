@@ -18,6 +18,9 @@
   @media(max-width:720px){.cards{grid-template-columns:1fr;}}
   .card{display:flex;flex-direction:column;background:#fff;border-radius:20px;padding:30px 28px;
     box-shadow:0 18px 40px rgba(112,144,176,.14);border:1px solid #fff;}
+  .thumb{display:block;border-radius:13px;overflow:hidden;margin-bottom:20px;border:1px solid #EDF2F7;box-shadow:0 8px 20px rgba(112,144,176,.16);line-height:0;}
+  .thumb img{width:100%;height:auto;display:block;transition:transform .35s ease;}
+  .thumb:hover img{transform:scale(1.035);}
   .tag{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 13px;border-radius:70px;font-size:12px;font-weight:700;margin-bottom:14px;}
   .a .tag{background:#DCF3F1;color:#2C9A90;}
   .b .tag{background:#E9E3FF;color:#4318FF;}
@@ -64,7 +67,8 @@
     <div class="cards">
       <!-- A -->
       <div class="card a">
-        <span class="tag">A형 · Teal Workbench</span>
+        <a class="thumb" href="A%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.dc.html"><img src="thumbs/a.png" alt="A형 학생 등록 화면 미리보기"></a>
+        <span class="tag">A형</span>
         <h2>밀도형 업무 화면</h2>
         <p class="lead">한 화면에서 최대한 많은 정보를 빠르게 다루는 <b>실무 집중형</b> 레이아웃입니다.</p>
         <ul class="spec">
@@ -80,7 +84,8 @@
 
       <!-- B -->
       <div class="card b">
-        <span class="tag">B형 · Horizon</span>
+        <a class="thumb" href="B%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D%20(Horizon%20LEFT).dc.html"><img src="thumbs/b.png" alt="B형 학생 등록 화면 미리보기"></a>
+        <span class="tag">B형</span>
         <h2>대시보드형 화면</h2>
         <p class="lead">여백과 카드로 정돈한 <b>모던 대시보드형</b> 레이아웃입니다.</p>
         <ul class="spec">
@@ -101,7 +106,7 @@
       <div class="cmp-scroll">
         <table>
           <thead>
-            <tr><th>항목</th><th class="col-a">A형 · Teal Workbench</th><th class="col-b">B형 · Horizon</th></tr>
+            <tr><th>항목</th><th class="col-a">A형</th><th class="col-b">B형</th></tr>
           </thead>
           <tbody>
             <tr><th>내비게이션</th><td>상단 가로 탭 + 메가메뉴</td><td>좌측 접이식 사이드바</td></tr>
