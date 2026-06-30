@@ -52,8 +52,13 @@
 
   /* content split */
   .content{flex:1;min-height:0;display:flex;gap:0;}
-  .left{flex:1;min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--line);background:#fff;}
+  .left{flex:1;min-width:0;display:flex;flex-direction:column;background:#fff;margin-right:12px;}
   .right{flex:0 0 760px;display:flex;flex-direction:column;background:#fbfcfe;overflow:auto;}
+  .resizer{flex:0 0 11px;align-self:stretch;position:relative;cursor:col-resize;background:transparent;touch-action:none;}
+  .resizer::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:1px;background:var(--line);transition:background .15s,width .15s;}
+  .resizer:hover::before,.resizer.dragging::before{background:var(--pb);width:2px;left:4px;}
+  .resizer .grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:46px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--pb);box-shadow:0 1px 4px rgba(15,40,90,.16);}
+  .resizer:hover .grip,.resizer.dragging .grip{border-color:var(--pb);}
 
   /* filter form */
   .filters{flex:0 0 auto;padding:8px 10px;border-bottom:1px solid var(--line-soft);}
@@ -204,6 +209,8 @@
           </div>
         </div>
       </div>
+
+      <div class="resizer" id="resizer" title="너비 조절"><div class="grip"><svg width="6" height="20" viewBox="0 0 6 20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M2 3v14M4 3v14"/></svg></div></div>
 
       <!-- RIGHT: detail -->
       <div class="right">
@@ -377,6 +384,40 @@
     });
     tb.appendChild(tr);
   });
+
+  // ===== 리스트/상세 영역 너비 조절 =====
+  (function(){
+    var rz = document.getElementById('resizer');
+    var content = document.querySelector('.content');
+    var right = document.querySelector('.right');
+    if(!rz || !content || !right) return;
+    var dragging = false;
+    rz.addEventListener('pointerdown', function(e){
+      dragging = true; rz.classList.add('dragging');
+      try{ rz.setPointerCapture(e.pointerId); }catch(_){}
+      document.body.style.cursor = 'col-resize';
+      document.body.style.userSelect = 'none';
+      e.preventDefault();
+    });
+    rz.addEventListener('pointermove', function(e){
+      if(!dragging) return;
+      var rect = content.getBoundingClientRect();
+      var w = rect.right - e.clientX - 5;
+      var min = 420, max = rect.width - 380;
+      if(w < min) w = min;
+      if(w > max) w = max;
+      right.style.flexBasis = w + 'px';
+    });
+    function end(e){
+      if(!dragging) return;
+      dragging = false; rz.classList.remove('dragging');
+      try{ rz.releasePointerCapture(e.pointerId); }catch(_){}
+      document.body.style.cursor = '';
+      document.body.style.userSelect = '';
+    }
+    rz.addEventListener('pointerup', end);
+    rz.addEventListener('pointercancel', end);
+  })();
 </script>
 </body>
 </html>
