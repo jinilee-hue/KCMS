@@ -187,41 +187,51 @@ html,body{margin:0;padding:0;}
               </div>
             </div>
 
-            <!-- table header -->
-            <div style="flex:0 0 auto;display:grid;grid-template-columns:38px 44px 1.5fr 1.15fr .75fr .7fr .92fr 1.05fr 1.15fr .6fr 1fr 1fr 40px;align-items:center;padding:0 12px;height:42px;background:var(--primary);font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;text-align:center;">
-              <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="opacity:.8!important;"><div style="width:16px;height:16px;border:1.5px solid {{ selAllBorder }};border-radius:4px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:8px;height:2.5px;background:var(--primary);border-radius:2px;"></div></sc-if></div></div>
-              <div style="text-align:center;">#</div>
-              <div>이름</div><div>학급</div><div>레벨</div><div>구분</div><div>상태</div><div>학번</div><div>학부모 전화</div><div style="text-align:center;">성별</div><div>생년월일</div><div>입학일</div><div></div>
-            </div>
-
-            <!-- rows -->
-            <div style="position:relative;flex:1;min-height:0;">
-            <div class="kc-rows">
-              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
-                <div onClick="{{ r.onClick }}" style="display:grid;grid-template-columns:38px 44px 1.5fr 1.15fr .75fr .7fr .92fr 1.05fr 1.15fr .6fr 1fr 1fr 40px;align-items:center;padding:0 12px;height:{{ rowH }}px;border-bottom:{{ r.rowBorderBottom }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};position:relative;z-index:{{ r.rowZ }};text-align:center;" style-hover="background:rgba(79,209,197,0.10)!important;">
-                  <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
-                    <div style="width:16px;height:16px;border:1.5px solid {{ r.checkBorder }};border-radius:4px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
-                      <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
-                    </div>
-                  </div>
-                  <div class="kc-num" style="text-align:center;font-size:12px;color:var(--text-faint);">{{ r.idx }}</div>
-                  <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
-                    <span style="font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
-                  </div>
-                  <div style="font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
-                  <div style="font-size:12.5px;color:var(--text-muted);">{{ r.level }}</div>
-                  <div style="font-size:12.5px;color:var(--text-muted);">{{ r.type }}</div>
-                  <div><span style="display:inline-flex;align-items:center;height:21px;padding:0 9px;border-radius:6px;font-size:11.5px;font-weight:700;color:{{ r.statusFg }};background:{{ r.statusBg }};">{{ r.status }}</span></div>
-                  <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.studentNo }}</div>
-                  <div class="kc-num" style="font-size:12.5px;color:var(--text);">{{ r.phone }}</div>
-                  <div style="text-align:center;font-size:12.5px;color:var(--text-muted);">{{ r.gender }}</div>
-                  <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.birth }}</div>
-                  <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.enroll }}</div>
-                  <div style="display:flex;align-items:center;justify-content:center;color:var(--text-faint);">⋯</div>
+            <!-- table scroll (horizontal + vertical, sticky header) -->
+            <div style="flex:1;min-height:0;overflow:auto;">
+              <div style="min-width:calc(100% + 1478px);">
+                <!-- table header -->
+                <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:38px 44px 1.5fr 1.15fr .75fr .7fr .92fr 1.05fr 1.15fr .6fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;padding:0 12px;height:42px;background:var(--primary);font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;text-align:center;">
+                  <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="opacity:.8!important;"><div style="width:16px;height:16px;border:1.5px solid {{ selAllBorder }};border-radius:4px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:8px;height:2.5px;background:var(--primary);border-radius:2px;"></div></sc-if></div></div>
+                  <div style="text-align:center;">#</div>
+                  <div>이름</div><div>학급</div><div>레벨</div><div>구분</div><div>상태</div><div>학번</div><div>학부모 전화</div><div style="text-align:center;">성별</div><div>생년월일</div><div>입학일</div><div>전화번호</div><div>핸드폰</div><div>이메일</div><div>우편번호</div><div>주소</div><div>상세주소</div><div>학교</div><div>학년</div><div>ID</div><div>현금영수증구분</div><div>현금영수증번호</div><div></div>
                 </div>
-              </sc-for>
-            </div>
-            <div class="kc-thumb"></div>
+                <!-- rows -->
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+                  <div onClick="{{ r.onClick }}" style="display:grid;grid-template-columns:38px 44px 1.5fr 1.15fr .75fr .7fr .92fr 1.05fr 1.15fr .6fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;padding:0 12px;height:{{ rowH }}px;border-bottom:{{ r.rowBorderBottom }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};position:relative;z-index:{{ r.rowZ }};text-align:center;" style-hover="background:rgba(79,209,197,0.10)!important;">
+                    <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
+                      <div style="width:16px;height:16px;border:1.5px solid {{ r.checkBorder }};border-radius:4px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
+                        <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
+                      </div>
+                    </div>
+                    <div class="kc-num" style="text-align:center;font-size:12px;color:var(--text-faint);">{{ r.idx }}</div>
+                    <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
+                      <span style="font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
+                    </div>
+                    <div style="font-size:13px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);">{{ r.level }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);">{{ r.type }}</div>
+                    <div><span style="display:inline-flex;align-items:center;height:21px;padding:0 9px;border-radius:6px;font-size:11.5px;font-weight:700;color:{{ r.statusFg }};background:{{ r.statusBg }};">{{ r.status }}</span></div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.studentNo }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text);">{{ r.phone }}</div>
+                    <div style="text-align:center;font-size:12.5px;color:var(--text-muted);">{{ r.gender }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.birth }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.enroll }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.tel }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.mobile }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.email }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.zip }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addr }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addrDetail }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);">{{ r.school }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);">{{ r.grade }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.sid }}</div>
+                    <div style="font-size:12.5px;color:var(--text-muted);">{{ r.cashType }}</div>
+                    <div class="kc-num" style="font-size:12.5px;color:var(--text-muted);">{{ r.cashNo }}</div>
+                    <div style="display:flex;align-items:center;justify-content:center;color:var(--text-faint);">⋯</div>
+                  </div>
+                </sc-for>
+              </div>
             </div>
 
             <!-- footer summary + pagination -->
@@ -523,7 +533,6 @@ class Component extends DCLogic {
     };
     attach();
     window.addEventListener('resize', this._checkNav);
-    this._initThumb();
     this._initDtabs();
     this._initNavScroll();
     this._initDrawerThumb();
@@ -853,6 +862,8 @@ class Component extends DCLogic {
       const chk = !!st.checked[s.id];
       return {
         ...s, idx:i+1, initial:s.name.charAt(0),
+        tel:'', mobile:'', email:'', zip:'', addr:'', addrDetail:'',
+        sid:(s.level||'id').toLowerCase().replace(/[^a-z0-9]/g,'')+'lod'+s.id, cashType:'', cashNo:'',
         statusFg:m.fg, statusBg:m.bg, avBg:m.av[0], avFg:m.av[1],
         rowBg: (s.status === '탈퇴' ? 'rgba(100,116,139,0.05)' : 'transparent'),
         rowMark: sel ? 'inset 0 0 0 1px var(--primary), 0 6px 18px rgba(20,30,55,0.16)' : 'none',
