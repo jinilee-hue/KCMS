@@ -118,7 +118,7 @@ html,body{margin:0;padding:0;}
       <!-- page head -->
       <div style="flex:0 0 auto;background:var(--surface);border-bottom:1px solid var(--border);padding:7px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;position:relative;z-index:1;">
         <div style="min-width:0;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--text-muted);white-space:nowrap;">
+          <div style="display:flex;align-items:center;gap:7px;font-size:13px;color:#18243f;white-space:nowrap;">
             <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:7px;background:var(--surface-2);color:var(--text-muted);cursor:pointer;flex:0 0 auto;" style-hover="background:var(--border)!important;color:var(--text)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
             <span style="color:var(--text-faint);">›</span>
             <span>학생관리</span><span style="color:var(--text-faint);">›</span>
@@ -649,7 +649,7 @@ class Component extends DCLogic {
       const open = st.hoverDomain===n;
       return {
         name:n,
-        color: hi ? 'var(--primary)' : 'var(--text-muted)',
+        color: hi ? 'var(--primary)' : '#18243f',
         weight: hi ? 700 : 600,
         bar: hi ? 'inset 0 -3px 0 var(--primary)' : 'none',
         onClick: ()=>{},
@@ -724,10 +724,10 @@ class Component extends DCLogic {
     const hv = st.hoverDomain;
     const megaCols = (hv && menu[hv]) ? menu[hv].map(c => ({
       cat: c.cat,
-      catColor: 'var(--navy)',
+      catColor: '#18243f',
       items: c.items.map(name => {
         const on = (hv===activeDomain && name===activeScreen);
-        return { name, weight: on?700:500, color: on?'var(--primary)':'var(--text-muted)', bg: 'transparent', onClick: ()=> this.setState({ hoverDomain:null }) };
+        return { name, weight: on?700:500, color: on?'var(--primary)':'#18243f', bg: 'transparent', onClick: ()=> this.setState({ hoverDomain:null }) };
       }),
     })) : [];
 
@@ -735,7 +735,7 @@ class Component extends DCLogic {
     const subnav = subNames.map(n => ({
       name:n,
       weight: n==='학생정보' ? 700 : 500,
-      color: n==='학생정보' ? 'var(--navy)' : 'var(--text-muted)',
+      color: n==='학생정보' ? 'var(--navy)' : '#18243f',
       bg: n==='학생정보' ? 'var(--surface-2)' : 'transparent',
       onClick: ()=>{},
     }));
@@ -744,7 +744,7 @@ class Component extends DCLogic {
     const screennav = scrNames.map(n => ({
       name:n,
       weight: n==='학생 등록' ? 700 : 500,
-      color: n==='학생 등록' ? 'var(--primary)' : 'var(--text-muted)',
+      color: n==='학생 등록' ? 'var(--primary)' : '#18243f',
       bar: n==='학생 등록' ? 'var(--primary)' : 'transparent',
       onClick: ()=>{},
     }));
@@ -777,7 +777,7 @@ class Component extends DCLogic {
       {name:'쪽지함', p:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'},
       {name:'상담 SR', p:'<path d="M4 13a8 8 0 0116 0"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/>'},
       {name:'폴리봇', p:'<rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01"/><path d="M2 13v2M22 13v2"/>'},
-    ].map(r => ({ name:r.name, color:'var(--text-muted)', bg:'transparent', iconEl:this.iconEl(r.p) }));
+    ].map(r => ({ name:r.name, color:'#18243f', bg:'transparent', iconEl:this.iconEl(r.p) }));
 
     // filtered list
     const q = st.search.trim();

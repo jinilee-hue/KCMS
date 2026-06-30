@@ -91,7 +91,7 @@
         <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
           <div style="flex-shrink:0;padding:2px 0 8px 21px;margin:2px 0 4px 23px;border-left:1px solid var(--gray-200);display:flex;flex-direction:column;gap:2px;">
             <sc-for list="{{ d.cats }}" as="c" hint-placeholder-count="3">
-              <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--gray-500);text-transform:uppercase;padding:9px 12px 4px;">{{ c.cat }}</div>
+              <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#2b3674;text-transform:uppercase;padding:9px 12px 4px;">{{ c.cat }}</div>
               <sc-for list="{{ c.items }}" as="it" hint-placeholder-count="3">
                 <div onClick="{{ it.onClick }}" style="position:relative;display:flex;align-items:center;height:34px;padding:0 12px;border-radius:9px;cursor:pointer;font-size:13.5px;font-weight:{{ it.weight }};color:{{ it.color }};background:{{ it.bg }};white-space:nowrap;" style-hover="color:var(--neutral-700)!important;">
                   {{ it.name }}
@@ -127,7 +127,7 @@
     <div onMouseLeave="{{ closeFlyout }}" style="position:absolute;left:84px;top:84px;z-index:60;min-width:220px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:14px 12px;">
       <div style="font-family:var(--font-display);font-weight:800;font-size:14px;color:var(--navy);padding:2px 10px 10px;">{{ flyoutName }}</div>
       <sc-for list="{{ flyoutCats }}" as="c" hint-placeholder-count="3">
-        <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--gray-500);text-transform:uppercase;padding:8px 10px 3px;">{{ c.cat }}</div>
+        <div style="font-size:10.5px;font-weight:700;letter-spacing:.06em;color:#2b3674;text-transform:uppercase;padding:8px 10px 3px;">{{ c.cat }}</div>
         <sc-for list="{{ c.items }}" as="it" hint-placeholder-count="3">
           <div onClick="{{ it.onClick }}" style="display:flex;align-items:center;height:32px;padding:0 10px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:{{ it.weight }};color:{{ it.color }};white-space:nowrap;" style-hover="background:var(--brand-wash)!important;color:var(--brand)!important;">{{ it.name }}</div>
         </sc-for>
@@ -142,8 +142,8 @@
     <header style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 28px 12px;">
       <div style="display:flex;align-items:center;gap:14px;min-width:0;">
         <div style="min-width:0;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--gray-600);">
-            <span title="대시보드 홈" style="display:inline-flex;align-items:center;color:var(--gray-500);cursor:pointer;" style-hover="color:var(--brand)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path><path d="M9.5 21v-6h5v6"></path></svg></span>
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#2b3674;">
+            <span title="대시보드 홈" style="display:inline-flex;align-items:center;color:#2b3674;cursor:pointer;" style-hover="color:var(--brand)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path><path d="M9.5 21v-6h5v6"></path></svg></span>
             <span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생관리</span><span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생정보</span><span style="color:var(--gray-400);">›</span><span style="color:var(--navy);font-weight:700;">학생 등록</span>
           </div>
           <h1 style="margin:3px 0 0;font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--navy);">학생 등록</h1>
@@ -657,8 +657,8 @@ class Component extends DCLogic {
         open,
         rowBg: isActiveDom ? 'var(--brand)' : 'transparent',
         cls: isActiveDom ? 'kc-dom kc-dom-on' : 'kc-dom',
-        iconColor: isActiveDom ? '#fff' : 'var(--gray-500)',
-        labelColor: isActiveDom ? '#fff' : 'var(--gray-600)',
+        iconColor: isActiveDom ? '#fff' : '#2b3674',
+        labelColor: isActiveDom ? '#fff' : '#2b3674',
         chevColor: isActiveDom ? 'rgba(255,255,255,.8)' : 'var(--gray-400)',
         weight: isActiveDom ? 700 : 500,
         chev: open ? '180deg' : '0deg',
@@ -668,7 +668,7 @@ class Component extends DCLogic {
           cat:c.cat,
           items:c.items.map(it => {
             const on = (n===activeDomain && it===activeScreen);
-            return { name:it, active:on, weight: on?700:500, color: on?'var(--brand)':'var(--gray-600)', bg:'transparent', onClick: ()=> this.openItem(n, it) };
+            return { name:it, active:on, weight: on?700:500, color: on?'var(--brand)':'#2b3674', bg:'transparent', onClick: ()=> this.openItem(n, it) };
           }),
         })) : [],
       };
@@ -680,7 +680,7 @@ class Component extends DCLogic {
       cat:c.cat,
       items:c.items.map(it => {
         const on = (fd===activeDomain && it===activeScreen);
-        return { name:it, weight:on?700:500, color:on?'var(--brand)':'var(--gray-600)', onClick: ()=> this.openItem(fd, it) };
+        return { name:it, weight:on?700:500, color:on?'var(--brand)':'#2b3674', onClick: ()=> this.openItem(fd, it) };
       }),
     })) : [];
 
