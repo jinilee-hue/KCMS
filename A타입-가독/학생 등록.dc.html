@@ -31,9 +31,11 @@ html,body{margin:0;padding:0;}
 ::-webkit-scrollbar{width:6px;height:6px;}
 ::-webkit-scrollbar-thumb{background:#C6D2E2;border-radius:8px;border:2px solid var(--bg);}
 ::-webkit-scrollbar-track{background:transparent;}
-.kc-tbl::-webkit-scrollbar{width:10px;height:10px;}
-.kc-tbl::-webkit-scrollbar-thumb{background:#C6D2E2;border-radius:8px;border:none;}
-.kc-tbl::-webkit-scrollbar-track{background:transparent;}
+.kc-hx::-webkit-scrollbar{width:6px;height:6px;}
+.kc-hx::-webkit-scrollbar-thumb{background:#C6D2E2;border-radius:8px;border:none;}
+.kc-hx::-webkit-scrollbar-track{background:transparent;}
+.kc-vrows{scrollbar-width:none;}
+.kc-vrows::-webkit-scrollbar{display:none;}
 .kc-num{font-family:var(--sans)!important;font-variant-numeric:tabular-nums;font-feature-settings:"tnum";}
 @keyframes kc-fill{from{transform:scaleX(0);}to{transform:scaleX(1);}}
 .kc-bar{transform-origin:left center;animation:kc-fill .7s cubic-bezier(0.16,1,0.3,1);}
@@ -204,17 +206,19 @@ html,body{margin:0;padding:0;}
               </div>
             </div>
 
-            <!-- table scroll (horizontal + vertical, sticky header) -->
-            <div class="kc-tbl" style="flex:1;min-height:0;overflow:auto;">
-              <div style="width:max-content;min-width:100%;">
-                <!-- table header -->
-                <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:{{ gridCols }};align-items:center;padding:0 12px;height:42px;background:var(--primary);font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;text-align:center;">
+            <!-- table: horizontal native scroll + floating vertical overlay -->
+            <div class="kc-tbl-wrap" style="position:relative;flex:1;min-height:0;">
+              <div class="kc-hx" style="height:100%;overflow-x:auto;overflow-y:hidden;">
+                <div style="width:max-content;min-width:100%;height:100%;display:flex;flex-direction:column;">
+                  <!-- table header -->
+                  <div class="kc-thead" style="flex:0 0 auto;display:grid;grid-template-columns:{{ gridCols }};align-items:center;padding:0 12px;height:42px;background:var(--primary);font-size:11px;font-weight:700;letter-spacing:.04em;color:#fff;text-transform:uppercase;text-align:center;">
                   <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="opacity:.8!important;"><div style="width:16px;height:16px;border:1.5px solid {{ selAllBorder }};border-radius:4px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:8px;height:2.5px;background:var(--primary);border-radius:2px;"></div></sc-if></div></div>
                   <div style="text-align:center;">#</div>
                   <div>이름</div><sc-if value="{{ cv.klass }}"><div>학급</div></sc-if><sc-if value="{{ cv.level }}"><div>레벨</div></sc-if><sc-if value="{{ cv.type }}"><div>구분</div></sc-if><sc-if value="{{ cv.status }}"><div>상태</div></sc-if><sc-if value="{{ cv.studentNo }}"><div>학번</div></sc-if><sc-if value="{{ cv.phone }}"><div>학부모 전화</div></sc-if><sc-if value="{{ cv.gender }}"><div style="text-align:center;">성별</div></sc-if><sc-if value="{{ cv.birth }}"><div>생년월일</div></sc-if><sc-if value="{{ cv.enroll }}"><div>입학일</div></sc-if><sc-if value="{{ cv.tel }}"><div>전화번호</div></sc-if><sc-if value="{{ cv.mobile }}"><div>핸드폰</div></sc-if><sc-if value="{{ cv.email }}"><div>이메일</div></sc-if><sc-if value="{{ cv.zip }}"><div>우편번호</div></sc-if><sc-if value="{{ cv.addr }}"><div>주소</div></sc-if><sc-if value="{{ cv.addrDetail }}"><div>상세주소</div></sc-if><sc-if value="{{ cv.school }}"><div>학교</div></sc-if><sc-if value="{{ cv.grade }}"><div>학년</div></sc-if><sc-if value="{{ cv.sid }}"><div>ID</div></sc-if><sc-if value="{{ cv.cashType }}"><div>현금영수증구분</div></sc-if><sc-if value="{{ cv.cashNo }}"><div>현금영수증번호</div></sc-if><div></div>
-                </div>
-                <!-- rows -->
-                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+                  </div>
+                  <!-- rows (vertical scroll, native bar hidden; floating thumb overlays) -->
+                  <div class="kc-vrows" style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;">
+                  <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
                   <div onClick="{{ r.onClick }}" style="display:grid;grid-template-columns:{{ gridCols }};align-items:center;padding:0 12px;height:{{ rowH }}px;border-bottom:{{ r.rowBorderBottom }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};position:relative;z-index:{{ r.rowZ }};text-align:center;" style-hover="background:rgba(79,209,197,0.10)!important;">
                     <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
                       <div style="width:16px;height:16px;border:1.5px solid {{ r.checkBorder }};border-radius:4px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
@@ -247,8 +251,11 @@ html,body{margin:0;padding:0;}
                     <sc-if value="{{ cv.cashNo }}"><div class="kc-num" style="font-size:12.5px;color:#18243f;">{{ r.cashNo }}</div></sc-if>
                     <div style="display:flex;align-items:center;justify-content:center;color:var(--text-faint);">⋯</div>
                   </div>
-                </sc-for>
+                  </sc-for>
+                  </div>
+                </div>
               </div>
+              <div class="kc-thumb kc-tbl-thumb"></div>
             </div>
 
             <!-- footer summary + pagination -->
@@ -555,9 +562,45 @@ class Component extends DCLogic {
     this._initDtabs();
     this._initNavScroll();
     this._initDrawerThumb();
+    this._initTblThumb();
   }
 
-  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._updDtabs) this._updDtabs(); if(this._updNav) this._updNav(); if(this._syncDrawer) this._syncDrawer(); }
+  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._updDtabs) this._updDtabs(); if(this._updNav) this._updNav(); if(this._syncDrawer) this._syncDrawer(); if(this._updTbl) this._updTbl(); }
+
+  _initTblThumb(){
+    const attach = () => {
+      const sc = document.querySelector('.kc-vrows');
+      const thumb = document.querySelector('.kc-tbl-thumb');
+      const head = document.querySelector('.kc-thead');
+      if(!sc || !thumb){ setTimeout(attach, 80); return; }
+      let hideT;
+      const show = () => { thumb.style.opacity='1'; clearTimeout(hideT); hideT=setTimeout(()=>{ if(!this._dragging) thumb.style.opacity='0'; }, 1200); };
+      const update = () => {
+        const headH = head ? head.offsetHeight : 0;
+        const sh=sc.scrollHeight, ch=sc.clientHeight, stp=sc.scrollTop, pad=6, trackH=ch-2*pad;
+        if(sh<=ch+1){ thumb.style.display='none'; return; }
+        thumb.style.display='block';
+        const th=Math.max(24, trackH*ch/sh);
+        thumb.style.height=th+'px';
+        thumb.style.transform='translateY('+(headH+pad+((sh-ch)?(stp/(sh-ch))*(trackH-th):0))+'px)';
+      };
+      this._updTbl = update;
+      sc.addEventListener('scroll', ()=>{ update(); show(); });
+      sc.addEventListener('mouseenter', ()=>{ update(); show(); });
+      thumb.addEventListener('mouseenter', show);
+      thumb.addEventListener('mousedown', (e)=>{
+        e.preventDefault(); this._dragging=true; thumb.classList.add('kc-dragging'); thumb.style.opacity='1';
+        const sh=sc.scrollHeight, ch=sc.clientHeight, pad=6, trackH=ch-2*pad, th=Math.max(24, trackH*ch/sh);
+        const startY=e.clientY, startTop=sc.scrollTop;
+        const onMove=(ev)=>{ const dy=ev.clientY-startY; sc.scrollTop = startTop + dy*(sh-ch)/(trackH-th); };
+        const onUp=()=>{ this._dragging=false; thumb.classList.remove('kc-dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); };
+        document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp);
+      });
+      this._tblRO = new ResizeObserver(update); this._tblRO.observe(sc);
+      update();
+    };
+    attach();
+  }
 
   _initDrawerThumb(){
     const sync = () => {
