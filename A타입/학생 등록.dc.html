@@ -436,9 +436,9 @@ html,body{margin:0;padding:0;}
   <!-- ===== WORK TABS (bottom bar) ===== -->
   <div class="noscroll" style="flex:0 0 auto;height:38px;background:var(--surface);border-top:1px solid var(--border);display:flex;align-items:stretch;gap:0;padding:0;overflow-x:auto;">
     <sc-for list="{{ worktabs }}" as="w" hint-placeholder-count="5">
-      <div style="display:flex;align-items:center;gap:9px;height:100%;padding:0 15px;font-size:13px;font-weight:{{ w.weight }};white-space:nowrap;color:{{ w.color }};background:{{ w.bg }};border-right:1px solid var(--border);box-shadow:{{ w.accent }};cursor:pointer;flex:0 0 auto;" style-hover="background:var(--surface-2)!important;">
+      <div onClick="{{ w.onClick }}" style="display:flex;align-items:center;gap:9px;height:100%;padding:0 15px;font-size:13px;font-weight:{{ w.weight }};white-space:nowrap;color:{{ w.color }};background:{{ w.bg }};border-right:1px solid var(--border);box-shadow:{{ w.accent }};cursor:pointer;flex:0 0 auto;" style-hover="background:var(--surface-2)!important;">
         <span>{{ w.name }}</span>
-        <span style="width:16px;height:16px;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;">✕</span>
+        <span onClick="{{ w.onClose }}" style="width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--text-faint);font-size:13px;cursor:pointer;" style-hover="background:var(--surface-2)!important;color:var(--text)!important;">✕</span>
       </div>
     </sc-for>
   </div>
@@ -453,6 +453,8 @@ class Component extends DCLogic {
       density: (props && props.density) ? props.density : 'standard',
       filtersOpen: true,
       hoverDomain: null,
+      worktabs: ['학생 등록','학급배정','출석','학급등록','셔틀운행정보'],
+      activeWorktab: '학생 등록',
       selectedId: 11,
       detailTab: '기본정보',
       search: '',
@@ -747,15 +749,22 @@ class Component extends DCLogic {
       onClick: ()=>{},
     }));
 
-    const wtNames = ['학생 등록','학급배정','출석','학급등록','셔틀운행정보'];
-    const worktabs = wtNames.map(n => {
-      const on = n==='학생 등록';
+    const worktabs = st.worktabs.map(n => {
+      const on = n===st.activeWorktab;
       return {
         name:n,
         weight: on ? 700 : 500,
         bg: 'transparent',
         color: on ? 'var(--primary)' : 'var(--text-muted)',
         accent: on ? 'inset 0 -2px 0 var(--primary)' : 'none',
+        onClick: ()=> this.setState({ activeWorktab:n }),
+        onClose: (e)=>{
+          if(e && e.stopPropagation) e.stopPropagation();
+          const arr = st.worktabs.filter(x => x!==n);
+          let active = st.activeWorktab;
+          if(active===n){ const i = st.worktabs.indexOf(n); active = arr[Math.min(i, arr.length-1)] || null; }
+          this.setState({ worktabs:arr, activeWorktab:active });
+        },
       };
     });
 
