@@ -226,23 +226,37 @@
               </sc-if>
             </div>
             <div style="display:flex;align-items:center;gap:8px;">
-              <button style="height:38px;width:38px;display:flex;align-items:center;justify-content:center;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;" title="컬럼 설정"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdLayoutColumnLine" size="17" hint-size="17px,17px"></x-import></button>
+              <div style="position:relative;">
+                <button onClick="{{ toggleColMenu }}" style="height:38px;width:38px;display:flex;align-items:center;justify-content:center;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;" title="컬럼 설정"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdLayoutColumnLine" size="17" hint-size="17px,17px"></x-import></button>
+                <sc-if value="{{ colMenu }}" hint-placeholder-val="{{ false }}">
+                  <div onClick="{{ closeColMenu }}" style="position:fixed;inset:0;z-index:60;"></div>
+                  <div style="position:absolute;top:46px;right:0;z-index:61;width:240px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:8px;max-height:340px;overflow:auto;">
+                    <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;padding:6px 10px 8px;">표시할 컬럼</div>
+                    <sc-for list="{{ colItems }}" as="c" hint-placeholder-count="10">
+                      <div onClick="{{ c.onClick }}" style="display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;border-radius:var(--radius-sm);cursor:pointer;" style-hover="background:var(--gray-100)!important;">
+                        <div style="width:16px;height:16px;border:1.5px solid {{ c.boxBorder }};border-radius:5px;background:{{ c.boxBg }};display:flex;align-items:center;justify-content:center;flex-shrink:0;"><sc-if value="{{ c.on }}" hint-placeholder-val="{{ true }}"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if></div>
+                        <span style="font-size:13px;color:var(--navy);">{{ c.label }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
               <button style="height:38px;padding:0 15px;display:flex;align-items:center;gap:7px;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--neutral-700);font-family:var(--font-display);font-size:13px;font-weight:700;cursor:pointer;" style-hover="color:var(--green-strong)!important;box-shadow:inset 0 0 0 1px var(--green-strong),0 8px 18px rgba(112,144,176,0.28)!important;"><span style="display:inline-flex;color:var(--green-strong);"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg></span>Excel</button>
             </div>
           </div>
 
           <!-- table scroll (horizontal + vertical, sticky header) -->
           <div class="kc-scroll" style="flex:1;min-height:0;overflow:auto;">
-            <div style="min-width:calc(100% + 1478px);">
+            <div style="width:max-content;min-width:100%;">
               <!-- table header -->
-              <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
+              <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
                 <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
                 <div style="text-align:center;">#</div>
-                <div class="kc-th">이름</div><div class="kc-th">학급</div><div class="kc-th">레벨</div><div class="kc-th">구분</div><div class="kc-th">상태</div><div class="kc-th">학번</div><div class="kc-th">학부모 전화</div><div class="kc-th" style="text-align:center;">성별</div><div class="kc-th">생년월일</div><div class="kc-th">입학일</div><div class="kc-th">전화번호</div><div class="kc-th">핸드폰</div><div class="kc-th">이메일</div><div class="kc-th">우편번호</div><div class="kc-th">주소</div><div class="kc-th">상세주소</div><div class="kc-th">학교</div><div class="kc-th">학년</div><div class="kc-th">ID</div><div class="kc-th">현금영수증구분</div><div class="kc-th">현금영수증번호</div><div></div>
+                <div class="kc-th">이름</div><sc-if value="{{ cv.klass }}"><div class="kc-th">학급</div></sc-if><sc-if value="{{ cv.level }}"><div class="kc-th">레벨</div></sc-if><sc-if value="{{ cv.type }}"><div class="kc-th">구분</div></sc-if><sc-if value="{{ cv.status }}"><div class="kc-th">상태</div></sc-if><sc-if value="{{ cv.studentNo }}"><div class="kc-th">학번</div></sc-if><sc-if value="{{ cv.phone }}"><div class="kc-th">학부모 전화</div></sc-if><sc-if value="{{ cv.gender }}"><div class="kc-th" style="text-align:center;">성별</div></sc-if><sc-if value="{{ cv.birth }}"><div class="kc-th">생년월일</div></sc-if><sc-if value="{{ cv.enroll }}"><div class="kc-th">입학일</div></sc-if><sc-if value="{{ cv.tel }}"><div class="kc-th">전화번호</div></sc-if><sc-if value="{{ cv.mobile }}"><div class="kc-th">핸드폰</div></sc-if><sc-if value="{{ cv.email }}"><div class="kc-th">이메일</div></sc-if><sc-if value="{{ cv.zip }}"><div class="kc-th">우편번호</div></sc-if><sc-if value="{{ cv.addr }}"><div class="kc-th">주소</div></sc-if><sc-if value="{{ cv.addrDetail }}"><div class="kc-th">상세주소</div></sc-if><sc-if value="{{ cv.school }}"><div class="kc-th">학교</div></sc-if><sc-if value="{{ cv.grade }}"><div class="kc-th">학년</div></sc-if><sc-if value="{{ cv.sid }}"><div class="kc-th">ID</div></sc-if><sc-if value="{{ cv.cashType }}"><div class="kc-th">현금영수증구분</div></sc-if><sc-if value="{{ cv.cashNo }}"><div class="kc-th">현금영수증번호</div></sc-if><div></div>
               </div>
               <!-- rows -->
               <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
-                <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
+                <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
                   <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
                     <div style="width:18px;height:18px;border:1.5px solid {{ r.checkBorder }};border-radius:6px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
                       <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
@@ -252,26 +266,26 @@
                   <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
                     <span style="font-weight:700;font-size:13.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
                   </div>
-                  <div style="font-size:13px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;">{{ r.level }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;">{{ r.type }}</div>
-                  <div><span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ r.statusBg }};color:{{ r.statusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ r.status }}</span></div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.studentNo }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.phone }}</div>
-                  <div style="text-align:center;font-size:12.5px;color:#2b3674;">{{ r.gender }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.birth }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.enroll }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.tel }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.mobile }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.email }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.zip }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addr }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addrDetail }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;">{{ r.school }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;">{{ r.grade }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.sid }}</div>
-                  <div style="font-size:12.5px;color:#2b3674;">{{ r.cashType }}</div>
-                  <div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.cashNo }}</div>
+                  <sc-if value="{{ cv.klass }}"><div style="font-size:13px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div></sc-if>
+                  <sc-if value="{{ cv.level }}"><div style="font-size:12.5px;color:#2b3674;">{{ r.level }}</div></sc-if>
+                  <sc-if value="{{ cv.type }}"><div style="font-size:12.5px;color:#2b3674;">{{ r.type }}</div></sc-if>
+                  <sc-if value="{{ cv.status }}"><div><span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ r.statusBg }};color:{{ r.statusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ r.status }}</span></div></sc-if>
+                  <sc-if value="{{ cv.studentNo }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.studentNo }}</div></sc-if>
+                  <sc-if value="{{ cv.phone }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.phone }}</div></sc-if>
+                  <sc-if value="{{ cv.gender }}"><div style="text-align:center;font-size:12.5px;color:#2b3674;">{{ r.gender }}</div></sc-if>
+                  <sc-if value="{{ cv.birth }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.birth }}</div></sc-if>
+                  <sc-if value="{{ cv.enroll }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.enroll }}</div></sc-if>
+                  <sc-if value="{{ cv.tel }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.tel }}</div></sc-if>
+                  <sc-if value="{{ cv.mobile }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.mobile }}</div></sc-if>
+                  <sc-if value="{{ cv.email }}"><div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.email }}</div></sc-if>
+                  <sc-if value="{{ cv.zip }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.zip }}</div></sc-if>
+                  <sc-if value="{{ cv.addr }}"><div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addr }}</div></sc-if>
+                  <sc-if value="{{ cv.addrDetail }}"><div style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addrDetail }}</div></sc-if>
+                  <sc-if value="{{ cv.school }}"><div style="font-size:12.5px;color:#2b3674;">{{ r.school }}</div></sc-if>
+                  <sc-if value="{{ cv.grade }}"><div style="font-size:12.5px;color:#2b3674;">{{ r.grade }}</div></sc-if>
+                  <sc-if value="{{ cv.sid }}"><div class="num" style="font-size:12.5px;color:#2b3674;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.sid }}</div></sc-if>
+                  <sc-if value="{{ cv.cashType }}"><div style="font-size:12.5px;color:#2b3674;">{{ r.cashType }}</div></sc-if>
+                  <sc-if value="{{ cv.cashNo }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.cashNo }}</div></sc-if>
                   <div style="display:flex;align-items:center;justify-content:center;color:var(--gray-400);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="16" hint-size="16px,16px"></x-import></div>
                 </div>
               </sc-for>
@@ -515,6 +529,8 @@ class Component extends DCLogic {
       newModal: false,
       newOpen: null,
       new_gender: '', new_klass: '', new_level: '',
+      colMenu: false,
+      colVis: { klass:true, level:true, type:true, status:true, studentNo:true, phone:true, gender:true, birth:true, enroll:true, tel:true, mobile:true, email:true, zip:true, addr:true, addrDetail:true, school:true, grade:true, sid:true, cashType:true, cashNo:true },
       sidebarCollapsed: false,
       openDomain: '학생관리',
       hoverDomain: null,
@@ -804,6 +820,23 @@ class Component extends DCLogic {
     const selAllSome = checkedCount>0 && !selAllOn;
     const toggleAll = (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); if(selAllOn){ this.setState({checked:{}}); } else { const c={...st.checked}; flist.forEach(s=> c[s.id]=true); this.setState({checked:c}); } };
 
+    // ===== column visibility =====
+    const cv = st.colVis;
+    const colDefs = [
+      {k:'klass',label:'학급',w:'110px'},{k:'level',label:'레벨',w:'80px'},{k:'type',label:'구분',w:'72px'},
+      {k:'status',label:'상태',w:'92px'},{k:'studentNo',label:'학번',w:'104px'},{k:'phone',label:'학부모 전화',w:'132px'},
+      {k:'gender',label:'성별',w:'60px'},{k:'birth',label:'생년월일',w:'104px'},{k:'enroll',label:'입학일',w:'104px'},
+      {k:'tel',label:'전화번호',w:'130px'},{k:'mobile',label:'핸드폰',w:'130px'},{k:'email',label:'이메일',w:'180px'},
+      {k:'zip',label:'우편번호',w:'96px'},{k:'addr',label:'주소',w:'200px'},{k:'addrDetail',label:'상세주소',w:'170px'},
+      {k:'school',label:'학교',w:'110px'},{k:'grade',label:'학년',w:'72px'},{k:'sid',label:'ID',w:'130px'},
+      {k:'cashType',label:'현금영수증구분',w:'120px'},{k:'cashNo',label:'현금영수증번호',w:'140px'},
+    ];
+    const visDefs = colDefs.filter(d=> cv[d.k]);
+    const gridCols = '42px 42px 150px ' + visDefs.map(d=>d.w).join(' ') + ' 40px';
+    const colItems = colDefs.map(d=> ({ label:d.label, on:cv[d.k],
+      boxBg: cv[d.k]?'var(--brand)':'transparent', boxBorder: cv[d.k]?'var(--brand)':'var(--gray-400)',
+      onClick: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); this.setState({ colVis: Object.assign({}, cv, {[d.k]: !cv[d.k]}) }); } }));
+
     // detail
     const sel = this.students.find(s=> s.id===st.selectedId);
     const selSc = sel ? this.statusColors(sel.status) : {bg:'var(--gray-100)',fg:'var(--gray-600)',avBg:'var(--gray-100)',avFg:'var(--gray-600)'};
@@ -919,6 +952,10 @@ class Component extends DCLogic {
       toggleFilters: ()=> this.setState({ filtersOpen: !st.filtersOpen }),
       filterRot: st.filtersOpen ? '180deg' : '0deg',
       rows, rowH, shownCount: rows.length,
+      gridCols, cv, colItems,
+      colMenu: st.colMenu,
+      toggleColMenu: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); this.setState({ colMenu: !st.colMenu }); },
+      closeColMenu: ()=> this.setState({ colMenu:false }),
       hasChecked: checkedCount>0, checkedCount,
       selAllOn, selAllSome, toggleAll,
       selAllBg: (selAllOn||selAllSome) ? 'var(--brand)' : 'transparent',
