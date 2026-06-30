@@ -88,11 +88,11 @@
   .paging .pg b{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-weight:400;background:#fff;}
   .paging .pg b.on{background:var(--pb);color:#fff;border-color:var(--pb-dark);font-weight:700;}
   .paging .right{margin-left:auto;}
-  .summary{display:flex;}
-  .summary .cell{flex:1;text-align:center;border-right:1px solid var(--line-soft);padding:6px 0;}
+  .summary{display:flex;padding:0 10px 6px;}
+  .summary .cell{flex:1;text-align:center;border-right:1px solid var(--line-soft);}
   .summary .cell:last-child{border-right:none;}
-  .summary .k{font-size:11px;color:var(--txt-mut);background:var(--pb-light);color:var(--pb-deeper);font-weight:700;padding:3px 0;}
-  .summary .v{font-size:13px;font-weight:700;color:var(--txt);padding-top:4px;}
+  .summary .k{font-size:11px;background:var(--pb-light);color:var(--pb-deeper);font-weight:700;padding:4px 0;border-top:1px solid var(--label-bd);border-bottom:1px solid var(--label-bd);}
+  .summary .v{font-size:13px;font-weight:700;color:var(--txt);padding:5px 0;}
   .lbar{display:flex;align-items:center;gap:6px;padding:5px 10px;}
 
   /* right detail */
@@ -272,7 +272,7 @@
 
         <div class="sectit">학급 배정 정보</div>
         <div class="rsec" style="padding-top:0;padding-bottom:16px;">
-          <div class="tblwrap" style="max-height:160px;">
+          <div class="tblwrap" style="max-height:160px;padding:0;">
             <table class="grid">
               <thead><tr><th>학기</th><th>구분</th><th>쿼터구분</th><th>레벨</th><th>학급명</th><th>강의실</th><th>정원</th><th>수강상태</th><th>수강예정일</th><th>수강시작일</th></tr></thead>
               <tbody>
