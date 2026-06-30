@@ -230,7 +230,7 @@
                 <button onClick="{{ toggleColMenu }}" style="height:38px;width:38px;display:flex;align-items:center;justify-content:center;background:var(--white);box-shadow:var(--shadow-inset-border);border:none;border-radius:var(--radius-sm);color:var(--gray-600);cursor:pointer;" style-hover="background:var(--brand-wash)!important;color:var(--navy)!important;box-shadow:var(--shadow-inset-border),0 8px 18px rgba(112,144,176,0.28)!important;" title="컬럼 설정"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdLayoutColumnLine" size="17" hint-size="17px,17px"></x-import></button>
                 <sc-if value="{{ colMenu }}" hint-placeholder-val="{{ false }}">
                   <div onClick="{{ closeColMenu }}" style="position:fixed;inset:0;z-index:60;"></div>
-                  <div style="position:absolute;top:46px;right:0;z-index:61;width:240px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:8px;max-height:60vh;overflow:auto;">
+                  <div style="position:absolute;top:46px;right:0;z-index:61;width:240px;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:8px;max-height:340px;overflow:auto;">
                     <div style="font-size:11px;font-weight:700;color:var(--gray-500);text-transform:uppercase;letter-spacing:.04em;padding:6px 10px 8px;">표시할 컬럼</div>
                     <sc-for list="{{ colItems }}" as="c" hint-placeholder-count="10">
                       <div onClick="{{ c.onClick }}" style="display:flex;align-items:center;gap:10px;height:34px;padding:0 10px;border-radius:var(--radius-sm);cursor:pointer;" style-hover="background:var(--gray-100)!important;">
