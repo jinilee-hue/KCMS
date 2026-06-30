@@ -452,12 +452,20 @@ html,body{margin:0;padding:0;}
           <div onClick="{{ closeNew }}" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);background:var(--surface-2);" style-hover="background:var(--danger-soft)!important;color:var(--danger)!important;">✕</div>
         </div>
         <div style="padding:22px 24px;display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+          <div style="grid-column:span 2;display:flex;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--border-soft);">
+            <div style="flex:0 0 auto;width:72px;height:72px;border-radius:50%;background:var(--surface-2);border:1px dashed var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-faint);"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></svg></div>
+            <div style="display:flex;flex-direction:column;gap:7px;">
+              <span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">프로필 이미지</span>
+              <label style="display:inline-flex;align-items:center;gap:7px;height:36px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:13px;font-weight:600;color:var(--text);cursor:pointer;width:fit-content;" style-hover="border-color:var(--primary)!important;color:var(--primary)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>이미지 등록<input type="file" accept="image/*" style="display:none;"></label>
+              <span style="font-size:11px;color:var(--text-faint);">JPG·PNG · 최대 5MB</span>
+            </div>
+          </div>
           <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">이름 *</span><input placeholder="이름 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">성별</span><input placeholder="남 / 여" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">성별</span><div style="position:relative;"><div onClick="{{ mNewGender.onToggle }}" style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;color:{{ mNewGender.valColor }};cursor:pointer;"><span>{{ mNewGender.value }}</span><span style="display:inline-flex;color:var(--text-faint);transform:rotate({{ mNewGender.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ mNewGender.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeNewSel }}" style="position:fixed;inset:0;z-index:1;"></div><div style="position:absolute;top:44px;left:0;right:0;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow-pop);padding:4px;max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:2px;"><sc-for list="{{ mNewGender.options }}" as="opt" hint-placeholder-count="2"><div onClick="{{ opt.onClick }}" style="height:34px;flex-shrink:0;display:flex;align-items:center;padding:0 10px;border-radius:6px;font-size:13px;cursor:pointer;color:var(--text);background:transparent;" style-hover="background:var(--surface-2)!important;">{{ opt.name }}</div></sc-for></div></sc-if></div></label>
           <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학번</span><input placeholder="자동 생성 또는 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
           <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학부모 휴대폰 *</span><input placeholder="010-0000-0000" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학급</span><input placeholder="학급 선택" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
-          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">레벨</span><input placeholder="레벨 선택" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학급</span><div style="position:relative;"><div onClick="{{ mNewKlass.onToggle }}" style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;color:{{ mNewKlass.valColor }};cursor:pointer;"><span>{{ mNewKlass.value }}</span><span style="display:inline-flex;color:var(--text-faint);transform:rotate({{ mNewKlass.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ mNewKlass.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeNewSel }}" style="position:fixed;inset:0;z-index:1;"></div><div style="position:absolute;top:44px;left:0;right:0;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow-pop);padding:4px;max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:2px;"><sc-for list="{{ mNewKlass.options }}" as="opt" hint-placeholder-count="6"><div onClick="{{ opt.onClick }}" style="height:34px;flex-shrink:0;display:flex;align-items:center;padding:0 10px;border-radius:6px;font-size:13px;cursor:pointer;color:var(--text);background:transparent;" style-hover="background:var(--surface-2)!important;">{{ opt.name }}</div></sc-for></div></sc-if></div></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">레벨</span><div style="position:relative;"><div onClick="{{ mNewLevel.onToggle }}" style="height:40px;display:flex;align-items:center;justify-content:space-between;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;color:{{ mNewLevel.valColor }};cursor:pointer;"><span>{{ mNewLevel.value }}</span><span style="display:inline-flex;color:var(--text-faint);transform:rotate({{ mNewLevel.rot }});transition:transform .15s ease;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div><sc-if value="{{ mNewLevel.open }}" hint-placeholder-val="{{ false }}"><div onClick="{{ closeNewSel }}" style="position:fixed;inset:0;z-index:1;"></div><div style="position:absolute;top:44px;left:0;right:0;z-index:2;background:var(--surface);border:1px solid var(--border);border-radius:8px;box-shadow:var(--shadow-pop);padding:4px;max-height:200px;overflow:auto;display:flex;flex-direction:column;gap:2px;"><sc-for list="{{ mNewLevel.options }}" as="opt" hint-placeholder-count="6"><div onClick="{{ opt.onClick }}" style="height:34px;flex-shrink:0;display:flex;align-items:center;padding:0 10px;border-radius:6px;font-size:13px;cursor:pointer;color:var(--text);background:transparent;" style-hover="background:var(--surface-2)!important;">{{ opt.name }}</div></sc-for></div></sc-if></div></label>
           <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학교</span><input placeholder="학교명 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
           <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학년</span><input placeholder="학년 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:var(--text);" style-focus="border-color:var(--primary)!important;"></label>
         </div>
@@ -476,6 +484,8 @@ class Component extends DCLogic {
     super(props);
     this.state = {
       newModal: false,
+      newOpen: null,
+      new_gender: '', new_klass: '', new_level: '',
       railOpen: (props && props.railOpen !== undefined) ? props.railOpen : true,
       density: (props && props.density) ? props.density : 'standard',
       filtersOpen: true,
@@ -633,6 +643,19 @@ class Component extends DCLogic {
   }
 
   componentWillUnmount(){ if(this._ro) this._ro.disconnect(); if(this._thumbRO) this._thumbRO.disconnect(); window.removeEventListener('resize', this._checkNav); }
+
+  _newSel(key, opts, ph){
+    const st = this.state;
+    const val = st['new_'+key];
+    return {
+      value: val || ph,
+      valColor: val ? 'var(--text)' : 'var(--text-faint)',
+      open: st.newOpen===key,
+      rot: st.newOpen===key ? '180deg' : '0deg',
+      onToggle: (e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.setState({ newOpen: st.newOpen===key ? null : key }); },
+      options: opts.map(o => ({ name:o, selected: val===o, onClick: (e)=>{ if(e&&e.stopPropagation)e.stopPropagation(); this.setState({ ['new_'+key]:o, newOpen:null }); } })),
+    };
+  }
 
   students = [
     {id:1,name:'김서연',gender:'여',klass:'ECP6-Bee',level:'ECP6',type:'정규',status:'재학',studentNo:'06032648',phone:'010-9590-4515',birth:'2015/03/12',enroll:'2022/03/02',school:'인천효성남초',grade:'3학년'},
@@ -1037,8 +1060,12 @@ class Component extends DCLogic {
       setCompact: ()=> this.setState({ density:'compact' }),
       newModal: st.newModal,
       openNew: ()=> this.setState({ newModal:true }),
-      closeNew: ()=> this.setState({ newModal:false }),
+      closeNew: ()=> this.setState({ newModal:false, newOpen:null }),
       stopNew: (e)=>{ if(e && e.stopPropagation) e.stopPropagation(); },
+      closeNewSel: ()=> this.setState({ newOpen:null }),
+      mNewGender: this._newSel('gender', ['남','여'], '선택'),
+      mNewKlass: this._newSel('klass', ['ECP6-Bee','GT1','MGT2','PAS 7','R&D 2025','SSPB','Honors1'], '학급 선택'),
+      mNewLevel: this._newSel('level', ['ECP6','GT1','MGT2','PAS8','R&D','SSPB','Honors1'], '레벨 선택'),
       // selected
       selected: !!sel,
       drawerWpx: st.drawerW + 'px',
