@@ -39,6 +39,11 @@
   .kc-scroll::-webkit-scrollbar{width:6px;height:6px;}
   .kc-scroll::-webkit-scrollbar-thumb{background:#D6DEEC;border-radius:8px;}
   .kc-scroll::-webkit-scrollbar-track{background:transparent;}
+  .kc-hx::-webkit-scrollbar{width:6px;height:6px;}
+  .kc-hx::-webkit-scrollbar-thumb{background:#D6DEEC;border-radius:8px;}
+  .kc-hx::-webkit-scrollbar-track{background:transparent;}
+  .kc-vrows{scrollbar-width:none;}
+  .kc-vrows::-webkit-scrollbar{display:none;}
   .noscroll::-webkit-scrollbar{height:0;width:0;}
   .kc-rows{overflow-y:auto;overflow-x:hidden;scrollbar-width:none;height:100%;}
   .kc-rows::-webkit-scrollbar{display:none;}
@@ -245,17 +250,19 @@
             </div>
           </div>
 
-          <!-- table scroll (horizontal + vertical, sticky header) -->
-          <div class="kc-scroll" style="flex:1;min-height:0;overflow:auto;">
-            <div style="width:max-content;min-width:100%;">
-              <!-- table header -->
-              <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
+          <!-- table: horizontal native scroll + floating vertical overlay -->
+          <div class="kc-tbl-wrap" style="position:relative;flex:1;min-height:0;">
+            <div class="kc-hx" style="height:100%;overflow-x:auto;overflow-y:hidden;">
+              <div style="width:max-content;min-width:100%;height:100%;display:flex;flex-direction:column;">
+                <!-- table header -->
+                <div class="kc-thead" style="flex:0 0 auto;display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
                 <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
                 <div style="text-align:center;">#</div>
                 <div class="kc-th">이름</div><sc-if value="{{ cv.klass }}"><div class="kc-th">학급</div></sc-if><sc-if value="{{ cv.level }}"><div class="kc-th">레벨</div></sc-if><sc-if value="{{ cv.type }}"><div class="kc-th">구분</div></sc-if><sc-if value="{{ cv.status }}"><div class="kc-th">상태</div></sc-if><sc-if value="{{ cv.studentNo }}"><div class="kc-th">학번</div></sc-if><sc-if value="{{ cv.phone }}"><div class="kc-th">학부모 전화</div></sc-if><sc-if value="{{ cv.gender }}"><div class="kc-th" style="text-align:center;">성별</div></sc-if><sc-if value="{{ cv.birth }}"><div class="kc-th">생년월일</div></sc-if><sc-if value="{{ cv.enroll }}"><div class="kc-th">입학일</div></sc-if><sc-if value="{{ cv.tel }}"><div class="kc-th">전화번호</div></sc-if><sc-if value="{{ cv.mobile }}"><div class="kc-th">핸드폰</div></sc-if><sc-if value="{{ cv.email }}"><div class="kc-th">이메일</div></sc-if><sc-if value="{{ cv.zip }}"><div class="kc-th">우편번호</div></sc-if><sc-if value="{{ cv.addr }}"><div class="kc-th">주소</div></sc-if><sc-if value="{{ cv.addrDetail }}"><div class="kc-th">상세주소</div></sc-if><sc-if value="{{ cv.school }}"><div class="kc-th">학교</div></sc-if><sc-if value="{{ cv.grade }}"><div class="kc-th">학년</div></sc-if><sc-if value="{{ cv.sid }}"><div class="kc-th">ID</div></sc-if><sc-if value="{{ cv.cashType }}"><div class="kc-th">현금영수증구분</div></sc-if><sc-if value="{{ cv.cashNo }}"><div class="kc-th">현금영수증번호</div></sc-if><div></div>
-              </div>
-              <!-- rows -->
-              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+                </div>
+                <!-- rows (vertical scroll, native bar hidden; floating thumb overlays) -->
+                <div class="kc-vrows" style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;">
+                <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
                 <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
                   <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
                     <div style="width:18px;height:18px;border:1.5px solid {{ r.checkBorder }};border-radius:6px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
@@ -288,8 +295,11 @@
                   <sc-if value="{{ cv.cashNo }}"><div class="num" style="font-size:12.5px;color:#2b3674;">{{ r.cashNo }}</div></sc-if>
                   <div style="display:flex;align-items:center;justify-content:center;color:var(--gray-400);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="16" hint-size="16px,16px"></x-import></div>
                 </div>
-              </sc-for>
+                </sc-for>
+                </div>
+              </div>
             </div>
+            <div class="kc-thumb kc-tbl-thumb"></div>
           </div>
 
           <!-- pagination -->
@@ -559,8 +569,44 @@ class Component extends DCLogic {
     window.addEventListener('resize', this._onResize);
     this._onResize();
     this._initLnbThumb();
+    this._initTblThumb();
   }
-  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); }
+  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); if(this._updTbl) this._updTbl(); }
+
+  _initTblThumb(){
+    const attach = () => {
+      const sc = document.querySelector('.kc-vrows');
+      const thumb = document.querySelector('.kc-tbl-thumb');
+      const head = document.querySelector('.kc-thead');
+      if(!sc || !thumb){ setTimeout(attach, 80); return; }
+      let hideT;
+      const show = () => { thumb.style.opacity='1'; clearTimeout(hideT); hideT=setTimeout(()=>{ if(!this._dragging) thumb.style.opacity='0'; }, 1200); };
+      const update = () => {
+        const headH = head ? head.offsetHeight : 0;
+        const sh=sc.scrollHeight, ch=sc.clientHeight, stp=sc.scrollTop, pad=6, trackH=ch-2*pad;
+        if(sh<=ch+1){ thumb.style.display='none'; return; }
+        thumb.style.display='block';
+        const th=Math.max(24, trackH*ch/sh);
+        thumb.style.height=th+'px';
+        thumb.style.transform='translateY('+(headH+pad+((sh-ch)?(stp/(sh-ch))*(trackH-th):0))+'px)';
+      };
+      this._updTbl = update;
+      sc.addEventListener('scroll', ()=>{ update(); show(); });
+      sc.addEventListener('mouseenter', ()=>{ update(); show(); });
+      thumb.addEventListener('mouseenter', show);
+      thumb.addEventListener('mousedown', (e)=>{
+        e.preventDefault(); this._dragging=true; thumb.classList.add('kc-dragging'); thumb.style.opacity='1';
+        const sh=sc.scrollHeight, ch=sc.clientHeight, pad=6, trackH=ch-2*pad, th=Math.max(24, trackH*ch/sh);
+        const startY=e.clientY, startTop=sc.scrollTop;
+        const onMove=(ev)=>{ const dy=ev.clientY-startY; sc.scrollTop = startTop + dy*(sh-ch)/(trackH-th); };
+        const onUp=()=>{ this._dragging=false; thumb.classList.remove('kc-dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); };
+        document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp);
+      });
+      this._tblRO = new ResizeObserver(update); this._tblRO.observe(sc);
+      update();
+    };
+    attach();
+  }
 
   _initLnbThumb(){
     const sync = () => {
