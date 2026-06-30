@@ -676,10 +676,10 @@ class Component extends DCLogic {
 
   statusMeta(s){
     const m = {
-      '재학':{fg:'var(--text-muted)',bg:'var(--primary-soft)',av:['var(--primary-soft)','var(--primary-hover)']},
-      '휴학':{fg:'var(--text-muted)',bg:'var(--warning-soft)',av:['var(--warning-soft)','var(--warning)']},
-      '탈퇴':{fg:'var(--text-muted)',bg:'var(--surface-2)',av:['var(--surface-2)','var(--text-muted)']},
-      '대기':{fg:'var(--text-muted)',bg:'var(--info-soft)',av:['var(--info-soft)','var(--info)']},
+      '재학':{fg:'#18243f',bg:'var(--primary-soft)',av:['var(--primary-soft)','var(--primary-hover)']},
+      '휴학':{fg:'#18243f',bg:'var(--warning-soft)',av:['var(--warning-soft)','var(--warning)']},
+      '탈퇴':{fg:'#18243f',bg:'var(--surface-2)',av:['var(--surface-2)','var(--text-muted)']},
+      '대기':{fg:'#18243f',bg:'var(--info-soft)',av:['var(--info-soft)','var(--info)']},
     };
     return m[s] || m['재학'];
   }
@@ -932,15 +932,15 @@ class Component extends DCLogic {
     }));
 
     const assignments = [
-      {klass:'SSP-B-Test', level:'SSPB', room:'201호', cap:'9/12', pct:75, capColor:'var(--primary)', status:'수강', fg:'var(--text-muted)', bg:'var(--primary-soft)', term:'2025/02'},
-      {klass:'R&D 2025', level:'R&D', room:'203호', cap:'11/12', pct:92, capColor:'var(--info)', status:'대기', fg:'var(--text-muted)', bg:'var(--info-soft)', term:'2025/01'},
-      {klass:'QA 2024', level:'PAS 7', room:'201호', cap:'12/12', pct:100, capColor:'var(--navy)', status:'수료', fg:'var(--text-muted)', bg:'var(--surface-2)', term:'2024/02'},
+      {klass:'SSP-B-Test', level:'SSPB', room:'201호', cap:'9/12', pct:75, capColor:'var(--primary)', status:'수강', fg:'#18243f', bg:'var(--primary-soft)', term:'2025/02'},
+      {klass:'R&D 2025', level:'R&D', room:'203호', cap:'11/12', pct:92, capColor:'var(--info)', status:'대기', fg:'#18243f', bg:'var(--info-soft)', term:'2025/01'},
+      {klass:'QA 2024', level:'PAS 7', room:'201호', cap:'12/12', pct:100, capColor:'var(--navy)', status:'수료', fg:'#18243f', bg:'var(--surface-2)', term:'2024/02'},
     ];
     const attendance = [
-      {date:'06/24 (화)', klass:'SSPB · 16:00', status:'출석', fg:'var(--text-muted)', bg:'var(--success-soft)'},
-      {date:'06/23 (월)', klass:'SSPB · 16:00', status:'출석', fg:'var(--text-muted)', bg:'var(--success-soft)'},
-      {date:'06/20 (금)', klass:'SSPB · 16:00', status:'지각', fg:'var(--text-muted)', bg:'var(--warning-soft)'},
-      {date:'06/19 (목)', klass:'SSPB · 16:00', status:'결석', fg:'var(--text-muted)', bg:'var(--danger-soft)'},
+      {date:'06/24 (화)', klass:'SSPB · 16:00', status:'출석', fg:'#18243f', bg:'var(--success-soft)'},
+      {date:'06/23 (월)', klass:'SSPB · 16:00', status:'출석', fg:'#18243f', bg:'var(--success-soft)'},
+      {date:'06/20 (금)', klass:'SSPB · 16:00', status:'지각', fg:'#18243f', bg:'var(--warning-soft)'},
+      {date:'06/19 (목)', klass:'SSPB · 16:00', status:'결석', fg:'#18243f', bg:'var(--danger-soft)'},
     ];
     const scores = [
       {name:'6월 Unit Test', subject:'Reading', date:'06/18', score:'92'},
@@ -963,9 +963,9 @@ class Component extends DCLogic {
         diffTxt:(d>=0?'▲ ':'▼ ')+Math.abs(d), diffColor: d>=0?'var(--success)':'var(--danger)' };
     });
     const payments = [
-      {item:'정규 수업료', month:'2025-06', amount:'440,000', status:'완납', fg:'var(--text-muted)', bg:'var(--primary-soft)'},
-      {item:'정규 수업료', month:'2025-05', amount:'440,000', status:'완납', fg:'var(--text-muted)', bg:'var(--primary-soft)'},
-      {item:'교재비', month:'2025-04', amount:'85,000', status:'미납', fg:'var(--text-muted)', bg:'var(--danger-soft)'},
+      {item:'정규 수업료', month:'2025-06', amount:'440,000', status:'완납', fg:'#18243f', bg:'var(--primary-soft)'},
+      {item:'정규 수업료', month:'2025-05', amount:'440,000', status:'완납', fg:'#18243f', bg:'var(--primary-soft)'},
+      {item:'교재비', month:'2025-04', amount:'85,000', status:'미납', fg:'#18243f', bg:'var(--danger-soft)'},
     ];
     const memos = [
       {author:'김민지 T', date:'2025/06/12', text:'응급처치 동의 완료. 알레르기: 견과류. 비상연락 1순위 母 010-4690-6584.'},
