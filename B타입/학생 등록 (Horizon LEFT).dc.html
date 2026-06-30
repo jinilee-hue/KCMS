@@ -247,7 +247,7 @@
 
           <!-- table scroll (horizontal + vertical, sticky header) -->
           <div class="kc-scroll" style="flex:1;min-height:0;overflow:auto;">
-            <div style="min-width:{{ tableMinW }};">
+            <div style="width:max-content;min-width:100%;">
               <!-- table header -->
               <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:{{ gridCols }};align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
                 <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
@@ -812,18 +812,16 @@ class Component extends DCLogic {
     // ===== column visibility =====
     const cv = st.colVis;
     const colDefs = [
-      {k:'klass',label:'학급',w:'1.15fr'},{k:'level',label:'레벨',w:'.8fr'},{k:'type',label:'구분',w:'.7fr'},
-      {k:'status',label:'상태',w:'.9fr'},{k:'studentNo',label:'학번',w:'1.05fr'},{k:'phone',label:'학부모 전화',w:'1.2fr'},
-      {k:'gender',label:'성별',w:'.55fr'},{k:'birth',label:'생년월일',w:'1fr'},{k:'enroll',label:'입학일',w:'1fr'},
-      {k:'tel',label:'전화번호',w:'130px',px:130},{k:'mobile',label:'핸드폰',w:'130px',px:130},{k:'email',label:'이메일',w:'180px',px:180},
-      {k:'zip',label:'우편번호',w:'96px',px:96},{k:'addr',label:'주소',w:'200px',px:200},{k:'addrDetail',label:'상세주소',w:'170px',px:170},
-      {k:'school',label:'학교',w:'110px',px:110},{k:'grade',label:'학년',w:'72px',px:72},{k:'sid',label:'ID',w:'130px',px:130},
-      {k:'cashType',label:'현금영수증구분',w:'120px',px:120},{k:'cashNo',label:'현금영수증번호',w:'140px',px:140},
+      {k:'klass',label:'학급',w:'110px'},{k:'level',label:'레벨',w:'80px'},{k:'type',label:'구분',w:'72px'},
+      {k:'status',label:'상태',w:'92px'},{k:'studentNo',label:'학번',w:'104px'},{k:'phone',label:'학부모 전화',w:'132px'},
+      {k:'gender',label:'성별',w:'60px'},{k:'birth',label:'생년월일',w:'104px'},{k:'enroll',label:'입학일',w:'104px'},
+      {k:'tel',label:'전화번호',w:'130px'},{k:'mobile',label:'핸드폰',w:'130px'},{k:'email',label:'이메일',w:'180px'},
+      {k:'zip',label:'우편번호',w:'96px'},{k:'addr',label:'주소',w:'200px'},{k:'addrDetail',label:'상세주소',w:'170px'},
+      {k:'school',label:'학교',w:'110px'},{k:'grade',label:'학년',w:'72px'},{k:'sid',label:'ID',w:'130px'},
+      {k:'cashType',label:'현금영수증구분',w:'120px'},{k:'cashNo',label:'현금영수증번호',w:'140px'},
     ];
     const visDefs = colDefs.filter(d=> cv[d.k]);
-    const gridCols = '42px 42px 1.5fr ' + visDefs.map(d=>d.w).join(' ') + ' 40px';
-    const extraPx = visDefs.filter(d=>d.px).reduce((a,d)=>a+d.px,0);
-    const tableMinW = extraPx>0 ? ('calc(100% + '+extraPx+'px)') : '100%';
+    const gridCols = '42px 42px 150px ' + visDefs.map(d=>d.w).join(' ') + ' 40px';
     const colItems = colDefs.map(d=> ({ label:d.label, on:cv[d.k],
       boxBg: cv[d.k]?'var(--brand)':'transparent', boxBorder: cv[d.k]?'var(--brand)':'var(--gray-400)',
       onClick: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); this.setState({ colVis: Object.assign({}, cv, {[d.k]: !cv[d.k]}) }); } }));
@@ -943,7 +941,7 @@ class Component extends DCLogic {
       toggleFilters: ()=> this.setState({ filtersOpen: !st.filtersOpen }),
       filterRot: st.filtersOpen ? '180deg' : '0deg',
       rows, rowH, shownCount: rows.length,
-      gridCols, tableMinW, cv, colItems,
+      gridCols, cv, colItems,
       colMenu: st.colMenu,
       toggleColMenu: (e)=>{ if(e&&e.stopPropagation) e.stopPropagation(); this.setState({ colMenu: !st.colMenu }); },
       closeColMenu: ()=> this.setState({ colMenu:false }),
