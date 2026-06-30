@@ -150,7 +150,7 @@
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex:0 0 auto;">
-        <button style="height:52px;padding:0 22px;border:none;border-radius:var(--radius-pill);background:var(--cyan-bright);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;" style-hover="background:#03a8e0!important;box-shadow:0 12px 26px rgba(4,190,254,0.30)!important;">
+        <button onClick="{{ openNew }}" style="height:52px;padding:0 22px;border:none;border-radius:var(--radius-pill);background:var(--cyan-bright);color:#fff;font-family:var(--font-display);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;" style-hover="background:#03a8e0!important;box-shadow:0 12px 26px rgba(4,190,254,0.30)!important;">
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex-shrink:0;"><path d="M12 5v14M5 12h14"/></svg>
           신규 등록
         </button>
@@ -451,6 +451,32 @@
 
     </div>
   </div>
+
+  <!-- NEW STUDENT MODAL -->
+  <sc-if value="{{ newModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeNew }}" style="position:fixed;inset:0;z-index:90;background:rgba(27,37,89,.42);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stopNew }}" style="width:620px;max-width:100%;max-height:88vh;overflow:auto;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;">
+        <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--gray-200);">
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--navy);"><span style="display:inline-flex;color:var(--brand);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>신규 학생 등록</div>
+          <div onClick="{{ closeNew }}" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-500);" style-hover="background:var(--gray-100)!important;color:var(--navy)!important;">✕</div>
+        </div>
+        <div style="padding:24px 26px;display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">이름 *</span><input placeholder="이름 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">성별</span><input placeholder="남 / 여" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학번</span><input placeholder="자동 생성 또는 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학부모 휴대폰 *</span><input placeholder="010-0000-0000" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학급</span><input placeholder="학급 선택" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">레벨</span><input placeholder="레벨 선택" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학교</span><input placeholder="학교명 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:7px;"><span style="font-size:11.5px;font-weight:700;color:var(--gray-600);">학년</span><input placeholder="학년 입력" style="height:44px;padding:0 14px;background:var(--brand-wash);border:1px solid transparent;border-radius:var(--radius-lg);font-family:inherit;font-size:13.5px;color:var(--navy);outline:none;" style-focus="background:var(--white)!important;box-shadow:inset 0 0 0 2px var(--brand)!important;"></label>
+        </div>
+        <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:10px;padding:18px 26px;border-top:1px solid var(--gray-200);">
+          <button onClick="{{ closeNew }}" style="height:44px;padding:0 20px;border:none;box-shadow:var(--shadow-inset-border);border-radius:var(--radius-sm);background:transparent;color:var(--gray-600);font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="color:var(--navy)!important;box-shadow:inset 0 0 0 1px var(--gray-400)!important;">취소</button>
+          <button onClick="{{ closeNew }}" style="height:44px;padding:0 24px;border:none;border-radius:var(--radius-sm);background:var(--brand);color:#fff;font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-hover)!important;box-shadow:0 8px 18px rgba(67,24,255,0.28)!important;">등록</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900}}">
@@ -458,6 +484,7 @@ class Component extends DCLogic {
   constructor(props){
     super(props);
     this.state = {
+      newModal: false,
       sidebarCollapsed: false,
       openDomain: '학생관리',
       hoverDomain: null,
@@ -880,7 +907,10 @@ class Component extends DCLogic {
       tabMemo: st.detailTab==='메모',
       activeTabName: st.detailTab,
       closeDrawer: ()=> this.setState({ selectedId:null }),
-      openNew: ()=>{},
+      newModal: st.newModal,
+      openNew: ()=> this.setState({ newModal:true }),
+      closeNew: ()=> this.setState({ newModal:false }),
+      stopNew: (e)=>{ if(e && e.stopPropagation) e.stopPropagation(); },
     };
   }
 }
