@@ -178,7 +178,7 @@ html,body{margin:0;padding:0;}
               <div style="display:flex;align-items:center;gap:10px;">
                 <span style="font-size:13px;color:var(--text-muted);">전체 <b class="kc-num" style="color:var(--text);">4,932</b>명 · <b class="kc-num" style="color:var(--text);">{{ shownCount }}</b> 표시</span>
                 <sc-if value="{{ hasChecked }}" hint-placeholder-val="{{ false }}">
-                  <span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;background:var(--primary-soft);border-radius:8px;font-size:12.5px;font-weight:700;color:var(--primary-hover);cursor:pointer;" style-hover="background:#CFF3EF!important;"><span class="kc-num">{{ checkedCount }}</span>건 선택 · 일괄 작업 ⌄</span>
+                  <span style="display:inline-flex;align-items:center;gap:8px;height:30px;padding:0 12px;background:var(--primary-soft);border-radius:8px;font-size:12.5px;font-weight:700;color:var(--primary-hover);cursor:pointer;" style-hover="background:#CFF3EF!important;"><span class="kc-num">{{ checkedCount }}</span>건 선택 · 일괄 작업<span style="display:inline-flex;align-items:center;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></span>
                 </sc-if>
               </div>
               <div style="display:flex;align-items:center;gap:8px;">
