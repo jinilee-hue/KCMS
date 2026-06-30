@@ -52,11 +52,11 @@
 
   /* content split */
   .content{flex:1;min-height:0;display:flex;gap:0;}
-  .left{flex:1;min-width:0;display:flex;flex-direction:column;background:#fff;margin-right:12px;}
+  .left{flex:1;min-width:0;display:flex;flex-direction:column;background:#fff;}
   .right{flex:0 0 760px;display:flex;flex-direction:column;background:#fbfcfe;overflow:auto;}
-  .resizer{flex:0 0 11px;align-self:stretch;position:relative;cursor:col-resize;background:transparent;touch-action:none;}
-  .resizer::before{content:'';position:absolute;left:5px;top:0;bottom:0;width:1px;background:var(--line);transition:background .15s,width .15s;}
-  .resizer:hover::before,.resizer.dragging::before{background:var(--pb);width:2px;left:4px;}
+  .resizer{flex:0 0 22px;align-self:stretch;position:relative;cursor:col-resize;background:transparent;touch-action:none;}
+  .resizer::before{content:'';position:absolute;left:calc(50% - 0.5px);top:0;bottom:0;width:1px;background:var(--line);transition:background .15s,width .15s;}
+  .resizer:hover::before,.resizer.dragging::before{background:var(--pb);width:2px;left:calc(50% - 1px);}
   .resizer .grip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:14px;height:46px;display:flex;align-items:center;justify-content:center;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--pb);box-shadow:0 1px 4px rgba(15,40,90,.16);}
   .resizer:hover .grip,.resizer.dragging .grip{border-color:var(--pb);}
 
@@ -77,6 +77,10 @@
   /* table */
   .tblwrap{flex:1;min-height:0;overflow:auto;padding:0 10px;}
   .left > .tblwrap{margin-top:10px;}
+  .tblwrap::-webkit-scrollbar,.right::-webkit-scrollbar{width:10px;height:10px;}
+  .tblwrap::-webkit-scrollbar-thumb,.right::-webkit-scrollbar-thumb{background:#c4ccd8;border-radius:6px;border:2px solid #fff;background-clip:padding-box;}
+  .tblwrap::-webkit-scrollbar-thumb:hover,.right::-webkit-scrollbar-thumb:hover{background:#aab4c4;border:2px solid #fff;background-clip:padding-box;}
+  .tblwrap::-webkit-scrollbar-track,.right::-webkit-scrollbar-track{background:transparent;}
   table.grid{border-collapse:collapse;width:100%;font-size:11.5px;white-space:nowrap;}
   table.grid thead th{position:sticky;top:0;background:var(--pb-light);color:var(--pb-deeper);font-weight:700;height:26px;border:1px solid var(--label-bd);padding:0 6px;text-align:center;z-index:2;}
   table.grid td{height:24px;border:1px solid var(--line-soft);padding:0 6px;color:var(--txt);text-align:center;}
@@ -400,7 +404,7 @@
     rz.addEventListener('pointermove', function(e){
       if(!dragging) return;
       var rect = content.getBoundingClientRect();
-      var w = rect.right - e.clientX - 5;
+      var w = rect.right - e.clientX - 11;
       var min = 420, max = rect.width - 380;
       if(w < min) w = min;
       if(w > max) w = max;
