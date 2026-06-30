@@ -30,10 +30,19 @@
   /* top nav */
   .topnav{flex:0 0 auto;height:64px;background:linear-gradient(180deg,#1f7bff,var(--pb));display:flex;align-items:center;padding:0 16px;gap:18px;}
   .topnav .brand{color:#fff;font-size:24px;font-weight:800;letter-spacing:.5px;}
-  .topnav .tabs{display:flex;gap:2px;flex:1;}
-  .topnav .tab{height:34px;padding:0 16px;display:flex;align-items:center;border-radius:6px;color:#dbe8ff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
+  .topnav .tabs{display:flex;gap:2px;flex:1;align-self:stretch;}
+  .topnav .tab{height:100%;padding:0 18px;display:flex;align-items:center;color:#dbe8ff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
   .topnav .tab:hover{background:rgba(255,255,255,.14);color:#fff;}
   .topnav .tab.on{background:#fff;color:var(--pb);}
+  .topnav .tab{position:relative;}
+  .dd{display:none;position:absolute;top:100%;left:0;z-index:50;background:#fff;border:1px solid var(--line);border-top:2px solid var(--pb);box-shadow:0 10px 22px rgba(0,40,100,.16);padding:14px 16px;flex-direction:row;gap:26px;white-space:nowrap;}
+  .topnav .tab:hover .dd{display:flex;}
+  .ddcol{min-width:118px;}
+  .ddcat{font-size:12px;font-weight:700;color:var(--pb-deeper);padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid var(--label-bd);}
+  .dditem{font-size:12px;font-weight:400;color:var(--txt);padding:5px 2px;cursor:pointer;display:flex;align-items:center;gap:6px;}
+  .dditem::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--pb);flex:0 0 auto;}
+  .dditem:hover{color:var(--pb);font-weight:700;}
+  .dditem.cur{color:var(--pb);font-weight:700;}
 
   /* breadcrumb bar */
   .bcbar{flex:0 0 auto;height:30px;background:#f4f6f9;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 12px;gap:6px;font-size:12px;color:var(--txt-mut);}
@@ -123,9 +132,7 @@
     <!-- ===== TOP NAV ===== -->
     <div class="topnav">
       <div class="brand">KCMS</div>
-      <div class="tabs">
-        <div class="tab">입학관리</div><div class="tab on">학생관리</div><div class="tab">학급관리</div><div class="tab">수업관리</div><div class="tab">도서관리</div><div class="tab">수납회계</div><div class="tab">업무관리</div><div class="tab">행정관리</div><div class="tab">직원관리</div><div class="tab">학원운영</div><div class="tab">홈페이지</div>
-      </div>
+      <div class="tabs" id="tabs"></div>
     </div>
 
     <!-- breadcrumb -->
@@ -283,6 +290,40 @@
 </div>
 
 <script>
+  // ===== GNB 2depth/3depth 메뉴 =====
+  var menu = {
+    '입학관리':[ {cat:'예비생관리', items:['예비생정보']}, {cat:'MAP', items:['MAP종합정보','예약표','응시료 납부 현황']} ],
+    '학생관리':[ {cat:'학생정보', items:['학생 등록','학생 정보','학생이름변경']}, {cat:'대기/휴/탈퇴', items:['대기생','휴/탈퇴생']}, {cat:'전략관리', items:['전입생','전출생']}, {cat:'교재레벨', items:['교재레벨일괄변경']} ],
+    '학급관리':[ {cat:'학급정보', items:['학급등록']}, {cat:'학급배정', items:['학급배정','전체배정정보']}, {cat:'시간표', items:['시간표 조회','시간표 등록','교시 설정','종합시간표']}, {cat:'강의실', items:['강의실 등록']} ],
+    '수업관리':[ {cat:'출결', items:['출석','출석(COVID-19)']}, {cat:'숙제', items:['숙제조회']}, {cat:'성적', items:['성적조회']} ],
+    '도서관리':[ {cat:'대여/반납/미납', items:['대여','반납','미납']}, {cat:'도서등록', items:['학원도서등록','본사도서등록요청']}, {cat:'도서운영조회', items:['도서운영정보조회','학생별도서운영정보조회']}, {cat:'독서지도', items:['최다대여도서','최다대여학생']} ],
+    '수납회계':[ {cat:'수납', items:['개인수납']}, {cat:'청구', items:['일괄청구']}, {cat:'수납종합조회', items:['납부내역조회','청구미납조회']}, {cat:'수입/지출', items:['수입','지출','지출결재','수입지출','현금흐름표']}, {cat:'결산(월말마감)', items:['결산(일일마감)','결산 마감 처리']}, {cat:'수납현황', items:['e-POLY 등록현황']} ],
+    '업무관리':[ {cat:'마이페이지', items:['마이페이지']}, {cat:'일정', items:['금일의 학원 업무']}, {cat:'메모', items:['메모','메모 등록']}, {cat:'담당학급', items:['담당학급']}, {cat:'월일보고서', items:['일일보고서']} ],
+    '행정관리':[ {cat:'셔틀', items:['셔틀운행정보']}, {cat:'게시판', items:['본사공지사항','직원게시판','자료실','본사업무지원','이용문의']} ],
+    '직원관리':[ {cat:'직원', items:['직원']} ],
+    '학원운영':[ {cat:'학원운영보고', items:['학원업무일지','본사업무일지']}, {cat:'Complaint', items:['Complaint']}, {cat:'업무별조회', items:['MAP','상담','출결','숙제']}, {cat:'분석자료', items:['학생상태분석','매출분석','학원현황','학생현황']}, {cat:'상담계획', items:['상담계획','상담건별조회','상담횟수조회']}, {cat:'설명회', items:['설명회']} ],
+    '홈페이지':[ {cat:'메뉴관리', items:['차량 운행 정보']}, {cat:'설문관리', items:['COVID-19 자가진단','POLY직원건강체크']} ],
+  };
+  var tabsEl = document.getElementById('tabs');
+  Object.keys(menu).forEach(function(name){
+    var tab = document.createElement('div');
+    tab.className = 'tab' + (name==='학생관리' ? ' on' : '');
+    var label = document.createElement('span'); label.textContent = name; tab.appendChild(label);
+    var dd = document.createElement('div'); dd.className = 'dd';
+    menu[name].forEach(function(c){
+      var col = document.createElement('div'); col.className = 'ddcol';
+      var h = document.createElement('div'); h.className = 'ddcat'; h.textContent = c.cat; col.appendChild(h);
+      c.items.forEach(function(it){
+        var item = document.createElement('div');
+        item.className = 'dditem' + (it==='학생 등록' ? ' cur' : '');
+        item.textContent = it; col.appendChild(item);
+      });
+      dd.appendChild(col);
+    });
+    tab.appendChild(dd);
+    tabsEl.appendChild(tab);
+  });
+
   var students = [
     ['PAS (PAS F)','26_01_IT_ECP6m','ECP6m','재학','재학','06032648','010-9590-4515','여','1995/01/01','2026/03/26','2016/04/13',1],
     ['슴곰발 (sgb)','2025_GT1_IT_T…','GT1','복학','복학','06032653','010-6417-8796','여','1995/01/01','2025/02/25','2013/01/01',1],
