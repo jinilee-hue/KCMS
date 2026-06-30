@@ -1,0 +1,48 @@
+/* ============================================================
+   Horizon UI — Typography tokens
+   Primary UI/body face: DM Sans
+   Display/heading face : Plus Jakarta Sans (substitute for the
+   file's "Plus Jakarta Display" — see readme FONT NOTE)
+   Numeric/quote accent : Poppins
+   ============================================================ */
+:root {
+  /* ---- Families ---- */
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Plus Jakarta Sans", "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-accent: "Poppins", "DM Sans", sans-serif;
+
+  /* Default body face */
+  --font-body: var(--font-sans);
+
+  /* ---- Weights ---- */
+  --fw-regular: 400; /* @kind font */
+  --fw-medium: 500;  /* @kind font */
+  --fw-bold: 700;    /* @kind font */
+
+  /* ---- Type scale (px) — Horizon dashboard ramp ---- */
+  --fs-display: 34px; /* page titles "Main Dashboard" */
+  --fs-h1: 26px;
+  --fs-h2: 24px;      /* card $ figures / section heads */
+  --fs-h3: 20px;
+  --fs-h4: 18px;      /* card titles */
+  --fs-lg: 16px;      /* prominent labels */
+  --fs-base: 14px;    /* default body / table cells */
+  --fs-sm: 12px;      /* meta, captions */
+  --fs-xs: 10px;      /* tiny labels / badges */
+
+  /* ---- Line heights ---- */
+  --lh-tight: 1.2; /* @kind font */
+  --lh-snug: 1.4;  /* @kind font */
+  --lh-normal: 1.5;/* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight: -0.02em;  /* @kind font */ /* headings & display */
+  --ls-normal: 0;       /* @kind font */
+
+  /* ---- Composite text styles ---- */
+  --text-display: var(--fw-bold) var(--fs-display)/1.25 var(--font-sans);
+  --text-h2:      var(--fw-bold) var(--fs-h2)/1.3 var(--font-sans);
+  --text-h4:      var(--fw-bold) var(--fs-h4)/1.4 var(--font-sans);
+  --text-body-md: var(--fw-medium) var(--fs-base)/1.5 var(--font-sans);
+  --text-meta:    var(--fw-medium) var(--fs-sm)/1.5 var(--font-sans);
+}

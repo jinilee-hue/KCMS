@@ -1,0 +1,102 @@
+/* ============================================================
+   Horizon UI — Color tokens
+   Base palettes + semantic aliases. Values lifted from the
+   Dashboard_PB Figma file (Horizon UI Free).
+   ============================================================ */
+:root {
+  /* ---- Brand (indigo/purple) ---- */
+  --brand-50:  #E9E3FF;
+  --brand-100: #C0B8FE;
+  --brand-200: #A195FD;
+  --brand-300: #8171FC;
+  --brand-400: #7551FF;
+  --brand-500: #422AFB; /* primary action */
+  --brand-600: #3311DB;
+  --brand-700: #2111A5;
+  --brand-800: #190793;
+  --brand-900: #11047A;
+
+  /* The exact brand swatch used across the file */
+  --brand: #4318FF;       /* rgb(67,24,255)  */
+  --brand-hover: #3311DB; /* rgb(51,17,219)  */
+  --brand-active: #190793;/* rgb(25,7,147)   */
+  --brand-tint: #868CFF;  /* rgb(134,140,255) light accent */
+  --brand-wash: #F4F7FE;  /* rgb(244,247,254) page / hover wash */
+
+  /* ---- Navy / heading ink ---- */
+  --navy-50:  #D0DCFB;
+  --navy-100: #AAC0FE;
+  --navy-200: #A3AED0;
+  --navy-300: #728FEA;
+  --navy-400: #3965FF;
+  --navy-500: #2152FF;
+  --navy-600: #3311DB;
+  --navy-700: #02044A;
+  --navy-800: #190793;
+  --navy-900: #11047A;
+
+  /* Primary heading ink + the in-between values seen in the file */
+  --navy: #2B3674;          /* rgb(43,54,116)  headings */
+  --navy-deep: #1B2559;     /* rgb(27,37,89)   strongest ink */
+
+  /* ---- Secondary grays (text + surfaces) ---- */
+  --gray-50:  #F4F7FE;  /* page background wash */
+  --gray-100: #EFF4FB;  /* rgb(239,244,251) subtle fill */
+  --gray-200: #E9EDF7;  /* rgb(233,237,247) divider */
+  --gray-300: #E0E5F2;  /* rgb(224,229,242) border */
+  --gray-400: #B0BBD5;  /* rgb(176,187,213) muted */
+  --gray-500: #A3AED0;  /* rgb(163,174,208) secondary text */
+  --gray-600: #707EAE;  /* rgb(112,126,174) tertiary text */
+  --gray-700: #8F9BBA;  /* rgb(143,155,186) disabled track */
+  --gray-900: #1B2559;
+
+  /* Chakra-style neutral ramp used by buttons */
+  --neutral-100: #EDF2F7; /* rgb(237,242,247) subtle button bg */
+  --neutral-200: #E2E8F0; /* rgb(226,232,240) outline border */
+  --neutral-700: #2D3748; /* rgb(45,55,72)    button label ink */
+
+  /* ---- Semantic status ---- */
+  --green:        #05CD99; /* rgb(5,205,153)  success accent */
+  --green-strong: #01B574; /* rgb(1,181,116)  success solid  */
+  --green-wash:   #E6FAF5;
+  --red:          #E31A1A; /* rgb(227,26,26)  error solid    */
+  --red-soft:     #EE5D50; /* rgb(238,93,80)  error accent   */
+  --red-wash:     #FDE0DC;
+  --orange:       #FFB547; /* rgb(255,181,71) warning        */
+  --orange-wash:  #FFF6DA;
+  --cyan:         #6AD2FF; /* rgb(106,210,255) info / chart  */
+  --cyan-bright:  #04BEFE; /* rgb(4,190,254)  */
+  --blue-link:    #4481EB; /* rgb(68,129,235) */
+
+  /* ---- Base ---- */
+  --white: #FFFFFF;
+  --black: #000000;
+
+  /* Card / overlay shadow base colour */
+  --shadow-color: 112, 144, 176;
+
+  /* ============================================================
+     SEMANTIC ALIASES — reference these in components
+     ============================================================ */
+  --color-bg: var(--gray-50);
+  --surface-card: var(--white);
+  --surface-subtle: var(--brand-wash);
+  --surface-sunken: var(--gray-100);
+
+  --text-heading: var(--navy);
+  --text-body: var(--navy);
+  --text-secondary: var(--gray-500);
+  --text-muted: var(--gray-600);
+  --text-on-brand: var(--white);
+  --text-link: var(--brand);
+
+  --border-subtle: var(--gray-200);
+  --border-default: var(--gray-300);
+  --border-strong: var(--neutral-200);
+
+  --action-primary: var(--brand);
+  --action-primary-hover: var(--brand-hover);
+  --action-primary-active: var(--brand-active);
+
+  --focus-ring: rgba(67, 24, 255, 0.28);
+}
