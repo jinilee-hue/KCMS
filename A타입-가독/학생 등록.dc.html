@@ -442,6 +442,32 @@ html,body{margin:0;padding:0;}
       </div>
     </sc-for>
   </div>
+
+  <!-- NEW STUDENT MODAL -->
+  <sc-if value="{{ newModal }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ closeNew }}" style="position:fixed;inset:0;z-index:90;background:rgba(20,30,55,.45);display:flex;align-items:center;justify-content:center;padding:24px;">
+      <div onClick="{{ stopNew }}" style="width:600px;max-width:100%;max-height:88vh;overflow:auto;background:var(--surface);border-radius:16px;box-shadow:0 24px 60px rgba(20,30,55,.32);display:flex;flex-direction:column;">
+        <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);">
+          <div style="display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;color:var(--text);"><span style="display:inline-flex;color:var(--primary);"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>신규 학생 등록</div>
+          <div onClick="{{ closeNew }}" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);background:var(--surface-2);" style-hover="background:var(--danger-soft)!important;color:var(--danger)!important;">✕</div>
+        </div>
+        <div style="padding:22px 24px;display:grid;grid-template-columns:1fr 1fr;gap:15px;">
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">이름 *</span><input placeholder="이름 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">성별</span><input placeholder="남 / 여" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학번</span><input placeholder="자동 생성 또는 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학부모 휴대폰 *</span><input placeholder="010-0000-0000" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학급</span><input placeholder="학급 선택" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">레벨</span><input placeholder="레벨 선택" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학교</span><input placeholder="학교명 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+          <label style="display:flex;flex-direction:column;gap:6px;"><span style="font-size:11.5px;font-weight:700;color:var(--text-muted);">학년</span><input placeholder="학년 입력" style="height:40px;padding:0 13px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-family:var(--sans);outline:none;color:#18243f;" style-focus="border-color:var(--primary)!important;"></label>
+        </div>
+        <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:flex-end;gap:9px;padding:16px 24px;border-top:1px solid var(--border);">
+          <button onClick="{{ closeNew }}" style="height:40px;padding:0 18px;background:var(--surface);border:1px solid var(--border);border-radius:9px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text-muted);cursor:pointer;" style-hover="border-color:var(--primary)!important;color:var(--primary)!important;">취소</button>
+          <button onClick="{{ closeNew }}" style="height:40px;padding:0 22px;background:var(--primary);border:none;border-radius:9px;font-family:var(--sans);font-size:13px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:7px;" style-hover="background:var(--primary-hover)!important;">등록</button>
+        </div>
+      </div>
+    </div>
+  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1440,&quot;height&quot;:900},&quot;accent&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;teal&quot;,&quot;indigo&quot;],&quot;default&quot;:&quot;teal&quot;,&quot;tsType&quot;:&quot;'teal'|'indigo'&quot;},&quot;density&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;standard&quot;,&quot;compact&quot;],&quot;default&quot;:&quot;standard&quot;,&quot;tsType&quot;:&quot;'standard'|'compact'&quot;},&quot;railOpen&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
@@ -449,6 +475,7 @@ class Component extends DCLogic {
   constructor(props){
     super(props);
     this.state = {
+      newModal: false,
       railOpen: (props && props.railOpen !== undefined) ? props.railOpen : true,
       density: (props && props.density) ? props.density : 'standard',
       filtersOpen: true,
@@ -1008,7 +1035,10 @@ class Component extends DCLogic {
       cmpBg: st.density==='compact' ? 'var(--surface)' : 'transparent',
       setStandard: ()=> this.setState({ density:'standard' }),
       setCompact: ()=> this.setState({ density:'compact' }),
-      openNew: ()=>{},
+      newModal: st.newModal,
+      openNew: ()=> this.setState({ newModal:true }),
+      closeNew: ()=> this.setState({ newModal:false }),
+      stopNew: (e)=>{ if(e && e.stopPropagation) e.stopPropagation(); },
       // selected
       selected: !!sel,
       drawerWpx: st.drawerW + 'px',
