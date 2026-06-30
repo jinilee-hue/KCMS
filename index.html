@@ -9,13 +9,13 @@
   body{min-height:100vh;padding:48px 20px 60px;
     font-family:'Pretendard',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     background:linear-gradient(135deg,#F4F7FE 0%,#EDF2F7 100%);color:#1A202C;line-height:1.5;}
-  .wrap{width:100%;max-width:960px;margin:0 auto;}
+  .wrap{width:100%;max-width:1120px;margin:0 auto;}
   .head{text-align:center;margin-bottom:40px;}
   .kicker{font-size:13px;font-weight:700;letter-spacing:.08em;color:#4318FF;text-transform:uppercase;margin-bottom:10px;}
   h1{font-size:31px;font-weight:800;letter-spacing:-.02em;margin-bottom:12px;}
   .sub{font-size:15px;color:#5A6B87;line-height:1.65;}
-  .cards{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:start;}
-  @media(max-width:720px){.cards{grid-template-columns:1fr;}}
+  .cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;align-items:start;}
+  @media(max-width:960px){.cards{grid-template-columns:1fr;}}
   .card{display:flex;flex-direction:column;background:#fff;border-radius:20px;padding:30px 28px;
     box-shadow:0 18px 40px rgba(112,144,176,.14);border:1px solid #fff;}
   .thumb{display:block;border-radius:13px;overflow:hidden;margin-bottom:20px;border:1px solid #EDF2F7;box-shadow:0 8px 20px rgba(112,144,176,.16);line-height:0;}
@@ -24,6 +24,7 @@
   .tag{align-self:flex-start;display:inline-flex;align-items:center;height:26px;padding:0 13px;border-radius:70px;font-size:12px;font-weight:700;margin-bottom:14px;}
   .a .tag{background:#DCF3F1;color:#2C9A90;}
   .b .tag{background:#E9E3FF;color:#4318FF;}
+  .c .tag{background:#E8F0FF;color:#0066FF;}
   .card h2{font-size:21px;font-weight:800;margin-bottom:6px;}
   .lead{font-size:14px;color:#5A6B87;margin-bottom:14px;}
   .desc{font-size:13.5px;color:#5A6B87;line-height:1.75;margin-bottom:22px;}
@@ -39,6 +40,8 @@
   .a .go:hover{background:#38B2AC;color:#fff;transform:translateY(-2px);box-shadow:0 10px 22px rgba(56,178,172,.35);}
   .b .go{background:#4318FF;color:#fff;}
   .b .go:hover{background:#3311DB;transform:translateY(-2px);box-shadow:0 10px 22px rgba(67,24,255,.32);}
+  .c .go{background:#0066FF;color:#fff;}
+  .c .go:hover{background:#0052CC;transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,102,255,.32);}
   .go2{margin-top:9px;display:flex;width:100%;box-sizing:border-box;align-items:center;justify-content:center;gap:7px;height:46px;border-radius:12px;font-size:14px;font-weight:700;text-decoration:none;box-shadow:inset 0 0 0 1px #E2E8F0;transition:box-shadow .15s ease,background .15s ease;}
   .go2 .dot{width:11px;height:11px;border-radius:3px;}
   .a .go2{color:#2C9A90;}
@@ -79,7 +82,7 @@
     <div class="head">
       <div class="kicker">POLY KCMS Redesign</div>
       <h1>학생 등록 화면 리디자인 시안</h1>
-      <p class="sub">동일한 '학생 등록' 화면을 서로 다른 두 디자인 철학으로 구현했습니다.<br>두 시안은 <b>같은 데이터·같은 기능</b>을 담되, 내비게이션 구조·색·정보 밀도에서 뚜렷이 갈립니다.<br>각 시안에는 <b>목록 데이터 글씨색을 단일 톤으로 통일한 '가독성 변형본'</b>을 함께 두어 비교할 수 있습니다.</p>
+      <p class="sub">동일한 '학생 등록' 화면을 <b>세 가지 방향(A·B·C)</b>으로 구현했습니다.<br>A·B는 전면 개편(새 디자인) 방향, C는 <b>기존 레이아웃을 유지하고 색만 바꾼 안</b>입니다.<br>A·B에는 <b>목록 데이터 글씨색을 단일 톤으로 통일한 '가독성 변형본'</b>을 함께 두어 비교할 수 있습니다.</p>
     </div>
 
     <div class="cards">
@@ -110,10 +113,20 @@
           <a class="go2" href="B%ED%83%80%EC%9E%85-%EA%B0%80%EB%8F%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D%20(Horizon%20LEFT).dc.html"><span class="dot" style="background:#2b3674"></span>가독성 변형 열기 →</a>
         </div>
       </div>
+
+      <!-- C -->
+      <div class="card c">
+        <a class="thumb" href="C%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.html"><img src="thumbs/c.png" alt="C안 학생 등록 화면 미리보기"></a>
+        <span class="tag">C안</span>
+        <h2>레거시 유지형</h2>
+        <p class="lead">기존 KCMS 화면 구조·정보 밀도를 <b>그대로 유지</b>하고 색만 입힌 안입니다.</p>
+        <p class="desc">개편 전 학생관리 레이아웃과 폰트 크기를 그대로 쓰되, <b>poly-dashboard 브랜드 컬러(Poly Blue)</b>만 적용했습니다. 상단 메뉴·좌측 즐겨찾기 툴바·조밀한 폼/테이블 — 기존 사용자에게 가장 익숙하고 전환 비용이 낮습니다.</p>
+        <a class="go" href="C%ED%83%80%EC%9E%85/%ED%95%99%EC%83%9D%20%EB%93%B1%EB%A1%9D.html">C안 열기 →</a>
+      </div>
     </div>
 
     <!-- comparison -->
-    <div class="section-title">상세 비교</div>
+    <div class="section-title">상세 비교 (A · B 신규안)</div>
     <div class="cmp">
       <div class="cmp-scroll">
         <table>
