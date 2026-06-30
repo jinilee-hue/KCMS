@@ -175,7 +175,7 @@
       <sc-for list="{{ worktabs }}" as="w" hint-placeholder-count="5">
         <div onClick="{{ w.onClick }}" style="display:flex;align-items:center;gap:9px;height:34px;padding:0 9px 0 15px;border-radius:var(--radius-pill);font-size:13px;font-weight:{{ w.weight }};white-space:nowrap;color:{{ w.color }};background:{{ w.bg }};box-shadow:{{ w.ring }};cursor:pointer;flex:0 0 auto;" style-hover="background:var(--gray-50)!important;">
           <span>{{ w.name }}</span>
-          <span style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:12px;" style-hover="background:var(--gray-200)!important;">✕</span>
+          <span onClick="{{ w.onClose }}" style="width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);font-size:12px;cursor:pointer;" style-hover="background:var(--gray-200)!important;color:var(--navy)!important;">✕</span>
         </div>
       </sc-for>
     </div>
@@ -683,6 +683,13 @@ class Component extends DCLogic {
         bg: 'var(--white)',
         ring: 'var(--shadow-inset-border)',
         onClick: ()=> this.setState({ activeWorktab:n }),
+        onClose: (e)=>{
+          if(e && e.stopPropagation) e.stopPropagation();
+          const arr = st.worktabs.filter(x => x!==n);
+          let active = st.activeWorktab;
+          if(active===n){ const i = st.worktabs.indexOf(n); active = arr[Math.min(i, arr.length-1)] || null; }
+          this.setState({ worktabs:arr, activeWorktab:active });
+        },
       };
     });
 
