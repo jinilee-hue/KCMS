@@ -387,7 +387,7 @@
   (function(){
     var rz = document.getElementById('resizer');
     var content = document.querySelector('.content');
-    var right = document.querySelector('.right');
+    var right = document.querySelector('.content > .right');
     if(!rz || !content || !right) return;
     var dragging = false;
     rz.addEventListener('pointerdown', function(e){
