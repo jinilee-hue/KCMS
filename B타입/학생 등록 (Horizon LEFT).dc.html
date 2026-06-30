@@ -112,7 +112,7 @@
     <div style="position:relative;flex:1;min-height:0;">
     <nav class="kc-lnb" style="height:100%;overflow-y:auto;overflow-x:visible;padding:4px 14px 14px;display:flex;flex-direction:column;align-items:center;gap:4px;">
       <sc-for list="{{ navItems }}" as="d" hint-placeholder-count="11">
-        <div onMouseEnter="{{ d.onHover }}" onClick="{{ d.onClick }}" title="{{ d.name }}" style="position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;cursor:pointer;background:{{ d.rowBg }};" style-hover="background:var(--gray-100)!important;">
+        <div onMouseEnter="{{ d.onHover }}" onClick="{{ d.onClick }}" class="{{ d.cls }}" title="{{ d.name }}" style="position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:12px;cursor:pointer;background:{{ d.rowBg }};">
           <span style="display:inline-flex;color:{{ d.iconColor }};"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="{{ d.iconPath }}"></path></svg></span>
         </div>
       </sc-for>
@@ -651,7 +651,7 @@ class Component extends DCLogic {
         chevColor: isActiveDom ? 'rgba(255,255,255,.8)' : 'var(--gray-400)',
         weight: isActiveDom ? 700 : 500,
         chev: open ? '180deg' : '0deg',
-        onClick: ()=> this.setState({ openDomain: st.openDomain===n ? null : n }),
+        onClick: ()=> collapsed ? this.setState({ openDomain:n, hoverDomain:n }) : this.setState({ openDomain: st.openDomain===n ? null : n }),
         onHover: ()=> this.setState({ hoverDomain:n }),
         cats: open ? this.menu[n].map(c => ({
           cat:c.cat,
