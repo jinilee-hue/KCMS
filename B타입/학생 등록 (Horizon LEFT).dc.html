@@ -47,7 +47,7 @@
   .kc-thumb:hover,.kc-thumb.kc-dragging{background:rgba(194,205,227,1);}
   .kc-lnb{scrollbar-width:none;}
   .kc-lnb::-webkit-scrollbar{display:none;}
-  .kc-rows .kc-row-sel:hover{background:var(--white)!important;}
+  .kc-scroll .kc-row-sel:hover{background:var(--white)!important;}
 </style>
 </helmet>
 
@@ -231,41 +231,51 @@
             </div>
           </div>
 
-          <!-- table header -->
-          <div style="flex:0 0 auto;overflow:hidden;display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:rgba(67,24,255,0.02);border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
-            <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
-            <div style="text-align:center;">#</div>
-            <div class="kc-th">이름</div><div class="kc-th">학급</div><div class="kc-th">레벨</div><div class="kc-th">구분</div><div class="kc-th">상태</div><div class="kc-th">학번</div><div class="kc-th">학부모 전화</div><div class="kc-th" style="text-align:center;">성별</div><div class="kc-th">생년월일</div><div class="kc-th">입학일</div><div></div>
-          </div>
-
-          <!-- rows -->
-          <div style="position:relative;flex:1;min-height:0;">
-          <div class="kc-rows">
-            <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
-              <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
-                <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
-                  <div style="width:18px;height:18px;border:1.5px solid {{ r.checkBorder }};border-radius:6px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
-                    <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
-                  </div>
-                </div>
-                <div class="num" style="text-align:center;font-size:12.5px;color:var(--gray-500);">{{ r.idx }}</div>
-                <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
-                  <span style="font-weight:700;font-size:13.5px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
-                </div>
-                <div style="font-size:13px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
-                <div style="font-size:12.5px;color:var(--gray-600);">{{ r.level }}</div>
-                <div style="font-size:12.5px;color:var(--gray-600);">{{ r.type }}</div>
-                <div><span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ r.statusBg }};color:{{ r.statusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ r.status }}</span></div>
-                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.studentNo }}</div>
-                <div class="num" style="font-size:12.5px;color:var(--navy);">{{ r.phone }}</div>
-                <div style="text-align:center;font-size:12.5px;color:var(--gray-600);">{{ r.gender }}</div>
-                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.birth }}</div>
-                <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.enroll }}</div>
-                <div style="display:flex;align-items:center;justify-content:center;color:var(--gray-400);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="16" hint-size="16px,16px"></x-import></div>
+          <!-- table scroll (horizontal + vertical, sticky header) -->
+          <div class="kc-scroll" style="flex:1;min-height:0;overflow:auto;">
+            <div style="min-width:calc(100% + 1478px);">
+              <!-- table header -->
+              <div style="position:sticky;top:0;z-index:10;display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;background:#FAF9FF;border-top:2px solid rgba(67,24,255,0.7);border-bottom:1px solid var(--gray-200);box-shadow:inset 0 1px 0 0 var(--gray-200);font-size:12px;font-weight:500;letter-spacing:.02em;color:var(--gray-600);">
+                <div onClick="{{ toggleAll }}" style="display:flex;align-items:center;justify-content:center;cursor:pointer;"><div style="width:18px;height:18px;border:1.5px solid {{ selAllBorder }};border-radius:6px;background:{{ selAllBg }};display:flex;align-items:center;justify-content:center;"><sc-if value="{{ selAllOn }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if><sc-if value="{{ selAllSome }}" hint-placeholder-val="{{ false }}"><div style="width:9px;height:2.5px;background:#fff;border-radius:2px;"></div></sc-if></div></div>
+                <div style="text-align:center;">#</div>
+                <div class="kc-th">이름</div><div class="kc-th">학급</div><div class="kc-th">레벨</div><div class="kc-th">구분</div><div class="kc-th">상태</div><div class="kc-th">학번</div><div class="kc-th">학부모 전화</div><div class="kc-th" style="text-align:center;">성별</div><div class="kc-th">생년월일</div><div class="kc-th">입학일</div><div class="kc-th">전화번호</div><div class="kc-th">핸드폰</div><div class="kc-th">이메일</div><div class="kc-th">우편번호</div><div class="kc-th">주소</div><div class="kc-th">상세주소</div><div class="kc-th">학교</div><div class="kc-th">학년</div><div class="kc-th">ID</div><div class="kc-th">현금영수증구분</div><div class="kc-th">현금영수증번호</div><div></div>
               </div>
-            </sc-for>
-          </div>
-          <div class="kc-thumb"></div>
+              <!-- rows -->
+              <sc-for list="{{ rows }}" as="r" hint-placeholder-count="12">
+                <div onClick="{{ r.onClick }}" class="{{ r.rowCls }}" style="position:relative;z-index:{{ r.z }};display:grid;grid-template-columns:42px 42px 1.5fr 1.15fr .8fr .7fr .9fr 1.05fr 1.2fr .55fr 1fr 1fr 130px 130px 180px 96px 200px 170px 110px 72px 130px 120px 140px 40px;align-items:center;text-align:center;padding:0;height:{{ rowH }}px;border-bottom:{{ r.rowBorder }};cursor:pointer;background:{{ r.rowBg }};box-shadow:{{ r.rowMark }};" style-hover="background:var(--brand-wash)!important;">
+                  <div onClick="{{ r.onCheck }}" style="display:flex;align-items:center;justify-content:center;">
+                    <div style="width:18px;height:18px;border:1.5px solid {{ r.checkBorder }};border-radius:6px;background:{{ r.checkBg }};display:flex;align-items:center;justify-content:center;">
+                      <sc-if value="{{ r.checked }}" hint-placeholder-val="{{ false }}"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 6"/></svg></sc-if>
+                    </div>
+                  </div>
+                  <div class="num" style="text-align:center;font-size:12.5px;color:var(--gray-500);">{{ r.idx }}</div>
+                  <div style="display:flex;align-items:center;justify-content:center;min-width:0;">
+                    <span style="font-weight:700;font-size:13.5px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.name }}</span>
+                  </div>
+                  <div style="font-size:13px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.klass }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);">{{ r.level }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);">{{ r.type }}</div>
+                  <div><span style="display:inline-flex;align-items:center;height:24px;padding:0 12px;border-radius:var(--radius-pill);background:{{ r.statusBg }};color:{{ r.statusFg }};font-family:var(--font-sans);font-size:12px;font-weight:700;letter-spacing:-.01em;white-space:nowrap;">{{ r.status }}</span></div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.studentNo }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--navy);">{{ r.phone }}</div>
+                  <div style="text-align:center;font-size:12.5px;color:var(--gray-600);">{{ r.gender }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.birth }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.enroll }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.tel }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.mobile }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.email }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.zip }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addr }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.addrDetail }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);">{{ r.school }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);">{{ r.grade }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--navy);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ r.sid }}</div>
+                  <div style="font-size:12.5px;color:var(--gray-600);">{{ r.cashType }}</div>
+                  <div class="num" style="font-size:12.5px;color:var(--gray-600);">{{ r.cashNo }}</div>
+                  <div style="display:flex;align-items:center;justify-content:center;color:var(--gray-400);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="IconLinearIdMoreLine" size="16" hint-size="16px,16px"></x-import></div>
+                </div>
+              </sc-for>
+            </div>
           </div>
 
           <!-- pagination -->
@@ -521,7 +531,6 @@ class Component extends DCLogic {
     };
     window.addEventListener('resize', this._onResize);
     this._onResize();
-    this._initThumb();
     this._initLnbThumb();
   }
   componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); }
@@ -763,6 +772,8 @@ class Component extends DCLogic {
       const sc = this.statusColors(s.status);
       return {
         ...s, idx:i+1, initial:s.name.charAt(0),
+        tel:'', mobile:'', email:'', zip:'', addr:'', addrDetail:'',
+        sid:(s.level||'id').toLowerCase().replace(/[^a-z0-9]/g,'')+'lod'+s.id, cashType:'', cashNo:'',
         statusBg:sc.bg, statusFg:sc.fg, avBg:sc.avBg, avFg:sc.avFg,
         rowBg: sel ? 'var(--white)' : (s.status==='탈퇴' ? 'rgba(112,144,176,0.07)' : 'transparent'),
         rowMark: sel ? '0 0 24px rgba(67,24,255,0.20)' : 'none',
