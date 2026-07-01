@@ -166,6 +166,8 @@
   table.det input[readonly]{background:#f1f4f8;color:var(--txt-mut);}
   .photo{width:104px;height:104px;border:1px solid var(--line);background:#f4f6f9;display:flex;align-items:center;justify-content:center;color:#aab4c0;font-size:11px;}
   .ta{width:100%;min-height:54px;border:1px solid var(--line);border-radius:3px;padding:4px 6px;font-size:11.5px;resize:vertical;font-family:inherit;color:var(--txt);}
+  /* 포커스 통일 — 파란 1px 테두리 (기본 검은 아웃라인 제거) */
+  input:focus,textarea:focus{outline:none !important;border-color:var(--pb) !important;box-shadow:none !important;}
   .actions{display:flex;flex-wrap:wrap;gap:5px;justify-content:flex-end;padding:8px 12px;border-bottom:1px solid var(--line-soft);}
   .prtwrap{position:relative;display:inline-block;}
   .prtmenu{display:none;position:absolute;top:100%;left:0;margin-top:2px;z-index:60;background:#fff;border:1px solid var(--line);box-shadow:0 6px 16px rgba(0,40,100,.18);min-width:124px;}
