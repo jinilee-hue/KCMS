@@ -600,9 +600,7 @@
         var vw = document.documentElement.clientWidth;
         dd.style.top = r.bottom + 'px';
         var w = dd.offsetWidth || 220;
-        var left = r.left;
-        var lbl = tab.querySelector('span');
-        if(lbl && lbl.textContent === '학급관리') left -= 1;   // 그리드 정렬 미세 보정
+        var left = Math.round(r.left);   // 정수 픽셀 스냅 → 박스 좌측 테두리를 탭 왼쪽 모서리에 정렬
         if(left + w > vw - 8) left = Math.max(8, vw - 8 - w);
         dd.style.left = left + 'px';
       });
