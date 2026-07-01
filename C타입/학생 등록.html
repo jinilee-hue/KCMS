@@ -154,6 +154,26 @@
   .xlsmenu .prtitem:hover{background:#e8f5ec;color:#146130;}
   .sectit{font-weight:700;color:var(--pb-deeper);font-size:12.5px;padding:4px 12px;display:flex;align-items:center;gap:5px;}
   .sectit::before{content:'';width:4px;height:13px;background:var(--pb);border-radius:2px;}
+  /* Contact Numbers 모달 */
+  .modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center;}
+  .modal-ov.open{display:flex;}
+  .modal-box{width:880px;max-width:94vw;max-height:88vh;background:#eef1f5;border:1px solid #8f9dac;border-radius:3px;box-shadow:0 14px 44px rgba(0,0,0,.4);display:flex;flex-direction:column;overflow:hidden;}
+  .modal-hd{height:34px;background:linear-gradient(180deg,#5d6b7c,#3f4c5a);color:#fff;display:flex;align-items:center;gap:7px;padding:0 10px;font-size:12.5px;font-weight:700;}
+  .modal-hd .hdi{width:13px;height:13px;background:#cfe0ff;border:1px solid #fff;border-radius:2px;}
+  .modal-x{margin-left:auto;width:20px;height:20px;background:#fff;border:1px solid #8f9dac;border-radius:2px;cursor:pointer;color:#333;font-size:11px;display:inline-flex;align-items:center;justify-content:center;}
+  .modal-x:hover{background:#ffe0e0;color:#d23b3b;}
+  .modal-tabs{display:flex;gap:4px;padding:9px 12px 0;}
+  .mtab{padding:6px 16px;font-size:12px;background:#dbe1e8;border:1px solid #bcc6d1;border-bottom:none;border-radius:4px 4px 0 0;color:#5b6875;cursor:pointer;white-space:nowrap;}
+  .mtab.on{background:#fff;color:var(--pb-deeper);font-weight:700;}
+  .modal-body{flex:1;min-height:0;overflow:auto;background:#fff;margin:0 12px 12px;border:1px solid #bcc6d1;}
+  .cntbl{border-collapse:collapse;width:100%;font-size:12px;}
+  .cntbl thead th{position:sticky;top:0;background:linear-gradient(180deg,#8a96a5,#6d7b8b);color:#fff;font-weight:700;height:30px;border:1px solid #6d7b8b;padding:0 8px;z-index:1;}
+  .cntbl td{border:1px solid #e0e5ec;padding:7px 8px;color:var(--txt);}
+  .cntbl td:nth-child(1){text-align:center;width:44px;}
+  .cntbl td:nth-child(2){text-align:center;width:96px;font-weight:700;}
+  .cntbl td:nth-child(5){text-align:center;width:118px;font-weight:700;}
+  .cntbl tbody tr:nth-child(even){background:#f6f8fa;}
+  .cntbl tbody tr:hover{background:var(--pb-a08);}
   /* 태블릿 대응: 좁은 화면에서 우측 상세 폭 축소 → 좌측 리스트 확보 */
   @media (max-width:1500px){ .right{flex-basis:640px;} }
   @media (max-width:1300px){ .right{flex-basis:560px;} }
@@ -168,7 +188,7 @@
     <div class="brand">KCMS</div>
     <div class="tabs" id="tabs"></div>
     <div class="contactwrap">
-      <span class="contact">Contact Numbers</span>
+      <span class="contact" id="cnOpen">Contact Numbers</span>
       <button class="contact-v" id="contactBtn" title="열기">▾</button>
       <div class="contactdd" id="contactDd">
         <span class="cinfo"><span class="cdot">●</span> ★Test (시범) 기타 : <b>이진희 (Jini Lee)</b></span>
@@ -388,6 +408,40 @@
   </div>
 </div>
 
+<!-- ===== Contact Numbers 모달 ===== -->
+<div class="modal-ov" id="cnModal">
+  <div class="modal-box">
+    <div class="modal-hd"><span class="hdi"></span>Contact Numbers<button class="modal-x" id="cnClose" title="닫기">✕</button></div>
+    <div class="modal-tabs">
+      <div class="mtab">PI 담당 업무별 부서안내</div>
+      <div class="mtab on">폴리어학원 캠퍼스 현황</div>
+    </div>
+    <div class="modal-body">
+      <table class="cntbl">
+        <thead><tr><th>번호</th><th>캠퍼스</th><th>원장</th><th>사업장 주소</th><th>전화번호</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>강동</td><td>양진원 (Edward Yang)</td><td>서울특별시 강동구 양재대로 1553 선진빌딩 2층</td><td>02-6285-7659</td></tr>
+          <tr><td>2</td><td>강서</td><td>김학일 (Roger Kim)</td><td>서울특별시 강서구 공항대로 41길 34 플러스존 7층</td><td>02-3661-7659</td></tr>
+          <tr><td>3</td><td>관악</td><td>장최선 (Nicole Jang)</td><td>서울특별시 관악구 관악로30길 12 우성타운상가 304호</td><td>02-887-7659</td></tr>
+          <tr><td>4</td><td>광교</td><td>이화숙 (Helen Lee)</td><td>경기도 수원시 영통구 에듀타운로 102 SK VIEW 4층</td><td>031-8019-7659</td></tr>
+          <tr><td>5</td><td>광명</td><td>박민정 (Michelle Park)</td><td>경기도 광명시 범안로 1060 남전빌딩 6~7층</td><td>02-898-7659</td></tr>
+          <tr><td>6</td><td>광산</td><td>정연희 (Esther Jung)</td><td>광주광역시 광산구 왕버들로 91</td><td>062-959-7659</td></tr>
+          <tr><td>7</td><td>광안</td><td>팽신희 (Michelle Peng)</td><td>부산광역시 남구 신선로 437 3층</td><td>051-623-7659</td></tr>
+          <tr><td>8</td><td>광주봉선</td><td>정인선 (Inseon Jung)</td><td>광주 남구 봉선2로 87-3 (봉선동) 2~5층</td><td>062-434-7659</td></tr>
+          <tr><td>9</td><td>광진</td><td>박기문 (Kenny Park)</td><td>서울특별시 광진구 자양로 113 구의현대하이엘2층</td><td>02-455-7659</td></tr>
+          <tr><td>10</td><td>구리남양주</td><td>박기문 (Kenny Park)</td><td>경기도 남양주시 미금로 134 다산학촌빌딩 2층</td><td>031-558-7659</td></tr>
+          <tr><td>11</td><td>구미</td><td>김기봉 (Kevin Kim)</td><td>경상북도 구미시 산업로 164 3층</td><td>054-456-7659</td></tr>
+          <tr><td>12</td><td>김포</td><td>도형석 (Andy Do)</td><td>경기도 김포시 사우중로 48 드림월드프라자 6층</td><td>031-983-7659</td></tr>
+          <tr><td>13</td><td>김해</td><td>이상민 (Roy Lee)</td><td>경상남도 김해시 율하1로 102 경보조아빌딩 5층</td><td>055-322-7659</td></tr>
+          <tr><td>14</td><td>낙동</td><td>이민영 (Lucy Lee)</td><td>인천광역시 낙동구 인하로 568 아시아드타워 9층</td><td>032-466-7659</td></tr>
+          <tr><td>15</td><td>노원</td><td>최윤정 (Grace Choi)</td><td>서울특별시 노원구 동일로 1414 노원빌딩 5층</td><td>02-937-7659</td></tr>
+          <tr><td>16</td><td>대전둔산</td><td>한상우 (Sam Han)</td><td>대전광역시 서구 대덕대로 179 원앙빌딩 4층</td><td>042-489-7659</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
 <script>
   // ===== GNB 2depth/3depth 메뉴 =====
   var menu = {
@@ -471,6 +525,23 @@
     });
     tb.appendChild(tr);
   });
+
+  // ===== Contact Numbers 모달 (버튼) =====
+  (function(){
+    var open = document.getElementById('cnOpen');
+    var modal = document.getElementById('cnModal');
+    var close = document.getElementById('cnClose');
+    if(!open || !modal) return;
+    open.addEventListener('click', function(e){ e.stopPropagation(); modal.classList.add('open'); });
+    if(close) close.addEventListener('click', function(){ modal.classList.remove('open'); });
+    modal.addEventListener('click', function(e){ if(e.target === modal) modal.classList.remove('open'); });
+    modal.querySelectorAll('.mtab').forEach(function(t){
+      t.addEventListener('click', function(){
+        modal.querySelectorAll('.mtab').forEach(function(x){ x.classList.remove('on'); });
+        t.classList.add('on');
+      });
+    });
+  })();
 
   // ===== Contact Numbers 드롭다운 (V 버튼) =====
   (function(){
