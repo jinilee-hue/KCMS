@@ -106,7 +106,7 @@
   .paging .pg{display:flex;gap:2px;}
   .paging .pg b{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-weight:400;background:#fff;}
   .paging .pg b.on{background:var(--pb);color:#fff;border-color:var(--pb-dark);font-weight:700;}
-  .paging .right{margin-left:auto;}
+  .paging .pgtotal{margin-left:auto;text-align:right;}
   .summary{display:flex;padding:0 10px 6px;}
   .summary .cell{flex:1;text-align:center;border-right:1px solid var(--line-soft);}
   .summary .cell:last-child{border-right:none;}
@@ -242,7 +242,7 @@
           <div class="paging">
             <span class="pg"><b>‹‹</b><b>‹</b><b class="on">1</b><b>2</b><b>3</b><b>›</b><b>››</b></span>
             <span>페이지 1 / 75</span>
-            <span class="right">전체 7411 중 1 - 30</span>
+            <span class="pgtotal">전체 7411 중 1 - 30</span>
           </div>
           <div class="lbar">
             <div class="prtwrap"><button class="btn g xls" id="xlsBtn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg>Excel ▾</button><div class="prtmenu xlsmenu" id="xlsMenu"><div class="prtitem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>선택된 정보 변환</div><div class="prtitem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>검색된 정보 변환</div></div></div>
