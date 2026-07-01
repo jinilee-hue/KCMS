@@ -35,8 +35,19 @@
   .topnav .tab{height:100%;padding:0 18px;display:flex;align-items:center;color:#dbe8ff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
   .topnav .tab:hover{background:rgba(255,255,255,.14);color:#fff;}
   .topnav .tab.on{background:#fff;color:var(--pb);}
-  .topnav .contact{margin-left:auto;color:#fff;font-size:12px;font-weight:600;background:#e5533d;padding:5px 12px;border-radius:4px;cursor:pointer;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
+  .contactwrap{position:relative;margin-left:auto;display:inline-flex;align-items:center;gap:4px;}
+  .topnav .contact{color:#fff;font-size:12px;font-weight:600;background:#e5533d;padding:5px 12px;border-radius:4px;white-space:nowrap;cursor:pointer;}
   .topnav .contact:hover{background:#d1462f;}
+  .contact-v{height:26px;min-width:24px;background:#e5533d;color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:10px;display:inline-flex;align-items:center;justify-content:center;}
+  .contact-v:hover{background:#d1462f;}
+  .contactdd{display:none;position:absolute;top:100%;right:0;margin-top:6px;z-index:70;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(0,40,100,.22);padding:8px 12px;white-space:nowrap;font-weight:400;border-radius:4px;align-items:center;gap:14px;cursor:default;}
+  .contactdd.open{display:flex;}
+  .contactdd .cinfo{font-size:12.5px;color:var(--txt);display:inline-flex;align-items:center;gap:6px;}
+  .contactdd .cdot{color:#e5533d;font-size:9px;}
+  .contactdd .cinfo b{color:var(--pb-deeper);}
+  .contactdd .cstat{font-size:11.5px;color:#5b6875;background:#eef1f5;border-radius:4px;padding:5px 10px;display:inline-flex;align-items:center;gap:8px;}
+  .contactdd .cnum{background:#2d3748;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;margin:0 2px;}
+  .contactdd .csep{color:#c3ccd6;}
   .topnav .tab{position:relative;}
   .dd{display:none;position:absolute;top:100%;left:0;z-index:50;background:#fff;border:1px solid var(--line);border-top:none;box-shadow:0 10px 22px rgba(0,40,100,.16);padding:14px 16px;flex-direction:row;gap:26px;white-space:nowrap;}
   .topnav .tab:hover .dd{display:flex;}
@@ -156,7 +167,14 @@
   <div class="topnav">
     <div class="brand">KCMS</div>
     <div class="tabs" id="tabs"></div>
-    <div class="contact">Contact Numbers ▾</div>
+    <div class="contactwrap">
+      <span class="contact">Contact Numbers</span>
+      <button class="contact-v" id="contactBtn" title="열기">▾</button>
+      <div class="contactdd" id="contactDd">
+        <span class="cinfo"><span class="cdot">●</span> ★Test (시범) 기타 : <b>이진희 (Jini Lee)</b></span>
+        <span class="cstat">나의 스케줄 <b class="cnum">0</b> 건 <span class="csep">|</span> 쪽지 <b class="cnum">0</b> 건</span>
+      </div>
+    </div>
   </div>
 
   <div class="lower">
@@ -453,6 +471,16 @@
     });
     tb.appendChild(tr);
   });
+
+  // ===== Contact Numbers 드롭다운 (V 버튼) =====
+  (function(){
+    var btn = document.getElementById('contactBtn');
+    var dd = document.getElementById('contactDd');
+    if(!btn || !dd) return;
+    btn.addEventListener('click', function(e){ e.stopPropagation(); dd.classList.toggle('open'); });
+    dd.addEventListener('click', function(e){ e.stopPropagation(); });
+    document.addEventListener('click', function(){ dd.classList.remove('open'); });
+  })();
 
   // ===== 세부검색 펼치기 =====
   (function(){
