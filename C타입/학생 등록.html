@@ -186,8 +186,38 @@
               <td class="flabel">학생명</td><td><input class="finput"></td>
             </tr>
           </table>
+          <div class="dfilter" id="dfilter" style="display:none;">
+            <table class="fbox">
+              <tr>
+                <td class="flabel">전화번호</td><td><input class="finput"></td>
+                <td class="flabel">주소</td><td><input class="finput"></td>
+              </tr>
+              <tr>
+                <td class="flabel">가족명</td><td><input class="finput"></td>
+                <td class="flabel">생년월일</td><td><input class="finput"></td>
+              </tr>
+              <tr>
+                <td class="flabel">학교</td><td><input class="finput"></td>
+                <td class="flabel">학년</td><td><select class="fselect"><option>전체</option></select></td>
+              </tr>
+              <tr>
+                <td class="flabel">귀국여부</td><td><select class="fselect"><option>전체</option></select></td>
+                <td></td><td></td>
+              </tr>
+              <tr>
+                <td class="flabel">ID</td><td><input class="finput"></td>
+                <td></td><td></td>
+              </tr>
+              <tr>
+                <td class="flabel">입학일</td><td colspan="3"><input class="finput" style="width:44%;display:inline-block;"> ~ <input class="finput" style="width:44%;display:inline-block;"></td>
+              </tr>
+              <tr>
+                <td class="flabel">상태적용일</td><td colspan="3"><select class="fselect" style="width:96px;display:inline-block;"><option>전체</option></select> <input class="finput" style="width:32%;display:inline-block;"> ~ <input class="finput" style="width:32%;display:inline-block;"></td>
+              </tr>
+            </table>
+          </div>
           <div class="ftools">
-            <button class="btn g">세부검색 ▾</button>
+            <button class="btn g" id="detailBtn">세부검색 ▾</button>
             <button class="btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>Search</button>
           </div>
         </div>
@@ -407,6 +437,18 @@
     });
     tb.appendChild(tr);
   });
+
+  // ===== 세부검색 펼치기 =====
+  (function(){
+    var btn = document.getElementById('detailBtn');
+    var panel = document.getElementById('dfilter');
+    if(!btn || !panel) return;
+    btn.addEventListener('click', function(){
+      var open = (panel.style.display === 'none' || !panel.style.display);
+      panel.style.display = open ? 'block' : 'none';
+      btn.textContent = '세부검색 ' + (open ? '▴' : '▾');
+    });
+  })();
 
   // ===== 출력 드롭다운 =====
   (function(){
