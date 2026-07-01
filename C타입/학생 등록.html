@@ -31,7 +31,11 @@
   /* top nav */
   .topnav{flex:0 0 auto;height:64px;background:linear-gradient(180deg,#1f7bff,var(--pb));display:flex;align-items:center;padding:0 16px;gap:18px;}
   .topnav .brand{color:#fff;font-size:24px;font-weight:800;letter-spacing:.5px;}
-  .topnav .tabs{display:flex;gap:2px;flex:1;align-self:stretch;}
+  .topnav .tabs{display:flex;gap:2px;flex:1;min-width:0;align-self:stretch;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-behavior:smooth;}
+  .topnav .tabs::-webkit-scrollbar{display:none;}
+  .navscroll{display:none;align-self:stretch;flex:0 0 auto;width:22px;background:rgba(255,255,255,.16);color:#fff;border:none;cursor:pointer;font-size:16px;align-items:center;justify-content:center;padding:0;}
+  .navscroll.show{display:flex;}
+  .navscroll:hover{background:rgba(255,255,255,.3);}
   .topnav .tab{height:100%;padding:0 18px;display:flex;align-items:center;color:#dbe8ff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;}
   .topnav .tab:hover{background:rgba(255,255,255,.14);color:#fff;}
   .topnav .tab.on{background:#fff;color:var(--pb);}
@@ -49,7 +53,7 @@
   .contactdd .cnum{background:#2d3748;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;margin:0 2px;}
   .contactdd .csep{color:#c3ccd6;}
   .topnav .tab{position:relative;}
-  .dd{display:none;position:absolute;top:100%;left:0;z-index:50;background:#fff;border:1px solid var(--line);border-top:none;box-shadow:0 10px 22px rgba(0,40,100,.16);padding:14px 18px;flex-direction:row;gap:26px;white-space:nowrap;}
+  .dd{display:none;position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-top:none;box-shadow:0 10px 22px rgba(0,40,100,.16);padding:14px 18px;flex-direction:row;gap:26px;white-space:nowrap;}
   .topnav .tab:hover .dd{display:flex;}
   .ddcol{min-width:118px;}
   .ddcat{font-size:12px;font-weight:700;color:var(--pb-deeper);padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid var(--label-bd);}
@@ -206,7 +210,9 @@
   <!-- ===== TOP NAV (full width) ===== -->
   <div class="topnav">
     <div class="brand">KCMS</div>
+    <button class="navscroll" id="navPrev" title="이전">‹</button>
     <div class="tabs" id="tabs"></div>
+    <button class="navscroll" id="navNext" title="다음">›</button>
     <div class="contactwrap">
       <span class="contact" id="cnOpen">Contact Numbers</span>
       <button class="contact-v" id="contactBtn" title="열기">▾</button>
@@ -574,19 +580,38 @@
     document.addEventListener('click', function(){ dd.classList.remove('open'); });
   })();
 
-  // ===== GNB 드롭다운 화면 밖 방지 =====
+  // ===== GNB 드롭다운 위치(fixed) + 화면 안 클램프 =====
   (function(){
     document.querySelectorAll('.topnav .tab').forEach(function(tab){
       var dd = tab.querySelector('.dd');
       if(!dd) return;
       tab.addEventListener('mouseenter', function(){
-        dd.style.left = '';
+        var r = tab.getBoundingClientRect();
         var vw = document.documentElement.clientWidth;
-        var r = dd.getBoundingClientRect();
-        if(r.width === 0) return;
-        if(r.right > vw - 8){ dd.style.left = (-(r.right - (vw - 8))) + 'px'; }
+        dd.style.top = r.bottom + 'px';
+        var w = dd.offsetWidth || 220;
+        var left = r.left;
+        if(left + w > vw - 8) left = Math.max(8, vw - 8 - w);
+        dd.style.left = left + 'px';
       });
     });
+  })();
+
+  // ===== GNB 탭 가로 스크롤 버튼 (태블릿 등 폭 부족 시) =====
+  (function(){
+    var tabsBox = document.getElementById('tabs');
+    var prev = document.getElementById('navPrev');
+    var next = document.getElementById('navNext');
+    if(!tabsBox || !prev || !next) return;
+    function upd(){
+      var overflow = tabsBox.scrollWidth > tabsBox.clientWidth + 2;
+      prev.classList.toggle('show', overflow);
+      next.classList.toggle('show', overflow);
+    }
+    prev.addEventListener('click', function(){ tabsBox.scrollBy({left:-220,behavior:'smooth'}); });
+    next.addEventListener('click', function(){ tabsBox.scrollBy({left:220,behavior:'smooth'}); });
+    window.addEventListener('resize', upd);
+    upd();
   })();
 
   // ===== 교재레벨 목록 (▾) =====
