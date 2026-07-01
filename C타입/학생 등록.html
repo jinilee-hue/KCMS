@@ -156,6 +156,14 @@
   .det .cbx{right:19px;}
   .det .cbv{right:2px;padding-left:4px;border-left:1px solid var(--line);}
   .det .cbx:hover,.det .cbv:hover{color:var(--pb);}
+  /* 셀렉트 화살표 통일 (▾ 세모) */
+  table.det select,.fselect{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='6'%3E%3Cpath d='M0 0h8L4 6z' fill='%235b6776'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center;padding-right:20px;}
+  /* 교재레벨 레벨 리스트 */
+  .cblist{display:none;position:absolute;top:100%;left:0;margin-top:2px;min-width:150px;max-height:260px;overflow:auto;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(0,40,100,.2);z-index:60;}
+  .cblist.open{display:block;}
+  .cbitem{padding:6px 12px;font-size:11.5px;color:var(--txt);cursor:pointer;white-space:nowrap;}
+  .cbitem::before{content:'▸';color:#e0a94b;margin-right:6px;font-size:10px;}
+  .cbitem:hover{background:var(--pb-light);color:var(--pb-deeper);}
   table.det input[readonly]{background:#f1f4f8;color:var(--txt-mut);}
   .photo{width:104px;height:104px;border:1px solid var(--line);background:#f4f6f9;display:flex;align-items:center;justify-content:center;color:#aab4c0;font-size:11px;}
   .ta{width:100%;min-height:54px;border:1px solid var(--line);border-radius:3px;padding:4px 6px;font-size:11.5px;resize:vertical;font-family:inherit;color:var(--txt);}
@@ -370,7 +378,7 @@
             </tr>
             <tr>
               <th>교재년도</th><td><select><option>2012년</option></select></td><th>교재학습학기</th><td><select><option>02</option></select></td><td style="border:0;"></td>
-              <th>교재레벨</th><td style="white-space:nowrap;"><span class="cbwrap" style="width:96px;"><input value="MGT4"><button class="cbx" title="지우기">✕</button><button class="cbv" title="목록">▾</button></span> <select style="width:52px;display:inline-block;"><option>N/A</option></select></td>
+              <th>교재레벨</th><td style="white-space:nowrap;"><span class="cbwrap" style="width:96px;"><input value="MGT4"><button class="cbx" title="지우기">✕</button><button class="cbv" id="lvlBtn" title="목록">▾</button><div class="cblist" id="lvlList"><div class="cbitem">ECP</div><div class="cbitem">LX</div><div class="cbitem">GT</div><div class="cbitem">MGT</div><div class="cbitem">S</div><div class="cbitem">Returnee</div><div class="cbitem">MAG</div><div class="cbitem">SSP</div><div class="cbitem">ME</div><div class="cbitem">MIL</div><div class="cbitem">PAS</div><div class="cbitem">고등부</div><div class="cbitem">STP</div><div class="cbitem">GRAD</div><div class="cbitem">Honors</div></div></span> <select style="width:52px;display:inline-block;"><option>N/A</option></select></td>
             </tr>
             <tr>
               <th>주소</th><td><select><option>국내</option></select></td><td colspan="5"><input value="" placeholder="우편번호" style="width:84px;display:inline-block;"> <button class="ibtn" title="주소찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button> <input value="" style="width:32%;display:inline-block;"> <input value="" placeholder="상세주소" style="width:32%;display:inline-block;"></td>
@@ -567,6 +575,17 @@
     btn.addEventListener('click', function(e){ e.stopPropagation(); dd.classList.toggle('open'); });
     dd.addEventListener('click', function(e){ e.stopPropagation(); });
     document.addEventListener('click', function(){ dd.classList.remove('open'); });
+  })();
+
+  // ===== 교재레벨 목록 (▾) =====
+  (function(){
+    var btn = document.getElementById('lvlBtn');
+    var list = document.getElementById('lvlList');
+    if(!btn || !list) return;
+    var input = btn.closest('.cbwrap').querySelector('input');
+    btn.addEventListener('click', function(e){ e.stopPropagation(); list.classList.toggle('open'); });
+    list.addEventListener('click', function(e){ var it=e.target.closest('.cbitem'); if(it){ if(input) input.value=it.textContent.trim(); list.classList.remove('open'); } });
+    document.addEventListener('click', function(){ list.classList.remove('open'); });
   })();
 
   // ===== 세부검색 펼치기 =====
