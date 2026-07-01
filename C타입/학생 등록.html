@@ -46,6 +46,12 @@
 
   /* breadcrumb bar */
   .bcbar{flex:0 0 auto;height:30px;background:#f4f6f9;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 12px;gap:6px;font-size:12px;color:var(--txt-mut);}
+  /* bottom work tabs */
+  .worktabs{flex:0 0 auto;height:30px;background:#e5eaf1;border-top:1px solid var(--line);display:flex;align-items:flex-end;gap:3px;padding:0 8px;}
+  .worktabs .wtab{height:24px;display:inline-flex;align-items:center;gap:7px;padding:0 12px;background:#f4f6f9;border:1px solid var(--line);border-bottom:none;border-radius:5px 5px 0 0;font-size:12px;color:var(--txt-mut);cursor:pointer;}
+  .worktabs .wtab.on{background:#fff;color:var(--pb-deeper);font-weight:700;}
+  .worktabs .wtab .x{width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;border-radius:3px;font-size:10px;color:var(--txt-mut);}
+  .worktabs .wtab .x:hover{background:#e0c4c4;color:#d23b3b;}
   .bcbar .home{color:var(--pb);}
   .bcbar b{color:var(--txt);font-weight:700;}
   .bcbar .meta{margin-left:auto;color:#7c8794;font-size:11.5px;}
@@ -302,6 +308,12 @@
         </div>
       </div>
     </div>
+
+    <!-- ===== BOTTOM WORK TABS ===== -->
+    <div class="worktabs" id="worktabs">
+      <div class="wtab">HOME</div>
+      <div class="wtab on">학생 등록<span class="x" title="닫기">✕</span></div>
+    </div>
   </div>
 </div>
 
@@ -388,6 +400,21 @@
     });
     tb.appendChild(tr);
   });
+
+  // ===== 하단 작업 탭 닫기 =====
+  (function(){
+    var wt = document.getElementById('worktabs');
+    if(!wt) return;
+    wt.addEventListener('click', function(e){
+      var x = e.target.closest('.x');
+      if(x){ e.stopPropagation(); x.closest('.wtab').remove(); return; }
+      var tab = e.target.closest('.wtab');
+      if(tab){
+        wt.querySelectorAll('.wtab').forEach(function(t){ t.classList.remove('on'); });
+        tab.classList.add('on');
+      }
+    });
+  })();
 
   // ===== 리스트/상세 영역 너비 조절 =====
   (function(){
