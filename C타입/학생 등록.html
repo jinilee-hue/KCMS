@@ -14,10 +14,11 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   html,body{height:100%;}
   body{font-family:'Malgun Gothic','맑은 고딕',Dotum,'돋움',sans-serif;font-size:12px;color:var(--txt);background:var(--bg);}
-  .app{display:flex;height:100vh;overflow:hidden;}
+  .app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
+  .lower{flex:1;min-height:0;display:flex;}
 
   /* ===== left icon rail ===== */
-  .rail{flex:0 0 58px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding-top:6px;}
+  .rail{flex:0 0 58px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding-top:0;}
   .rail .logo{width:46px;height:30px;display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--pb);font-size:13px;letter-spacing:.5px;margin-bottom:4px;}
   .rail .ic{width:54px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--txt-mut);cursor:pointer;border-left:3px solid transparent;font-size:10px;}
   .rail .ic svg{width:19px;height:19px;}
@@ -132,9 +133,15 @@
 </head>
 <body>
 <div class="app">
+  <!-- ===== TOP NAV (full width) ===== -->
+  <div class="topnav">
+    <div class="brand">KCMS</div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+
+  <div class="lower">
   <!-- ===== LEFT ICON RAIL (즐겨찾기 툴바) ===== -->
   <div class="rail">
-    <div class="logo">P</div>
     <div class="ic on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>HOME</div>
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9 6.8 19.2l1-5.8L3.5 9.3l5.9-.9z"/></svg>즐겨찾기</div>
     <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16v12H8l-4 4z"/></svg>메모등록</div>
@@ -151,12 +158,6 @@
   </div>
 
   <div class="main">
-    <!-- ===== TOP NAV ===== -->
-    <div class="topnav">
-      <div class="brand">KCMS</div>
-      <div class="tabs" id="tabs"></div>
-    </div>
-
     <!-- breadcrumb -->
     <div class="bcbar">
       <span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span> 학생관리 › 학생정보 › <b>학생 등록</b>
@@ -314,6 +315,7 @@
       <div class="wtab">HOME</div>
       <div class="wtab on">학생 등록<span class="x" title="닫기">✕</span></div>
     </div>
+  </div>
   </div>
 </div>
 
