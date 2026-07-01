@@ -123,6 +123,8 @@
   .paging .pg{display:flex;gap:2px;}
   .paging .pg b{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-weight:400;background:#fff;}
   .paging .pg b.on{background:var(--pb);color:#fff;border-color:var(--pb-dark);font-weight:700;}
+  .paging .pgrefresh{width:22px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);cursor:pointer;padding:0;}
+  .paging .pgrefresh:hover{border-color:var(--pb);color:var(--pb);}
   .paging .pgtotal{margin-left:auto;text-align:right;}
   .summary{display:flex;padding:0 10px 6px;}
   .summary .cell{flex:1;text-align:center;border-right:1px solid var(--line-soft);}
@@ -297,6 +299,7 @@
           <div class="paging">
             <span class="pg"><b>‹‹</b><b>‹</b><b class="on">1</b><b>2</b><b>3</b><b>›</b><b>››</b></span>
             <span>페이지 1 / 75</span>
+            <button class="pgrefresh" title="새로고침"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>
             <span class="pgtotal">전체 7411 중 1 - 30</span>
           </div>
           <div class="lbar">
