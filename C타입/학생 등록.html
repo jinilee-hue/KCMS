@@ -130,8 +130,10 @@
   .prtwrap{position:relative;display:inline-block;}
   .prtmenu{display:none;position:absolute;top:100%;left:0;margin-top:2px;z-index:60;background:#fff;border:1px solid var(--line);box-shadow:0 6px 16px rgba(0,40,100,.18);min-width:124px;}
   .prtmenu.open{display:block;}
-  .prtitem{padding:8px 14px;font-size:12px;color:var(--txt);cursor:pointer;white-space:nowrap;}
+  .prtitem{padding:8px 14px;font-size:12px;color:var(--txt);cursor:pointer;white-space:nowrap;display:flex;align-items:center;gap:7px;}
   .prtitem:hover{background:var(--pb-light);color:var(--pb-deeper);font-weight:700;}
+  .btn.g.xls:hover{border-color:#1a7a3c;color:#1a7a3c;}
+  .xlsmenu .prtitem:hover{background:#e8f5ec;color:#146130;}
   .sectit{font-weight:700;color:var(--pb-deeper);font-size:12.5px;padding:4px 12px;display:flex;align-items:center;gap:5px;}
   .sectit::before{content:'';width:4px;height:13px;background:var(--pb);border-radius:2px;}
 </style>
@@ -241,7 +243,7 @@
             <span class="right">전체 7411 중 1 - 30</span>
           </div>
           <div class="lbar">
-            <button class="btn g"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg>Excel ▾</button>
+            <div class="prtwrap"><button class="btn g xls" id="xlsBtn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg>Excel ▾</button><div class="prtmenu xlsmenu" id="xlsMenu"><div class="prtitem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>선택된 정보 변환</div><div class="prtitem"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#1a7a3c" stroke-width="1.8"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg>검색된 정보 변환</div></div></div>
             <button class="btn g">SMS</button>
           </div>
           <div class="summary">
@@ -454,6 +456,16 @@
   (function(){
     var btn = document.getElementById('prtBtn');
     var menu = document.getElementById('prtMenu');
+    if(!btn || !menu) return;
+    btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.toggle('open'); });
+    menu.addEventListener('click', function(e){ if(e.target.closest('.prtitem')) menu.classList.remove('open'); });
+    document.addEventListener('click', function(){ menu.classList.remove('open'); });
+  })();
+
+  // ===== Excel 드롭다운 =====
+  (function(){
+    var btn = document.getElementById('xlsBtn');
+    var menu = document.getElementById('xlsMenu');
     if(!btn || !menu) return;
     btn.addEventListener('click', function(e){ e.stopPropagation(); menu.classList.toggle('open'); });
     menu.addEventListener('click', function(e){ if(e.target.closest('.prtitem')) menu.classList.remove('open'); });
