@@ -31,7 +31,7 @@
   /* top nav */
   .topnav{flex:0 0 auto;height:64px;background:linear-gradient(180deg,#1f7bff,var(--pb));display:flex;align-items:center;padding:0 16px;gap:18px;}
   .topnav .brand{color:#fff;font-size:24px;font-weight:800;letter-spacing:.5px;}
-  .topnav .tabs{display:flex;gap:2px;flex:1;min-width:0;align-self:stretch;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-behavior:smooth;}
+  .topnav .tabs{display:flex;gap:0;flex:1;min-width:0;align-self:stretch;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;scroll-behavior:smooth;}
   .topnav .tabs::-webkit-scrollbar{display:none;}
   .navscroll{display:none;align-self:stretch;flex:0 0 auto;width:22px;background:rgba(255,255,255,.16);color:#fff;border:none;cursor:pointer;font-size:16px;align-items:center;justify-content:center;padding:0;}
   .navscroll.show{display:flex;}
@@ -98,7 +98,7 @@
   .finput{height:24px;border:1px solid var(--line);border-radius:3px;padding:0 6px;font-size:11.5px;width:100%;background:#fff;color:var(--txt);}
   .fselect{height:24px;border:1px solid var(--line);border-radius:3px;font-size:11.5px;background:#fff;color:var(--txt);width:100%;}
   .ftools{display:flex;justify-content:space-between;align-items:center;margin-top:6px;}
-  .btn{height:24px;padding:0 10px;border:1px solid var(--pb-dark);border-radius:3px;background:var(--pb);color:#fff;font-size:11.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
+  .btn{height:24px;padding:0 10px;border:1px solid var(--pb-dark);border-radius:3px;background:var(--pb);color:#fff;font-size:11.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;vertical-align:middle;}
   .btn.g{background:#fff;color:var(--txt);border-color:var(--line);}
   .btn.g:hover{border-color:var(--pb);color:var(--pb);}
   .btn:not(.g):hover{background:var(--pb-dark);}
@@ -148,7 +148,7 @@
   table.det{border-collapse:collapse;width:100%;}
   table.det th{background:var(--label);border:1px solid var(--label-bd);color:var(--pb-deeper);font-weight:700;font-size:11.5px;height:26px;width:84px;text-align:center;padding:0 4px;white-space:nowrap;}
   table.det td{border:1px solid var(--line-soft);padding:2px 4px;font-size:11.5px;}
-  table.det input,table.det select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 5px;font-size:11.5px;width:100%;background:#fff;color:var(--txt);}
+  table.det input,table.det select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 5px;font-size:11.5px;width:100%;background:#fff;color:var(--txt);vertical-align:middle;}
   .det .iwrap{position:relative;display:inline-block;width:100%;vertical-align:middle;}
   .det .iwrap input{padding-right:24px;}
   .det .ibtn{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--pb-deeper);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;vertical-align:middle;}
@@ -358,26 +358,26 @@
             <tr>
               <th>이름(성별)</th><td colspan="3">MGT4 (MGT4) / 여</td>
               <td rowspan="5" style="width:120px;text-align:center;"><div class="photo">No Image</div></td>
-              <th>상태(상태적용일)</th><td>재학(재학) 2022/07/06 &nbsp;<button class="ibtn" title="찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button> <button class="btn g" style="height:22px;">상태변경</button></td>
+              <th>상태(상태적용일)</th><td><span class="iwrap" style="width:172px;"><input value="재학(재학) 2022/07/06"><button class="ibtn" title="찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button></span> <button class="btn g" style="height:22px;"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--pb);"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 0 1 4-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 0 1-4 4H3"/></svg>상태변경 ▾</button></td>
             </tr>
             <tr>
               <th>학번</th><td colspan="3">(KR) 06032713</td>
               <th>전화(집/학생)</th><td><input value="" style="width:47%;display:inline-block;"> <input value="" style="width:47%;display:inline-block;"></td>
             </tr>
             <tr>
-              <th>ID/PWD</th><td><input value="06032713"></td><td colspan="2"><button class="btn g" style="height:22px;">비밀번호변경</button></td>
+              <th>ID/PWD</th><td colspan="3"><input value="06032713" style="width:120px;display:inline-block;"> <button class="btn g" style="height:22px;">비밀번호변경</button></td>
               <th>어머니 전화</th><td><input value="010-2540-9331"></td>
             </tr>
             <tr>
               <th>입학일</th><td colspan="3"><span class="iwrap"><input value=""><button class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span></td>
-              <th>현금영수증</th><td><select style="width:66%;display:inline-block;"><option></option></select></td>
+              <th>현금영수증</th><td><select style="width:44%;display:inline-block;"><option></option></select> <input value="" placeholder="번호" style="width:52%;display:inline-block;"></td>
             </tr>
             <tr>
               <th>귀국여부</th><td colspan="3"><select style="width:48%;display:inline-block;"><option>일반학생</option></select> <span class="iwrap" style="width:46%;"><input value=""><button class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span></td>
               <th>생년월일</th><td><input value="1995/01/01(양력)"></td>
             </tr>
             <tr>
-              <th>셔틀호차</th><td colspan="4"><span class="iwrap"><input value="(송차)2호차"><button class="ibtn" title="찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button></span></td>
+              <th>셔틀호차</th><td colspan="4"><span class="iwrap"><input value="(승차)2호차"><button class="ibtn" title="찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button></span></td>
               <th>Email</th><td><input value=""></td>
             </tr>
             <tr>
@@ -385,18 +385,18 @@
               <th>현재레벨</th><td><input value="ECP6"></td>
             </tr>
             <tr>
-              <th>학년</th><td><select><option>9학년</option></select></td><th style="width:74px;">출판사(교과서)</th><td><input value=""></td><td style="border:0;"></td>
+              <th>학년</th><td><select style="width:100px;display:inline-block;"><option>9학년</option></select></td><th style="width:74px;">출판사(교과서)</th><td colspan="2"><input value=""></td>
               <th>서비스</th><td></td>
             </tr>
             <tr>
               <th>Level Scale</th><td colspan="6"><select style="width:130px;display:inline-block;"><option></option></select></td>
             </tr>
             <tr>
-              <th>교재년도</th><td><select><option>2012년</option></select></td><th>교재학습학기</th><td><select><option>02</option></select></td><td style="border:0;"></td>
-              <th>교재레벨</th><td style="white-space:nowrap;"><span class="cbwrap" style="width:96px;"><input value="MGT4"><button class="cbx" title="지우기">✕</button><button class="cbv" id="lvlBtn" title="목록">▾</button><div class="prtmenu" id="lvlList" style="max-height:260px;overflow:auto;"><div class="prtitem">ECP</div><div class="prtitem">LX</div><div class="prtitem">GT</div><div class="prtitem">MGT</div><div class="prtitem">S</div><div class="prtitem">Returnee</div><div class="prtitem">MAG</div><div class="prtitem">SSP</div><div class="prtitem">ME</div><div class="prtitem">MIL</div><div class="prtitem">PAS</div><div class="prtitem">고등부</div><div class="prtitem">STP</div><div class="prtitem">GRAD</div><div class="prtitem">Honors</div></div></span> <select style="width:52px;display:inline-block;"><option>N/A</option></select></td>
+              <th>교재년도</th><td><select style="width:100px;display:inline-block;"><option>2012년</option></select></td><th>교재학습학기</th><td colspan="2"><select style="width:90px;display:inline-block;"><option>02</option></select></td>
+              <th>교재레벨</th><td style="white-space:nowrap;"><span class="cbwrap" style="width:96px;"><input value="MGT4"><button class="cbx" title="지우기">✕</button><button class="cbv" id="lvlBtn" title="목록"><svg width="5" height="4" viewBox="0 0 5 4"><path d="M0 0h5L2.5 4z" fill="#5b6776"/></svg></button><div class="prtmenu" id="lvlList" style="max-height:260px;overflow:auto;"><div class="prtitem">ECP</div><div class="prtitem">LX</div><div class="prtitem">GT</div><div class="prtitem">MGT</div><div class="prtitem">S</div><div class="prtitem">Returnee</div><div class="prtitem">MAG</div><div class="prtitem">SSP</div><div class="prtitem">ME</div><div class="prtitem">MIL</div><div class="prtitem">PAS</div><div class="prtitem">고등부</div><div class="prtitem">STP</div><div class="prtitem">GRAD</div><div class="prtitem">Honors</div></div></span> <select style="width:52px;display:inline-block;"><option>N/A</option></select></td>
             </tr>
             <tr>
-              <th>주소</th><td><select><option>국내</option></select></td><td colspan="5"><input value="" placeholder="우편번호" style="width:84px;display:inline-block;"> <button class="ibtn" title="주소찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button> <input value="" style="width:32%;display:inline-block;"> <input value="" placeholder="상세주소" style="width:32%;display:inline-block;"></td>
+              <th>주소</th><td colspan="6"><select style="width:70px;display:inline-block;"><option>국내</option></select> <input value="" placeholder="우편번호" style="width:84px;display:inline-block;"> <button class="ibtn" title="주소찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg></button> <input value="" style="width:32%;display:inline-block;"> <input value="" placeholder="상세주소" style="width:32%;display:inline-block;"></td>
             </tr>
             <tr>
               <th>특이사항</th><td colspan="6"><textarea class="ta">nzaffffffzgfsfdsfdsfdsfs</textarea></td>
@@ -602,7 +602,7 @@
         var vw = document.documentElement.clientWidth;
         dd.style.top = r.bottom + 'px';
         var w = dd.offsetWidth || 220;
-        var left = Math.round(r.left);   // 정수 픽셀 스냅 → 박스 좌측 테두리를 탭 왼쪽 모서리에 정렬
+        var left = Math.round(r.left);   // 정수 픽셀 스냅 → 박스 좌측을 탭 왼쪽 모서리에 정렬
         if(left + w > vw - 8) left = Math.max(8, vw - 8 - w);
         dd.style.left = left + 'px';
       });
