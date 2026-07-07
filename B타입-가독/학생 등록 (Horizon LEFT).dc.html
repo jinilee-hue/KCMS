@@ -19,12 +19,8 @@
   html,body{margin:0;padding:0;}
   *{box-sizing:border-box;}
   input,textarea{min-width:0;width:100%;max-width:100%;}
-  .kc-mscroll{scrollbar-width:thin;scrollbar-color:rgba(214,222,236,1) transparent;}
-  .kc-mscroll::-webkit-scrollbar{width:6px;}
-  .kc-mscroll::-webkit-scrollbar-button{display:none;width:0;height:0;}
-  .kc-mscroll::-webkit-scrollbar-track{background:transparent;margin:20px 0;}
-  .kc-mscroll::-webkit-scrollbar-thumb{background:rgba(214,222,236,.9);border-radius:99px;}
-  .kc-mscroll::-webkit-scrollbar-thumb:hover{background:rgba(214,222,236,1);}
+  .kc-mbody{scrollbar-width:none;}
+  .kc-mbody::-webkit-scrollbar{display:none;}
   :root{--radius-xl:14px;}
   ::-webkit-scrollbar{width:6px;height:6px;}
   ::-webkit-scrollbar-button{display:none;width:0;height:0;}
@@ -604,7 +600,8 @@
   <!-- NEW STUDENT MODAL -->
   <sc-if value="{{ newModal }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeNew }}" style="position:fixed;inset:0;z-index:90;background:rgba(27,37,89,.42);display:flex;align-items:center;justify-content:center;padding:24px;">
-      <div onClick="{{ stopNew }}" class="kc-mscroll" style="width:620px;max-width:100%;max-height:88vh;overflow:auto;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;">
+      <div onClick="{{ stopNew }}" style="position:relative;width:620px;max-width:100%;max-height:88vh;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);overflow:hidden;display:flex;flex-direction:column;">
+        <div class="kc-mbody" style="flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;display:flex;flex-direction:column;">
         <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--gray-200);">
           <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--navy);"><span style="display:inline-flex;color:var(--brand);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>신규 학생 등록</div>
           <div onClick="{{ closeNew }}" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-500);" style-hover="background:var(--gray-100)!important;color:var(--navy)!important;">✕</div>
@@ -656,6 +653,8 @@
           <button onClick="{{ closeNew }}" style="height:32px;padding:0 20px;border:none;box-shadow:var(--shadow-inset-border);border-radius:var(--radius-sm);background:transparent;color:var(--gray-600);font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="color:var(--navy)!important;box-shadow:inset 0 0 0 1px var(--gray-400),0 8px 18px rgba(112,144,176,0.28)!important;">취소</button>
           <button onClick="{{ closeNew }}" style="height:32px;padding:0 24px;border:none;border-radius:var(--radius-sm);background:var(--brand);color:#fff;font-family:var(--font-display);font-size:13.5px;font-weight:700;cursor:pointer;" style-hover="background:var(--brand-hover)!important;box-shadow:0 8px 18px rgba(67,24,255,0.28)!important;">등록</button>
         </div>
+        </div>
+        <div class="kc-thumb kc-mthumb"></div>
       </div>
     </div>
   </sc-if>
@@ -722,8 +721,45 @@ class Component extends DCLogic {
     this._onResize();
     this._initLnbThumb();
     this._initTblThumb();
+    this._initModalThumb();
   }
-  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); if(this._updTbl) this._updTbl(); }
+  componentDidUpdate(){ if(this._updThumb) this._updThumb(); if(this._syncLnb) this._syncLnb(); if(this._updTbl) this._updTbl(); if(this._syncModal) this._syncModal(); }
+
+  _initModalThumb(){
+    const sync = () => {
+      const sc = document.querySelector('.kc-mbody');
+      const thumb = document.querySelector('.kc-mthumb');
+      if(!sc || !thumb) return;
+      if(sc._kcBound){ if(sc._kcUpd) sc._kcUpd(); return; }
+      sc._kcBound = true;
+      let hideT;
+      const show = () => { thumb.style.opacity='1'; clearTimeout(hideT); hideT=setTimeout(()=>{ if(!this._dragging) thumb.style.opacity='0'; }, 1200); };
+      const update = () => {
+        const sh=sc.scrollHeight, ch=sc.clientHeight, stp=sc.scrollTop, pad=20, trackH=ch-2*pad;
+        if(sh<=ch+1){ thumb.style.display='none'; return; }
+        thumb.style.display='block';
+        const th=Math.max(24, trackH*ch/sh);
+        thumb.style.height=th+'px';
+        thumb.style.transform='translateY('+(pad+((sh-ch)?(stp/(sh-ch))*(trackH-th):0))+'px)';
+      };
+      sc._kcUpd = update;
+      sc.addEventListener('scroll', ()=>{ update(); show(); });
+      sc.addEventListener('mouseenter', ()=>{ update(); show(); });
+      thumb.addEventListener('mouseenter', show);
+      thumb.addEventListener('mousedown', (e)=>{
+        e.preventDefault(); this._dragging=true; thumb.classList.add('kc-dragging'); thumb.style.opacity='1';
+        const sh=sc.scrollHeight, ch=sc.clientHeight, pad=20, trackH=ch-2*pad, th=Math.max(24, trackH*ch/sh);
+        const startY=e.clientY, startTop=sc.scrollTop;
+        const onMove=(ev)=>{ const dy=ev.clientY-startY; sc.scrollTop = startTop + dy*(sh-ch)/(trackH-th); };
+        const onUp=()=>{ this._dragging=false; thumb.classList.remove('kc-dragging'); document.removeEventListener('mousemove',onMove); document.removeEventListener('mouseup',onUp); };
+        document.addEventListener('mousemove',onMove); document.addEventListener('mouseup',onUp);
+      });
+      const ro = new ResizeObserver(update); ro.observe(sc); sc._kcRO = ro;
+      show(); setTimeout(update, 0);
+    };
+    this._syncModal = sync;
+    sync();
+  }
 
   _initTblThumb(){
     const attach = () => {
