@@ -21,6 +21,10 @@
   input,textarea{min-width:0;width:100%;max-width:100%;}
   .kc-mbody{scrollbar-width:none;}
   .kc-mbody::-webkit-scrollbar{display:none;}
+  @media (max-width:1280px){
+    .kc-remain{display:none!important;}
+    .kc-hdricons{display:none!important;}
+  }
   :root{--radius-xl:14px;}
   ::-webkit-scrollbar{width:6px;height:6px;}
   ::-webkit-scrollbar-button{display:none;width:0;height:0;}
@@ -161,15 +165,15 @@
     <header style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 28px 6px;">
       <div style="display:flex;align-items:center;gap:14px;min-width:0;">
         <div style="min-width:0;">
-          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#2b3674;">
+          <div style="display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:#2b3674;white-space:nowrap;">
             <span title="대시보드 홈" style="display:inline-flex;align-items:center;color:#2b3674;cursor:pointer;" style-hover="color:var(--brand)!important;"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.2 12 3l9 7.2"></path><path d="M5 9.5V20a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5"></path><path d="M9.5 21v-6h5v6"></path></svg></span>
             <span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생관리</span><span style="color:var(--gray-400);">›</span><span style="cursor:pointer;" style-hover="color:var(--brand)!important;">학생정보</span><span style="color:var(--gray-400);">›</span><span style="color:var(--navy);font-weight:700;">학생 등록</span>
           </div>
-          <h1 style="margin:3px 0 0;font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--navy);">학생 등록</h1>
+          <h1 style="margin:3px 0 0;font-family:var(--font-display);font-size:30px;font-weight:600;letter-spacing:-.02em;color:var(--navy);white-space:nowrap;">학생 등록</h1>
         </div>
       </div>
       <div style="display:flex;align-items:center;gap:12px;flex:0 0 auto;">
-        <div style="display:flex;align-items:center;gap:10px;flex:0 0 auto;">
+        <div class="kc-remain" style="display:flex;align-items:center;gap:10px;flex:0 0 auto;">
           <div style="display:flex;align-items:center;gap:9px;font-size:12px;color:var(--gray-600);white-space:nowrap;">
             <span style="font-weight:700;color:var(--navy);">잔여수량</span>
             <span style="color:var(--gray-300);">|</span>
@@ -188,15 +192,26 @@
           <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" style="flex-shrink:0;"><path d="M12 5v14M5 12h14"/></svg>
           신규 등록
         </button>
-        <div style="display:flex;align-items:center;gap:12px;background:var(--white);border-radius:var(--radius-pill);padding:7px;box-shadow:var(--shadow-sm);">
-        <div style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;position:relative;" style-hover="background:var(--gray-100)!important;">
+        <div style="display:flex;align-items:center;gap:12px;background:var(--white);border-radius:var(--radius-pill);padding:7px;box-shadow:var(--shadow-sm);position:relative;">
+        <div class="kc-hdricons" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;position:relative;" style-hover="background:var(--gray-100)!important;">
           <x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="NotificationsNone" size="19" hint-size="19px,19px"></x-import>
           <span style="position:absolute;top:7px;right:8px;width:7px;height:7px;border-radius:50%;background:var(--brand);border:1.5px solid var(--white);"></span>
         </div>
-        <div style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;" style-hover="background:var(--gray-100)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="InfoOutline" size="19" hint-size="19px,19px"></x-import></div>
-        <div style="display:flex;align-items:center;gap:9px;padding-left:4px;cursor:pointer;">
+        <div class="kc-hdricons" style="width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;" style-hover="background:var(--gray-100)!important;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="InfoOutline" size="19" hint-size="19px,19px"></x-import></div>
+        <div onClick="{{ toggleProfile }}" style="display:flex;align-items:center;gap:9px;padding-left:4px;cursor:pointer;">
           <div style="width:38px;height:38px;border-radius:50%;background:var(--gray-100);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;font-size:14px;">김</div>
         </div>
+        <sc-if value="{{ profileOpen }}" hint-placeholder-val="{{ false }}">
+          <div onClick="{{ closeProfile }}" style="position:fixed;inset:0;z-index:59;"></div>
+          <div style="position:absolute;top:52px;right:0;z-index:60;background:var(--white);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);padding:6px;min-width:150px;display:flex;flex-direction:column;gap:2px;border:1px solid var(--gray-200);">
+            <div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-radius:var(--radius-sm);cursor:pointer;color:var(--navy);font-size:13.5px;font-weight:600;position:relative;" style-hover="background:var(--gray-100)!important;">
+              <span style="display:inline-flex;color:var(--gray-600);position:relative;"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="NotificationsNone" size="18" hint-size="18px,18px"></x-import><span style="position:absolute;top:0;right:1px;width:6px;height:6px;border-radius:50%;background:var(--brand);"></span></span>알림
+            </div>
+            <div style="display:flex;align-items:center;gap:10px;height:40px;padding:0 12px;border-radius:var(--radius-sm);cursor:pointer;color:var(--navy);font-size:13.5px;font-weight:600;" style-hover="background:var(--gray-100)!important;">
+              <span style="display:inline-flex;color:var(--gray-600);"><x-import component-from-global-scope="HorizonUIDesignSystem_ea160b.Icon" name="InfoOutline" size="18" hint-size="18px,18px"></x-import></span>정보
+            </div>
+          </div>
+        </sc-if>
       </div>
       <div title="로그아웃" style="flex:0 0 auto;width:52px;height:52px;border-radius:50%;background:var(--white);box-shadow:var(--shadow-sm);display:flex;align-items:center;justify-content:center;color:var(--gray-500);cursor:pointer;transition:box-shadow .15s ease;" style-hover="color:var(--neutral-700)!important;box-shadow:0 8px 18px rgba(112,144,176,0.28)!important;">
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></svg>
@@ -686,6 +701,7 @@ class Component extends DCLogic {
     super(props);
     this.state = {
       newModal: false,
+      profileOpen: false,
       newOpen: null,
       new_gender: '', new_klass: '', new_level: '',
       colMenu: false,
@@ -1272,6 +1288,9 @@ class Component extends DCLogic {
       activeTabName: st.detailTab,
       closeDrawer: ()=> this.setState({ selectedId:null }),
       newModal: st.newModal,
+      profileOpen: st.profileOpen,
+      toggleProfile: ()=> this.setState({ profileOpen: !st.profileOpen }),
+      closeProfile: ()=> this.setState({ profileOpen:false }),
       openNew: ()=> this.setState({ newModal:true }),
       closeNew: ()=> this.setState({ newModal:false, newOpen:null }),
       stopNew: (e)=>{ if(e && e.stopPropagation) e.stopPropagation(); },
