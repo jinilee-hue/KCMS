@@ -29,11 +29,6 @@
 html,body{margin:0;padding:0;}
 *{box-sizing:border-box;}
 input,textarea{min-width:0;width:100%;max-width:100%;}
-.kc-mscroll{scrollbar-width:thin;scrollbar-color:#C6D2E2 transparent;}
-.kc-mscroll::-webkit-scrollbar{width:12px;}
-.kc-mscroll::-webkit-scrollbar-track{background:transparent;margin:10px 0;}
-.kc-mscroll::-webkit-scrollbar-thumb{background:#C6D2E2;border-radius:99px;border-right:6px solid transparent;background-clip:padding-box;}
-.kc-mscroll::-webkit-scrollbar-thumb:hover{background:#AEBDD2;background-clip:padding-box;}
 ::-webkit-scrollbar{width:6px;height:6px;}
 ::-webkit-scrollbar-thumb{background:#C6D2E2;border-radius:8px;border:2px solid var(--bg);}
 ::-webkit-scrollbar-track{background:transparent;}
@@ -575,7 +570,7 @@ input,textarea{min-width:0;width:100%;max-width:100%;}
   <!-- NEW STUDENT MODAL -->
   <sc-if value="{{ newModal }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeNew }}" style="position:fixed;inset:0;z-index:90;background:rgba(20,30,55,.45);display:flex;align-items:center;justify-content:center;padding:24px;">
-      <div onClick="{{ stopNew }}" class="kc-mscroll" style="width:600px;max-width:100%;max-height:88vh;overflow:auto;background:var(--surface);border-radius:16px;box-shadow:0 24px 60px rgba(20,30,55,.32);display:flex;flex-direction:column;">
+      <div onClick="{{ stopNew }}" style="width:600px;max-width:100%;max-height:88vh;overflow:auto;background:var(--surface);border-radius:16px;box-shadow:0 24px 60px rgba(20,30,55,.32);display:flex;flex-direction:column;">
         <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border);">
           <div style="display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;color:var(--text);"><span style="display:inline-flex;color:var(--primary);"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>신규 학생 등록</div>
           <div onClick="{{ closeNew }}" style="width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--text-muted);background:var(--surface-2);" style-hover="background:var(--navy)!important;color:#fff!important;">✕</div>
