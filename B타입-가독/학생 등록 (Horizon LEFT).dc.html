@@ -19,8 +19,15 @@
   html,body{margin:0;padding:0;}
   *{box-sizing:border-box;}
   input,textarea{min-width:0;width:100%;max-width:100%;}
+  .kc-mscroll{scrollbar-width:thin;scrollbar-color:rgba(214,222,236,1) transparent;}
+  .kc-mscroll::-webkit-scrollbar{width:10px;}
+  .kc-mscroll::-webkit-scrollbar-button{display:none;width:0;height:0;}
+  .kc-mscroll::-webkit-scrollbar-track{background:transparent;}
+  .kc-mscroll::-webkit-scrollbar-thumb{background:rgba(214,222,236,.9);border-radius:99px;border-right:4px solid transparent;background-clip:padding-box;}
+  .kc-mscroll::-webkit-scrollbar-thumb:hover{background:rgba(214,222,236,1);background-clip:padding-box;}
   :root{--radius-xl:14px;}
   ::-webkit-scrollbar{width:6px;height:6px;}
+  ::-webkit-scrollbar-button{display:none;width:0;height:0;}
   ::-webkit-scrollbar-thumb{background:#D6DEEC;border-radius:8px;}
   ::-webkit-scrollbar-track{background:transparent;}
   .num{font-variant-numeric:tabular-nums;}
@@ -597,7 +604,7 @@
   <!-- NEW STUDENT MODAL -->
   <sc-if value="{{ newModal }}" hint-placeholder-val="{{ false }}">
     <div onClick="{{ closeNew }}" style="position:fixed;inset:0;z-index:90;background:rgba(27,37,89,.42);display:flex;align-items:center;justify-content:center;padding:24px;">
-      <div onClick="{{ stopNew }}" style="width:620px;max-width:100%;max-height:88vh;overflow:auto;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;">
+      <div onClick="{{ stopNew }}" class="kc-mscroll" style="width:620px;max-width:100%;max-height:88vh;overflow:auto;background:var(--white);border-radius:var(--radius-xl);box-shadow:var(--shadow-lg);display:flex;flex-direction:column;">
         <div style="flex:0 0 auto;display:flex;align-items:center;justify-content:space-between;padding:22px 26px;border-bottom:1px solid var(--gray-200);">
           <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-size:18px;font-weight:800;color:var(--navy);"><span style="display:inline-flex;color:var(--brand);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>신규 학생 등록</div>
           <div onClick="{{ closeNew }}" style="width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--gray-500);" style-hover="background:var(--gray-100)!important;color:var(--navy)!important;">✕</div>
