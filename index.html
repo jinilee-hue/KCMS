@@ -61,11 +61,12 @@
   .section-title{font-size:17px;font-weight:800;letter-spacing:-.01em;color:#111927;text-align:left;margin:48px 0 16px;}
   .cmp{background:#fff;border-radius:20px;box-shadow:0 18px 40px rgba(112,144,176,.1);overflow:hidden;}
   .cmp-scroll{overflow-x:auto;}
-  table{width:100%;border-collapse:collapse;min-width:560px;font-size:13.5px;}
+  table{width:100%;border-collapse:collapse;min-width:760px;font-size:13.5px;}
   th,td{padding:14px 18px;text-align:left;border-bottom:1px solid #EDF2F7;vertical-align:top;}
   thead th{font-size:12.5px;font-weight:700;color:#2D3748;background:#F8FAFC;}
   thead th.col-a{color:#2C9A90;}
   thead th.col-b{color:#4318FF;}
+  thead th.col-c{color:#0066FF;}
   tbody th{font-weight:700;color:#2D3748;width:130px;white-space:nowrap;}
   td{color:#5A6B87;}
   tr:last-child th,tr:last-child td{border-bottom:none;}
@@ -136,26 +137,26 @@
     </div>
 
     <!-- comparison -->
-    <div class="section-title">상세 비교 (A · B 신규안)</div>
+    <div class="section-title">상세 비교 (A · B 신규안 · C 레거시안)</div>
     <div class="cmp">
       <div class="cmp-scroll">
         <table>
           <thead>
-            <tr><th>항목</th><th class="col-a">A형</th><th class="col-b">B형</th></tr>
+            <tr><th>항목</th><th class="col-a">A형</th><th class="col-b">B형</th><th class="col-c">C안</th></tr>
           </thead>
           <tbody>
-            <tr class="grp"><td colspan="3">디자인 차이</td></tr>
-            <tr><th>내비게이션</th><td>상단 가로 탭 + 메가메뉴</td><td>좌측 접이식 사이드바</td></tr>
-            <tr><th>브랜드 컬러</th><td><div class="cmp-sw"><span style="background:#4FD1C5"></span><span style="background:#38B2AC"></span><span style="background:#2D3748"></span><span style="background:#EDF2F7"></span></div>민트 / Teal (#4FD1C5)</td><td><div class="cmp-sw"><span style="background:#4318FF"></span><span style="background:#7551FF"></span><span style="background:#2B3674"></span><span style="background:#F4F7FE"></span></div>인디고 / Indigo (#4318FF)</td></tr>
-            <tr><th>정보 밀도</th><td>높음 (컴팩트·실무형)</td><td>중간 (여백·카드형)</td></tr>
-            <tr><th>레이아웃</th><td>목록 + 상세 분할 (너비 조절)</td><td>카드 구획 + 슬라이드 상세</td></tr>
-            <tr><th>세로 공간</th><td>넓음 (상단 바 1줄)</td><td>보통 (상단 바 + 여백)</td></tr>
-            <tr><th>태블릿 대응</th><td>상세 패널 비율 자동 조정 · 터치 드래그 리사이즈</td><td>사이드바 자동 축소(≤1280px) · 필터 그리드 단수 조정</td></tr>
-            <tr class="grp"><td colspan="3">공통 구현 기능 · A·B 동일</td></tr>
-            <tr><th>입력 · 폼</th><td class="both" colspan="2">검색 필터(상태·학번·레벨·학급) · 인라인 폼 입력·저장 · 커스텀 셀렉트·드롭다운</td></tr>
-            <tr><th>목록 · 상세</th><td class="both" colspan="2">학생 목록 ↔ 상세 연동 · 상세 탭(기본·배정·출결·성적·수납·메모)</td></tr>
-            <tr><th>데이터 시각화</th><td class="both" colspan="2">성적 차트(반평균 비교) · 출결 캘린더</td></tr>
-            <tr><th>공통 UI</th><td class="both" colspan="2">상태 배지 · 페이지네이션 · 커스텀 오버레이 스크롤바</td></tr>
+            <tr class="grp"><td colspan="4">디자인 차이</td></tr>
+            <tr><th>내비게이션</th><td>상단 가로 탭 + 메가메뉴</td><td>좌측 접이식 사이드바</td><td>상단 가로 메뉴 + 좌측 즐겨찾기 툴바 (기존 구조)</td></tr>
+            <tr><th>브랜드 컬러</th><td><div class="cmp-sw"><span style="background:#4FD1C5"></span><span style="background:#38B2AC"></span><span style="background:#2D3748"></span><span style="background:#EDF2F7"></span></div>민트 / Teal (#4FD1C5)</td><td><div class="cmp-sw"><span style="background:#4318FF"></span><span style="background:#7551FF"></span><span style="background:#2B3674"></span><span style="background:#F4F7FE"></span></div>인디고 / Indigo (#4318FF)</td><td><div class="cmp-sw"><span style="background:#0066FF"></span><span style="background:#2C3E5A"></span><span style="background:#3E5C76"></span><span style="background:#8A6D3B"></span></div>Poly Blue (#0066FF) · 톤다운 4종</td></tr>
+            <tr><th>정보 밀도</th><td>높음 (컴팩트·실무형)</td><td>중간 (여백·카드형)</td><td>매우 높음 (레거시 밀도 유지)</td></tr>
+            <tr><th>레이아웃</th><td>목록 + 상세 분할 (너비 조절)</td><td>카드 구획 + 슬라이드 상세</td><td>좌 목록 / 우 상세 동시 표시 (기존 화면 그대로)</td></tr>
+            <tr><th>세로 공간</th><td>넓음 (상단 바 1줄)</td><td>보통 (상단 바 + 여백)</td><td>조밀 (기존 밀도)</td></tr>
+            <tr><th>태블릿 대응</th><td>상세 패널 비율 자동 조정 · 터치 드래그 리사이즈</td><td>사이드바 자동 축소(≤1280px) · 필터 그리드 단수 조정</td><td>데스크톱 고정 (기존 레이아웃 유지)</td></tr>
+            <tr class="grp"><td colspan="4">구현 기능 · A·B 공통 / C 레거시 방식</td></tr>
+            <tr><th>입력 · 폼</th><td class="both" colspan="2">검색 필터(상태·학번·레벨·학급) · 인라인 폼 입력·저장 · 커스텀 셀렉트·드롭다운</td><td>기존 등록 폼 유지 · 셀 병합 정리 · 상태변경 드롭다운 · 현금영수증 입력</td></tr>
+            <tr><th>목록 · 상세</th><td class="both" colspan="2">학생 목록 ↔ 상세 연동 · 상세 탭(기본·배정·출결·성적·수납·메모)</td><td>좌 목록 / 우 상세 동시 표시 · 학급 배정 정보 테이블</td></tr>
+            <tr><th>데이터 시각화</th><td class="both" colspan="2">성적 차트(반평균 비교) · 출결 캘린더</td><td>해당 없음 (폼·테이블 중심)</td></tr>
+            <tr><th>공통 UI</th><td class="both" colspan="2">상태 배지 · 페이지네이션 · 커스텀 오버레이 스크롤바</td><td>기존 UI 유지 · 커스텀 셀렉트·드롭다운 통일 · Poly Blue 배지</td></tr>
           </tbody>
         </table>
       </div>
