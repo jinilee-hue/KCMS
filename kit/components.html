@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KCMS 입학관리 Kit — 컴포넌트 가이드</title>
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/common.css">
+<style>
+  body{background:var(--bg);}
+  .doc{max-width:1080px;margin:0 auto;padding:32px 24px 80px;background:#fff;min-height:100vh;}
+  .doc h1{font-size:26px;margin:0 0 6px;letter-spacing:-.4px;}
+  .doc .lede{color:var(--txt-mut);font-size:13px;margin:0 0 28px;line-height:1.6;}
+  .doc h2{font-size:17px;margin:36px 0 4px;padding-top:20px;border-top:1px solid var(--line-soft);}
+  .doc h3{font-size:13px;margin:20px 0 8px;color:var(--gnb);}
+  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.6;margin:6px 0 12px;}
+  .demo{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:18px;margin:10px 0;
+    display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fff;}
+  .demo.col{flex-direction:column;align-items:stretch;}
+  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.55;padding:12px 14px;
+    border-radius:var(--r-sm);overflow:auto;margin:0 0 14px;}
+  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .toc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
+  .toc a{font-size:11.5px;padding:4px 10px;border:1px solid var(--line);border-radius:var(--r-pill);
+    color:var(--txt-mut);text-decoration:none;}
+  .toc a:hover{border-color:var(--pb);color:var(--pb);}
+  .swatch{width:74px;}
+  .swatch i{display:block;height:44px;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,.06);}
+  .swatch b{display:block;font-size:10.5px;margin-top:5px;font-weight:600;}
+  .swatch span{display:block;font-size:10px;color:var(--txt-mut);}
+  .rulebox{border-left:3px solid var(--pb);background:var(--pb-a08);padding:10px 14px;font-size:12px;
+    line-height:1.65;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:10px 0 16px;}
+  .rulebox b{color:var(--pb-deeper);}
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <h1>KCMS 입학관리 Kit</h1>
+  <p class="lede">
+    PCMS 입학관리 화면에서 확정된 규격을 그대로 옮긴 컴포넌트 모음입니다.
+    빌드 도구 없이 <code>tokens.css → common.css → utils.js → layout.js</code> 4개만 불러오면 됩니다.
+    <br>기준 화면: <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b>
+  </p>
+
+  <div class="toc">
+    <a href="#start">시작하기</a><a href="#color">색</a><a href="#type">타이포</a>
+    <a href="#button">버튼</a><a href="#badge">배지</a><a href="#table">표</a>
+    <a href="#form">폼</a><a href="#tab">탭</a><a href="#modal">모달</a>
+    <a href="#toast">토스트</a><a href="#chart">차트</a><a href="#layout">레이아웃</a>
+  </div>
+
+  <h2 id="start">시작하기</h2>
+  <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
+&lt;link rel="stylesheet" href="styles/common.css"&gt;
+&lt;script src="js/utils.js"&gt;&lt;/script&gt;
+&lt;script src="js/layout.js"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+  initLayout({
+    menu: MENU, current: '입학관리', badges: {'입학관리':'NEW'},
+    railItems: RAIL, railCurrent: 'HOME',
+    openTabs: [{key:'a', label:'예비생 등록·관리', cur:true}],
+    onTabOpen: function(key){ /* 화면 이동 */ },
+    onTabClose: function(key){ /* 탭 닫기 */ }
+  });
+&lt;/script&gt;</code></pre>
+
+  <h2 id="color">색</h2>
+  <p class="note">브랜드 파랑은 본문 강조, 네이비는 상단 바 — 역할을 분리합니다. 그래프는 톤다운 색을 따로 씁니다.</p>
+  <div class="demo" id="swatches"></div>
+  <div class="rulebox">
+    <b>지표 색 규칙</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.<br>
+    그래프처럼 <b>면적이 넓은 곳</b>은 톤다운(<code>--chart-ok</code> / <code>--chart-low</code>),
+    <b>글자·아이콘</b>은 원색(<code>--pb</code> / <code>--danger</code>)을 씁니다.
+    면적이 넓은데 원색이면 촌스럽고, 작은 글자에 톤다운이면 뿌옇습니다.
+  </div>
+
+  <h2 id="type">타이포</h2>
+  <div class="demo col">
+    <div class="sectit">섹션 제목 13px / 700<span class="hint">앞에 4×14 파란 막대</span></div>
+    <div style="font-size:12.5px;font-weight:700;">탭·강조 라벨 12.5px / 700</div>
+    <div style="font-size:11.5px;">표·폼 본문 11.5px — 업무 화면 기본 크기</div>
+    <div style="font-size:11px;color:var(--txt-mut);">배지·캡션 11px / 보조색</div>
+    <div style="font-size:22px;font-weight:700;color:var(--pb);">348<span class="pcts">%</span> ← 숫자 강조, % 기호만 0.68em</div>
+  </div>
+
+  <h2 id="button">버튼</h2>
+  <div class="demo">
+    <button class="btn">주요 동작</button>
+    <button class="btn g">보조</button>
+    <button class="btn s">시스템</button>
+    <button class="btn danger">삭제</button>
+    <button class="btn sm">작게</button>
+    <button class="btn" disabled>비활성</button>
+    <button class="ibtn" title="아이콘">＋</button>
+  </div>
+  <p class="note">높이 24px 고정(작게 22px). <b>삭제 버튼에 빨강은 파괴적 동작에만</b> 쓰고, 목록의 행 삭제·탭 닫기 같은 일상 동작은 중립 톤을 씁니다.</p>
+
+  <h2 id="badge">배지</h2>
+  <div class="demo">
+    <span class="badge">기본</span>
+    <span class="badge primary">재원</span>
+    <span class="badge ok">완납</span>
+    <span class="badge warn">미납</span>
+    <span class="badge danger">결석</span>
+    <span class="badge line">태그</span>
+    <span class="badge pill primary">알약형</span>
+  </div>
+  <p class="note">굵기는 <b>500</b> 입니다(700 금지). 알약형은 <code>.pill</code>.</p>
+
+  <h2 id="table">표</h2>
+  <div class="demo col">
+    <table class="grid">
+      <thead>
+        <tr><th class="grp" colspan="2">학생</th><th class="grp" colspan="2">MAP</th></tr>
+        <tr><th>이름</th><th>학년</th><th>응시일</th><th class="num">점수</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="ctr">최○○</td><td class="ctr">초3</td><td class="ctr">2026.08.12</td><td class="num">218</td></tr>
+        <tr class="on"><td class="ctr">김○○</td><td class="ctr">초4</td><td class="ctr">2026.08.14</td><td class="num">231</td></tr>
+      </tbody>
+      <tfoot><tr><td colspan="3" class="ctr">평균</td><td class="num">224.5</td></tr></tfoot>
+    </table>
+  </div>
+  <p class="note">헤더 <b>33px · #F4F7FD · 11.5px/700</b>, 2단 그룹 헤더는 <code>.grp</code>(#EAF1FB). 숫자 칸은 <code>.num</code> 으로 우측 정렬 + 등폭 숫자.</p>
+
+  <h2 id="form">폼</h2>
+  <div class="demo">
+    <span class="flabel">캠퍼스</span>
+    <select class="fselect" data-autowidth><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
+    <span class="flabel">학생명</span>
+    <input class="finput" placeholder="이름 입력">
+    <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+    <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
+  </div>
+  <p class="note">입력 높이 24px. <code>data-autowidth</code> 를 붙이면 옵션 최대 길이에 맞춰 셀렉트 폭이 자동 계산됩니다(리스트가 잘리지 않게).</p>
+
+  <h2 id="tab">탭</h2>
+  <div class="demo col">
+    <div class="ptabs"><button class="ptab on">예비생정보</button><button class="ptab">MAP 예약</button><button class="ptab">채점</button></div>
+    <div style="display:flex;gap:6px;margin-top:12px;">
+      <button class="quickpill on">전체</button><button class="quickpill">진학</button><button class="quickpill">유입</button>
+    </div>
+  </div>
+  <p class="note">상위 탭은 밑줄형(<code>.ptab</code>), 하위 필터는 알약형(<code>.quickpill</code>). 토글 스위치형은 쓰지 않습니다.</p>
+
+  <h2 id="modal">모달</h2>
+  <div class="demo">
+    <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
+    <span class="badge line">헤더 40px · 드래그 이동 · Esc/오버레이 클릭으로 닫힘</span>
+  </div>
+
+  <h2 id="toast">토스트</h2>
+  <div class="demo">
+    <button class="btn" onclick="KCMS.toast('저장했습니다.','success','저장 완료')">success</button>
+    <button class="btn g" onclick="KCMS.toast('필수값을 확인해 주세요.','warning','확인 필요')">warning</button>
+    <button class="btn g" onclick="KCMS.toast('전송에 실패했습니다.','danger','오류')">danger</button>
+    <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.')">neutral</button>
+  </div>
+  <div class="rulebox">
+    왼쪽 두꺼운 액센트 바를 넣지 않고 <b>배경색 자체로</b> 상황을 구분합니다.
+    <b>문구에 이모지를 넣지 않습니다</b> — 구분은 색과 제목이 합니다. 동시에 최대 3개까지 쌓입니다.
+  </div>
+
+  <h2 id="chart">차트 (Chart.js 프리셋)</h2>
+  <pre><code>KCMS.setChartDefaults();                 // 폰트·막대 두께·점 크기 일괄 설정
+const c = KCMS.getChartColors();         // 브랜드 파랑 1색을 투명도로만 나눈 팔레트
+new Chart(el, { type:'bar', data:{ datasets:[{ backgroundColor:c[0] }] } });
+
+// 기준선이 있는 지표는 두 색으로만
+bar.backgroundColor = KCMS.ruleColor(pct, 70);   // 70% 이상 파랑 / 미만 경고 레드</code></pre>
+  <div class="rulebox">차트에 <b>시맨틱 색(빨강·주황·초록)을 쓰지 않습니다.</b> 예외는 기준 미달 경고뿐입니다.</div>
+
+  <h2 id="layout">레이아웃 골격</h2>
+  <pre><code>상단 GNB      64px    #3A5170 → #2C3E5A
+좌측 레일      58px    (1000px 이하 50px)
+히스토리 네비   30px
+하단 작업 탭    30px    ← 화면을 열 때마다 탭이 옆으로 쌓임
+콘텐츠 기준선   73px    (밴드는 풀 너비, 안쪽 여백 14px)</code></pre>
+  <p class="note">1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 항목의 점이 같은 세로선에서 시작합니다. 3뎁스 점은 2뎁스 첫 글자 가운데(+3.2px)에 맞춥니다.</p>
+
+</div>
+
+<!-- 데모 모달 -->
+<div class="modal-ov" id="demoModal">
+  <div class="modal-box" style="width:460px;">
+    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" aria-label="닫기">✕</button></div>
+    <div class="modal-body">
+      <table class="form" style="width:100%;border-collapse:separate;border-spacing:0;">
+        <tr><th>학생명<span class="req">*</span></th><td><input class="finput" style="width:100%" value="최○○"></td></tr>
+        <tr><th>생년월일<span class="req">*</span></th><td><input class="finput" style="width:100%" value="2017-06-30"></td></tr>
+      </table>
+    </div>
+    <div class="modal-ft"><button class="btn g" onclick="KCMS.closeModal('demoModal')">닫기</button><button class="btn">확인</button></div>
+  </div>
+</div>
+
+<script src="js/utils.js"></script>
+<script src="js/layout.js"></script>
+<script>
+  var SW=[['--pb','브랜드'],['--pb-light','틴트'],['--pb-dark','호버'],['--pb-deeper','최심'],
+          ['--gnb','GNB'],['--txt','본문'],['--txt-mut','보조'],['--line','테두리'],
+          ['--tbl-head','표 헤더'],['--tbl-head-grp','그룹 헤더'],
+          ['--chart-ok','기준 이상'],['--chart-low','기준 미만'],
+          ['--warn','경고'],['--danger','위험']];
+  document.getElementById('swatches').innerHTML = SW.map(function(s){
+    return '<div class="swatch"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></div>';
+  }).join('');
+  initLayout({});
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KCMS 입학관리 Kit — 다운로드</title>
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/common.css">
+<style>
+  body{background:#fff;}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  .hero{background:linear-gradient(180deg,var(--gnb-top),var(--gnb));color:#fff;padding:64px 0 56px;}
+  .hero .eyebrow{font-size:11.5px;letter-spacing:2px;color:#A9BBD6;font-weight:700;}
+  .hero h1{font-size:38px;margin:10px 0 12px;letter-spacing:-1px;line-height:1.25;}
+  .hero p{font-size:14px;line-height:1.7;color:#CDD8E9;margin:0 0 26px;max-width:640px;}
+  .cta{display:flex;gap:10px;flex-wrap:wrap;}
+  .cta a{display:inline-flex;align-items:center;gap:7px;height:42px;padding:0 20px;border-radius:var(--r-lg);
+    font-size:13.5px;font-weight:700;text-decoration:none;}
+  .cta .primary{background:#fff;color:var(--gnb);}
+  .cta .primary:hover{background:var(--pb-light);color:var(--pb-deeper);}
+  .cta .ghost{border:1px solid rgba(255,255,255,.4);color:#fff;}
+  .cta .ghost:hover{background:rgba(255,255,255,.12);}
+  .sec{padding:56px 0;border-bottom:1px solid var(--line-soft);}
+  .sec h2{font-size:22px;margin:0 0 6px;letter-spacing:-.4px;}
+  .sec .sub{color:var(--txt-mut);font-size:13px;margin:0 0 26px;}
+  .files{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;}
+  .file{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:18px 20px;}
+  .file .nm{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--pb);font-weight:700;}
+  .file .ti{font-size:13.5px;font-weight:700;margin:6px 0 6px;}
+  .file p{font-size:12px;color:var(--txt-mut);line-height:1.65;margin:0;}
+  .feats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+  .feat h3{font-size:14px;margin:0 0 6px;}
+  .feat p{font-size:12.5px;color:var(--txt-mut);line-height:1.7;margin:0;}
+  .steps{counter-reset:s;display:grid;gap:14px;}
+  .step{display:flex;gap:14px;align-items:flex-start;}
+  .step .n{flex:0 0 26px;height:26px;border-radius:50%;background:var(--pb);color:#fff;font-size:12px;
+    font-weight:700;display:flex;align-items:center;justify-content:center;}
+  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.6;padding:14px 16px;
+    border-radius:var(--r-sm);overflow:auto;margin:8px 0 0;flex:1;}
+  .cases{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+  .case{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:18px 20px;text-decoration:none;color:inherit;display:block;}
+  .case:hover{border-color:var(--pb);}
+  .case b{display:block;font-size:13.5px;margin-bottom:6px;}
+  .case span{font-size:12px;color:var(--txt-mut);line-height:1.6;}
+  footer{padding:34px 0 60px;color:var(--txt-mut);font-size:12px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">POLY CAMPUS MANAGEMENT SYSTEM</div>
+    <h1>KCMS 입학관리 Kit</h1>
+    <p>
+      PCMS 입학관리 화면에서 확정된 규격을 그대로 옮긴 디자인 Kit 입니다.
+      빌드 도구·패키지 설치 없이 파일 4개만 불러오면 같은 화면이 나옵니다.
+      표·모달·토스트·GNB·작업 탭까지 업무 화면에 필요한 컴포넌트가 모두 들어 있습니다.
+    </p>
+    <div class="cta">
+      <a class="primary" href="kcms-admissions-kit.zip" download>Kit 내려받기 (.zip)</a>
+      <a class="ghost" href="components.html">컴포넌트 가이드 보기</a>
+      <a class="ghost" href="../입학관리/">입학관리 체험판</a>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <h2>패키지 구성</h2>
+    <p class="sub">6개 파일로 완성되는 디자인 시스템</p>
+    <div class="files">
+      <div class="file"><div class="nm">kcms-admissions.md</div><div class="ti">AI Agent 프롬프트</div>
+        <p>Cursor · VS Code · Claude Code 등 개발 Agent에 그대로 붙여넣는 UI 규약입니다. 규칙 설명 없이 바로 개발을 시작합니다.</p></div>
+      <div class="file"><div class="nm">styles/tokens.css</div><div class="ti">디자인 토큰</div>
+        <p>색·간격·타이포·컴포넌트 높이를 CSS 변수로 정의합니다. 값 하드코딩을 막는 단일 출처입니다.</p></div>
+      <div class="file"><div class="nm">styles/common.css</div><div class="ti">컴포넌트 스타일</div>
+        <p>레이아웃 골격, 버튼, 배지, 표, 폼, 탭, 모달, 토스트, 진행바, 페이지네이션까지 15개 그룹.</p></div>
+      <div class="file"><div class="nm">js/utils.js</div><div class="ti">유틸리티</div>
+        <p>날짜·숫자·전화 포맷, 개인정보 마스킹, 4색 토스트, 모달 제어, Chart.js 프리셋이 들어 있습니다.</p></div>
+      <div class="file"><div class="nm">js/layout.js</div><div class="ti">레이아웃 엔진</div>
+        <p>GNB 3뎁스 메뉴, 좌측 레일, 하단 작업 탭, 셀렉트 폭 자동 계산, 모달 드래그를 <code>initLayout()</code> 한 줄로 초기화합니다.</p></div>
+      <div class="file"><div class="nm">design-system.md</div><div class="ti">디자인 시스템 문서</div>
+        <p>색 스케일, 컴포넌트 스펙, 모달 인벤토리(44종), 반응형 브레이크포인트, 의도된 예외까지 담은 레퍼런스입니다.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <h2>주요 특징</h2>
+    <p class="sub">업무 화면의 밀도에 맞춰 설계했습니다</p>
+    <div class="feats">
+      <div class="feat"><h3>업무 화면 밀도 기준</h3>
+        <p>표 헤더 33px, 버튼·입력 24px, 본문 11.5px. 한 화면에 많은 정보를 담는 업무 시스템 기준으로 잡힌 스케일입니다.</p></div>
+      <div class="feat"><h3>역할이 분리된 2색</h3>
+        <p>상단 GNB는 네이비, 본문 강조는 Poly Blue. 화면 어디를 보고 있는지와 무엇을 눌러야 하는지가 색으로 갈립니다.</p></div>
+      <div class="feat"><h3>기준선이 있는 지표 색</h3>
+        <p>충원율 70% · 가동률 30% 같은 기준을 넘었는지를 두 색으로만 표시합니다. 면적에 따라 톤다운/원색을 나눠 씁니다.</p></div>
+      <div class="feat"><h3>쌓이는 작업 탭</h3>
+        <p>메뉴에서 화면을 열면 하단에 탭이 쌓이고, 넘치면 좌우 이동 버튼이 나타납니다. KCMS 사용 흐름 그대로입니다.</p></div>
+      <div class="feat"><h3>44종 모달 규격</h3>
+        <p>공통 26종 · 화면 전용 18종을 한 셸(<code>.modal-box</code>)로 통일했습니다. 드래그 이동과 Esc 닫기가 기본입니다.</p></div>
+      <div class="feat"><h3>Vanilla JS · 빌드 불필요</h3>
+        <p>Node·번들러 없이 브라우저에서 바로 실행됩니다. 차트가 필요하면 Chart.js CDN 한 줄만 추가합니다.</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <h2>2단계로 시작하기</h2>
+    <p class="sub">파일을 넣고 초기화 한 줄이면 끝납니다</p>
+    <div class="steps">
+      <div class="step"><div class="n">1</div>
+        <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
+&lt;link rel="stylesheet" href="styles/common.css"&gt;
+&lt;script src="js/utils.js"&gt;&lt;/script&gt;
+&lt;script src="js/layout.js"&gt;&lt;/script&gt;</code></pre></div>
+      <div class="step"><div class="n">2</div>
+        <pre><code>initLayout({
+  menu: MENU, current: '입학관리',
+  railItems: RAIL, railCurrent: 'HOME',
+  openTabs: [{key:'a', label:'예비생 등록·관리', cur:true}],
+  onTabOpen: openScreen, onTabClose: closeScreen
+});</code></pre></div>
+    </div>
+  </div>
+</div>
+
+<div class="sec">
+  <div class="wrap">
+    <h2>실제 제작 사례</h2>
+    <p class="sub">이 Kit 의 규격이 나온 화면들입니다</p>
+    <div class="cases">
+      <a class="case" href="../입학관리/"><b>입학관리 화면 체험판</b><span>16개 화면 · GNB·작업 탭·모달까지 실제 동작</span></a>
+      <a class="case" href="components.html"><b>컴포넌트 가이드</b><span>버튼·배지·표·폼·모달·토스트 라이브 데모</span></a>
+      <a class="case" href="design-system.md"><b>디자인 시스템 문서</b><span>색 스케일 · 컴포넌트 스펙 · 예외 규정</span></a>
+    </div>
+  </div>
+</div>
+
+<footer><div class="wrap">KCMS 입학관리 Kit · 2026-08-26 · 기준 화면 PCMS-SCR-ET-02-012</div></footer>
+</body>
+</html>
