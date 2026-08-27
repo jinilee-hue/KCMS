@@ -1,0 +1,125 @@
+# KCMS 입학관리 Kit — 규칙 · 계약
+
+컴포넌트 가이드(`components.html`)는 **보이는 것**만 두고, 지켜야 할 규칙과 API 계약은 이 문서에 모읍니다.
+관련 문서: `design-system.md`(구성·제작 방식) · `kcms-admissions.md`(AI 에이전트용 규약)
+
+---
+
+## 1. Do / Don't
+
+| 영역 | 이렇게 | 이러지 않기 |
+|---|---|---|
+| 색 | 토큰 변수만 사용 `var(--pb)` | hex 하드코딩 · 새 파랑 추가 |
+| 지표 색 | 그래프는 톤다운, 글자는 원색 | 넓은 면적에 원색 · 작은 글자에 톤다운 |
+| 차트 | 브랜드 파랑 농도로 구분 | 빨강·주황·초록 (기준 미달 경고만 예외) |
+| 배지 | 굵기 500 · 용도별 클래스 | 굵기 700 · 아무 배지나 재사용 |
+| 삭제 버튼 | 되돌릴 수 없는 동작만 빨강 | 행 삭제 · 탭 닫기에 빨강 |
+| 토스트 | 배경색으로 상황 구분 · 순수 텍스트 | 좌측 액센트 바 · 이모지 |
+| 탭 | 상위·하위는 밑줄, 토글은 채움 | 상·하위를 같은 모양으로 |
+| 날짜 | 하이픈 `2026-08-27` | 점 `2026.08.27` |
+| 타이포 | 8단계 안에서 선택 · 강조는 굵기로 | 새 크기 추가 · 본문 키워 강조 |
+| 달력 | 오늘 채움 / 선택 링 · 파랑 한 가지 | 오늘·선택에 서로 다른 파랑 |
+
+## 2. 컴포넌트별 금지 · 원칙
+
+| 컴포넌트 | 규칙 |
+|---|---|
+| 타이포 | 크기 단계를 늘리지 않는다 (6단계 고정) |
+| 간격 · 라운드 | 토큰에 없는 새 값을 만들지 않는다 |
+| 그림자 | 카드 · 패널 · 표에 그림자 금지 — 구분은 1px 테두리 |
+| 아이콘 | 채움(fill) 아이콘 금지 — 선 아이콘 `currentColor` |
+| 탭 | 상위 · 하위 · 토글 **세 모양이 서로 달라야 한다** |
+| 하위 탭 | 컨테이너 배경 금지 (알약 버튼만) |
+| 토글(`.seg`) | 탭이 아니라 값 전환 · 버튼 사이 구분선 금지 |
+| 배지 | 굵기 700 금지 (500 고정) |
+| 폼 | 포커스 링 · 그림자 금지 — 테두리 색만 바뀐다 |
+| 검색폼 칸선 | `.hascell` 클래스로 준다 — `td:has(.fselect)` 처럼 컨트롤 종류로 잡지 않는다 |
+| 트리(다중) | 단일 선택에 쓰지 않는다 · 전부 체크 = 전체(제한 없음) |
+| 트리 카운트 | 장식용 숫자 금지 — 실제 값만. 세는 칸이 다르면 숫자도 달라야 한다 |
+| 날짜 · 달력 | 파랑 두 가지 금지 — 오늘은 채움, 선택은 링 |
+| 모달 | 본문에 테두리 없음 (흰 박스) |
+
+## 3. 접근성 · 키보드
+
+| 항목 | 규칙 |
+|---|---|
+| 키보드 | `Esc` 모달 · 달력 · 드롭다운 닫기 · `Tab` 이동 · `Enter`/`Space` 커스텀 셀렉트 열기 |
+| 포커스 | 모달을 열면 첫 입력으로 포커스가 가고, 닫으면 열었던 버튼으로 돌아온다 |
+| 역할 | 모달 `role="dialog" aria-modal="true"` · 토스트 `role="status"`(오류·경고는 `alert`) · 도움말 `role="tooltip"` |
+| 아이콘 버튼 | 글자가 없으면 `aria-label` 필수 — 닫기 · 이전 · 다음 · 새로고침 |
+| 대비 | 본문 `#1F2937` 12.6:1 · 보조 `#5B6776` 6.4:1 · 파랑 위 흰 글자 4.6:1 |
+| 모션 | `prefers-reduced-motion` 이면 토스트 · 차트 애니메이션을 끈다 |
+
+## 4. 계약 (API · 마크업)
+
+**불러오기**
+
+```html
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/common.css">
+<script src="js/utils.js"></script>
+<script src="js/layout.js"></script>
+<script src="js/date-picker.js"></script>   <!-- 날짜 입력이 있으면 -->
+<script src="js/modal-drag.js"></script>    <!-- 모달을 쓰면 -->
+```
+
+**셸 — GNB · 레일 · 작업 탭**
+
+```js
+initLayout({ menu: PCMS_GNB_MENU, current: '입학관리',
+             badges: PCMS_GNB_TAB_BADGES,
+             railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });
+```
+
+`initLayout()` 안에서 `initCsel()` · `initTreeSelect()` · `initCTree()` · 모달 드래그가 함께 켜집니다.
+
+**페이지네이션**
+
+```js
+KCMS.renderPaging('#paging', { page: 3, total: 1284, size: 30,
+                               onPage: function(p){ /* 페이지 이동 */ } });
+```
+
+**트리 셀렉트 — 단일 선택**
+
+```html
+<span class="tsel" data-tree data-placeholder="학급 선택">
+  <ul>
+    <li data-label="ECP" data-count="12">ECP
+      <ul><li data-v="ECP5-Bee">ECP5-Bee</li></ul>
+    </li>
+  </ul>
+</span>
+```
+
+**트리 셀렉트 — 다중 선택(체크박스)**
+
+```html
+<span class="ctree" data-ctree data-all data-placeholder="전체">
+  <ul>
+    <li data-label="ECP"><ul><li>ECP5</li><li data-count="3/12">ECP6</li></ul></li>
+  </ul>
+</span>
+```
+
+```js
+el.__ctree.values();               // 선택 배열 · 전체면 null
+el.__ctree.setAll(); el.__ctree.reset();
+```
+
+값은 숨은 `input` 에 쉼표로 들어가고 `change` 가 발생합니다. 잎의 `data-count="3/12"` 는 [배정/정원] 같은 **실제 수치**이고, 묶음 행에는 그 합이 표시됩니다.
+
+**토스트**
+
+```js
+KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
+KCMS.toast('조회 결과가 12건입니다.');       // 타입 생략 → neutral
+```
+
+**모달**
+
+```js
+KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
+KCMS.closeModal('myModal');
+KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결
+```
