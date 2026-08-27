@@ -3286,3 +3286,15 @@ table.matrix > tbody > tr:not(:last-child) > th:first-child, table.matrix > tbod
 /* 작업 탭 닫기(✕) — 삭제 버튼에 빨강 금지 규칙에 따라 중립 톤 */
 .worktabs .wtab .x{cursor:pointer;}
 .worktabs .wtab .x:hover{background:#d7dde6;color:#1F2937;}
+
+/* ── 섹션 제목 위 구분선 (2026-08-27) ──
+   기준 화면(02-012·05-001)은 구분선이 없다. 6px 회색 밴드는 예전 D타입 규칙의 잔재라 기본은 끈다.
+   대시보드처럼 섹션을 선으로 나누고 싶으면 `.sectit.divider` 를 쓴다(1px). */
+.sectit{border-top:0;padding-top:6px;margin-top:12px;}
+.sectit.divider{border-top:1px solid #E3E8EF;padding-top:12px;}
+
+/* ── 세로형 표(상세) 수직 정렬 ──
+   패딩으로 높이를 만들면 글자·컨트롤이 1px 위로 쏠린다(실측 위9/아래10).
+   높이는 행이 정하고, 셀 안에서는 vertical-align 이 가운데를 잡게 한다. */
+table.infotbl th,table.infotbl td{padding-top:0;padding-bottom:0;vertical-align:middle;height:33px;}
+table.infotbl td > .finput,table.infotbl td > .iwrap,table.infotbl td > .seg{vertical-align:middle;}
