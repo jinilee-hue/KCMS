@@ -44,7 +44,11 @@
   .doc p.note + .demo{margin-top:12px;}
 
   /* 데모 상자 — 안쪽 여백·정렬을 통일 */
-  .demo{border:1px solid var(--line-soft);border-radius:8px;background:#fff;padding:18px;margin:12px 0 0;}
+  .demo{position:relative;border:1px solid var(--line-soft);border-radius:8px;background:#fff;
+    padding:18px;margin:12px 0 0;}
+  .demo[data-cls]::after{content:attr(data-cls);position:absolute;top:8px;right:10px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#9aa8bd;letter-spacing:.2px;}
+  .demo.dark[data-cls]::after{color:rgba(255,255,255,.45);}
   .demo.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
   .demo.col{display:flex;flex-direction:column;gap:10px;align-items:stretch;}
   .demo.dark{background:var(--gnb);padding:0;overflow:hidden;}
@@ -71,11 +75,19 @@
     line-height:1.85;margin:12px 0 0;border-radius:0 6px 6px 0;}
 
   /* 색 스와치 */
-  .sw{width:80px;display:inline-block;margin:0 10px 10px 0;vertical-align:top;}
+  #sws{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;}
+  .sw{width:auto;margin:0;}
   .sw i{display:block;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.07);}
   .sw b{display:block;font-size:10.5px;margin-top:6px;font-weight:700;}
   .sw span{display:block;font-size:10px;color:var(--txt-mut);margin-top:1px;}
 
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px;}
+  .fact{border:1px solid var(--line-soft);border-radius:8px;padding:11px 13px;background:#fbfcfe;}
+  .fact b{display:block;font-size:10.5px;font-weight:800;color:var(--pb);letter-spacing:.4px;margin-bottom:3px;}
+  .fact span{font-size:11.5px;color:var(--txt);line-height:1.5;}
+  section{counter-increment:sec;}
+  section > h3::before{content:counter(sec) ". ";color:#a9b6c9;font-weight:700;}
+  .doc{counter-reset:sec;}
   @media (max-width:960px){ .nav{display:none;} .doc{padding:24px 20px 80px;} }
 </style>
 </head>
@@ -85,7 +97,7 @@
 <div class="nav-group">기초</div>
 <a href="#start">시작하기</a>
 <a href="#color">색 팔레트</a>
-<a href="#type">타이포</a>
+<a href="#type">타이포</a><a href="#token">토큰 · 간격 · 아이콘</a>
 <div class="nav-group">레이아웃</div>
 <a href="#layout">레이아웃 골격</a>
 <a href="#sec">섹션 · 패널</a>
@@ -101,12 +113,22 @@
 <a href="#form">폼 컨트롤</a>
 
 <a href="#btn">버튼</a>
-<div class="nav-group">피드백 · 오버레이</div>
+<div class="nav-group">상태</div><a href="#state">상태 매트릭스</a><div class="nav-group">피드백 · 오버레이</div>
 <a href="#toast">토스트</a>
 <a href="#help">도움말 팝오버</a><a href="#modal">모달</a>
 <a href="#date">날짜 선택</a>
-<div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside>
-<main class="doc"><header class="doc-hd"><h1>컴포넌트 가이드</h1><p>모두 <b>Kit CSS 그대로</b> 렌더링한 것입니다. <code>common.css</code> 는 실제 화면 <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b> 의 CSS 에서 id 한정 규칙만 빼고 원본 순서대로 추출했고, 컴포넌트 67개를 실측 대조해 값이 같은 것을 확인했습니다.</p></header>
+<div class="nav-group">규칙</div><a href="#rules">Do / Don’t</a><a href="#a11y">접근성 · 키보드</a><div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside>
+<main class="doc"><header class="doc-hd">
+  <h1>컴포넌트 가이드</h1>
+  <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다 —
+  <code>common.css</code> 는 새로 쓴 게 아니라 화면의 CSS 를 추출한 것이기 때문입니다.</p>
+  <div class="facts">
+    <div class="fact"><b>기준 화면</b><span>PCMS-SCR-ET-02-012 예비생 등록·관리</span></div>
+    <div class="fact"><b>대상 범위</b><span>입학관리 11개 화면 · 클래스 커버리지 95%</span></div>
+    <div class="fact"><b>검증</b><span>컴포넌트 67개 실측 대조 · 규칙 29개 점검</span></div>
+    <div class="fact"><b>구성</b><span>common.css 1,413 규칙 · 화면 전용 256 규칙 분리</span></div>
+  </div>
+</header>
 <h2 class="grp">기초</h2>
 <section id="start"><h3>시작하기</h3>
 <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
@@ -118,7 +140,7 @@
 
 </section>
 <section id="color"><h3>색 팔레트</h3>
-<div class="demo" id="sws"></div>
+<div data-cls="tokens.css" class="demo" id="sws"></div>
 <div class="rule">
   <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
   면적이 넓은 <b>그래프·진행바</b>는 톤다운(<code>--chart-ok</code>/<code>--chart-low</code>),
@@ -132,7 +154,7 @@
 본문 기준이 <b>11.5px</b> 로 낮고, 크기 단계도 6개로 좁습니다. 단계를 늘리지 마세요.</p>
 
 <h4 class="sub">① 크기 단계</h4>
-<div class="demo flush">
+<div data-cls="타이포 스케일" class="demo flush">
   <table class="type-spec">
     <thead><tr><th>역할</th><th>크기 / 굵기</th><th>색</th><th>예시</th></tr></thead>
     <tbody>
@@ -207,13 +229,61 @@
 
 </section>
 
+<section id="token"><h3>토큰 — 간격 · 라운드 · 그림자 · 아이콘</h3>
+<p class="note">아래 값은 화면 CSS 에서 실제로 쓰인 빈도를 세어 정리한 것입니다. 새 값을 만들지 말고 이 안에서 고르세요.</p>
+
+<h4 class="sub">간격</h4>
+<div class="demo flush" data-cls="gap / padding">
+  <table class="type-spec">
+    <thead><tr><th>값</th><th>쓰는 곳</th><th>크기</th></tr></thead>
+    <tbody>
+      <tr><td class="k">4px</td><td class="c">아이콘과 글자, 배지 사이</td><td><span style="display:inline-block;width:4px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+      <tr><td class="k">6px</td><td class="c">버튼 사이, 라벨과 컨트롤 사이 <b>(기본)</b></td><td><span style="display:inline-block;width:6px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+      <tr><td class="k">8px</td><td class="c">표 셀 좌우, 필터 항목 사이</td><td><span style="display:inline-block;width:8px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+      <tr><td class="k">10–12px</td><td class="c">패널 안 블록 사이, 모달 본문 여백</td><td><span style="display:inline-block;width:12px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+      <tr><td class="k">14px</td><td class="c">패널 안쪽 여백 <b>(기본)</b>, 콘텐츠 좌우</td><td><span style="display:inline-block;width:14px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+      <tr><td class="k">24px</td><td class="c">섹션과 섹션 사이</td><td><span style="display:inline-block;width:24px;height:14px;background:var(--pb);opacity:.35;"></span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4 class="sub">라운드</h4>
+<div class="demo row" data-cls="border-radius">
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:82px;height:42px;border:1px solid var(--line);border-radius:3px;font-size:11px;text-align:center;">3px<br>버튼·입력·배지</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:82px;height:42px;border:1px solid var(--line);border-radius:5px;font-size:11px;text-align:center;">5px<br>모달·토스트</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:82px;height:42px;border:1px solid var(--line);border-radius:8px;font-size:11px;text-align:center;">8px<br>카드·패널</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:82px;height:42px;border:1px solid var(--line);border-radius:999px;font-size:11px;text-align:center;">999px<br>알약·토글</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:1px solid var(--line);border-radius:50%;font-size:11px;">50%</span>
+</div>
+
+<h4 class="sub">그림자</h4>
+<div class="demo row" data-cls="box-shadow">
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:130px;height:46px;background:#fff;border-radius:5px;box-shadow:0 6px 16px rgba(0,40,100,.18);font-size:11px;">드롭다운 · 팝오버</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:130px;height:46px;background:#fff;border-radius:5px;box-shadow:0 10px 28px rgba(15,30,60,.34);font-size:11px;">토스트</span>
+  <span style="display:inline-flex;align-items:center;justify-content:center;width:130px;height:46px;background:#fff;border-radius:5px;box-shadow:0 14px 44px rgba(0,0,0,.4);font-size:11px;">모달</span>
+</div>
+<p class="note">떠 있는 정도에 따라 세 단계만 씁니다. 카드·패널·표에는 그림자를 쓰지 않고 <b>1px 테두리</b>로 구분합니다.</p>
+
+<h4 class="sub">아이콘</h4>
+<div class="demo row" data-cls="viewBox 0 0 24 24">
+  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
+  <span style="font-size:11px;color:var(--txt-mut);">11px — 입력 옆 · 버튼 안</span>
+  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>
+  <span style="font-size:11px;color:var(--txt-mut);">13px — 버튼 라벨 앞</span>
+  <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+  <span style="font-size:11px;color:var(--txt-mut);">19px — 좌측 레일</span>
+</div>
+<p class="note">전부 <code>viewBox="0 0 24 24"</code> 선 아이콘입니다. 굵기 <b>1.8</b>(기본) · 2(작은 크기),
+<code>stroke-linecap/linejoin: round</code>, 색은 <code>currentColor</code> 로 글자색을 따라갑니다. 채움 아이콘은 쓰지 않습니다.</p>
+</section>
+
 <h2 class="grp">레이아웃</h2>
 <section id="layout"><h3>레이아웃 골격</h3>
-<div class="demo flush">
+<div data-cls=".rail / .bcbar / .worktabs" class="demo flush">
   <div style="display:flex;height:150px;">
     <div class="rail" id="rail" style="flex:0 0 58px;"></div>
     <div class="main" style="flex:1;">
-      <div class="bcbar"><span class="home">⌂</span> 입학관리 › <b>예비생 등록·관리</b>
+      <div class="bcbar"><span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span> 입학관리 › <b>예비생 등록·관리</b>
         <span class="meta">최종 갱신: 2026-08-27 09:00</span></div>
       <div class="content" style="background:#fff;">본문 영역 — 좌우 여백 14px</div>
       <div class="worktabs"><div class="wtscroll">
@@ -231,7 +301,7 @@
 <b>액션바</b>가 그 영역의 버튼을 오른쪽에 모읍니다.</p>
 
 <h4 class="sub">① 조각별</h4>
-<div class="demo flush">
+<div data-cls=".sectit / .panel / .actions" class="demo flush">
   <table class="type-spec">
     <tbody>
       <tr><td class="k">섹션 제목</td>
@@ -285,7 +355,7 @@
 
 <h2 class="grp">내비게이션</h2>
 <section id="gnb"><h3>GNB 메뉴 (3뎁스)</h3>
-<div class="demo dark">
+<div data-cls=".topnav / .tab / .dd" class="demo dark">
   <div class="topnav" style="position:relative;">
     <div class="brand">PCMS</div>
     <div class="tabs" id="tabs"></div>
@@ -302,7 +372,7 @@
 세 개를 섞어 쓰지 않습니다 — 같은 화면에서 상위·하위가 같은 모양이면 어느 게 상위인지 알 수 없습니다.</p>
 
 <h4 class="sub">① 상위 탭 (.dtabs / .dtab)</h4>
-<div class="demo flush">
+<div data-cls=".dtab / .rssubtab / .quickpill" class="demo flush">
   <div class="dtabs" style="margin:0;">
     <div class="dtab on">예비생정보</div><div class="dtab">MAP 예약</div>
     <div class="dtab">채점</div><div class="dtab">MAP 결과</div>
@@ -340,7 +410,7 @@
 </section>
 
 <section id="page"><h3>페이지네이션</h3>
-<div class="demo flush">
+<div data-cls=".paging" class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
 <p class="note">실제 화면과 같은 구성입니다 — <code>« ‹ 번호 › »</code> · 페이지 직접 입력 · 새로고침 · 페이지당 개수 · 총 건수.
@@ -357,12 +427,12 @@
 검색 조건은 표가 아니라 <a href="#form">폼 컨트롤</a>의 필터 줄로 다룹니다.</p>
 
 <h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
-<div class="demo flush">
+<div data-cls="table.grid / table.infotbl" class="demo flush">
   <div class="tblwrap" style="max-height:190px;">
     <table class="grid" style="table-layout:auto;">
       <thead><tr>
         <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow">▾</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
+        <th class="sortable">이름<span class="sarrow on">▼</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
       </tr></thead>
       <tbody>
         <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr>
@@ -396,7 +466,7 @@
 &lt;table class="infotbl"&gt;&lt;tr&gt;&lt;th&gt;라벨&lt;/th&gt;&lt;td&gt;값&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;  &lt;!-- 세로형(상세) --&gt;
 </code></pre></section>
 <section id="badge"><h3>배지 22종</h3>
-<div class="demo row">
+<div data-cls=".badge 계열" class="demo row">
   <span class="badge">기본</span>
   <span class="badge has">값 있음</span>
   <span class="typebadge">타입</span>
@@ -439,7 +509,7 @@
 
 <p class="note">수치를 보여 주는 조각들입니다. 입력 컨트롤은 <a href="#form">폼</a>, 묶는 상자는 <a href="#sec">섹션 · 패널</a>,\n증감 수치와 점 배지는 <a href="#type">타이포</a> · <a href="#badge">배지</a>에 있습니다.</p>
 
-<div class="demo flush">
+<div data-cls=".progress-track / .avatar / .period-tab" class="demo flush">
   <table class="type-spec">
     <tbody>
       <tr><td class="k">진행바</td>
@@ -469,7 +539,7 @@
 포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음 — 표가 빽빽한 업무 화면에서 링은 시끄럽습니다).</p>
 
 <h4 class="sub">① 텍스트 입력 — 상태별</h4>
-<div class="demo">
+<div data-cls=".finput / .fselect / .seg" class="demo">
   <table class="spec">
     <tr><td class="k">기본</td><td><input class="finput" value="최○○"></td><td class="c"><code>.finput</code></td></tr>
     <tr><td class="k">placeholder</td><td><input class="finput" placeholder="이름 입력"></td><td class="c">—</td></tr>
@@ -553,7 +623,7 @@
 </section>
 
 <section id="btn"><h3>버튼</h3>
-<div class="demo flush">
+<div data-cls=".btn / .ibtn" class="demo flush">
   <table class="type-spec">
     <tbody>
       <tr><td class="k">주요</td><td><button class="btn">검색</button></td>
@@ -581,9 +651,50 @@
 </div>
 </section>
 
+<section id="state"><h3>상태 — 기본 · hover · 포커스 · 선택 · 비활성</h3>
+<p class="note">같은 컴포넌트라도 상태 표현은 한 규칙을 따릅니다.</p>
+<div class="demo flush" data-cls="상태 매트릭스">
+  <table class="type-spec">
+    <thead><tr><th>컴포넌트</th><th>기본</th><th>hover</th><th>선택 · 포커스</th><th>비활성</th></tr></thead>
+    <tbody>
+      <tr><td class="k">버튼</td>
+        <td><button class="btn">저장</button></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">배경 <code>--pb-dark</code></span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">테두리 <code>--pb-dark</code></span></td>
+        <td><button class="btn" disabled>저장</button></td></tr>
+      <tr><td class="k">입력</td>
+        <td><input class="finput" value="값" style="width:100px;"></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">변화 없음</span></td>
+        <td><input class="finput" value="포커스" style="width:100px;border-color:var(--pb);"></td>
+        <td><input class="finput" value="비활성" style="width:100px;" disabled></td></tr>
+      <tr><td class="k">표 행</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">짝수 행 <code>#F7F9FC</code></span></td>
+        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-a08);font-size:11px;">파랑 8%</span></td>
+        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-light);font-size:11px;">파랑 틴트</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+      <tr><td class="k">탭</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">회색 글자</span></td>
+        <td><span style="font-size:11px;color:var(--pb);">파란 글자</span></td>
+        <td><span style="font-size:11px;color:var(--pb-deeper);font-weight:700;border-bottom:3px solid var(--pb);padding-bottom:2px;">파란 밑줄</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+      <tr><td class="k">메뉴 항목</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">기본</span></td>
+        <td><span style="font-size:11px;color:var(--pb);font-weight:700;">파랑 + 굵게</span></td>
+        <td><span style="display:inline-block;padding:3px 8px;background:var(--pb-light);color:var(--pb);font-size:11px;font-weight:700;">틴트 배경</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+    </tbody>
+  </table>
+</div>
+<div class="rule">
+  <b>포커스</b>는 테두리 색만 파랑으로 바꿉니다 — 링·그림자를 쓰지 않습니다(밀도 높은 표 화면에서 링은 시끄럽습니다).<br>
+  <b>비활성</b>은 <code>opacity:.45</code> 또는 회색 배경(<code>#F0F2F5</code>) + 회색 글자.<br>
+  <b>선택</b>은 파랑 틴트(<code>--pb-light</code>), <b>hover</b> 는 그보다 옅은 파랑 8%(<code>--pb-a08</code>).
+</div>
+</section>
+
 <h2 class="grp">피드백 · 오버레이</h2>
 <section id="toast"><h3>토스트</h3>
-<div class="demo row">
+<div data-cls=".kistoast" class="demo row">
   <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
   <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
   <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
@@ -602,7 +713,7 @@
 <pre><code>KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
 KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></section>
 <section id="help"><h3>도움말 팝오버</h3>
-<div class="demo row">
+<div data-cls=".helpwrap" class="demo row">
   <span style="font-size:11.5px;">입학구분(현재 결정)</span>
   <span class="helpwrap" style="position:relative;">
     <button type="button" class="helpbtn" aria-haspopup="true">?</button>
@@ -620,7 +731,7 @@ KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 
 </section>
 
 <section id="modal"><h3>모달</h3>
-<div class="demo row">
+<div data-cls=".modal-ov" class="demo row">
   <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
 </div>
 <p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
@@ -633,7 +744,7 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
 <p class="note">날짜 <b>입력 필드</b>의 구조는 <a href="#form">폼 ③</a>에 있습니다. 여기서는 버튼을 눌렀을 때 열리는
 <b>달력 팝업의 표시 규칙</b>만 다룹니다.</p>
 
-<div class="demo flush">
+<div data-cls=".pcmsdp" class="demo flush">
   <table class="type-spec">
     <tbody>
       <tr><td class="k">오늘</td>
@@ -665,15 +776,73 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
 
 </section>
 
+<h2 class="grp">규칙</h2>
+<section id="rules"><h3>Do / Don&rsquo;t</h3>
+<div class="demo flush" data-cls="공통 규칙">
+  <table class="type-spec">
+    <thead><tr><th>영역</th><th>이렇게</th><th>이러지 않기</th></tr></thead>
+    <tbody>
+      <tr><td class="k">색</td><td class="c">토큰 변수만 사용 <code>var(--pb)</code></td><td class="c">hex 하드코딩 · 새 파랑 추가</td></tr>
+      <tr><td class="k">지표 색</td><td class="c">그래프는 톤다운, 글자는 원색</td><td class="c">넓은 면적에 원색 · 작은 글자에 톤다운</td></tr>
+      <tr><td class="k">차트</td><td class="c">브랜드 파랑 농도로 구분</td><td class="c">빨강·주황·초록 (기준 미달 경고만 예외)</td></tr>
+      <tr><td class="k">배지</td><td class="c">굵기 500 · 용도별 클래스</td><td class="c">굵기 700 · 아무 배지나 재사용</td></tr>
+      <tr><td class="k">삭제 버튼</td><td class="c">되돌릴 수 없는 동작만 빨강</td><td class="c">행 삭제 · 탭 닫기에 빨강</td></tr>
+      <tr><td class="k">토스트</td><td class="c">배경색으로 상황 구분 · 순수 텍스트</td><td class="c">좌측 액센트 바 · 이모지</td></tr>
+      <tr><td class="k">탭</td><td class="c">상위·하위는 밑줄, 토글은 채움</td><td class="c">상·하위를 같은 모양으로</td></tr>
+      <tr><td class="k">날짜</td><td class="c">하이픈 <code>2026-08-27</code></td><td class="c">점 <code>2026.08.27</code></td></tr>
+      <tr><td class="k">타이포</td><td class="c">8단계 안에서 선택 · 강조는 굵기로</td><td class="c">새 크기 추가 · 본문 키워 강조</td></tr>
+      <tr><td class="k">달력</td><td class="c">오늘 채움 / 선택 링 · 파랑 한 가지</td><td class="c">오늘·선택에 서로 다른 파랑</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
+<section id="a11y"><h3>접근성 · 키보드</h3>
+<div class="demo flush" data-cls="a11y">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">키보드</td><td class="c"><code>Esc</code> 모달·달력·드롭다운 닫기 · <code>Tab</code> 이동 · <code>Enter/Space</code> 커스텀 셀렉트 열기</td></tr>
+      <tr><td class="k">포커스</td><td class="c">모달을 열면 첫 입력으로 포커스가 가고, 닫으면 열었던 버튼으로 돌아옵니다</td></tr>
+      <tr><td class="k">역할</td><td class="c">모달 <code>role="dialog" aria-modal="true"</code> · 토스트 <code>role="status"</code>(오류·경고는 <code>alert</code>) · 도움말 <code>role="tooltip"</code></td></tr>
+      <tr><td class="k">아이콘 버튼</td><td class="c">글자가 없으면 <code>aria-label</code> 필수 — 닫기 · 이전 · 다음 · 새로고침</td></tr>
+      <tr><td class="k">대비</td><td class="c">본문 <code>#1F2937</code> 12.6:1 · 보조 <code>#5B6776</code> 6.4:1 · 파랑 위 흰 글자 4.6:1</td></tr>
+      <tr><td class="k">모션</td><td class="c"><code>prefers-reduced-motion</code> 이면 토스트·차트 애니메이션을 끕니다</td></tr>
+    </tbody>
+  </table>
+</div>
+</section>
+
 </main></div>
-<div class="modal-ov" id="demoModal">
-  <div class="modal-box" style="width:520px;">
-    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" onclick="KCMS.closeModal('demoModal')">✕</button></div>
+<div class="modal-ov" id="demoModal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="modal-hd">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><polyline points="16 11 18 13 22 9"/></svg>
+      학생중복체크
+      <button class="modal-x" onclick="KCMS.closeModal('demoModal')">✕</button>
+    </div>
     <div class="modal-body">
-      <table class="form" style="width:100%;">
-        <tr><th>학생명<span class="req">*</span></th><td><input class="finput" style="width:100%" value="최○○"></td></tr>
-        <tr><th>생년월일<span class="req">*</span></th><td><input type="date" class="finput" style="width:100%" value="2017-06-30"></td></tr>
+      <div class="msgbanner">이름 · 생년월일 · 학부모핸드폰으로 이미 등록된 학생이 있는지 확인합니다.</div>
+      <table class="infotbl" style="margin-top:10px;">
+        <tr><th>국적<span class="req">*</span></th>
+            <td><select class="fselect" style="width:140px;"><option>한국</option><option>미국</option></select></td></tr>
+        <tr><th>이름/성별<span class="req">*</span></th>
+            <td><span style="display:inline-flex;gap:6px;align-items:center;">
+              <input class="finput" placeholder="학생 이름" style="width:150px;">
+              <span class="seg" style="width:96px;"><button class="on">남</button><button>여</button></span>
+            </span></td></tr>
+        <tr><th>생년월일<span class="req">*</span></th>
+            <td><span class="iwrap">
+              <input type="text" class="finput" placeholder="예: 19-04-12" maxlength="8" style="width:110px;">
+              <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
+              <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+            </span></td></tr>
+        <tr><th>학부모핸드폰<span class="req">*</span></th>
+            <td><input class="finput" value="010-0000-0000" style="width:150px;"></td></tr>
       </table>
+    </div>
+    <div class="modal-foot">
+      <button class="btn g" onclick="KCMS.closeModal('demoModal')">취소</button>
+      <button class="btn">중복 확인</button>
     </div>
   </div>
 </div>
