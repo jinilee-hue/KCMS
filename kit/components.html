@@ -103,7 +103,7 @@
 <a href="#btn">버튼</a>
 <div class="nav-group">피드백 · 오버레이</div>
 <a href="#toast">토스트</a>
-<a href="#modal">모달</a>
+<a href="#help">도움말 팝오버</a><a href="#modal">모달</a>
 <a href="#date">날짜 선택</a>
 <div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside>
 <main class="doc"><header class="doc-hd"><h1>컴포넌트 가이드</h1><p>모두 <b>Kit CSS 그대로</b> 렌더링한 것입니다. <code>common.css</code> 는 실제 화면 <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b> 의 CSS 에서 id 한정 규칙만 빼고 원본 순서대로 추출했고, 컴포넌트 67개를 실측 대조해 값이 같은 것을 확인했습니다.</p></header>
@@ -601,6 +601,24 @@
 
 <pre><code>KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
 KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></section>
+<section id="help"><h3>도움말 팝오버</h3>
+<div class="demo row">
+  <span style="font-size:11.5px;">입학구분(현재 결정)</span>
+  <span class="helpwrap" style="position:relative;">
+    <button type="button" class="helpbtn" aria-haspopup="true">?</button>
+    <div class="helppop" role="tooltip" style="display:block;position:static;margin-top:8px;max-width:420px;">
+      <div class="hp-sec">
+        <div class="hp-tit">입학구분이란?</div>
+        <b>바로 입학</b>(당해 즉시 입학)과 <b>신학년 입학</b>(다음 해 3월 입학) 중 현재 결정된 값입니다.
+      </div>
+    </div>
+  </span>
+</div>
+<p class="note">용어·규칙을 설명할 때 씁니다. <code>.helpwrap</code> 안에 <code>.helpbtn</code>(16px 원형)과
+<code>.helppop</code>(흰 박스 · 1px 테두리 · 라운드 5px)을 두고, 버튼을 누르면 팝오버가 열립니다.
+설명이 길면 <code>.hp-sec</code> 로 문단을 나눕니다.</p>
+</section>
+
 <section id="modal"><h3>모달</h3>
 <div class="demo row">
   <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
