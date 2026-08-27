@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="styles/tokens.css">
 <link rel="stylesheet" href="styles/common.css">
 
-
 <style>
   /* ── 가이드 문서 셸 ─────────────────────────────────────────────
      컴포넌트 하나 = 카드 하나. 카드 안에서 소제목은 조용한 라벨로 두고,
@@ -125,12 +124,6 @@
 
 <h4 class="sub part">색</h4>
 <div data-cls="tokens.css" class="demo" id="sws"></div>
-<div class="rule">
-  <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
-  면적이 넓은 <b>그래프·진행바</b>는 톤다운(<code>--chart-ok</code>/<code>--chart-low</code>),
-  면적이 좁은 <b>글자·아이콘</b>은 원색(<code>--pb</code>/<code>--danger</code>).
-</div>
-
 <h4 class="sub part">타이포</h4>
 <div class="chips"><b>Pretendard</b><b>본문 <i>11.5px</i></b><b>크기 단계 <i>6개</i></b></div>
 <h4 class="sub">① 크기 단계</h4>
@@ -198,15 +191,6 @@
     </tbody>
   </table>
 </div>
-
-<div class="rule">
-  <b>지켜야 할 것</b><br>
-  · 크기 단계를 새로 만들지 않습니다. 위 8단계 안에서 고릅니다.<br>
-  · 강조는 <b>굵기</b>로 합니다. 본문 크기를 키워 강조하지 않습니다.<br>
-  · 줄간격은 본문 1.5, 설명문 1.7. 표 안은 줄간격 없이 셀 높이(24px)로 맞춥니다.<br>
-  · 지표 수치만 800 을 씁니다. 그 외 강조는 700 까지입니다.
-</div>
-
 <h4 class="sub part">간격 · 라운드 · 그림자 · 아이콘</h4>
 <div class="chips"><b>화면 CSS 사용 빈도 기준</b></div>
 <h4 class="sub">간격</h4>
@@ -312,13 +296,6 @@
   <div class="paging" id="pagingSample"></div>
 </div>
 <h4 class="sub">③ 여백 규칙</h4>
-<div class="rule">
-  섹션 제목 위 <b>12px</b> · 아래 <b>8px</b><br>
-  패널 안쪽 <b>14px</b> · 패널끼리 세로 간격 <b>12px</b><br>
-  콘텐츠 영역 좌우 기준선 <b>73px</b>(밴드는 화면 끝까지, 안쪽 여백 14px)<br>
-  액션바와 표 사이 <b>6px</b> · 표와 페이징 사이 <b>8px</b>
-</div>
-
 </div></div></section>
 
 <section id="nav"><div class="card"><div class="card-header"><div class="card-title">내비게이션</div></div><div class="card-body">
@@ -352,13 +329,6 @@
   <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
 </div>
 <div class="chips"><b>바깥 <i>8px</i></b><b>버튼 <i>20px</i></b><b>활성 <i>6px + 그림자</i></b><b>예외 <i>.seg.gender 3px</i></b></div>
-<div class="rule">
-  <b>어떤 걸 쓸지</b><br>
-  · 내용 자체가 다른 화면으로 바뀐다 → <b>상위 탭</b>(밑줄)<br>
-  · 같은 화면에서 목록을 나눈다 → <b>하위 탭</b>(알약)<br>
-  · 값을 바꾸거나 조건을 켠다/끈다 → <b>토글</b>(붙은 박스)
-</div>
-
 <h4 class="sub part">페이지네이션</h4>
 <div data-cls=".paging" class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
@@ -499,14 +469,6 @@
         <label class="chk"><input type="radio" name="gg"> 여</label></td><td class="c">14px · 브랜드 파랑</td></tr>
   </table>
 </div>
-
-<div class="rule">
-  <b>셀렉트 세 가지 — 언제 무엇을</b><br>
-  · <b>기본 <code>.fselect</code></b> — 목록을 브라우저가 그립니다. 항목이 짧고 스타일을 맞출 필요가 없을 때 (기본값)<br>
-  · <b>커스텀 <code>data-csel</code></b> — 목록이 길거나 잘리면 안 될 때. 박스 바로 아래·같은 라운드로 열립니다<br>
-  · <b>트리 <code>.tsel</code></b> — 값에 계층이 있을 때 (과정 → 레벨 → 반)<br>
-  세 가지의 <b>박스 모양은 모두 같습니다</b>(24px · 라운드 3px · 오른쪽 v 화살표). 다른 건 열렸을 때의 목록뿐입니다.
-</div>
 <h4 class="sub">③ 날짜 · 검색</h4>
 <div class="demo">
   <table class="spec">
@@ -549,12 +511,6 @@
   </div>
 </div>
 <div class="chips"><b>감싸기 <i>table.fbox</i></b><b>라벨 칸 <i>.flabel</i></b><b>입력 칸 <i>.hascell</i></b><b>셀 <i>33px</i></b><b>회색 띠 <i>.filters.gray</i></b></div>
-<div class="rule">
-  <b>규격 요약</b> — 입력·셀렉트·날짜·검색상자 <b>24px</b> · 세그먼트 버튼 24px · 토글 18px · 체크/라디오 14px<br>
-  라벨 <code>.flabel</code> 11.5/700 <code>#2C3E5A</code> · 필수 표시 <code>.req</code> 빨간 별 ·
-  도움말 <code>.form-hint</code> · 오류 <code>.form-error</code>
-</div>
-
 <h4 class="sub part">트리 셀렉트</h4>
 <h4 class="sub">단일 선택 — .tsel</h4>
 
@@ -651,13 +607,6 @@
     </tbody>
   </table>
 </div>
-
-<div class="rule">
-  파랑은 <code>#0066FF</code> <b>한 가지만</b> 씁니다. 오늘과 선택일의 구분은 색이 아니라 <b>형태</b>(채움 ↔ 링)로 합니다.<br>
-  이전에는 오늘 <code>#0066FF</code> 채움 / 선택 <code>#003D99</code> 남색 채움이라, 같은 달력인데 파랑이 두 가지로 보였습니다.<br>
-  날짜 표기는 <b>하이픈</b>(2026-08-27). 점 표기는 쓰지 않습니다 — <code>KCMS.date('20260827')</code>.
-</div>
-
 </div></div></section>
 
 <section id="action"><div class="card"><div class="card-header"><div class="card-title">액션 · 상태</div></div><div class="card-body">
@@ -685,11 +634,6 @@
     </tbody>
   </table>
 </div>
-<div class="rule">
-  높이 <b>24px</b>(작게 22px) · 라운드 3px · 글자 11.5px/500.<br>
-  한 줄에 버튼이 여러 개면 <b>주요 1개 + 보조 여러 개</b>로 두고, 주요 버튼을 가장 오른쪽에 둡니다.
-</div>
-
 <h4 class="sub part">상태 5종</h4>
 <div class="chips"><b>hover</b><b>active</b><b>focus</b><b>disabled</b><b>비활성 · 읽기 전용</b><b>한 컴포넌트 <i>한 규칙</i></b></div>
 <div class="demo flush" data-cls="상태 매트릭스">
@@ -724,12 +668,6 @@
     </tbody>
   </table>
 </div>
-<div class="rule">
-  <b>포커스</b>는 테두리 색만 파랑으로 바꿉니다 — 링·그림자를 쓰지 않습니다(밀도 높은 표 화면에서 링은 시끄럽습니다).<br>
-  <b>비활성</b>은 <code>opacity:.45</code> 또는 회색 배경(<code>#F0F2F5</code>) + 회색 글자.<br>
-  <b>선택</b>은 파랑 틴트(<code>--pb-light</code>), <b>hover</b> 는 그보다 옅은 파랑 8%(<code>--pb-a08</code>).
-</div>
-
 </div></div></section>
 
 <section id="feedback"><div class="card"><div class="card-header"><div class="card-title">피드백</div></div><div class="card-body">
@@ -743,14 +681,6 @@
   <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
   <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
 </div>
-<div class="rule">
-  배경은 의미색을 <b>92% 불투명</b>으로 깔고(<code>color-mix</code>) 글자·아이콘은 흰색입니다.
-  왼쪽 두꺼운 액센트 바를 쓰지 않고, <b>문구에 이모지를 넣지 않습니다.</b> 최대 4개까지 쌓입니다.
-  <b>타입을 생략하면 기본은 neutral</b> 이고, 문구에 뚜렷한 단서가 있을 때만 그쪽으로 추정합니다 —
-  <code>되었습니다·완료·성공·저장했</code> → success, <code>주세요·하세요·필수·확인해</code> → warning,
-  <code>수 없·실패·오류·불가</code> → danger. 어디에도 걸리지 않으면 neutral 입니다.
-</div>
-
 <h4 class="sub part">모달</h4>
 <div data-cls=".modal-ov" class="demo row">
   <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
