@@ -9,86 +9,78 @@
 
 
 <style>
-  /* ── 가이드 문서 전용 셸 ─────────────────────────────────────────────
-     Kit CSS 는 업무 화면용이라 body·본문 여백 기준이 좁다.
-     문서 셸은 그 위에 얹히므로 여백·정렬을 여기서 명시적으로 다시 잡는다. */
-  html,body{margin:0;padding:0;background:#fff;color:var(--txt);}
+  /* ── 가이드 문서 셸 ─────────────────────────────────────────────
+     컴포넌트 하나 = 카드 하나. 카드 안에서 소제목은 조용한 라벨로 두고,
+     예시는 테두리 없이 옅은 배경 위에 올려 테두리가 겹치지 않게 한다. */
+  html,body{margin:0;padding:0;background:#F4F6F9;color:var(--txt);}
   .wrap{display:flex;align-items:flex-start;min-height:100vh;}
 
-  /* 좌측 목차 */
   .nav{position:sticky;top:0;flex:0 0 220px;height:100vh;overflow-y:auto;background:var(--gnb);padding:22px 0 28px;}
   .nav-brand{padding:0 20px;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.3;}
   .nav-sub{padding:4px 20px 18px;font-size:11px;color:#93a4bd;}
   .nav-group{padding:16px 20px 6px;font-size:10px;font-weight:800;color:#8fa2bd;letter-spacing:1px;}
-  .nav a{display:block;padding:6px 20px;font-size:12px;line-height:1.4;color:#cfd8e6;text-decoration:none;
-    border-left:2px solid transparent;}
+  .nav a{display:block;padding:6px 20px;font-size:12px;line-height:1.4;color:#cfd8e6;text-decoration:none;border-left:2px solid transparent;}
   .nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
   .nav a.on{border-left-color:#fff;background:rgba(255,255,255,.10);color:#fff;font-weight:700;}
-  .nav-foot{margin:20px 20px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);
-    display:flex;flex-direction:column;gap:8px;}
+  .nav-foot{margin:20px 20px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:8px;}
   .nav-foot a{padding:0;font-size:11.5px;color:#9fb4d1;}
 
-  /* 본문 — 세로 리듬을 한 곳에서 정한다 */
-  .doc{flex:1;min-width:0;max-width:900px;padding:32px 40px 100px;}
+  .doc{flex:1;min-width:0;max-width:960px;padding:28px 32px 90px;counter-reset:sec;}
   .doc *{box-sizing:border-box;}
   .doc h1,.doc h2,.doc h3,.doc h4,.doc p{margin:0;}
-  .doc-hd{padding-bottom:6px;}
-  .doc-hd h1{font-size:24px;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;}
+  .doc-hd{margin-bottom:8px;}
+  .doc-hd h1{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;}
   .doc-hd p{font-size:12.5px;color:var(--txt-mut);line-height:1.8;}
-  h2.grp{font-size:10.5px;font-weight:800;color:var(--pb);letter-spacing:1.2px;
-    margin-top:44px;padding:20px 0 0;border-top:1px solid var(--line-soft);}
-  section{padding:18px 0 0;}
-  section > h3{font-size:16px;font-weight:700;letter-spacing:-.2px;margin-bottom:10px;}
-  h4.sub{font-size:12.5px;font-weight:700;color:var(--gnb);margin:20px 0 8px;}
-  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.85;margin:10px 0 0;}
-  .doc p.note + .demo{margin-top:12px;}
+  h2.grp{font-size:10px;font-weight:800;color:var(--txt-mut);letter-spacing:1.2px;margin:30px 0 10px;}
 
-  /* 데모 상자 — 안쪽 여백·정렬을 통일 */
-  .demo{position:relative;border:1px solid var(--line-soft);border-radius:8px;background:#fff;
-    padding:18px;margin:12px 0 0;}
-  .demo[data-cls]::after{content:attr(data-cls);position:absolute;top:8px;right:10px;
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#9aa8bd;letter-spacing:.2px;}
-  .demo.dark[data-cls]::after{color:rgba(255,255,255,.45);}
+  /* 컴포넌트 = 카드 */
+  section{counter-increment:sec;display:block;margin-bottom:14px;}
+  section > .card{background:#fff;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;}
+  section > .card > .card-header{padding:13px 18px;border-bottom:1px solid var(--line-soft);background:#fff;}
+  section > .card > .card-header .card-title{font-size:14px;font-weight:700;letter-spacing:-.2px;}
+  section > .card > .card-header .card-title::before{content:counter(sec) ". ";color:#b3bfd0;font-weight:700;}
+  section > .card > .card-body{padding:18px;}
+
+  /* 카드 안 소제목 — 조용한 라벨 */
+  h4.sub{font-size:10.5px;font-weight:800;color:#8794a8;letter-spacing:.7px;margin:24px 0 10px;}
+  section > .card > .card-body > h4.sub:first-child{margin-top:0;}
+  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.8;margin:10px 0 0;}
+
+  /* 예시 — 카드 안이므로 테두리 없이 옅은 배경 */
+  .demo{position:relative;background:#FAFBFD;border:1px solid #EDF1F6;border-radius:8px;padding:16px;margin:0 0 4px;}
+  .demo[data-cls]::after{content:attr(data-cls);position:absolute;top:7px;right:10px;
+    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#a7b3c4;}
   .demo.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
   .demo.col{display:flex;flex-direction:column;gap:10px;align-items:stretch;}
-  .demo.dark{background:var(--gnb);padding:0;overflow:hidden;}
-  .demo.flush{padding:0;overflow:hidden;}
+  .demo.dark{background:var(--gnb);border-color:var(--gnb);padding:0;overflow:hidden;}
+  .demo.flush{padding:0;overflow:hidden;background:#fff;}
 
-  /* 규격표 — 라벨 / 실물 / 설명 3열 */
   table.spec,table.type-spec{width:100%;border-collapse:collapse;}
-  table.type-spec th{background:var(--tbl-head);color:var(--gnb);font-weight:700;font-size:11.5px;
-    text-align:left;padding:8px 12px;border-bottom:1px solid var(--tbl-bd);}
-  table.spec td,table.type-spec td{padding:10px 12px;border-bottom:1px solid var(--line-soft);
-    vertical-align:middle;font-size:11.5px;}
+  table.type-spec th{background:#F4F7FD;color:var(--gnb);font-weight:700;font-size:11.5px;text-align:left;
+    padding:8px 12px;border-bottom:1px solid var(--tbl-bd);}
+  table.spec td,table.type-spec td{padding:10px 12px;border-bottom:1px solid #EDF1F6;vertical-align:middle;font-size:11.5px;}
   table.spec tr:last-child td,table.type-spec tbody tr:last-child td{border-bottom:0;}
   table.spec td.k,table.type-spec td.k{width:118px;font-weight:700;color:var(--gnb);white-space:nowrap;}
   table.spec td.c,table.type-spec td.c{width:36%;color:var(--txt-mut);line-height:1.7;}
   label.chk{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;margin-right:14px;}
 
-  /* 코드 · 규칙 박스 */
-  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.7;padding:14px 16px;
-    border-radius:6px;overflow:auto;margin:12px 0 0;}
-  .doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;
-    background:#eef2f8;color:#31415c;padding:1px 5px;border-radius:3px;}
+  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.7;padding:14px 16px;border-radius:8px;overflow:auto;margin:12px 0 0;}
+  .doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#EEF2F8;color:#31415c;padding:1px 5px;border-radius:3px;}
   pre code{background:none;color:inherit;padding:0;font-size:11.5px;}
-  .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:12px 16px;font-size:12px;
-    line-height:1.85;margin:12px 0 0;border-radius:0 6px 6px 0;}
+  .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:12px 16px;font-size:12px;line-height:1.85;margin:12px 0 0;border-radius:0 8px 8px 0;}
 
-  /* 색 스와치 */
   #sws{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;}
-  .sw{width:auto;margin:0;}
+  .sw{margin:0;}
   .sw i{display:block;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.07);}
   .sw b{display:block;font-size:10.5px;margin-top:6px;font-weight:700;}
   .sw span{display:block;font-size:10px;color:var(--txt-mut);margin-top:1px;}
 
-  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin-top:16px;}
-  .fact{border:1px solid var(--line-soft);border-radius:8px;padding:11px 13px;background:#fbfcfe;}
-  .fact b{display:block;font-size:10.5px;font-weight:800;color:var(--pb);letter-spacing:.4px;margin-bottom:3px;}
+  .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 4px;}
+  .fact{background:#fff;border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;}
+  .fact b{display:block;font-size:10px;font-weight:800;color:var(--pb);letter-spacing:.5px;margin-bottom:4px;}
   .fact span{font-size:11.5px;color:var(--txt);line-height:1.5;}
-  section{counter-increment:sec;}
-  section > h3::before{content:counter(sec) ". ";color:#a9b6c9;font-weight:700;}
-  .doc{counter-reset:sec;}
-  @media (max-width:960px){ .nav{display:none;} .doc{padding:24px 20px 80px;} }
+
+  @media (max-width:960px){ .nav{display:none;} .doc{padding:22px 16px 80px;} }
 </style>
 </head>
 <body>
@@ -130,7 +122,7 @@
   </div>
 </header>
 <h2 class="grp">기초</h2>
-<section id="start"><h3>시작하기</h3>
+<section id="start"><div class="card"><div class="card-header"><div class="card-title">시작하기</div></div><div class="card-body">
 <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
 &lt;link rel="stylesheet" href="styles/common.css"&gt;
 &lt;script src="js/utils.js"&gt;&lt;/script&gt;
@@ -138,8 +130,8 @@
 &lt;script src="js/date-picker.js"&gt;&lt;/script&gt;   &lt;!-- 날짜 입력이 있으면 --&gt;
 &lt;script src="js/modal-drag.js"&gt;&lt;/script&gt;    &lt;!-- 모달을 쓰면 --&gt;</code></pre>
 
-</section>
-<section id="color"><h3>색 팔레트</h3>
+</div></div></section>
+<section id="color"><div class="card"><div class="card-header"><div class="card-title">색 팔레트</div></div><div class="card-body">
 <div data-cls="tokens.css" class="demo" id="sws"></div>
 <div class="rule">
   <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
@@ -147,8 +139,8 @@
   면적이 좁은 <b>글자·아이콘</b>은 원색(<code>--pb</code>/<code>--danger</code>).
 </div>
 
-</section>
-<section id="type"><h3>타이포</h3>
+</div></div></section>
+<section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
 
 <p class="note">서체는 <b>Pretendard</b>(없으면 맑은 고딕)입니다. 업무 화면은 한 화면에 많은 정보를 담기 때문에
 본문 기준이 <b>11.5px</b> 로 낮고, 크기 단계도 6개로 좁습니다. 단계를 늘리지 마세요.</p>
@@ -227,9 +219,9 @@
   · 지표 수치만 800 을 씁니다. 그 외 강조는 700 까지입니다.
 </div>
 
-</section>
+</div></div></section>
 
-<section id="token"><h3>토큰 — 간격 · 라운드 · 그림자 · 아이콘</h3>
+<section id="token"><div class="card"><div class="card-header"><div class="card-title">토큰 — 간격 · 라운드 · 그림자 · 아이콘</div></div><div class="card-body">
 <p class="note">아래 값은 화면 CSS 에서 실제로 쓰인 빈도를 세어 정리한 것입니다. 새 값을 만들지 말고 이 안에서 고르세요.</p>
 
 <h4 class="sub">간격</h4>
@@ -275,10 +267,10 @@
 </div>
 <p class="note">전부 <code>viewBox="0 0 24 24"</code> 선 아이콘입니다. 굵기 <b>1.8</b>(기본) · 2(작은 크기),
 <code>stroke-linecap/linejoin: round</code>, 색은 <code>currentColor</code> 로 글자색을 따라갑니다. 채움 아이콘은 쓰지 않습니다.</p>
-</section>
+</div></div></section>
 
 <h2 class="grp">레이아웃</h2>
-<section id="layout"><h3>레이아웃 골격</h3>
+<section id="layout"><div class="card"><div class="card-header"><div class="card-title">레이아웃 골격</div></div><div class="card-body">
 <div data-cls=".rail / .bcbar / .worktabs" class="demo flush">
   <div style="display:flex;height:150px;">
     <div class="rail" id="rail" style="flex:0 0 58px;"></div>
@@ -294,8 +286,8 @@
 </div>
 <p class="note">상단 GNB 64 · 좌측 레일 58 · 히스토리 네비 30 · 하단 작업 탭 30px. 화면을 열 때마다 작업 탭이 옆으로 쌓입니다.</p>
 
-</section>
-<section id="sec"><h3>섹션 · 패널</h3>
+</div></div></section>
+<section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 · 패널</div></div><div class="card-body">
 
 <p class="note">화면 안에서 내용을 묶는 세 가지입니다. <b>섹션 제목</b>이 영역을 열고, <b>패널</b>이 내용을 담고,
 <b>액션바</b>가 그 영역의 버튼을 오른쪽에 모읍니다.</p>
@@ -351,10 +343,10 @@
   액션바와 표 사이 <b>6px</b> · 표와 페이징 사이 <b>8px</b>
 </div>
 
-</section>
+</div></div></section>
 
 <h2 class="grp">내비게이션</h2>
-<section id="gnb"><h3>GNB 메뉴 (3뎁스)</h3>
+<section id="gnb"><div class="card"><div class="card-header"><div class="card-title">GNB 메뉴 (3뎁스)</div></div><div class="card-body">
 <div data-cls=".topnav / .tab / .dd" class="demo dark">
   <div class="topnav" style="position:relative;">
     <div class="brand">PCMS</div>
@@ -365,8 +357,8 @@
 
 <pre><code>initLayout({ menu: PCMS_GNB_MENU, current: '입학관리',
             badges: PCMS_GNB_TAB_BADGES,
-            railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre></section>
-<section id="tab"><h3>탭 — 3종</h3>
+            railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre></div></div></section>
+<section id="tab"><div class="card"><div class="card-header"><div class="card-title">탭 — 3종</div></div><div class="card-body">
 
 <p class="note">깊이에 따라 <b>상위 → 하위</b> 두 단계를 쓰고, 같은 목록을 거르거나 값을 바꿀 때만 <b>토글</b>을 씁니다.
 세 개의 모양이 서로 달라야 어느 것이 상위인지 한눈에 보입니다.</p>
@@ -405,9 +397,9 @@
   · 값을 바꾸거나 조건을 켠다/끈다 → <b>토글</b>(붙은 박스)
 </div>
 
-</section>
+</div></div></section>
 
-<section id="page"><h3>페이지네이션</h3>
+<section id="page"><div class="card"><div class="card-header"><div class="card-title">페이지네이션</div></div><div class="card-body">
 <div data-cls=".paging" class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
@@ -417,9 +409,9 @@
 <pre><code>KCMS.renderPaging('#paging', {
   page: 3, total: 1284, size: 30,
   onPage: function(p){ /* 페이지 이동 */ }
-});</code></pre></section>
+});</code></pre></div></div></section>
 <h2 class="grp">데이터 표시</h2>
-<section id="table"><h3>표 — 가로형 / 세로형</h3>
+<section id="table"><div class="card"><div class="card-header"><div class="card-title">표 — 가로형 / 세로형</div></div><div class="card-body">
 <p class="note">업무 화면의 표는 <b>두 가지</b>입니다. <b>가로형</b>은 여러 건을 나열하는 목록(<code>table.grid</code>),
 <b>세로형</b>은 한 건을 라벨-값으로 보여주는 상세(<code>table.infotbl</code>)입니다.
 검색 조건은 표가 아니라 <a href="#tsel">트리 셀렉트</a><a href="#form">폼 컨트롤</a>의 필터 줄로 다룹니다.</p>
@@ -462,8 +454,8 @@
 
 <pre><code>&lt;div class="tblwrap"&gt;&lt;table class="grid"&gt; … &lt;/table&gt;&lt;/div&gt;   &lt;!-- 가로형(목록) --&gt;
 &lt;table class="infotbl"&gt;&lt;tr&gt;&lt;th&gt;라벨&lt;/th&gt;&lt;td&gt;값&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;  &lt;!-- 세로형(상세) --&gt;
-</code></pre></section>
-<section id="badge"><h3>배지 22종</h3>
+</code></pre></div></div></section>
+<section id="badge"><div class="card"><div class="card-header"><div class="card-title">배지 22종</div></div><div class="card-body">
 <div data-cls=".badge 계열" class="demo row">
   <span class="badge">기본</span>
   <span class="badge has">값 있음</span>
@@ -502,8 +494,8 @@
 <p class="note">굵기는 <b>500</b> 으로 통일돼 있습니다(700 금지). 화면에서 쓰는 배지 계열 <b>22종</b>을 그대로 제공합니다 —
 용도가 정해진 것(<code>agebadge</code> 연령·MAP 대상, <code>to-badge</code> 입학 시기, <code>ddaybadge</code> 잔여일)은 그 용도로만 쓰세요.</p>
 
-</section>
-<section id="extra"><h3>지표 · 상태 표시</h3>
+</div></div></section>
+<section id="extra"><div class="card"><div class="card-header"><div class="card-title">지표 · 상태 표시</div></div><div class="card-body">
 
 <p class="note">수치를 보여 주는 조각들입니다. 입력 컨트롤은 <a href="#form">폼</a>, 묶는 상자는 <a href="#sec">섹션 · 패널</a>,\n증감 수치와 점 배지는 <a href="#type">타이포</a> · <a href="#badge">배지</a>에 있습니다.</p>
 
@@ -528,10 +520,10 @@
   </table>
 </div>
 
-</section>
+</div></div></section>
 
 <h2 class="grp">입력</h2>
-<section id="tsel"><h3>트리 셀렉트</h3>
+<section id="tsel"><div class="card"><div class="card-header"><div class="card-title">트리 셀렉트</div></div><div class="card-body">
 
 <p class="note">과정 → 레벨 → 반 처럼 <b>계층이 있는 값</b>을 고를 때 씁니다. 겉모양은 커스텀 셀렉트와 같고 목록만 트리로 펼쳐집니다.
 상위 노드는 펼침/접힘만 하고, <b>잎 노드만 선택</b>됩니다.</p>
@@ -581,9 +573,9 @@
 
 KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
 
-</section>
+</div></div></section>
 
-<section id="form"><h3>폼 컨트롤</h3>
+<section id="form"><div class="card"><div class="card-header"><div class="card-title">폼 컨트롤</div></div><div class="card-body">
 
 <p class="note">모든 입력 컨트롤은 <b>높이 24px</b>, 테두리 <code>#CFD6E0</code> 1px, 라운드 3px, 글자 11.5px 입니다.
 포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음 — 표가 빽빽한 업무 화면에서 링은 시끄럽습니다).</p>
@@ -677,9 +669,9 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
   도움말 <code>.form-hint</code> · 오류 <code>.form-error</code>
 </div>
 
-</section>
+</div></div></section>
 
-<section id="btn"><h3>버튼</h3>
+<section id="btn"><div class="card"><div class="card-header"><div class="card-title">버튼</div></div><div class="card-body">
 <div data-cls=".btn / .ibtn" class="demo flush">
   <table class="type-spec">
     <tbody>
@@ -706,9 +698,9 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
   높이 <b>24px</b>(작게 22px) · 라운드 3px · 글자 11.5px/500.<br>
   한 줄에 버튼이 여러 개면 <b>주요 1개 + 보조 여러 개</b>로 두고, 주요 버튼을 가장 오른쪽에 둡니다.
 </div>
-</section>
+</div></div></section>
 
-<section id="state"><h3>상태 — 기본 · hover · 포커스 · 선택 · 비활성</h3>
+<section id="state"><div class="card"><div class="card-header"><div class="card-title">상태 — 기본 · hover · 포커스 · 선택 · 비활성</div></div><div class="card-body">
 <p class="note">같은 컴포넌트라도 상태 표현은 한 규칙을 따릅니다.</p>
 <div class="demo flush" data-cls="상태 매트릭스">
   <table class="type-spec">
@@ -747,10 +739,10 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
   <b>비활성</b>은 <code>opacity:.45</code> 또는 회색 배경(<code>#F0F2F5</code>) + 회색 글자.<br>
   <b>선택</b>은 파랑 틴트(<code>--pb-light</code>), <b>hover</b> 는 그보다 옅은 파랑 8%(<code>--pb-a08</code>).
 </div>
-</section>
+</div></div></section>
 
 <h2 class="grp">피드백 · 오버레이</h2>
-<section id="toast"><h3>토스트</h3>
+<section id="toast"><div class="card"><div class="card-header"><div class="card-title">토스트</div></div><div class="card-body">
 <div data-cls=".kistoast" class="demo row">
   <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
   <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
@@ -768,8 +760,8 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
 </div>
 
 <pre><code>KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
-KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></section>
-<section id="help"><h3>도움말 팝오버</h3>
+KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></div></div></section>
+<section id="help"><div class="card"><div class="card-header"><div class="card-title">도움말 팝오버</div></div><div class="card-body">
 <div data-cls=".helpwrap" class="demo row">
   <span style="font-size:11.5px;">입학구분(현재 결정)</span>
   <span class="helpwrap" style="position:relative;">
@@ -785,9 +777,9 @@ KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 
 <p class="note">용어·규칙을 설명할 때 씁니다. <code>.helpwrap</code> 안에 <code>.helpbtn</code>(16px 원형)과
 <code>.helppop</code>(흰 박스 · 1px 테두리 · 라운드 5px)을 두고, 버튼을 누르면 팝오버가 열립니다.
 설명이 길면 <code>.hp-sec</code> 로 문단을 나눕니다.</p>
-</section>
+</div></div></section>
 
-<section id="modal"><h3>모달</h3>
+<section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
 <div data-cls=".modal-ov" class="demo row">
   <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
 </div>
@@ -795,8 +787,8 @@ KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 
 
 <pre><code>KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
 KCMS.closeModal('myModal');
-KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre></section>
-<section id="date"><h3>날짜 선택 — 달력 팝업</h3>
+KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre></div></div></section>
+<section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 선택 — 달력 팝업</div></div><div class="card-body">
 
 <p class="note">날짜 <b>입력 필드</b>의 구조는 <a href="#form">폼 ③</a>에 있습니다. 여기서는 버튼을 눌렀을 때 열리는
 <b>달력 팝업의 표시 규칙</b>만 다룹니다.</p>
@@ -831,10 +823,10 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
   날짜 표기는 <b>하이픈</b>(2026-08-27). 점 표기는 쓰지 않습니다 — <code>KCMS.date('20260827')</code>.
 </div>
 
-</section>
+</div></div></section>
 
 <h2 class="grp">규칙</h2>
-<section id="rules"><h3>Do / Don&rsquo;t</h3>
+<section id="rules"><div class="card"><div class="card-header"><div class="card-title">Do / Don&rsquo;t</div></div><div class="card-body">
 <div class="demo flush" data-cls="공통 규칙">
   <table class="type-spec">
     <thead><tr><th>영역</th><th>이렇게</th><th>이러지 않기</th></tr></thead>
@@ -852,9 +844,9 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     </tbody>
   </table>
 </div>
-</section>
+</div></div></section>
 
-<section id="a11y"><h3>접근성 · 키보드</h3>
+<section id="a11y"><div class="card"><div class="card-header"><div class="card-title">접근성 · 키보드</div></div><div class="card-body">
 <div class="demo flush" data-cls="a11y">
   <table class="type-spec">
     <tbody>
@@ -867,7 +859,7 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     </tbody>
   </table>
 </div>
-</section>
+</div></div></section>
 
 </main></div>
 <div class="modal-ov" id="demoModal" role="dialog" aria-modal="true">
