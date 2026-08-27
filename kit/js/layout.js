@@ -490,6 +490,17 @@ function buildCTree(host, groups, opt){
   };
 }
 
+
+/* ---------- 날짜 필드의 달력 버튼 ----------
+   .iwrap 안의 달력 버튼을 누르면 숨은 input[type=date] 의 showPicker() 를 부른다.
+   date-picker.js 가 showPicker 를 가로채 화면 공통 달력 패널을 띄운다. */
+document.addEventListener('click', function(e){
+  var btn = e.target.closest && e.target.closest('.iwrap .ibtn, .drange .ibtn, .dwrap .ibtn');
+  if(!btn) return;
+  var shadow = btn.parentElement.querySelector('input[type=date]');
+  if(shadow && typeof shadow.showPicker === 'function'){ e.preventDefault(); shadow.showPicker(); }
+});
+
 /* ---------- 초기화 ---------- */
 /**
  * initLayout({
