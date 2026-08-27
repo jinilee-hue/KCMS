@@ -158,6 +158,86 @@ function makeDraggable(box,handle){
   window.addEventListener('mouseup',function(){ on=false; });
 }
 
+
+/* ---------- 커스텀 셀렉트 (.csel) ----------
+   네이티브 <select> 의 드롭다운은 브라우저가 그려서 라운드·정렬을 맞출 수 없다.
+   원본 select 는 DOM 에 남겨 두고(값 읽기·change 핸들러가 그대로 동작) 표시용 위젯을 덧씌운다.
+   메뉴는 position:fixed 로 띄운다 — 조상(.content)이 overflow 로 자르기 때문. */
+function initCsel(root){
+  (root||document).querySelectorAll('select[data-csel]').forEach(function(sel){
+    if(sel.__csel) return; sel.__csel=true;
+    var wrap=document.createElement('span'); wrap.className='csel';
+    var box=document.createElement('div'); box.className='csel-box'; box.tabIndex=0;
+    var menu=document.createElement('div'); menu.className='csel-menu';
+    sel.parentNode.insertBefore(wrap, sel);
+    wrap.appendChild(box); wrap.appendChild(menu); wrap.appendChild(sel);
+    sel.style.display='none';
+    function paint(){
+      box.textContent=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].textContent:'';
+      menu.innerHTML='';
+      [].forEach.call(sel.options,function(o,i){
+        var it=document.createElement('div');
+        it.className='prtitem'+(i===sel.selectedIndex?' sel':'');
+        it.textContent=o.textContent;
+        it.addEventListener('click',function(){
+          sel.selectedIndex=i; paint(); close();
+          sel.dispatchEvent(new Event('change',{bubbles:true}));
+        });
+        menu.appendChild(it);
+      });
+    }
+    function place(){
+      var r=box.getBoundingClientRect();
+      menu.style.left=r.left+'px'; menu.style.top=(r.bottom+1)+'px';
+      menu.style.minWidth=r.width+'px';
+    }
+    function open(){ wrap.classList.add('open'); place(); }
+    function close(){ wrap.classList.remove('open'); }
+    box.addEventListener('click',function(){ wrap.classList.contains('open')?close():open(); });
+    box.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }
+      if(e.key==='Escape') close();
+    });
+    document.addEventListener('mousedown',function(e){ if(!wrap.contains(e.target)) close(); },true);
+    window.addEventListener('scroll',function(){ if(wrap.classList.contains('open')) place(); },true);
+    window.addEventListener('resize',function(){ if(wrap.classList.contains('open')) place(); });
+    paint();
+  });
+}
+
+/* ---------- 페이지네이션 ----------
+   실제 화면(02-012)의 renderPaging 과 같은 마크업을 만든다.
+   « ‹ [번호…] › »  ·  페이지 [입력]/N  ·  새로고침  ·  페이지당 [30/50/100]  ·  총 N건 */
+function renderPaging(el, opt){
+  el=typeof el==='string'?document.querySelector(el):el; if(!el) return;
+  opt=opt||{};
+  var size=opt.size||30, total=opt.total||0, cur=opt.page||1;
+  var pages=Math.max(1, Math.ceil(total/size));
+  cur=Math.min(Math.max(1,cur),pages);
+  var end=Math.min(pages, Math.max(5, cur+2)), start=Math.max(1, end-4);
+  var nums='';
+  for(var p=start;p<=end;p++) nums+='<button type="button" class="pgnum'+(p===cur?' on':'')+'" data-p="'+p+'">'+p+'</button>';
+  var from=total?((cur-1)*size+1):0, to=total?Math.min(cur*size,total):0;
+  el.className='paging';
+  el.innerHTML=
+    '<button type="button" class="pgnav" title="처음"'+(cur<=1?' disabled':'')+'>«</button>'+
+    '<button type="button" class="pgnav" title="이전"'+(cur<=1?' disabled':'')+'>‹</button>'+nums+
+    '<button type="button" class="pgnav" title="다음"'+(cur>=pages?' disabled':'')+'>›</button>'+
+    '<button type="button" class="pgnav" title="끝"'+(cur>=pages?' disabled':'')+'>»</button>'+
+    '<span class="pgjump">페이지 <input type="number" min="1" max="'+pages+'" value="'+cur+'"> / '+pages+'</span>'+
+    '<button type="button" class="pgnav" title="새로고침"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" '+
+      'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+
+      '<path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>'+
+    '<span class="pgsize">페이지당 <select class="pgsizesel" aria-label="페이지당 표시 개수">'+
+      [30,50,100].map(function(n){ return '<option value="'+n+'"'+(n===size?' selected':'')+'>'+n+'</option>'; }).join('')+
+    '</select></span>'+
+    '<span class="pgtotal">'+(total?from+'–'+to+' / 총 '+KCMSnum(total)+'건':'총 0건')+'</span>';
+  el.querySelectorAll('.pgnum').forEach(function(b){
+    b.addEventListener('click',function(){ if(opt.onPage) opt.onPage(Number(b.dataset.p)); });
+  });
+}
+function KCMSnum(v){ return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
+
 /* ---------- 초기화 ---------- */
 /**
  * initLayout({
@@ -174,6 +254,7 @@ function initLayout(opt){
   if(opt.openTabs&&$(opt.workTabs||'#worktabs'))
     renderWorkTabs($(opt.workTabs||'#worktabs'),opt.openTabs,opt.onTabOpen,opt.onTabClose);
   syncSelectWidths();
+  initCsel();
   document.querySelectorAll('.modal-box').forEach(function(b){ makeDraggable(b); });
   if(global.KCMS&&global.KCMS.bindModals) global.KCMS.bindModals();
   return {renderTabs:renderTabs,renderRail:renderRail,renderWorkTabs:renderWorkTabs};
@@ -181,7 +262,8 @@ function initLayout(opt){
 
 global.KCMS=Object.assign(global.KCMS||{},{
   initLayout:initLayout, renderTabs:renderTabs, renderRail:renderRail,
-  renderWorkTabs:renderWorkTabs, syncSelectWidths:syncSelectWidths, makeDraggable:makeDraggable, SVG:SVG
+  renderWorkTabs:renderWorkTabs, syncSelectWidths:syncSelectWidths,
+  initCsel:initCsel, renderPaging:renderPaging, makeDraggable:makeDraggable, SVG:SVG
 });
 global.initLayout=initLayout;
 })(window);

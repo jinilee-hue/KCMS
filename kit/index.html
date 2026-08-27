@@ -67,14 +67,14 @@
 <div class="sec">
   <div class="wrap">
     <h2>패키지 구성</h2>
-    <p class="sub">8개 파일로 완성되는 디자인 시스템 — CSS 는 실제 화면에서 추출한 것이라 결과가 같습니다</p>
+    <p class="sub">화면에서 추출한 CSS + 유틸리티 — 컴포넌트 67개 실측 대조 완료</p>
     <div class="files">
       <div class="file"><div class="nm">kcms-admissions.md</div><div class="ti">AI Agent 프롬프트</div>
         <p>Cursor · VS Code · Claude Code 등 개발 Agent에 그대로 붙여넣는 UI 규약입니다. 규칙 설명 없이 바로 개발을 시작합니다.</p></div>
       <div class="file"><div class="nm">styles/tokens.css</div><div class="ti">디자인 토큰</div>
         <p>색·간격·타이포·컴포넌트 높이를 CSS 변수로 정의합니다. 값 하드코딩을 막는 단일 출처입니다.</p></div>
       <div class="file"><div class="nm">styles/common.css</div><div class="ti">컴포넌트 스타일</div>
-        <p>실제 화면(PCMS-SCR-ET-02-012)의 CSS 에서 컴포넌트 규칙 452개를 <b>원본 순서 그대로</b> 추출했습니다.
+        <p>실제 화면(PCMS-SCR-ET-02-012)의 CSS 에서 컴포넌트 규칙 1,300여 개를 <b>원본 순서 그대로</b> 추출했습니다. 대시보드의 지표·차트 컴포넌트와 커스텀 셀렉트도 함께 담았습니다.
         손으로 다시 쓰지 않았기 때문에 화면과 결과가 어긋나지 않습니다.</p></div>
       <div class="file"><div class="nm">js/utils.js</div><div class="ti">유틸리티</div>
         <p>날짜·숫자·전화 포맷, 개인정보 마스킹, 4색 토스트, 모달 제어, Chart.js 프리셋이 들어 있습니다.</p></div>
@@ -106,7 +106,7 @@
       <div class="feat"><h3>44종 모달 규격</h3>
         <p>공통 26종 · 화면 전용 18종을 한 셸(<code>.modal-box</code>)로 통일했습니다. 드래그 이동과 Esc 닫기가 기본입니다.</p></div>
       <div class="feat"><h3>화면에서 추출한 CSS</h3>
-        <p>규격을 문서만 보고 다시 구현하지 않습니다. 실제 화면의 CSS 를 그대로 옮겨 왔고, 31개 항목을 실측 대조해 값이 같은 것을 확인했습니다.</p></div>
+        <p>규격을 문서만 보고 다시 구현하지 않습니다. 실제 화면의 CSS 를 그대로 옮겨 왔고, <b>컴포넌트 67개</b>를 실측 대조해 값이 모두 같은 것을 확인했습니다.</p></div>
       <div class="feat"><h3>Vanilla JS · 빌드 불필요</h3>
         <p>Node·번들러 없이 브라우저에서 바로 실행됩니다. 차트가 필요하면 Chart.js CDN 한 줄만 추가합니다.</p></div>
     </div>

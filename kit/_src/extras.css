@@ -1,0 +1,110 @@
+
+/* ═══════ Kit 보강 — 입학관리 화면에는 없지만 업무 화면에 필요한 컴포넌트 ═══════
+   poly-dashboard Kit 의 컴포넌트 목록을 기준으로 빠진 것을 채웠습니다.
+   값은 전부 KCMS 톤(본문 11.5px · 컨트롤 24px · 라운드 3px · Poly Blue)에 맞췄습니다. */
+
+/* 검색 상자 */
+.search-box{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 8px;
+  border:1px solid var(--line);border-radius:3px;background:#fff;}
+.search-box:focus-within{border-color:var(--pb);}
+.search-box svg{width:12px;height:12px;color:var(--txt-mut);flex:0 0 auto;}
+.search-box input{border:0;outline:none;font-size:11.5px;font-family:inherit;color:var(--txt);
+  background:transparent;width:150px;}
+
+/* 폼 그룹 · 그리드 */
+.form-group{display:flex;flex-direction:column;gap:4px;}
+.form-label{font-size:11.5px;font-weight:700;color:var(--gnb);}
+.form-label .req{color:var(--danger);margin-left:2px;}
+.form-hint{font-size:11px;color:var(--txt-mut);line-height:1.5;}
+.form-error{font-size:11px;color:var(--danger);line-height:1.5;}
+.form-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 14px;}
+.form-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px;}
+
+/* 페이지 헤더 */
+.page-header{display:flex;align-items:flex-end;gap:10px;padding:0 0 10px;
+  border-bottom:1px solid var(--line-soft);margin-bottom:12px;}
+.page-title{font-size:16px;font-weight:700;color:var(--txt);letter-spacing:-.3px;}
+.page-subtitle{font-size:11.5px;color:var(--txt-mut);}
+.page-header-actions{margin-left:auto;display:flex;gap:6px;}
+
+/* 카드 */
+.card{background:#fff;border:1px solid var(--line-soft);border-radius:5px;}
+.card-header{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line-soft);}
+.card-title{font-size:12.5px;font-weight:700;color:var(--txt);}
+.card-subtitle{font-size:11px;color:var(--txt-mut);}
+.card-body{padding:14px;}
+.card-body.no-pad{padding:0;}
+
+/* 아바타 */
+.avatar{width:24px;height:24px;border-radius:50%;background:var(--pb-light);color:var(--pb-deeper);
+  font-size:10.5px;font-weight:700;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;}
+.avatar.lg{width:34px;height:34px;font-size:12.5px;}
+.table-avatar{display:inline-flex;align-items:center;gap:6px;}
+
+/* 아이콘 버튼 */
+.icon-btn{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;background:#fff;
+  color:var(--txt-mut);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+.icon-btn:hover{border-color:var(--pb);color:var(--pb);}
+.icon-btn svg{width:12px;height:12px;}
+
+/* 토글 스위치 */
+.toggle{display:inline-flex;align-items:center;gap:7px;cursor:pointer;font-size:11.5px;color:var(--txt);}
+.toggle input{position:absolute;opacity:0;width:0;height:0;}
+.toggle-slider{width:32px;height:18px;border-radius:999px;background:#c9d1dc;position:relative;
+  transition:background .16s ease;flex:0 0 auto;}
+.toggle-slider::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .16s ease;}
+.toggle input:checked + .toggle-slider{background:var(--pb);}
+.toggle input:checked + .toggle-slider::after{transform:translateX(14px);}
+.toggle input:disabled + .toggle-slider{opacity:.45;}
+
+/* 진행바 */
+.progress-track{height:6px;background:#e7ecf4;border-radius:3px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--pb);border-radius:3px;}
+.progress-fill.ok{background:var(--chart-ok);}
+.progress-fill.low{background:var(--chart-low);}
+
+/* 빈 상태 */
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+  padding:36px 0;color:var(--txt-mut);}
+.empty-state svg{width:28px;height:28px;color:#c3ccd8;}
+.empty-state .es-title{font-size:12.5px;font-weight:700;color:var(--txt);}
+.empty-state .es-desc{font-size:11.5px;line-height:1.6;text-align:center;}
+
+/* 점 배지 · 증감 수치 */
+.badge-dot{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--txt-mut);}
+.badge-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--pb);}
+.badge-dot.warn::before{background:var(--warn);}
+.badge-dot.danger::before{background:var(--danger);}
+.badge-dot.muted::before{background:#9aa8bd;}
+.num-positive{color:var(--pb);font-weight:700;}
+.num-negative{color:var(--danger);font-weight:700;}
+
+/* 차트 컨테이너 */
+.chart-container-sm{height:160px;}
+.chart-container-md{height:220px;}
+.chart-container-lg{height:300px;}
+.chart-grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.chart-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;}
+@media (max-width:1300px){ .chart-grid-2,.chart-grid-3{grid-template-columns:1fr;} }
+
+/* 기간 탭 */
+.period-tabs{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;}
+.period-tab{height:22px;padding:0 10px;border:0;background:#fff;font-size:11px;color:var(--txt-mut);
+  cursor:pointer;font-family:inherit;}
+.period-tab + .period-tab{border-left:1px solid var(--line);}
+.period-tab.on{background:var(--pb);color:#fff;font-weight:500;}
+
+/* 모달 크기 변형 */
+.modal-box.sm{width:420px;}
+.modal-box.lg{width:900px;}
+.modal-foot.split{justify-content:space-between;}
+
+/* 독립형 브레드크럼 */
+.breadcrumb{display:flex;align-items:center;gap:5px;font-size:11.5px;color:var(--txt-mut);}
+.breadcrumb .sep{color:#b6bfcc;}
+.breadcrumb .cur{color:var(--txt);font-weight:700;}
+
+/* 구분선 */
+.divider{height:1px;background:var(--line-soft);border:0;margin:12px 0;}
+.divider.strong{background:var(--line);}
