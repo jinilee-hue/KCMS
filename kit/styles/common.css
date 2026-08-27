@@ -1616,3 +1616,20 @@ tr.vacant td{background:#F7F9FC;color:#c4ccd8;}
 
 /* 버튼 최소 폭 — 짧은 라벨도 한 단으로 (표 안 .btn.sm 제외) */
 .btn:not(.sm){min-width:56px;justify-content:center;}
+
+/* 입력창 밖에 단독으로 놓인 .ibtn — 기본 스타일이 없어 브라우저 기본 버튼(회색)으로 보였다.
+   .icon-btn 과 같은 흰 박스로 맞춘다(입력창 안에서는 위의 .iwrap .ibtn 규칙이 이긴다). */
+.ibtn{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+.ibtn:hover{border-color:var(--pb);color:var(--pb);}
+
+/* ==========================================================================
+   배지 톤 통합 (2026-08-27)
+   --------------------------------------------------------------------------
+   측정 결과 배지 클래스 31종이 실제로는 8가지 스타일이었고, 그중 넷은 값이
+   거의 같아 눈으로 구분되지 않았다. 같은 의미끼리 한 값으로 맞춘다.
+     · 입학 시기(to-badge) · 3월(agebadge.mar) · 카운트(cntbadge) → 파랑 틴트 한 가지
+     · 없음/0(mapbadge.muted) → 회색 채움
+   ========================================================================== */
+.to-badge, .agebadge.mar, .cntbadge{background:var(--pb-light) !important;color:var(--pb-dark) !important;}
+.mapbadge.muted, .ddbadge.muted{background:#EEF1F5 !important;color:var(--txt-mut) !important;}

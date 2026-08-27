@@ -88,6 +88,8 @@
   .demo.col{display:flex;flex-direction:column;gap:10px;align-items:stretch;}
   .demo.dark{background:var(--gnb);border-color:var(--gnb);padding:0;overflow:hidden;}
   .demo.flush{padding:0;overflow:hidden;background:#fff;}
+  /* 가로형(.tblwrap 안)과 세로형 표의 좌우 기준선을 같게 — wrap 의 좌우 패딩 제거 */
+  .demo .tblwrap{padding-left:0 !important;padding-right:0 !important;}
   .demo + h4.sub{margin-top:30px;}
 
   /* 라벨 열을 190px 로 못 박아 카드마다 예시 시작선이 같은 자리에 오게 한다 */
@@ -179,7 +181,7 @@
 
 <h4 class="sub">아이콘 전용 · 22PX</h4>
 <div class="demo row">
-  <button class="ibtn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+  <button class="icon-btn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
   <button class="icon-btn" aria-label="추가"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
   <button class="icon-btn" aria-label="새로고침"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
   <button class="icon-btn" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -194,7 +196,7 @@
     <div class="dtab on">예비생정보</div><div class="dtab">MAP 예약</div>
     <div class="dtab">채점</div><div class="dtab">MAP 결과</div>
   </div>
-  <div style="padding:14px;font-size:11.5px;color:var(--txt-mut);">선택한 탭의 내용 영역</div>
+  <div data-pane style="padding:14px;font-size:11.5px;color:var(--txt-mut);">예비생정보 탭의 내용 영역</div>
 </div>
 <h4 class="sub">하위 탭 · 알약형</h4>
 <div class="demo row">
@@ -202,45 +204,39 @@
 </div>
 <h4 class="sub">토글 · 붙은 라운드 박스</h4>
 <div class="demo row">
-  <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+  <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span><span data-out style="font-size:11.5px;color:var(--txt-mut);">전체</span>
 </div>
 </div></div></section>
 
 <section id="badge"><div class="card"><div class="card-header"><div class="card-title">배지</div></div><div class="card-body">
-<h4 class="sub">톤 8가지 · 10.5PX / 500 · 높이 16PX · 라운드 999PX</h4>
+<h4 class="sub">톤 6가지 · 10.5PX / 500 · 높이 16PX · 라운드 999PX</h4>
 <div class="demo flush">
   <table class="type-spec">
     <tbody>
       <tr><td class="k">기본 · 중립</td>
           <td><span class="badge">기본</span> <span class="statuspill">재원</span> <span class="typebadge">타입</span> <span class="agebadge">7세</span></td></tr>
-      <tr><td class="k">값 있음 · 흰 배경</td>
+      <tr><td class="k">흰 배경 · 값 있음</td>
           <td><span class="badge has">값 있음</span></td></tr>
-      <tr><td class="k">회색 채움 · 지난 · 제외</td>
-          <td><span class="agebadge mapex">MAP 제외</span> <span class="ddaybadge">D-14</span> <span class="ddbadge muted">준비중</span></td></tr>
-      <tr><td class="k">파랑 틴트 · 현재 · 대상</td>
-          <td><span class="agebadge cur">현재</span> <span class="agebadge mapin">MAP 대상</span> <span class="to-badge now">바로 입학</span> <span class="to-badge mar">신학년 입학</span></td></tr>
+      <tr><td class="k">회색 채움 · 지난 · 제외 · 없음</td>
+          <td><span class="agebadge mapex">MAP 제외</span> <span class="ddaybadge">D-14</span> <span class="mapbadge muted">MAP : 0</span> <span class="ddbadge muted">준비중</span></td></tr>
+      <tr><td class="k">파랑 틴트 · 현재 · 대상 · 시기</td>
+          <td><span class="agebadge cur">현재</span> <span class="agebadge mapin">MAP 대상</span> <span class="to-badge now">바로 입학</span> <span class="agebadge mar">3월</span> <span class="cntbadge">12</span></td></tr>
       <tr><td class="k">파랑 채움 · 수치 강조</td>
-          <td><span class="mapbadge brand">MAP : 44</span> <span class="cntbadge">12</span></td></tr>
-      <tr><td class="k">진회색 채움 · 없음 · 0</td>
-          <td><span class="mapbadge muted">MAP : 0</span></td></tr>
-      <tr><td class="k">레드 틴트 · 임박</td>
-          <td><span class="ddaybadge danger">D-DAY</span> <span class="ddaybadge warn">D-3</span></td></tr>
-      <tr><td class="k">레드 채움 · 신규</td>
-          <td><span class="ddbadge">신규</span></td></tr>
+          <td><span class="mapbadge brand">MAP : 44</span></td></tr>
+      <tr><td class="k">레드 · 임박</td>
+          <td><span class="ddaybadge danger">D-DAY</span></td></tr>
     </tbody>
   </table>
 </div>
 
 <h4 class="sub">점 배지 · 배경 없이 상태만</h4>
-<div class="demo row items">
-  <span class="item"><span class="badge-dot">정상</span></span>
-  <span class="item"><span class="badge-dot warn">확인</span></span>
-  <span class="item"><span class="badge-dot danger">오류</span></span>
+<div class="demo row">
+  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
 </div>
 </div></div></section>
 
 <section id="table"><div class="card"><div class="card-header"><div class="card-title">표</div></div><div class="card-body">
-<h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
+<h4 class="sub">가로형 · 목록 · 세로 스크롤 시 헤더 고정</h4>
 <div class="demo flush">
   <div class="tblwrap" style="max-height:190px;">
     <table class="grid" style="table-layout:auto;">
@@ -253,7 +249,14 @@
         <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr>
         <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr>
         <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr>
-      </tbody>
+      
+<tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
+</tbody>
     </table>
   </div>
 </div>
@@ -867,6 +870,93 @@
     if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });
   KCMS.bindModals();   /* 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
+
+  /* ── 데모 상호작용 — 실제 화면과 같은 동작을 그대로 ─────────────────── */
+  (function initDemos(){
+    var doc=document;
+
+    /* 상위 탭 · 하위 탭 · 토글 · 기간 탭 — 형제 중 하나만 활성 */
+    doc.addEventListener('click', function(e){
+      var t=e.target.closest('.dtab, .quickpill > button, .seg > button, .period-tab, .ptab');
+      if(!t) return;
+      var box=t.parentElement;
+      [].forEach.call(box.children, function(c){ c.classList.remove('on'); });
+      t.classList.add('on');
+      var out=box.parentElement.querySelector('[data-out]');
+      if(out) out.textContent=t.textContent.trim();
+      /* 상위 탭은 내용 영역 문구도 바꾼다 */
+      if(t.classList.contains('dtab')){
+        var pane=box.parentElement.querySelector('[data-pane]');
+        if(pane) pane.textContent=t.textContent.trim()+' 탭의 내용 영역';
+      }
+    });
+
+    /* 표 — 헤더 체크박스로 전체 선택, 행 클릭으로 선택 표시, 정렬 가능 헤더 */
+    doc.addEventListener('change', function(e){
+      var th=e.target.closest('thead .rowchk'); if(!th) return;
+      var tbl=th.closest('table');
+      tbl.querySelectorAll('tbody .rowchk').forEach(function(c){
+        c.checked=th.checked; c.closest('tr').classList.toggle('sel', th.checked); });
+    });
+    doc.addEventListener('change', function(e){
+      var c=e.target.closest('tbody .rowchk'); if(!c) return;
+      c.closest('tr').classList.toggle('sel', c.checked);
+      var tbl=c.closest('table'), all=tbl.querySelectorAll('tbody .rowchk');
+      var on=tbl.querySelectorAll('tbody .rowchk:checked').length;
+      var head=tbl.querySelector('thead .rowchk');
+      if(head){ head.checked = on===all.length; head.indeterminate = on>0 && on<all.length; }
+    });
+    doc.addEventListener('click', function(e){
+      var th=e.target.closest('th.sortable'); if(!th) return;
+      var tbl=th.closest('table'), idx=[].indexOf.call(th.parentElement.children, th);
+      var asc=!th.classList.contains('asc');
+      tbl.querySelectorAll('th.sortable').forEach(function(x){
+        x.classList.remove('asc'); var a=x.querySelector('.sarrow'); if(a) a.classList.remove('on'); });
+      th.classList.toggle('asc', asc);
+      var ar=th.querySelector('.sarrow'); if(ar){ ar.classList.add('on'); ar.textContent = asc ? '▲' : '▼'; }
+      var body=tbl.tBodies[0], rows=[].slice.call(body.rows);
+      rows.sort(function(a,b){
+        var x=(a.cells[idx]||{}).textContent||'', y=(b.cells[idx]||{}).textContent||'';
+        return asc ? x.localeCompare(y,'ko') : y.localeCompare(x,'ko'); });
+      rows.forEach(function(r){ body.appendChild(r); });
+    });
+
+    /* 검색 필터 — [검색]은 토스트, [초기화]는 입력값 비우기 */
+    doc.addEventListener('click', function(e){
+      var b=e.target.closest('.filters .btn, .fbtns .btn'); if(!b) return;
+      var box=b.closest('.filters')||b.closest('.demo');
+      if(/초기화/.test(b.textContent)){
+        box.querySelectorAll('input').forEach(function(i){ i.value=''; });
+        box.querySelectorAll('select').forEach(function(sel){ sel.selectedIndex=0;
+          var w=sel.closest('.csel'); if(w) w.querySelector('.csel-box').textContent=sel.options[0].text; });
+        KCMS.toast('검색 조건을 초기화했습니다.','neutral');
+      } else {
+        KCMS.toast('검색 결과가 12건입니다.','neutral');
+      }
+    });
+
+    /* 도움말 — 버튼을 누르면 열고 닫는다(화면과 동일) */
+    doc.querySelectorAll('.helpwrap').forEach(function(w){
+      var btn=w.querySelector('.helpbtn'), pop=w.querySelector('.helppop');
+      if(!btn||!pop) return;
+      pop.style.display='none';
+      btn.addEventListener('click', function(e){
+        e.stopPropagation();
+        var open=pop.style.display!=='none';
+        pop.style.display= open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', String(!open));
+      });
+      doc.addEventListener('click', function(){ pop.style.display='none'; });
+      pop.addEventListener('click', function(e){ e.stopPropagation(); });
+    });
+
+    /* 아이콘 전용 버튼 — 눌리면 무엇을 하는 자리인지 알려 준다 */
+    doc.addEventListener('click', function(e){
+      var b=e.target.closest('#btn .icon-btn'); if(!b) return;
+      KCMS.toast((b.getAttribute('aria-label')||'아이콘 버튼')+' 눌림','neutral');
+    });
+  })();
+
 
   /* 체크박스 트리 — 선택 결과를 옆에 보여 준다 */
   var ct=document.querySelector('.ctree[data-ctree]');
