@@ -6,46 +6,69 @@
 <title>KCMS 입학관리 Kit — 컴포넌트 가이드</title>
 <link rel="stylesheet" href="styles/tokens.css">
 <link rel="stylesheet" href="styles/common.css">
+
+
 <style>
-  /* 가이드 문서 전용 스타일 — Kit 컴포넌트가 아닙니다 */
-  body{background:#fff;}
-  .doc{max-width:1080px;margin:0 auto;padding:30px 24px 90px;}
-  .doc h1{font-size:26px;margin:0 0 6px;letter-spacing:-.5px;}
-  .doc .lede{color:var(--txt-mut);font-size:13px;line-height:1.7;margin:0 0 24px;}
-  .doc h2{font-size:17px;margin:38px 0 6px;padding-top:20px;border-top:1px solid var(--line-soft);}
-  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.7;margin:8px 0 14px;}
+  body{background:#fff;color:var(--txt);}
+  .wrap{display:flex;align-items:flex-start;}
+  .nav{position:sticky;top:0;height:100vh;overflow:auto;flex:0 0 208px;background:var(--gnb);padding:20px 0 30px;}
+  .nav-brand{padding:0 18px;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;}
+  .nav-sub{padding:2px 18px 16px;font-size:11px;color:#93a4bd;}
+  .nav-group{padding:14px 18px 4px;font-size:10.5px;font-weight:700;color:#8fa2bd;letter-spacing:.6px;}
+  .nav a{display:block;padding:5px 18px;font-size:12px;color:#cfd8e6;text-decoration:none;border-left:2px solid transparent;}
+  .nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
+  .nav a.on{border-left-color:#fff;background:rgba(255,255,255,.10);color:#fff;font-weight:700;}
+  .nav-foot{margin-top:18px;padding:14px 18px 0;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:6px;}
+  .nav-foot a{padding:0;font-size:11.5px;color:#9fb4d1;}
+  .doc{flex:1;min-width:0;max-width:920px;padding:28px 34px 90px;}
+  .doc-hd h1{font-size:24px;margin:0 0 6px;letter-spacing:-.5px;}
+  .doc-hd p{font-size:12.5px;color:var(--txt-mut);line-height:1.75;margin:0;}
+  h2.grp{font-size:11px;font-weight:800;color:var(--pb);letter-spacing:1.2px;margin:34px 0 0;padding-top:22px;border-top:1px solid var(--line-soft);}
+  section{padding:14px 0 6px;}
+  section h3{font-size:15px;margin:0 0 8px;letter-spacing:-.2px;}
+  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.75;margin:8px 0 12px;}
   .demo{border:1px solid var(--line-soft);border-radius:8px;padding:16px;margin:10px 0;background:#fff;}
   .demo.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .demo.col{display:flex;flex-direction:column;gap:8px;}
   .demo.dark{background:var(--gnb);}
-  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.6;padding:12px 14px;border-radius:3px;overflow:auto;margin:0 0 14px;}
-  .toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;}
-  .toc a{font-size:11.5px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--txt-mut);text-decoration:none;}
-  .toc a:hover{border-color:var(--pb);color:var(--pb);}
+  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.65;padding:12px 14px;border-radius:4px;overflow:auto;margin:8px 0 4px;}
+  .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:10px 14px;font-size:12px;line-height:1.75;margin:10px 0 4px;border-radius:0 4px 4px 0;}
   .sw{width:76px;display:inline-block;margin:0 8px 8px 0;}
-  .sw i{display:block;height:42px;border-radius:3px;border:1px solid rgba(0,0,0,.06);}
-  .sw b{display:block;font-size:10.5px;margin-top:5px;}
-  .sw span{display:block;font-size:10px;color:var(--txt-mut);}
-  .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:10px 14px;font-size:12px;line-height:1.7;margin:10px 0 16px;}
+  .sw i{display:block;height:42px;border-radius:4px;border:1px solid rgba(0,0,0,.06);}
+  .sw b{display:block;font-size:10.5px;margin-top:5px;} .sw span{display:block;font-size:10px;color:var(--txt-mut);}
+  @media (max-width:900px){ .nav{display:none;} .doc{padding:20px;} }
 </style>
 </head>
 <body>
-<div class="doc">
-
-<h1>KCMS 입학관리 Kit — 컴포넌트 가이드</h1>
-<p class="lede">
-  아래 예시는 모두 <b>Kit CSS 그대로</b> 렌더링한 것입니다. Kit 의 <code>common.css</code> 는 새로 쓴 게 아니라
-  실제 화면 <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b> 의 CSS 에서 컴포넌트 규칙만 원본 순서대로 뽑아낸 것이라,
-  여기 보이는 모습이 실제 화면과 같습니다. (31개 항목 실측 대조 완료)
-</p>
-
-<div class="toc">
-  <a href="#start">시작하기</a><a href="#color">색</a><a href="#gnb">GNB</a><a href="#layout">레이아웃</a>
-  <a href="#sec">섹션·패널</a><a href="#btn">버튼</a><a href="#badge">배지</a><a href="#table">표</a>
-  <a href="#form">폼</a><a href="#tab">탭</a><a href="#modal">모달</a><a href="#toast">토스트</a>
-  <a href="#date">날짜</a><a href="#page">페이지네이션</a><a href="#csel">커스텀 셀렉트</a><a href="#extra">Kit 보강</a>
-</div>
-
-<h2 id="start">시작하기</h2>
+<div class="wrap">
+<aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
+<div class="nav-group">기초</div>
+<a href="#start">시작하기</a>
+<a href="#color">색 팔레트</a>
+<a href="#type">타이포</a>
+<div class="nav-group">레이아웃</div>
+<a href="#layout">레이아웃 골격</a>
+<a href="#sec">섹션 · 패널</a>
+<div class="nav-group">내비게이션</div>
+<a href="#gnb">GNB 메뉴 (3뎁스)</a>
+<a href="#tab">탭</a>
+<a href="#page">페이지네이션</a>
+<div class="nav-group">데이터 표시</div>
+<a href="#table">표 — 가로형 / 세로형</a>
+<a href="#badge">배지 22종</a>
+<a href="#extra">지표 · 카드 · 보강 컴포넌트</a>
+<div class="nav-group">입력</div>
+<a href="#form">폼 컨트롤</a>
+<a href="#csel">커스텀 셀렉트</a>
+<a href="#btn">버튼</a>
+<div class="nav-group">피드백 · 오버레이</div>
+<a href="#toast">토스트</a>
+<a href="#modal">모달</a>
+<a href="#date">날짜 선택</a>
+<div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside>
+<main class="doc"><header class="doc-hd"><h1>컴포넌트 가이드</h1><p>모두 <b>Kit CSS 그대로</b> 렌더링한 것입니다. <code>common.css</code> 는 실제 화면 <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b> 의 CSS 에서 id 한정 규칙만 빼고 원본 순서대로 추출했고, 컴포넌트 67개를 실측 대조해 값이 같은 것을 확인했습니다.</p></header>
+<h2 class="grp">기초</h2>
+<section id="start"><h3>시작하기</h3>
 <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
 &lt;link rel="stylesheet" href="styles/common.css"&gt;
 &lt;script src="js/utils.js"&gt;&lt;/script&gt;
@@ -53,7 +76,8 @@
 &lt;script src="js/date-picker.js"&gt;&lt;/script&gt;   &lt;!-- 날짜 입력이 있으면 --&gt;
 &lt;script src="js/modal-drag.js"&gt;&lt;/script&gt;    &lt;!-- 모달을 쓰면 --&gt;</code></pre>
 
-<h2 id="color">색</h2>
+</section>
+<section id="color"><h3>색 팔레트</h3>
 <div class="demo" id="sws"></div>
 <div class="rule">
   <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
@@ -61,16 +85,19 @@
   면적이 좁은 <b>글자·아이콘</b>은 원색(<code>--pb</code>/<code>--danger</code>).
 </div>
 
-<h2 id="gnb">GNB (1 · 2 · 3뎁스)</h2>
-<div class="demo dark" style="padding:0;">
-  <div class="topnav" style="position:relative;">
-    <div class="brand">PCMS</div>
-    <div class="tabs" id="tabs"></div>
-  </div>
+</section>
+<section id="type"><h3>타이포</h3>
+<div class="demo col">
+  <div class="sectit">섹션 제목 13px / 700<span class="hint">앞에 4×14 파란 막대</span></div>
+  <div style="font-size:12.5px;font-weight:700;">탭 · 강조 라벨 12.5px / 700</div>
+  <div style="font-size:11.5px;">표 · 폼 본문 11.5px — 업무 화면 기본 크기</div>
+  <div style="font-size:11px;color:var(--txt-mut);">배지 · 캡션 11px / 500</div>
+  <div style="font-size:22px;font-weight:800;color:var(--pb);">348<span class="pcts">%</span>
+    <span style="font-size:11.5px;font-weight:400;color:var(--txt-mut);">← 지표 수치, % 기호만 0.68em</span></div>
 </div>
-<p class="note">탭에 마우스를 올리면 2뎁스가 열립니다. 1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 점이 같은 세로선에서 시작합니다(점은 2뎁스 첫 글자 가운데). 탭이 넘치면 좌우 <code>‹ ›</code> 버튼이 나타납니다.</p>
-
-<h2 id="layout">레이아웃 골격</h2>
+</section>
+<h2 class="grp">레이아웃</h2>
+<section id="layout"><h3>레이아웃 골격</h3>
 <div class="demo" style="padding:0;overflow:hidden;">
   <div style="display:flex;height:150px;">
     <div class="rail" id="rail" style="flex:0 0 58px;"></div>
@@ -86,63 +113,47 @@
 </div>
 <p class="note">상단 GNB 64 · 좌측 레일 58 · 히스토리 네비 30 · 하단 작업 탭 30px. 화면을 열 때마다 작업 탭이 옆으로 쌓입니다.</p>
 
-<h2 id="sec">섹션 · 패널</h2>
+</section>
+<section id="sec"><h3>섹션 · 패널</h3>
 <div class="demo">
   <div class="sectit">예비생 목록<span class="hint">Grid · 정렬 가능</span></div>
   <div class="panel">패널 — 안쪽 여백 14px</div>
 </div>
 
-<h2 id="btn">버튼</h2>
-<div class="demo row">
-  <button class="btn">검색</button>
-  <button class="btn g">초기화</button>
-  <button class="btn s">엑셀</button>
-  <button class="btn danger">삭제</button>
-  <button class="btn sm">작게</button>
-  <button class="btn" disabled>비활성</button>
+</section>
+<h2 class="grp">내비게이션</h2>
+<section id="gnb"><h3>GNB 메뉴 (3뎁스)</h3>
+<div class="demo dark" style="padding:0;">
+  <div class="topnav" style="position:relative;">
+    <div class="brand">PCMS</div>
+    <div class="tabs" id="tabs"></div>
+  </div>
 </div>
-<p class="note">높이 24px(작게 22px). 빨강은 파괴적 동작에만 씁니다.</p>
+<p class="note">탭에 마우스를 올리면 2뎁스가 열립니다. 1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 점이 같은 세로선에서 시작합니다(점은 2뎁스 첫 글자 가운데). 탭이 넘치면 좌우 <code>‹ ›</code> 버튼이 나타납니다.</p>
 
-<h2 id="badge">배지</h2>
+<pre><code>initLayout({ menu: PCMS_GNB_MENU, current: '입학관리',
+            badges: PCMS_GNB_TAB_BADGES,
+            railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre></section>
+<section id="tab"><h3>탭</h3>
 <div class="demo row">
-  <span class="badge">기본</span>
-  <span class="badge has">값 있음</span>
-  <span class="typebadge">타입</span>
-  <span class="statuspill">재원</span>
-  <span class="agebadge">7세</span>
-  <span class="agebadge cur">현재</span>
-  <span class="agebadge mapin">MAP 대상</span>
-  <span class="agebadge mapex">MAP 제외</span>
-  <span class="agebadge mar">3월</span>
+  <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
 </div>
-<div class="demo row">
-  <span class="mapbadge brand">MAP : 44</span>
-  <span class="mapbadge muted">MAP : 0</span>
-  <span class="to-badge now">바로 입학</span>
-  <span class="to-badge mar">신학년 입학</span>
-  <span class="ddaybadge">D-14</span>
-  <span class="ddaybadge warn">D-3</span>
-  <span class="ddaybadge danger">D-DAY</span>
-  <span class="cntbadge">12</span>
-  <span class="tabbadge">NEW</span>
-  <span class="ddbadge">신규</span>
-  <span class="ddbadge muted">준비중</span>
-</div>
-<div class="demo row">
-  <span class="fambadge">가족</span>
-  <span class="waitbadge">대기</span>
-  <span class="rosterbadge">명단</span>
-  <span class="impdupbadge">중복</span>
-  <span class="tbadge">태그</span>
-  <span class="tobadge">TO</span>
-  <span class="qbadge">Q</span>
-  <span class="kpi-badge">78.0%</span>
-  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
-</div>
-<p class="note">굵기는 <b>500</b> 으로 통일돼 있습니다(700 금지). 화면에서 쓰는 배지 계열 <b>22종</b>을 그대로 제공합니다 —
-용도가 정해진 것(<code>agebadge</code> 연령·MAP 대상, <code>to-badge</code> 입학 시기, <code>ddaybadge</code> 잔여일)은 그 용도로만 쓰세요.</p>
+<p class="note"><code>.quickpill</code> 은 <b>컨테이너</b>이고 그 안의 <code>button</code> 이 각 탭입니다(활성은 <code>.on</code>).</p>
 
-<h2 id="table">표 — 가로형 / 세로형</h2>
+</section>
+<section id="page"><h3>페이지네이션</h3>
+<div class="demo" style="padding:0;">
+  <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
+</div>
+<p class="note">실제 화면과 같은 구성입니다 — <code>« ‹ 번호 › »</code> · 페이지 직접 입력 · 새로고침 · 페이지당 개수 · 총 건수.
+<code>KCMS.renderPaging(el, {page, total, size, onPage})</code> 로 그립니다.</p>
+
+<pre><code>KCMS.renderPaging('#paging', {
+  page: 3, total: 1284, size: 30,
+  onPage: function(p){ /* 페이지 이동 */ }
+});</code></pre></section>
+<h2 class="grp">데이터 표시</h2>
+<section id="table"><h3>표 — 가로형 / 세로형</h3>
 <p class="note">업무 화면의 표는 두 가지입니다. <b>가로형</b>은 여러 건을 나열하는 목록(<code>table.grid</code>),
 <b>세로형</b>은 한 건의 항목을 라벨-값으로 보여주는 상세(<code>table.infotbl</code>)입니다.</p>
 
@@ -198,105 +209,50 @@
 <p class="note">검색 조건 표입니다. 라벨 칸 <code>.flabel</code>, 입력 칸 <code>.hascell</code>(테두리 담당), 셀 높이 33px.
 표 상단에는 파란 1px 강조선이 자동으로 붙습니다.</p>
 
-<h2 id="form">폼</h2>
+<pre><code>&lt;div class="tblwrap"&gt;&lt;table class="grid"&gt; … &lt;/table&gt;&lt;/div&gt;   &lt;!-- 가로형(목록) --&gt;
+&lt;table class="infotbl"&gt;&lt;tr&gt;&lt;th&gt;라벨&lt;/th&gt;&lt;td&gt;값&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;  &lt;!-- 세로형(상세) --&gt;
+&lt;table class="fbox"&gt;&lt;tr&gt;&lt;td class="flabel"&gt;라벨&lt;/td&gt;&lt;td class="hascell"&gt;…&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</code></pre></section>
+<section id="badge"><h3>배지 22종</h3>
 <div class="demo row">
-  <span class="flabel">캠퍼스</span>
-  <select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
-  <span class="flabel">학생명</span>
-  <input class="finput" placeholder="이름 입력">
-  <span class="flabel">상태</span>
-  <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
-  <button class="btn">검색</button><button class="btn g">초기화</button>
+  <span class="badge">기본</span>
+  <span class="badge has">값 있음</span>
+  <span class="typebadge">타입</span>
+  <span class="statuspill">재원</span>
+  <span class="agebadge">7세</span>
+  <span class="agebadge cur">현재</span>
+  <span class="agebadge mapin">MAP 대상</span>
+  <span class="agebadge mapex">MAP 제외</span>
+  <span class="agebadge mar">3월</span>
 </div>
 <div class="demo row">
-  <span class="flabel">생년월일</span>
-  <span class="iwrap">
-    <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10">
-    <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
-    <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
-  </span>
-  <span class="flabel">읽기 전용</span><input class="finput roflat" value="한국 (여)" readonly>
-  <span class="flabel">비활성</span><input class="finput" value="수정 불가" disabled>
-  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="checkbox" checked> 재원생만</label>
-  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g" checked> 남</label>
-  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g"> 여</label>
+  <span class="mapbadge brand">MAP : 44</span>
+  <span class="mapbadge muted">MAP : 0</span>
+  <span class="to-badge now">바로 입학</span>
+  <span class="to-badge mar">신학년 입학</span>
+  <span class="ddaybadge">D-14</span>
+  <span class="ddaybadge warn">D-3</span>
+  <span class="ddaybadge danger">D-DAY</span>
+  <span class="cntbadge">12</span>
+  <span class="tabbadge">NEW</span>
+  <span class="ddbadge">신규</span>
+  <span class="ddbadge muted">준비중</span>
 </div>
 <div class="demo row">
-  <span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span>
-  <textarea class="ftextarea" rows="2" style="width:260px" placeholder="상담 메모"></textarea>
-  <div class="form-group" style="width:200px;">
-    <label class="form-label">학부모 연락처<span class="req">*</span></label>
-    <input class="finput" value="010-0000-0000">
-    <span class="form-error">형식을 확인해 주세요.</span>
-  </div>
+  <span class="fambadge">가족</span>
+  <span class="waitbadge">대기</span>
+  <span class="rosterbadge">명단</span>
+  <span class="impdupbadge">중복</span>
+  <span class="tbadge">태그</span>
+  <span class="tobadge">TO</span>
+  <span class="qbadge">Q</span>
+  <span class="kpi-badge">78.0%</span>
+  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
 </div>
-<p class="note">
-  입력·셀렉트·날짜 필드 모두 <b>높이 24px</b>. 포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음).<br>
-  날짜 필드는 <code>.iwrap</code> 안에 [텍스트 입력 + 숨은 <code>input[type=date]</code> + 달력 버튼] 구조입니다 —
-  버튼을 누르면 <code>date-picker.js</code> 의 공통 달력이 열립니다.<br>
-  읽기 전용 값은 <code>.roflat</code>(테두리 없음), 비활성은 <code>disabled</code>.
-  체크박스·라디오는 14px, 브랜드 파랑(<code>accent-color</code>).
-</p>
+<p class="note">굵기는 <b>500</b> 으로 통일돼 있습니다(700 금지). 화면에서 쓰는 배지 계열 <b>22종</b>을 그대로 제공합니다 —
+용도가 정해진 것(<code>agebadge</code> 연령·MAP 대상, <code>to-badge</code> 입학 시기, <code>ddaybadge</code> 잔여일)은 그 용도로만 쓰세요.</p>
 
-<h2 id="tab">탭</h2>
-<div class="demo row">
-  <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
-</div>
-<p class="note"><code>.quickpill</code> 은 <b>컨테이너</b>이고 그 안의 <code>button</code> 이 각 탭입니다(활성은 <code>.on</code>).</p>
-
-<h2 id="modal">모달</h2>
-<div class="demo row">
-  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
-</div>
-<p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
-
-<h2 id="toast">토스트</h2>
-<div class="demo row">
-  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
-  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
-  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
-  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
-  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
-  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
-</div>
-<div class="rule">
-  배경은 의미색을 <b>92% 불투명</b>으로 깔고(<code>color-mix</code>) 글자·아이콘은 흰색입니다.
-  왼쪽 두꺼운 액센트 바를 쓰지 않고, <b>문구에 이모지를 넣지 않습니다.</b> 최대 4개까지 쌓입니다.
-  <b>타입을 생략하면 기본은 neutral</b> 이고, 문구에 뚜렷한 단서가 있을 때만 그쪽으로 추정합니다 —
-  <code>되었습니다·완료·성공·저장했</code> → success, <code>주세요·하세요·필수·확인해</code> → warning,
-  <code>수 없·실패·오류·불가</code> → danger. 어디에도 걸리지 않으면 neutral 입니다.
-</div>
-
-<h2 id="date">날짜 선택</h2>
-<div class="demo row">
-  <span class="flabel">생년월일</span>
-  <span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span>
-</div>
-<p class="note">오늘 = 파란 원 채움 + 흰 글자 / 선택일 = 파란 테두리 링. 파랑은 <code>#0066FF</code> 한 가지만 씁니다.</p>
-
-<h2 id="page">페이지네이션</h2>
-<div class="demo" style="padding:0;">
-  <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
-</div>
-<p class="note">실제 화면과 같은 구성입니다 — <code>« ‹ 번호 › »</code> · 페이지 직접 입력 · 새로고침 · 페이지당 개수 · 총 건수.
-<code>KCMS.renderPaging(el, {page, total, size, onPage})</code> 로 그립니다.</p>
-
-<h2 id="csel">커스텀 셀렉트</h2>
-<div class="demo row">
-  <span class="flabel">과정</span>
-  <span style="width:150px;display:inline-block;">
-    <select data-csel><option>전체 과정</option><option>ECP</option><option>ELE</option><option>GRAD</option></select>
-  </span>
-  <span class="flabel">레벨</span>
-  <span style="width:110px;display:inline-block;">
-    <select data-csel><option>전체</option><option>GT1</option><option>MGT2</option></select>
-  </span>
-</div>
-<p class="note">네이티브 <code>select</code> 의 목록은 브라우저가 그려서 라운드·정렬을 맞출 수 없습니다.
-원본 <code>select</code> 는 그대로 두고 표시용 위젯을 씌워, 목록이 박스 바로 아래·같은 라운드로 열립니다.
-<code>data-csel</code> 만 붙이면 <code>initLayout()</code> 이 변환합니다.</p>
-
-<h2 id="extra">Kit 보강 컴포넌트</h2>
+</section>
+<section id="extra"><h3>지표 · 카드 · 보강 컴포넌트</h3>
 <p class="note">입학관리 화면에는 없지만 업무 화면에 필요해 KCMS 톤으로 채운 것들입니다.</p>
 <div class="demo row">
   <span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span>
@@ -342,8 +298,120 @@
   </div>
 </div>
 
+</section>
+<h2 class="grp">입력</h2>
+<section id="form"><h3>폼 컨트롤</h3>
+<div class="demo row">
+  <span class="flabel">캠퍼스</span>
+  <select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
+  <span class="flabel">학생명</span>
+  <input class="finput" placeholder="이름 입력">
+  <span class="flabel">상태</span>
+  <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+  <button class="btn">검색</button><button class="btn g">초기화</button>
+</div>
+<div class="demo row">
+  <span class="flabel">생년월일</span>
+  <span class="iwrap">
+    <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10">
+    <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
+    <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+  </span>
+  <span class="flabel">읽기 전용</span><input class="finput roflat" value="한국 (여)" readonly>
+  <span class="flabel">비활성</span><input class="finput" value="수정 불가" disabled>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="checkbox" checked> 재원생만</label>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g" checked> 남</label>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g"> 여</label>
+</div>
+<div class="demo row">
+  <span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span>
+  <textarea class="ftextarea" rows="2" style="width:260px" placeholder="상담 메모"></textarea>
+  <div class="form-group" style="width:200px;">
+    <label class="form-label">학부모 연락처<span class="req">*</span></label>
+    <input class="finput" value="010-0000-0000">
+    <span class="form-error">형식을 확인해 주세요.</span>
+  </div>
+</div>
+<p class="note">
+  입력·셀렉트·날짜 필드 모두 <b>높이 24px</b>. 포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음).<br>
+  날짜 필드는 <code>.iwrap</code> 안에 [텍스트 입력 + 숨은 <code>input[type=date]</code> + 달력 버튼] 구조입니다 —
+  버튼을 누르면 <code>date-picker.js</code> 의 공통 달력이 열립니다.<br>
+  읽기 전용 값은 <code>.roflat</code>(테두리 없음), 비활성은 <code>disabled</code>.
+  체크박스·라디오는 14px, 브랜드 파랑(<code>accent-color</code>).
+</p>
+
+<pre><code>&lt;span class="iwrap"&gt;
+  &lt;input type="text" class="finput dateinput" placeholder="연도-월-일"&gt;
+  &lt;input type="date" class="dateshadow" tabindex="-1" aria-hidden="true"&gt;
+  &lt;button class="ibtn"&gt;달력&lt;/button&gt;
+&lt;/span&gt;</code></pre></section>
+<section id="csel"><h3>커스텀 셀렉트</h3>
+<div class="demo row">
+  <span class="flabel">과정</span>
+  <span style="width:150px;display:inline-block;">
+    <select data-csel><option>전체 과정</option><option>ECP</option><option>ELE</option><option>GRAD</option></select>
+  </span>
+  <span class="flabel">레벨</span>
+  <span style="width:110px;display:inline-block;">
+    <select data-csel><option>전체</option><option>GT1</option><option>MGT2</option></select>
+  </span>
+</div>
+<p class="note">네이티브 <code>select</code> 의 목록은 브라우저가 그려서 라운드·정렬을 맞출 수 없습니다.
+원본 <code>select</code> 는 그대로 두고 표시용 위젯을 씌워, 목록이 박스 바로 아래·같은 라운드로 열립니다.
+<code>data-csel</code> 만 붙이면 <code>initLayout()</code> 이 변환합니다.</p>
+
+<pre><code>&lt;select data-csel&gt;&lt;option&gt;전체 과정&lt;/option&gt;&lt;/select&gt;
+&lt;!-- initLayout() 이 자동 변환. 원본 select 가 남아 있어 value·change 는 그대로 --&gt;</code></pre></section>
+<section id="btn"><h3>버튼</h3>
+<div class="demo row">
+  <button class="btn">검색</button>
+  <button class="btn g">초기화</button>
+  <button class="btn s">엑셀</button>
+  <button class="btn danger">삭제</button>
+  <button class="btn sm">작게</button>
+  <button class="btn" disabled>비활성</button>
+</div>
+<p class="note">높이 24px(작게 22px). 빨강은 파괴적 동작에만 씁니다.</p>
+
+</section>
+<h2 class="grp">피드백 · 오버레이</h2>
+<section id="toast"><h3>토스트</h3>
+<div class="demo row">
+  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
+  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
+  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
+  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
+  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
+  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
+</div>
+<div class="rule">
+  배경은 의미색을 <b>92% 불투명</b>으로 깔고(<code>color-mix</code>) 글자·아이콘은 흰색입니다.
+  왼쪽 두꺼운 액센트 바를 쓰지 않고, <b>문구에 이모지를 넣지 않습니다.</b> 최대 4개까지 쌓입니다.
+  <b>타입을 생략하면 기본은 neutral</b> 이고, 문구에 뚜렷한 단서가 있을 때만 그쪽으로 추정합니다 —
+  <code>되었습니다·완료·성공·저장했</code> → success, <code>주세요·하세요·필수·확인해</code> → warning,
+  <code>수 없·실패·오류·불가</code> → danger. 어디에도 걸리지 않으면 neutral 입니다.
 </div>
 
+<pre><code>KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
+KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></section>
+<section id="modal"><h3>모달</h3>
+<div class="demo row">
+  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
+</div>
+<p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
+
+<pre><code>KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
+KCMS.closeModal('myModal');
+KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre></section>
+<section id="date"><h3>날짜 선택</h3>
+<div class="demo row">
+  <span class="flabel">생년월일</span>
+  <span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span>
+</div>
+<p class="note">오늘 = 파란 원 채움 + 흰 글자 / 선택일 = 파란 테두리 링. 파랑은 <code>#0066FF</code> 한 가지만 씁니다.</p>
+
+</section>
+</main></div>
 <div class="modal-ov" id="demoModal">
   <div class="modal-box" style="width:520px;">
     <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" onclick="KCMS.closeModal('demoModal')">✕</button></div>
@@ -378,6 +446,14 @@
     if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });
   KCMS.bindModals();   /* 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
+</script>
+<script>
+  var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  function spy(){ var y=window.scrollY+130, cur=0;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
+    links.forEach(function(a,i){ a.classList.toggle('on', i===cur); }); }
+  window.addEventListener('scroll', spy); spy();
 </script>
 </body>
 </html>

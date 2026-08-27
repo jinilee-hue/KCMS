@@ -41,12 +41,22 @@
 
 - **버튼** `.btn`(주요) / `.btn.g`(보조) / `.btn.s`(시스템) / `.btn.danger`(파괴적 동작만)
   일상적인 삭제·닫기 버튼에 **빨강을 쓰지 않는다** — 중립 톤(`#D7DDE6` hover).
-- **배지** 굵기 **500**(700 금지), 알약형은 `.pill`.
-- **표** 헤더 `#F4F7FD` 33px 고정. 숫자 칸은 `.num`(우측 정렬 + 등폭). 2단 헤더만 `.grp`.
+- **배지** 굵기 **500** 고정(700 금지). 용도가 정해진 배지는 그 용도로만 쓴다 —
+  `agebadge`(연령·MAP 대상) · `to-badge`(입학 시기) · `ddaybadge`(잔여일) · `mapbadge`(MAP 건수) ·
+  `cntbadge`(개수) · `statuspill`(상태) · `typebadge`(구분). 그 외 일반 표시는 `.badge`.
+- **표 — 두 형식만 쓴다.**
+  · **가로형(목록)** `.tblwrap > table.grid` — 헤더 33px 고정(sticky) · 셀 24px · 짝수 행 줄무늬 · 선택 행 `.sel`
+  · **세로형(상세)** `table.infotbl` — 라벨 `th` 92px `#F4F7FD` 가운데 정렬, 한 행에 라벨-값 2쌍
+  · 검색 조건은 `table.fbox` (`.flabel` + `.hascell`, 셀 33px, 상단 파란 1px 선)
+  숫자 칸 `.num`(우측 정렬 + 등폭), 2단 헤더 `.grp`.
 - **탭** 상위는 밑줄형 `.ptab`, 하위 필터는 알약형 `.quickpill`. **토글 스위치형 금지.**
-- **모달** `.modal-ov > .modal-box > (.modal-hd + .modal-body + .modal-ft)`.
-  헤더 드래그로 이동, Esc·오버레이 클릭으로 닫힘. `KCMS.openModal(id)` / `closeModal(id)`.
-- **토스트** `KCMS.toast(msg, type, title)` — type: `success` `warning` `danger` 생략(neutral).
+- **모달** `.modal-ov > .modal-box > (.modal-hd + .modal-body + .modal-foot)`.
+  **여는 클래스는 `.open`** (`.modal-ov.open{display:flex}`). 헤더 드래그로 이동, Esc·오버레이 클릭으로 닫힘.
+  `KCMS.openModal(id)` / `closeModal(id)` / `bindModals()`.
+- **토스트** `KCMS.toast(msg, type)` — `success` · `warning` · `danger` · `neutral`.
+  **타입을 생략하면 기본은 neutral**, 문구에 뚜렷한 단서가 있을 때만 추정해서 올린다
+  (`되었습니다·완료` → success / `주세요·필수·확인해` → warning / `수 없·실패·오류` → danger).
+  배경은 의미색 **70% 불투명**(color-mix) + 흰 글자. 최대 4개 스택.
   왼쪽 두꺼운 액센트 바 금지. **문구에 이모지 금지.** 최대 3개까지 쌓인다.
 - **달력** 오늘 = 파란 원 채움 + 흰 글자 / 선택일 = 파란 테두리 링. 파랑은 `#0066FF` 한 가지만.
 - **% 표기** 숫자는 800 굵기, `%` 기호만 `0.68em`(`<span class="pcts">%</span>`).
@@ -59,6 +69,15 @@
 
 > 점을 `position:absolute; left:-10px` 로 바깥에 띄우지 말 것 — 열 사이 여백(26px)을 파고들어
 > 열 간격이 좌 16 / 우 26 으로 비대칭이 된다.
+
+## 4-1. 폼 · 셀렉트 · 페이지네이션
+
+- 입력·셀렉트·날짜 필드 **높이 24px**, 포커스는 **테두리 색만** 파랑(링·그림자 없음).
+- 날짜 필드는 `.iwrap` 안에 [텍스트 입력 + 숨은 `input[type=date]` + 달력 버튼] 구조.
+- 목록이 잘리면 안 되는 셀렉트는 `data-csel` 을 붙여 **커스텀 셀렉트**로 만든다
+  (원본 `select` 가 남아 있어 `value`·`change` 는 그대로).
+- 페이지네이션은 `KCMS.renderPaging(el, {page, total, size, onPage})` —
+  `« ‹ 번호 › »` · 페이지 직접 입력 · 새로고침 · 페이지당 개수 · 총 건수가 한 줄에 들어간다.
 
 ## 5. 하단 작업 탭
 
