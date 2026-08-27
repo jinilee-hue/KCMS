@@ -12,10 +12,21 @@
   /* ── 가이드 문서 셸 ─────────────────────────────────────────────
      컴포넌트 하나 = 카드 하나. 카드 안에서 소제목은 조용한 라벨로 두고,
      예시는 테두리 없이 옅은 배경 위에 올려 테두리가 겹치지 않게 한다. */
-  html,body{margin:0;padding:0;background:#F4F6F9;color:var(--txt);}
-  .wrap{display:flex;align-items:flex-start;min-height:100vh;}
+  html,body{margin:0;padding:0;height:100%;background:#F4F6F9;color:var(--txt);}
+  .app{height:100vh;}
+  .content{background:#F4F6F9;padding:0;display:block;overflow-y:auto;overflow-x:hidden;}
+  .guide{display:flex;align-items:flex-start;min-height:100%;}
 
-  .nav{position:sticky;top:0;flex:0 0 220px;height:100vh;overflow-y:auto;background:var(--gnb);padding:22px 0 28px;}
+  .guide .nav{position:sticky;top:0;flex:0 0 200px;align-self:flex-start;max-height:calc(100vh - 124px);overflow-y:auto;
+    background:#fff;border-right:1px solid var(--line-soft);padding:18px 0 24px;}
+  .guide .nav-brand{color:var(--txt);}
+  .guide .nav-sub{color:var(--txt-mut);}
+  .guide .nav-group{color:#9aa8bd;}
+  .guide .nav a{color:var(--txt-mut);}
+  .guide .nav a:hover{background:var(--pb-a08);color:var(--pb);}
+  .guide .nav a.on{background:var(--pb-light);color:var(--pb);border-left-color:var(--pb);font-weight:700;}
+  .guide .nav-foot{border-top-color:var(--line-soft);}
+  .guide .nav-foot a{color:var(--pb);}
   .nav-brand{padding:0 20px;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.3;}
   .nav-sub{padding:4px 20px 18px;font-size:11px;color:#93a4bd;}
   .nav-group{padding:16px 20px 6px;font-size:10px;font-weight:800;color:#8fa2bd;letter-spacing:1px;}
@@ -44,6 +55,15 @@
   /* 카드 안 소제목 — 조용한 라벨 */
   h4.sub{font-size:10.5px;font-weight:800;color:#8794a8;letter-spacing:.7px;margin:24px 0 10px;}
   section > .card > .card-body > h4.sub:first-child{margin-top:0;}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;}
+  .chips b{display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 10px;border-radius:999px;
+    background:#EFF3F9;color:#5b6d85;font-size:11px;font-weight:600;letter-spacing:-.1px;}
+  .chips b i{font-style:normal;font-weight:800;color:var(--gnb);}
+  .chips b.ok{background:var(--pb-light);color:var(--pb-deeper);}
+  .chips b.ok i{color:var(--pb-deeper);}
+  .chips b.no{background:#FDEDED;color:#b4373b;}
+  .chips b.no i{color:#b4373b;}
+  .chips b.no::before{content:'\2715';font-size:9px;font-weight:800;}
   .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.8;margin:10px 0 0;}
 
   /* 예시 — 카드 안이므로 테두리 없이 옅은 배경 */
@@ -84,7 +104,26 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+
+<div class="app">
+  <!-- 실제 화면과 같은 셸 안에서 컴포넌트를 봅니다 -->
+  <div class="topnav">
+    <div class="brand">PCMS</div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <div class="lower">
+    <div class="rail" id="rail"></div>
+    <div class="main">
+      <div class="bcbar">
+        <span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
+        디자인 Kit &rsaquo; <b>컴포넌트 가이드</b>
+        <span class="meta">기준 화면 PCMS-SCR-ET-02-012</span>
+        <span class="bctools">
+          <button class="bcic star" title="즐겨찾기" aria-label="즐겨찾기"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg></button>
+        </span>
+      </div>
+      <div class="content" id="guideContent">
+        <div class="guide">
 <aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
 <div class="nav-group">기초</div>
 <a href="#start">시작하기</a>
@@ -109,8 +148,7 @@
 <a href="#toast">토스트</a>
 <a href="#help">도움말 팝오버</a><a href="#modal">모달</a>
 <a href="#date">날짜 선택</a>
-<div class="nav-group">규칙</div><a href="#rules">Do / Don’t</a><a href="#a11y">접근성 · 키보드</a><div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside>
-<main class="doc"><header class="doc-hd">
+<div class="nav-group">규칙</div><a href="#rules">Do / Don’t</a><a href="#a11y">접근성 · 키보드</a><div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside><main class="doc"><header class="doc-hd">
   <h1>컴포넌트 가이드</h1>
   <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다 —
   <code>common.css</code> 는 새로 쓴 게 아니라 화면의 CSS 를 추출한 것이기 때문입니다.</p>
@@ -142,8 +180,7 @@
 </div></div></section>
 <section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
 
-<p class="note">서체는 <b>Pretendard</b>(없으면 맑은 고딕)입니다. 업무 화면은 한 화면에 많은 정보를 담기 때문에
-본문 기준이 <b>11.5px</b> 로 낮고, 크기 단계도 6개로 좁습니다. 단계를 늘리지 마세요.</p>
+<div class="chips"><b>Pretendard</b><b>본문 <i>11.5px</i></b><b>크기 단계 <i>6개</i></b><b class="no">단계 추가 금지</b></div>
 
 <h4 class="sub">① 크기 단계</h4>
 <div data-cls="타이포 스케일" class="demo flush">
@@ -222,7 +259,7 @@
 </div></div></section>
 
 <section id="token"><div class="card"><div class="card-header"><div class="card-title">토큰 — 간격 · 라운드 · 그림자 · 아이콘</div></div><div class="card-body">
-<p class="note">아래 값은 화면 CSS 에서 실제로 쓰인 빈도를 세어 정리한 것입니다. 새 값을 만들지 말고 이 안에서 고르세요.</p>
+<div class="chips"><b>화면 CSS 사용 빈도 기준</b><b class="no">새 값 만들지 않기</b></div>
 
 <h4 class="sub">간격</h4>
 <div class="demo flush" data-cls="gap / padding">
@@ -254,7 +291,7 @@
   <span style="display:inline-flex;align-items:center;justify-content:center;width:130px;height:46px;background:#fff;border-radius:5px;box-shadow:0 10px 28px rgba(15,30,60,.34);font-size:11px;">토스트</span>
   <span style="display:inline-flex;align-items:center;justify-content:center;width:130px;height:46px;background:#fff;border-radius:5px;box-shadow:0 14px 44px rgba(0,0,0,.4);font-size:11px;">모달</span>
 </div>
-<p class="note">떠 있는 정도에 따라 세 단계만 씁니다. 카드·패널·표에는 그림자를 쓰지 않고 <b>1px 테두리</b>로 구분합니다.</p>
+<div class="chips"><b>그림자 <i>3단계</i></b><b class="no">카드·패널·표 그림자 금지</b><b>구분은 1px 테두리</b></div>
 
 <h4 class="sub">아이콘</h4>
 <div class="demo row" data-cls="viewBox 0 0 24 24">
@@ -265,8 +302,7 @@
   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
   <span style="font-size:11px;color:var(--txt-mut);">19px — 좌측 레일</span>
 </div>
-<p class="note">전부 <code>viewBox="0 0 24 24"</code> 선 아이콘입니다. 굵기 <b>1.8</b>(기본) · 2(작은 크기),
-<code>stroke-linecap/linejoin: round</code>, 색은 <code>currentColor</code> 로 글자색을 따라갑니다. 채움 아이콘은 쓰지 않습니다.</p>
+<div class="chips"><b>viewBox <i>0 0 24 24</i></b><b>굵기 <i>1.8 / 2</i></b><b>linecap <i>round</i></b><b>색 <i>currentColor</i></b><b class="no">채움 아이콘 금지</b></div>
 </div></div></section>
 
 <h2 class="grp">레이아웃</h2>
@@ -284,13 +320,12 @@
     </div>
   </div>
 </div>
-<p class="note">상단 GNB 64 · 좌측 레일 58 · 히스토리 네비 30 · 하단 작업 탭 30px. 화면을 열 때마다 작업 탭이 옆으로 쌓입니다.</p>
+<div class="chips"><b>GNB <i>64</i></b><b>레일 <i>58</i></b><b>히스토리 네비 <i>30</i></b><b>작업 탭 <i>30</i></b><b>작업 탭은 옆으로 누적</b></div>
 
 </div></div></section>
 <section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 · 패널</div></div><div class="card-body">
 
-<p class="note">화면 안에서 내용을 묶는 세 가지입니다. <b>섹션 제목</b>이 영역을 열고, <b>패널</b>이 내용을 담고,
-<b>액션바</b>가 그 영역의 버튼을 오른쪽에 모읍니다.</p>
+<div class="chips"><b>섹션 제목 <i>영역을 연다</i></b><b>패널 <i>내용을 담는다</i></b><b>액션바 <i>버튼을 모은다</i></b></div>
 
 <h4 class="sub">① 조각별</h4>
 <div data-cls=".sectit / .panel / .actions" class="demo flush">
@@ -332,8 +367,7 @@
   </div>
   <div class="paging" id="pagingSample"></div>
 </div>
-<p class="note">순서는 항상 <b>섹션 제목 → 액션바 → 내용 → 페이징</b> 입니다.
-액션바의 버튼은 오른쪽, 건수·상태 표시는 왼쪽에 둡니다.</p>
+<div class="chips"><b>① 섹션 제목</b><b>② 액션바</b><b>③ 내용</b><b>④ 페이징</b><b>버튼 <i>오른쪽</i></b><b>건수·상태 <i>왼쪽</i></b></div>
 
 <h4 class="sub">③ 여백 규칙</h4>
 <div class="rule">
@@ -353,15 +387,14 @@
     <div class="tabs" id="tabs"></div>
   </div>
 </div>
-<p class="note">탭에 마우스를 올리면 2뎁스가 열립니다. 1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 점이 같은 세로선에서 시작합니다(점은 2뎁스 첫 글자 가운데). 탭이 넘치면 좌우 <code>‹ ›</code> 버튼이 나타납니다.</p>
+<div class="chips"><b>hover 로 2뎁스</b><b>1·2뎁스 <i>좌측선 일치</i></b><b>3뎁스 점 <i>+3.2px</i></b><b>넘치면 ‹ ›</b></div>
 
 <pre><code>initLayout({ menu: PCMS_GNB_MENU, current: '입학관리',
             badges: PCMS_GNB_TAB_BADGES,
             railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre></div></div></section>
 <section id="tab"><div class="card"><div class="card-header"><div class="card-title">탭 — 3종</div></div><div class="card-body">
 
-<p class="note">깊이에 따라 <b>상위 → 하위</b> 두 단계를 쓰고, 같은 목록을 거르거나 값을 바꿀 때만 <b>토글</b>을 씁니다.
-세 개의 모양이 서로 달라야 어느 것이 상위인지 한눈에 보입니다.</p>
+<div class="chips"><b>상위 <i>.tabs</i></b><b>하위 <i>.quickpill</i></b><b>토글 <i>.seg</i></b><b class="ok">세 모양이 서로 달라야 한다</b></div>
 
 <h4 class="sub">① 상위 탭 — 밑줄형 (.dtabs / .dtab)</h4>
 <div class="demo flush" data-cls=".dtab">
@@ -371,24 +404,19 @@
   </div>
   <div style="padding:14px;font-size:11.5px;color:var(--txt-mut);">선택한 탭의 내용 영역</div>
 </div>
-<p class="note">화면의 큰 단위를 가릅니다. 12px/700 · 아래 <b>3px 파란 밑줄</b> · 컨테이너 하단 1px 선.</p>
+<div class="chips"><b>12px / 700</b><b>밑줄 <i>3px</i></b><b>컨테이너 하단 <i>1px</i></b></div>
 
 <h4 class="sub">② 하위 탭 — 알약형 (.quickpill)</h4>
 <div class="demo row" data-cls=".quickpill">
   <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
 </div>
-<p class="note">상위 탭 안에서 목록을 나눌 때 씁니다. 버튼 <b>22px · 라운드 999px</b> · 11px,
-활성은 파랑 채움 + 흰 글자. 컨테이너는 배경 없이 <code>gap:6px</code> 로만 띄웁니다.</p>
+<div class="chips"><b>버튼 <i>22px</i></b><b>라운드 <i>999px</i></b><b>11px</b><b>활성 <i>파랑 채움</i></b><b>gap <i>6px</i></b><b class="no">컨테이너 배경 금지</b></div>
 
 <h4 class="sub">③ 토글 — 붙은 라운드 박스 (.seg)</h4>
 <div class="demo row" data-cls=".seg">
   <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
 </div>
-<p class="note">
-  값을 바꾸는 스위치입니다(탭이 아닙니다). 바깥 <b>라운드 8px · 안쪽 여백 1px</b>, 버튼 <b>20px</b>,
-  <b>버튼 사이 구분선은 넣지 않습니다</b> — 활성 버튼만 파랑으로 채우고 라운드 6px + 옅은 그림자로 떠 보이게 합니다.<br>
-  표 칸에 꽉 채워야 하면 <code>.seg.gender</code> 를 씁니다 — 바깥 라운드 3px, 버튼 라운드 0으로 각지게 들어갑니다(성별 칸 등).
-</p>
+<div class="chips"><b class="no">탭 아님 — 값 전환</b><b>바깥 <i>8px</i></b><b>버튼 <i>20px</i></b><b>활성 <i>6px + 그림자</i></b><b class="no">버튼 사이 구분선 금지</b><b>예외 <i>.seg.gender 3px</i></b></div>
 
 <div class="rule">
   <b>어떤 걸 쓸지</b><br>
@@ -403,8 +431,7 @@
 <div data-cls=".paging" class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
-<p class="note">실제 화면과 같은 구성입니다 — <code>« ‹ 번호 › »</code> · 페이지 직접 입력 · 새로고침 · 페이지당 개수 · 총 건수.
-<code>KCMS.renderPaging(el, {page, total, size, onPage})</code> 로 그립니다.</p>
+<div class="chips"><b>« ‹ 번호 › »</b><b>페이지 직접 입력</b><b>새로고침</b><b>페이지당 개수</b><b>총 건수</b></div>
 
 <pre><code>KCMS.renderPaging('#paging', {
   page: 3, total: 1284, size: 30,
@@ -412,9 +439,7 @@
 });</code></pre></div></div></section>
 <h2 class="grp">데이터 표시</h2>
 <section id="table"><div class="card"><div class="card-header"><div class="card-title">표 — 가로형 / 세로형</div></div><div class="card-body">
-<p class="note">업무 화면의 표는 <b>두 가지</b>입니다. <b>가로형</b>은 여러 건을 나열하는 목록(<code>table.grid</code>),
-<b>세로형</b>은 한 건을 라벨-값으로 보여주는 상세(<code>table.infotbl</code>)입니다.
-검색 조건은 표가 아니라 <a href="#tsel">트리 셀렉트</a><a href="#form">폼 컨트롤</a>의 필터 줄로 다룹니다.</p>
+<div class="chips"><b>가로형 <i>table.grid · 목록</i></b><b>세로형 <i>table.infotbl · 상세</i></b><b>검색 조건 <i>필터 줄</i></b></div>
 
 <h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
 <div data-cls="table.grid / table.infotbl" class="demo flush">
@@ -433,8 +458,7 @@
     </table>
   </div>
 </div>
-<p class="note">헤더 33px(스크롤해도 고정) · 셀 24px · 짝수 행 줄무늬 · 선택 행 <code>.sel</code> · 정렬 가능 헤더 <code>.sortable</code>.
-표는 <code>.tblwrap</code> 안에 넣습니다.</p>
+<div class="chips"><b>헤더 <i>33px 고정</i></b><b>셀 <i>24px</i></b><b>짝수 행 줄무늬</b><b>선택 <i>.sel</i></b><b>정렬 <i>.sortable</i></b><b>감싸기 <i>.tblwrap</i></b></div>
 
 <h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">② 세로형 — 상세 (table.infotbl)</h3>
 <div class="demo">
@@ -449,8 +473,7 @@
         <td><span class="seg"><button class="on">남</button><button>여</button></span></td></tr>
   </table>
 </div>
-<p class="note">라벨 칸은 <code>th</code>(92px · <code>#F4F7FD</code> · 가운데 정렬), 값 칸은 <code>td</code>. 한 행에 라벨-값 쌍을 2개까지 넣습니다.
-읽기 전용 값은 <code>.roflat</code> 을 붙여 입력창 테두리를 없앱니다.</p>
+<div class="chips"><b>라벨 th <i>92px · #F4F7FD</i></b><b>라벨 정렬 <i>가운데</i></b><b>한 행 <i>라벨-값 2쌍</i></b><b>읽기 전용 <i>.roflat</i></b></div>
 
 <pre><code>&lt;div class="tblwrap"&gt;&lt;table class="grid"&gt; … &lt;/table&gt;&lt;/div&gt;   &lt;!-- 가로형(목록) --&gt;
 &lt;table class="infotbl"&gt;&lt;tr&gt;&lt;th&gt;라벨&lt;/th&gt;&lt;td&gt;값&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;  &lt;!-- 세로형(상세) --&gt;
@@ -491,13 +514,12 @@
   <span class="kpi-badge">78.0%</span>
   <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
 </div>
-<p class="note">굵기는 <b>500</b> 으로 통일돼 있습니다(700 금지). 화면에서 쓰는 배지 계열 <b>22종</b>을 그대로 제공합니다 —
-용도가 정해진 것(<code>agebadge</code> 연령·MAP 대상, <code>to-badge</code> 입학 시기, <code>ddaybadge</code> 잔여일)은 그 용도로만 쓰세요.</p>
+<div class="chips"><b>굵기 <i>500</i></b><b class="no">700 금지</b><b>계열 <i>22종</i></b><b>용도 고정 <i>agebadge · to-badge · ddaybadge</i></b></div>
 
 </div></div></section>
 <section id="extra"><div class="card"><div class="card-header"><div class="card-title">지표 · 상태 표시</div></div><div class="card-body">
 
-<p class="note">수치를 보여 주는 조각들입니다. 입력 컨트롤은 <a href="#form">폼</a>, 묶는 상자는 <a href="#sec">섹션 · 패널</a>,\n증감 수치와 점 배지는 <a href="#type">타이포</a> · <a href="#badge">배지</a>에 있습니다.</p>
+<div class="chips"><b>수치 표시 전용</b><b>입력→폼</b><b>상자→섹션·패널</b><b>증감·점→타이포·배지</b></div>
 
 <div data-cls=".progress-track / .avatar / .period-tab" class="demo flush">
   <table class="type-spec">
@@ -525,8 +547,7 @@
 <h2 class="grp">입력</h2>
 <section id="tsel"><div class="card"><div class="card-header"><div class="card-title">트리 셀렉트</div></div><div class="card-body">
 
-<p class="note">과정 → 레벨 → 반 처럼 <b>계층이 있는 값</b>을 고를 때 씁니다. 겉모양은 커스텀 셀렉트와 같고 목록만 트리로 펼쳐집니다.
-상위 노드는 펼침/접힘만 하고, <b>잎 노드만 선택</b>됩니다.</p>
+<div class="chips"><b>과정 › 레벨 › 반</b><b>잎 노드만 선택</b><b>상위 노드 <i>펼침·접힘만</i></b></div>
 
 <div class="demo row" data-cls=".tsel">
   <span class="flabel">학급</span>
@@ -556,12 +577,7 @@
   <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
 </div>
 
-<p class="note">
-  깊이는 들여쓰기(<code>data-depth</code> 0·1·2)로 나타내고, 접힘 화살표는 펼치면 90° 돌아갑니다.
-  오른쪽 끝의 회색 숫자(<code>data-count</code>)는 하위 개수처럼 참고값을 넣을 때 씁니다.<br>
-  값은 숨은 <code>input[type=hidden]</code> 에 들어가고 <code>change</code> 가 발생하므로,
-  폼 전송·검증 코드는 일반 <code>select</code> 와 같은 방식으로 붙이면 됩니다.
-</p>
+<div class="chips"><b>깊이 <i>data-depth 0·1·2</i></b><b>화살표 <i>펼치면 90°</i></b><b>참고값 <i>data-count</i></b><b>값 <i>hidden input + change</i></b></div>
 
 <pre><code>&lt;span class="tsel" data-tree data-placeholder="학급 선택"&gt;
   &lt;ul&gt;
@@ -577,8 +593,7 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
 
 <section id="form"><div class="card"><div class="card-header"><div class="card-title">폼 컨트롤</div></div><div class="card-body">
 
-<p class="note">모든 입력 컨트롤은 <b>높이 24px</b>, 테두리 <code>#CFD6E0</code> 1px, 라운드 3px, 글자 11.5px 입니다.
-포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음 — 표가 빽빽한 업무 화면에서 링은 시끄럽습니다).</p>
+<div class="chips"><b>높이 <i>24px</i></b><b>테두리 <i>#CFD6E0 1px</i></b><b>라운드 <i>3px</i></b><b>글자 <i>11.5px</i></b><b>포커스 <i>테두리 색만</i></b><b class="no">포커스 링·그림자 금지</b></div>
 
 <h4 class="sub">① 텍스트 입력 — 상태별</h4>
 <div data-cls=".finput / .fselect / .seg" class="demo">
@@ -616,9 +631,7 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
   · <b>트리 <code>.tsel</code></b> — 값에 계층이 있을 때 (과정 → 레벨 → 반)<br>
   세 가지의 <b>박스 모양은 모두 같습니다</b>(24px · 라운드 3px · 오른쪽 v 화살표). 다른 건 열렸을 때의 목록뿐입니다.
 </div>
-<p class="note"><b>커스텀 셀렉트</b>는 <code>data-csel</code> 만 붙이면 <code>initLayout()</code> 이 변환합니다.
-원본 <code>select</code> 가 DOM 에 그대로 남아 <code>value</code>·<code>change</code> 는 손대지 않아도 됩니다.
-목록은 <code>position:fixed</code> 로 띄워 <code>.content</code> 의 <code>overflow</code> 에 잘리지 않습니다.</p>
+<div class="chips"><b>변환 <i>data-csel</i></b><b>원본 select 유지</b><b>목록 <i>position:fixed</i></b><b>잘림 없음</b></div>
 <h4 class="sub">③ 날짜 · 검색</h4>
 <div class="demo">
   <table class="spec">
@@ -660,8 +673,7 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
     <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
   </div>
 </div>
-<p class="note">필터가 많아 한 줄에 안 들어가면 <code>table.fbox</code>(라벨 칸 <code>.flabel</code> + 입력 칸 <code>.hascell</code>, 셀 33px) 로 감쌉니다.
-회색 띠가 필요하면 <code>.filters.gray</code>.</p>
+<div class="chips"><b>감싸기 <i>table.fbox</i></b><b>라벨 칸 <i>.flabel</i></b><b>입력 칸 <i>.hascell</i></b><b>셀 <i>33px</i></b><b>회색 띠 <i>.filters.gray</i></b></div>
 
 <div class="rule">
   <b>규격 요약</b> — 입력·셀렉트·날짜·검색상자 <b>24px</b> · 세그먼트 버튼 24px · 토글 18px · 체크/라디오 14px<br>
@@ -701,7 +713,7 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
 </div></div></section>
 
 <section id="state"><div class="card"><div class="card-header"><div class="card-title">상태 — 기본 · hover · 포커스 · 선택 · 비활성</div></div><div class="card-body">
-<p class="note">같은 컴포넌트라도 상태 표현은 한 규칙을 따릅니다.</p>
+<div class="chips"><b>hover</b><b>active</b><b>focus</b><b>disabled</b><b>비활성 · 읽기 전용</b><b>한 컴포넌트 <i>한 규칙</i></b></div>
 <div class="demo flush" data-cls="상태 매트릭스">
   <table class="type-spec">
     <thead><tr><th>컴포넌트</th><th>기본</th><th>hover</th><th>선택 · 포커스</th><th>비활성</th></tr></thead>
@@ -774,24 +786,21 @@ KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 
     </div>
   </span>
 </div>
-<p class="note">용어·규칙을 설명할 때 씁니다. <code>.helpwrap</code> 안에 <code>.helpbtn</code>(16px 원형)과
-<code>.helppop</code>(흰 박스 · 1px 테두리 · 라운드 5px)을 두고, 버튼을 누르면 팝오버가 열립니다.
-설명이 길면 <code>.hp-sec</code> 로 문단을 나눕니다.</p>
+<div class="chips"><b>버튼 <i>.helpbtn 16px 원형</i></b><b>팝오버 <i>.helppop</i></b><b>라운드 <i>5px</i></b><b>문단 <i>.hp-sec</i></b></div>
 </div></div></section>
 
 <section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
 <div data-cls=".modal-ov" class="demo row">
   <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
 </div>
-<p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
+<div class="chips"><b>헤더 <i>40px</i></b><b>드래그 이동</b><b>Esc · 오버레이 클릭 닫기</b><b class="no">본문 테두리 없음</b></div>
 
 <pre><code>KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
 KCMS.closeModal('myModal');
 KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre></div></div></section>
 <section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 선택 — 달력 팝업</div></div><div class="card-body">
 
-<p class="note">날짜 <b>입력 필드</b>의 구조는 <a href="#form">폼 ③</a>에 있습니다. 여기서는 버튼을 눌렀을 때 열리는
-<b>달력 팝업의 표시 규칙</b>만 다룹니다.</p>
+<div class="chips"><b>오늘 <i>파랑 채움</i></b><b>선택일 <i>파랑 링</i></b><b class="no">파랑 두 가지 금지</b><b>필드 구조 <i>폼 ③</i></b></div>
 
 <div data-cls=".pcmsdp" class="demo flush">
   <table class="type-spec">
@@ -861,7 +870,14 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
 </div>
 </div></div></section>
 
-</main></div>
+</main>
+        </div>
+      </div>
+      <div class="worktabs" id="worktabs"></div>
+    </div>
+  </div>
+</div>
+
 <div class="modal-ov" id="demoModal" role="dialog" aria-modal="true">
   <div class="modal-box">
     <div class="modal-hd">
@@ -894,19 +910,13 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
       <button class="btn">중복 확인</button>
     </div>
   </div>
-</div>
-
-<script src="js/utils.js"></script>
-<script src="js/layout.js"></script>
-<script src="js/menu.sample.js"></script>
-<script src="js/date-picker.js"></script>
-<script src="js/modal-drag.js"></script>
-<script>
+</div><script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script><script>
   /* 실제 화면과 같은 11개 1뎁스 메뉴 — js/menu.sample.js 에서 불러온다 */
   var MENU=PCMS_GNB_MENU;
   var RAIL=PCMS_LEFT_RAIL_ITEMS;
   initLayout({menu:MENU, current:'입학관리', badges:PCMS_GNB_TAB_BADGES,
-              railItems:RAIL, railCurrent:'HOME'});
+              railItems:RAIL, railCurrent:'HOME',
+              openTabs:[{key:'kit', label:'디자인 Kit — 컴포넌트 가이드', cur:true, closable:false}]});
   document.addEventListener('change',function(e){
     if(e.target.closest && e.target.closest('.tsel'))
       document.getElementById('tselOut').textContent='선택값 '+e.target.value;
@@ -924,14 +934,18 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });
   KCMS.bindModals();   /* 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
-</script>
-<script>
+</script><script>
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  function spy(){ var y=window.scrollY+130, cur=0;
-    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
+  function spy(){ var top=document.getElementById('guideContent').getBoundingClientRect().top+130, cur=0;
+    secs.forEach(function(s,i){ if(s && s.getBoundingClientRect().top<=top) cur=i; });
     links.forEach(function(a,i){ a.classList.toggle('on', i===cur); }); }
-  window.addEventListener('scroll', spy); spy();
+  var sc=document.getElementById('guideContent');
+  sc.addEventListener('scroll', spy); spy();
+  links.forEach(function(a,i){ a.addEventListener('click', function(e){ e.preventDefault();
+    var t=secs[i]; if(!t) return;
+    sc.scrollTo({top: sc.scrollTop + t.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12, behavior:'smooth'});
+  }); });
 </script>
 </body>
 </html>
