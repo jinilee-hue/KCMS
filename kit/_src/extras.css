@@ -178,3 +178,10 @@
    ========================================================================== */
 .to-badge, .agebadge.mar, .cntbadge{background:var(--pb-light) !important;color:var(--pb-dark) !important;}
 .mapbadge.muted, .ddbadge.muted{background:#EEF1F5 !important;color:var(--txt-mut) !important;}
+
+/* 정렬 중인 열의 화살표만 파랑 — 화면과 같은 규칙(▲ 오름 / ▼ 내림) */
+.sarrow.on{color:var(--pb);}
+/* 아이콘 전용 버튼도 다른 컨트롤과 같은 24px (입력창 안 .ibtn 은 18px 유지) */
+.icon-btn{width:24px;height:24px;}
+.ibtn{width:24px;height:24px;}
+.iwrap .ibtn,.drange .ibtn,.dwrap .ibtn,table.grid .iwrap .ibtn{width:19px;height:18px !important;}

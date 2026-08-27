@@ -133,6 +133,7 @@
 <a href="#tab">탭</a>
 <a href="#badge">배지</a>
 <a href="#table">표</a>
+<a href="#scroll">스크롤</a>
 <a href="#input">입력 필드</a>
 <a href="#select">셀렉트</a>
 <a href="#choice">체크 · 라디오 · 토글</a>
@@ -179,7 +180,7 @@
   <button class="btn s"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> 다운로드</button>
 </div>
 
-<h4 class="sub">아이콘 전용 · 22PX</h4>
+<h4 class="sub">아이콘 전용 · 24PX</h4>
 <div class="demo row">
   <button class="icon-btn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
   <button class="icon-btn" aria-label="추가"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -236,26 +237,16 @@
 </div></div></section>
 
 <section id="table"><div class="card"><div class="card-header"><div class="card-title">표</div></div><div class="card-body">
-<h4 class="sub">가로형 · 목록 · 세로 스크롤 시 헤더 고정</h4>
+<h4 class="sub">가로형 · 목록</h4>
 <div class="demo flush">
-  <div class="tblwrap" style="max-height:190px;">
+  <div class="tblwrap">
     <table class="grid" style="table-layout:auto;">
       <thead><tr>
         <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow on">▼</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
+        <th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th>
       </tr></thead>
       <tbody>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr>
-      
-<tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
 </tbody>
     </table>
   </div>
@@ -274,6 +265,46 @@
   </table>
 </div>
 </div></div></section>
+
+<section id="scroll"><div class="card"><div class="card-header"><div class="card-title">스크롤</div></div><div class="card-body">
+
+<h4 class="sub">본문 목록 · 페이지가 스크롤한다</h4>
+<div class="demo row">
+  <span style="font-size:11.5px;color:var(--txt-mut);">목록 표는 내부 스크롤을 두지 않고 페이징으로 끊습니다(기본 30건).</span>
+</div>
+
+<h4 class="sub">모달 · 보조 목록 · 내부 스크롤 + 헤더 고정</h4>
+<div class="demo flush">
+  <div class="tblwrap" style="max-height:132px;">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr>
+        <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
+        <th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th>
+      </tr></thead>
+      <tbody>
+<tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<h4 class="sub">자리별 최대 높이</h4>
+<div class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">모달 안 검색 결과 표</td><td>420px</td></tr>
+      <tr><td class="k">가져오기 미리보기 표</td><td>280px</td></tr>
+      <tr><td class="k">주소 검색 결과</td><td>360px</td></tr>
+      <tr><td class="k">컬럼 선택 하위 목록</td><td>300px</td></tr>
+      <tr><td class="k">커스텀 셀렉트 목록</td><td>400px</td></tr>
+      <tr><td class="k">트리 셀렉트 목록</td><td>266px</td></tr>
+      <tr><td class="k">학생 선택 목록</td><td>230px</td></tr>
+      <tr><td class="k">메모 로그</td><td>150px</td></tr>
+    </tbody>
+  </table>
+</div>
+</div></div></section>
+
 
 <section id="input"><div class="card"><div class="card-header"><div class="card-title">입력 필드</div></div><div class="card-body">
 <h4 class="sub">텍스트 입력 · 상태별</h4>
@@ -913,6 +944,8 @@
       tbl.querySelectorAll('th.sortable').forEach(function(x){
         x.classList.remove('asc'); var a=x.querySelector('.sarrow'); if(a) a.classList.remove('on'); });
       th.classList.toggle('asc', asc);
+      /* 화면과 같은 규칙 — 정렬 중인 열에만 화살표를 보이고 파랑(.on), ▲ 오름 / ▼ 내림 */
+      tbl.querySelectorAll('.sarrow').forEach(function(a){ a.textContent=''; a.classList.remove('on'); });
       var ar=th.querySelector('.sarrow'); if(ar){ ar.classList.add('on'); ar.textContent = asc ? '▲' : '▼'; }
       var body=tbl.tBodies[0], rows=[].slice.call(body.rows);
       rows.sort(function(a,b){
