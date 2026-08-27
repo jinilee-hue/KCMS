@@ -329,7 +329,8 @@ function initCTree(root){
       var kids=li.querySelector('ul');
       var name=(li.childNodes[0]&&li.childNodes[0].nodeValue||'').trim()||li.dataset.label||'';
       return {name:name, items:kids?[].map.call(kids.children,function(c){
-        return (c.textContent||'').trim(); }):[]};
+        var label=(c.childNodes[0]&&c.childNodes[0].nodeValue||'').trim()||(c.textContent||'').trim();
+        return c.dataset.count?{value:label, count:c.dataset.count}:label; }):[]};
     }).filter(function(g){ return g.items.length; });
     src.remove();
     wrap.__ctree=buildCTree(wrap, groups, {placeholder:wrap.dataset.placeholder});
@@ -338,6 +339,7 @@ function initCTree(root){
 }
 
 var CT_CHEV='<svg class="ctchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
+var CT_LEAF='<svg class="ctleaf" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3"/><path d="M20 4c0 9-6 14-14 15"/></svg>';
 var CT_FOLD='<svg class="ctfold" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
 
 function buildCTree(host, groups, opt){
@@ -359,20 +361,28 @@ function buildCTree(host, groups, opt){
   var leaves=[], parents=[];
 
   groups.forEach(function(g){
+    /* 잎에 [배정/정원] 같은 참고 수치가 있으면 묶음은 그 합을 보여 준다 */
+    var sum=g.items.reduce(function(a,v){
+      var c=(v&&typeof v==='object'&&v.count)?String(v.count).split('/'):null;
+      if(c){ a.n+=Number(c[0])||0; a.m+=Number(c[1])||0; a.any=true; } return a;
+    },{n:0,m:0,any:false});
     var prow=document.createElement('div');
-    prow.className='ctnode'; prow.setAttribute('data-depth','0');   /* 처음엔 접힘 — 40종을 다 펼치면 목록이 길다 */
-    prow.innerHTML=CT_CHEV+CT_FOLD+'<input type="checkbox"><span></span><span class="ctcount">'+g.items.length+'</span>';
+    prow.className='ctnode'; prow.setAttribute('data-depth','0');   /* 처음엔 접힘 — 항목이 많으면 목록이 길다 */
+    prow.innerHTML=CT_CHEV+CT_FOLD+'<input type="checkbox"><span></span><span class="ctcount">'+
+      (sum.any?'['+sum.n+'/'+sum.m+']':g.items.length)+'</span>';
     prow.querySelector('span').textContent=g.name;
     list.appendChild(prow);
     var P={cb:prow.querySelector('input'), row:prow, kids:[], rows:[]};
     parents.push(P);
     g.items.forEach(function(v){
+      var val=(v&&typeof v==='object')?v.value:v, cnt=(v&&typeof v==='object'&&v.count)?v.count:'';
       var row=document.createElement('div');
       row.className='ctnode hide2'; row.setAttribute('data-depth','1');
-      row.innerHTML=CT_CHEV+'<input type="checkbox"><span></span>';
-      row.querySelector('span').textContent=v;
+      row.innerHTML=CT_CHEV+CT_LEAF+'<input type="checkbox"><span></span>'+
+        (cnt?'<span class="ctcount">['+cnt+']</span>':'');
+      row.querySelector('span').textContent=val;
       list.appendChild(row);
-      var L={value:v, cb:row.querySelector('input'), row:row, parent:P};
+      var L={value:val, cb:row.querySelector('input'), row:row, parent:P};
       leaves.push(L); P.kids.push(L); P.rows.push(row);
     });
     prow.addEventListener('click', function(e){

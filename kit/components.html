@@ -586,11 +586,29 @@ KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
   <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
 </div>
 
+<div class="demo row" data-cls=".ctree + data-count">
+  <span class="flabel">진학 학급</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul>
+        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
+        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
+        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
+      <li data-label="GT"><ul>
+        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
+        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
+    </ul>
+  </span>
+  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계 <code>[10/120]</code></span>
+</div>
+
+<div class="chips"><b>잎 아이콘 <i>끝 항목</i></b><b>참고 수치 <i>[배정/정원]</i></b><b>묶음 <i>자동 합계</i></b><b class="no">숫자를 장식으로 넣지 않기 — 실제 값만</b></div>
+
 <div class="chips"><b>박스 <i>24px · .csel-box 와 동일</i></b><b>목록 <i>268px · fixed</i></b><b>행 <i>26px</i></b><b>값 <i>hidden input + change</i></b><b class="no">단일 선택에 쓰지 않기</b></div>
 
 <pre><code>&lt;span class="ctree" data-ctree data-all data-placeholder="전체"&gt;
   &lt;ul&gt;
-    &lt;li data-label="ECP"&gt;&lt;ul&gt;&lt;li&gt;ECP5&lt;/li&gt;&lt;li&gt;ECP6&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+    &lt;li data-label="ECP"&gt;&lt;ul&gt;&lt;li&gt;ECP5&lt;/li&gt;&lt;li data-count="3/12"&gt;ECP6&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
   &lt;/ul&gt;
 &lt;/span&gt;
 
@@ -684,7 +702,7 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
     <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
   </div>
 </div>
-<div class="chips"><b>감싸기 <i>table.fbox</i></b><b>라벨 칸 <i>.flabel</i></b><b>입력 칸 <i>.hascell</i></b><b>셀 <i>33px</i></b><b>회색 띠 <i>.filters.gray</i></b></div>
+<div class="chips"><b>감싸기 <i>table.fbox</i></b><b>라벨 칸 <i>.flabel</i></b><b>입력 칸 <i>.hascell</i></b><b>셀 <i>33px</i></b><b>회색 띠 <i>.filters.gray</i></b><b class="ok">칸선은 <i>.hascell</i> 로 — 컨트롤 종류로 잡지 않기</b></div>
 
 <div class="rule">
   <b>규격 요약</b> — 입력·셀렉트·날짜·검색상자 <b>24px</b> · 세그먼트 버튼 24px · 토글 18px · 체크/라디오 14px<br>
