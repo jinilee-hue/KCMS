@@ -36,7 +36,8 @@
   section > .card{background:#fff;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;}
   section > .card > .card-header{padding:13px 18px;border-bottom:1px solid var(--line-soft);background:#fff;}
   section > .card > .card-header .card-title{font-size:14px;font-weight:700;letter-spacing:-.2px;}
-  section > .card > .card-header .card-title::before{content:counter(sec) ". ";color:#b3bfd0;font-weight:700;}
+  section > .card > .card-header .card-title::before{content:'';display:block;width:16px;height:2px;
+    background:var(--pb);margin-bottom:6px;}
   section > .card > .card-body{padding:18px;}
 
   /* 카드 안 소제목 — 조용한 라벨 */
@@ -105,14 +106,27 @@
 <body>
 <div class="wrap">
 <aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
-<a href="#base">기초</a>
-<a href="#layout">레이아웃</a>
-<a href="#nav">내비게이션</a>
+<a href="#btn">버튼</a>
+<a href="#tab">탭</a>
+<a href="#badge">배지</a>
 <a href="#table">표</a>
-<a href="#display">표시</a>
-<a href="#input">입력</a>
-<a href="#action">액션 · 상태</a>
-<a href="#feedback">피드백</a>
+<a href="#input">입력 필드</a>
+<a href="#select">선택 컨트롤</a>
+<a href="#tsel">트리 셀렉트</a>
+<a href="#filter">검색 필터</a>
+<a href="#date">날짜 피커</a>
+<a href="#paging">페이징</a>
+<a href="#modal">모달</a>
+<a href="#toast">토스트</a>
+<a href="#help">도움말 팝오버</a>
+<a href="#metric">지표 · 상태 표시</a>
+<a href="#state">상태</a>
+<a href="#sec">섹션 · 패널</a>
+<a href="#gnb">GNB 메뉴</a>
+<a href="#shell">화면 골격</a>
+<a href="#color">색</a>
+<a href="#type">타이포</a>
+<a href="#token">간격 · 라운드 · 그림자 · 아이콘</a>
 <div class="nav-foot"><a href="rules.md">규칙 · 계약 (md)</a><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside><main class="doc"><header class="doc-hd">
   <h1>컴포넌트 가이드</h1>
   <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다.<br>
@@ -125,12 +139,475 @@
   </div>
 </header>
 
-<section id="base"><div class="card"><div class="card-header"><div class="card-title">기초</div></div><div class="card-body">
+<section id="btn"><div class="card"><div class="card-header"><div class="card-title">버튼</div></div><div class="card-body">
+<h4 class="sub">기본 · 24PX</h4>
+<div class="demo row" data-cls=".btn · .btn.g · .btn.s · .btn.danger">
+  <button class="btn">검색</button>
+  <button class="btn g">초기화</button>
+  <button class="btn s">엑셀</button>
+  <button class="btn danger">영구 삭제</button>
+  <button class="btn" disabled>저장</button>
+</div>
 
-<h4 class="sub part">색</h4>
+<h4 class="sub">작게 · BTN.SM · 22PX</h4>
+<div class="demo row">
+  <button class="btn sm">상세</button>
+  <button class="btn g sm">수정</button>
+  <button class="btn s sm">인쇄</button>
+</div>
+
+<h4 class="sub">아이콘 포함</h4>
+<div class="demo row" data-cls=".btn > svg + 글자">
+  <button class="btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> 등록</button>
+  <button class="btn g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4v16h16v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg> 수정</button>
+  <button class="btn s"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> 다운로드</button>
+</div>
+
+<h4 class="sub">아이콘 전용 · IBTN · ICON-BTN · 22PX</h4>
+<div class="demo row">
+  <button class="ibtn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+  <button class="icon-btn" aria-label="추가"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+  <button class="icon-btn" aria-label="새로고침"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
+  <button class="icon-btn" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+</div>
+</div></div></section>
+
+<section id="tab"><div class="card"><div class="card-header"><div class="card-title">탭</div></div><div class="card-body">
+<h4 class="sub">상위 탭 · 밑줄형 · .dtabs · .dtab</h4>
+<div class="demo flush" data-cls=".dtab">
+  <div class="dtabs" style="margin:0;">
+    <div class="dtab on">예비생정보</div><div class="dtab">MAP 예약</div>
+    <div class="dtab">채점</div><div class="dtab">MAP 결과</div>
+  </div>
+  <div style="padding:14px;font-size:11.5px;color:var(--txt-mut);">선택한 탭의 내용 영역</div>
+</div>
+<h4 class="sub">하위 탭 · 알약형 · .quickpill</h4>
+<div class="demo row" data-cls=".quickpill">
+  <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
+</div>
+<h4 class="sub">토글 · 붙은 라운드 박스 · .seg</h4>
+<div class="demo row" data-cls=".seg">
+  <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+</div>
+</div></div></section>
+
+<section id="badge"><div class="card"><div class="card-header"><div class="card-title">배지</div></div><div class="card-body">
+<div data-cls=".badge 계열" class="demo row">
+  <span class="badge">기본</span>
+  <span class="badge has">값 있음</span>
+  <span class="typebadge">타입</span>
+  <span class="statuspill">재원</span>
+  <span class="agebadge">7세</span>
+  <span class="agebadge cur">현재</span>
+  <span class="agebadge mapin">MAP 대상</span>
+  <span class="agebadge mapex">MAP 제외</span>
+  <span class="agebadge mar">3월</span>
+</div>
+<div class="demo row">
+  <span class="mapbadge brand">MAP : 44</span>
+  <span class="mapbadge muted">MAP : 0</span>
+  <span class="to-badge now">바로 입학</span>
+  <span class="to-badge mar">신학년 입학</span>
+  <span class="ddaybadge">D-14</span>
+  <span class="ddaybadge warn">D-3</span>
+  <span class="ddaybadge danger">D-DAY</span>
+  <span class="cntbadge">12</span>
+  <span class="tabbadge">NEW</span>
+  <span class="ddbadge">신규</span>
+  <span class="ddbadge muted">준비중</span>
+</div>
+<div class="demo row">
+  <span class="fambadge">가족</span>
+  <span class="waitbadge">대기</span>
+  <span class="rosterbadge">명단</span>
+  <span class="impdupbadge">중복</span>
+  <span class="tbadge">태그</span>
+  <span class="tobadge">TO</span>
+  <span class="qbadge">Q</span>
+  <span class="kpi-badge">78.0%</span>
+  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
+</div>
+</div></div></section>
+
+<section id="table"><div class="card"><div class="card-header"><div class="card-title">표</div></div><div class="card-body">
+<h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
+<div data-cls="table.grid / table.infotbl" class="demo flush">
+  <div class="tblwrap" style="max-height:190px;">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr>
+        <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
+        <th class="sortable">이름<span class="sarrow on">▼</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">② 세로형 — 상세 (table.infotbl)</h3>
+<div class="demo">
+  <table class="infotbl">
+    <tr><th>국적</th><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td>
+        <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-0000-0000"></td></tr>
+    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="최○○"></td>
+        <th>전화번호</th><td><input class="finput" placeholder="선택 입력"></td></tr>
+    <tr><th>생년월일<span class="req">*</span></th>
+        <td><span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span></td>
+        <th>성별<span class="req">*</span></th>
+        <td><span class="seg"><button class="on">남</button><button>여</button></span></td></tr>
+  </table>
+</div>
+</div></div></section>
+
+<section id="input"><div class="card"><div class="card-header"><div class="card-title">입력 필드</div></div><div class="card-body">
+<h4 class="sub">텍스트 입력 · 상태별</h4>
+<div data-cls=".finput / .fselect / .seg" class="demo">
+  <table class="spec">
+    <tr><td class="k">기본<span class="cls">.finput</span></td><td><input class="finput" value="최○○"></td></tr>
+    <tr><td class="k">placeholder</td><td><input class="finput" placeholder="이름 입력"></td></tr>
+    <tr><td class="k">읽기 전용<span class="cls">.roflat</span></td><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td></tr>
+    <tr><td class="k">비활성<span class="cls">disabled</span></td><td><input class="finput" value="수정 불가" disabled></td></tr>
+    <tr><td class="k">여러 줄<span class="cls">.ftextarea</span></td><td><textarea class="ftextarea" rows="2" style="width:240px" placeholder="상담 메모"></textarea></td></tr>
+  </table>
+</div>
+
+
+<h4 class="sub">라벨 · 도움말 · 오류</h4>
+<div class="demo">
+  <div class="form-grid-2">
+    <div class="form-group">
+      <label class="form-label">학생명<span class="req">*</span></label>
+      <input class="finput" value="최○○">
+      <span class="form-hint">동명이인은 생년월일로 구분합니다.</span>
+    </div>
+    <div class="form-group">
+      <label class="form-label">학부모 연락처<span class="req">*</span></label>
+      <input class="finput" value="010-0000">
+      <span class="form-error">형식을 확인해 주세요.</span>
+    </div>
+  </div>
+</div>
+</div></div></section>
+
+<section id="select"><div class="card"><div class="card-header"><div class="card-title">선택 컨트롤</div></div><div class="card-body">
+<h4 class="sub">선택 컨트롤</h4>
+<div class="demo">
+  <table class="spec">
+    <tr><td class="k">셀렉트<span class="cls">.fselect</span></td><td><select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select></td></tr>
+    <tr><td class="k">커스텀 셀렉트<span class="cls">data-csel</span></td><td><span style="width:150px;display:inline-block;"><select data-csel><option>전체 과정</option><option>ECP</option><option>ELE</option></select></span></td></tr>
+    <tr><td class="k">세그먼트<span class="cls">.seg</span></td><td><span style="font-size:11.5px;color:var(--txt-mut);">→ <a href="#tab">탭 3종</a>의 ③ 토글 탭</span></td></tr>
+    <tr><td class="k">토글<span class="cls">.toggle</span></td><td><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span>충원율 반영</label></td></tr>
+    <tr><td class="k">체크박스</td><td><label class="chk"><input type="checkbox" checked> 재원생만</label>
+        <label class="chk"><input type="checkbox"> 대기 포함</label></td></tr>
+    <tr><td class="k">라디오</td><td><label class="chk"><input type="radio" name="gg" checked> 남</label>
+        <label class="chk"><input type="radio" name="gg"> 여</label></td></tr>
+  </table>
+</div>
+</div></div></section>
+
+<section id="tsel"><div class="card"><div class="card-header"><div class="card-title">트리 셀렉트</div></div><div class="card-body">
+<h4 class="sub">단일 선택 · .tsel</h4>
+<div class="demo row" data-cls=".tsel">
+  <span class="flabel">학급</span>
+  <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
+    <ul>
+      <li data-label="ECP" data-count="12">ECP
+        <ul>
+          <li data-label="ECP5" data-count="4">ECP5
+            <ul><li data-v="ECP5-Bee">ECP5-Bee</li><li data-v="ECP5-Ladybug">ECP5-Ladybug</li></ul>
+          </li>
+          <li data-label="ECP6" data-count="3">ECP6
+            <ul><li data-v="ECP6-Bee">ECP6-Bee</li></ul>
+          </li>
+        </ul>
+      </li>
+      <li data-label="ELE" data-count="18">ELE
+        <ul>
+          <li data-label="GT1" data-count="2">GT1
+            <ul><li data-v="GT1-Falcon">GT1-Falcon</li><li data-v="GT1-Eagle">GT1-Eagle</li></ul>
+          </li>
+          <li data-v="MGT2-Comet">MGT2-Comet</li>
+        </ul>
+      </li>
+      <li data-v="전체">전체 학급</li>
+    </ul>
+  </span>
+  <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
+</div>
+
+<h4 class="sub">다중 선택 · 체크박스 트리 .ctree</h4>
+<div class="demo row" data-cls=".ctree">
+  <span class="flabel">현재 레벨</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
+      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
+      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
+      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
+      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
+      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
+      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
+      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
+      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
+      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
+    </ul>
+  </span>
+  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
+</div>
+
+<div class="demo row" data-cls=".ctree + data-count">
+  <span class="flabel">현재 학급</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul>
+        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
+        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
+        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
+      <li data-label="GT"><ul>
+        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
+        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
+    </ul>
+  </span>
+  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계.
+  현재 학급은 <code>curClass</code>, 진학 학급은 <code>nextClass</code> 로 세어 같은 반이라도 숫자가 다릅니다.</span>
+</div>
+</div></div></section>
+
+<section id="filter"><div class="card"><div class="card-header"><div class="card-title">검색 필터</div></div><div class="card-body">
+<h4 class="sub">검색 필터 줄</h4>
+<div class="demo">
+  <div class="filters">
+    <span class="flabel">캠퍼스</span><select class="fselect"><option>시범캠퍼스</option></select>
+    <span class="flabel">학생명</span><input class="finput" placeholder="이름">
+    <span class="flabel">상태</span><select class="fselect"><option>전체</option><option>재원</option><option>대기</option></select>
+    <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
+  </div>
+</div>
+</div></div></section>
+
+<section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 피커</div></div><div class="card-body">
+<h4 class="sub">입력 필드 · 검색 상자</h4>
+<div class="demo">
+  <table class="spec">
+    <tr><td class="k">날짜 필드<span class="cls">input[type=date]</span></td>
+        <td><span class="iwrap">
+          <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10" style="width:110px;">
+          <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
+          <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+        </span></td></tr>
+    <tr><td class="k">검색 상자<span class="cls">.search-box</span></td>
+        <td><span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span></td></tr>
+  </table>
+</div>
+<h4 class="sub">달력 팝업 · 표시 규칙</h4>
+
+<div data-cls=".pcmsdp" class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">오늘</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
+              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td></tr>
+      <tr><td class="k">선택한 날짜</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:transparent;
+              color:var(--pb);box-shadow:inset 0 0 0 1px var(--pb);align-items:center;justify-content:center;
+              font-size:11.5px;font-weight:700;">30</span></td></tr>
+      <tr><td class="k">오늘이자 선택</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
+              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td></tr>
+      <tr><td class="k">그 외 날짜</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;
+              font-size:11.5px;">12</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</div></div></section>
+
+<section id="paging"><div class="card"><div class="card-header"><div class="card-title">페이징</div></div><div class="card-body">
+<div data-cls=".paging" class="demo flush">
+  <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
+</div>
+</div></div></section>
+
+<section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
+<h4 class="sub">기본 · 헤더 40PX · 드래그 이동</h4>
+<div data-cls=".modal-ov > .modal-box" class="demo row">
+  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
+  <button class="btn g" onclick="KCMS.openModal('demoModal')">확인 모달</button>
+</div>
+
+<h4 class="sub">크기 · MODAL-BOX.SM / .LG</h4>
+<div class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">작게<span class="cls">.modal-box.sm</span></td><td><span style="display:inline-block;width:105px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
+      <tr><td class="k">기본<span class="cls">.modal-box</span></td><td><span style="display:inline-block;width:160px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
+      <tr><td class="k">넓게<span class="cls">.modal-box.lg</span></td><td><span style="display:inline-block;width:225px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4 class="sub">하단 버튼 · MODAL-FOOT</h4>
+<div class="demo row" data-cls=".modal-foot — 주요 버튼이 오른쪽 끝">
+  <span style="display:flex;gap:5px;padding:8px 10px;background:#F7F9FC;border:1px solid var(--line-soft);border-radius:3px;">
+    <button class="btn g">취소</button><button class="btn">저장</button>
+  </span>
+</div>
+</div></div></section>
+
+<section id="toast"><div class="card"><div class="card-header"><div class="card-title">토스트</div></div><div class="card-body">
+<div data-cls=".kistoast" class="demo row">
+  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
+  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
+  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
+  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
+  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
+  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
+</div>
+</div></div></section>
+
+<section id="help"><div class="card"><div class="card-header"><div class="card-title">도움말 팝오버</div></div><div class="card-body">
+<div data-cls=".helpwrap" class="demo row">
+  <span style="font-size:11.5px;">입학구분(현재 결정)</span>
+  <span class="helpwrap" style="position:relative;">
+    <button type="button" class="helpbtn" aria-haspopup="true">?</button>
+    <div class="helppop" role="tooltip" style="display:block;position:static;margin-top:8px;max-width:420px;">
+      <div class="hp-sec">
+        <div class="hp-tit">입학구분이란?</div>
+        <b>바로 입학</b>(당해 즉시 입학)과 <b>신학년 입학</b>(다음 해 3월 입학) 중 현재 결정된 값입니다.
+      </div>
+    </div>
+  </span>
+</div>
+</div></div></section>
+
+<section id="metric"><div class="card"><div class="card-header"><div class="card-title">지표 · 상태 표시</div></div><div class="card-body">
+<div data-cls=".progress-track / .avatar / .period-tab" class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">진행바<span class="cls">.progress-track · .progress-fill · .ok · .low</span></td>
+          <td style="width:180px;"><div class="progress-track"><i class="progress-fill ok" style="display:block;width:78%"></i></div></td></tr>
+      <tr><td class="k">아바타<span class="cls">.avatar · .avatar.lg</span></td>
+          <td><span class="avatar">최</span> <span class="avatar lg">김</span></td></tr>
+      <tr><td class="k">기간 탭<span class="cls">.period-tabs</span></td>
+          <td><span class="period-tabs"><button class="period-tab on">주</button><button class="period-tab">월</button><button class="period-tab">분기</button></span></td></tr>
+      <tr><td class="k">빈 상태<span class="cls">.empty-state · .emptynote</span></td>
+          <td><div class="empty-state" style="padding:14px 0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
+              <div class="es-title">조회 결과가 없습니다</div></div></td></tr>
+    </tbody>
+  </table>
+</div>
+</div></div></section>
+
+<section id="state"><div class="card"><div class="card-header"><div class="card-title">상태</div></div><div class="card-body">
+<div class="demo flush" data-cls="상태 매트릭스">
+  <table class="type-spec">
+    <thead><tr><th>컴포넌트</th><th>기본</th><th>hover</th><th>선택 · 포커스</th><th>비활성</th></tr></thead>
+    <tbody>
+      <tr><td class="k">버튼</td>
+        <td><button class="btn">저장</button></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">배경 <code>--pb-dark</code></span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">테두리 <code>--pb-dark</code></span></td>
+        <td><button class="btn" disabled>저장</button></td></tr>
+      <tr><td class="k">입력</td>
+        <td><input class="finput" value="값" style="width:100px;"></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">변화 없음</span></td>
+        <td><input class="finput" value="포커스" style="width:100px;border-color:var(--pb);"></td>
+        <td><input class="finput" value="비활성" style="width:100px;" disabled></td></tr>
+      <tr><td class="k">표 행</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">짝수 행 <code>#F7F9FC</code></span></td>
+        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-a08);font-size:11px;">파랑 8%</span></td>
+        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-light);font-size:11px;">파랑 틴트</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+      <tr><td class="k">탭</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">회색 글자</span></td>
+        <td><span style="font-size:11px;color:var(--pb);">파란 글자</span></td>
+        <td><span style="font-size:11px;color:var(--pb-deeper);font-weight:700;border-bottom:3px solid var(--pb);padding-bottom:2px;">파란 밑줄</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+      <tr><td class="k">메뉴 항목</td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">기본</span></td>
+        <td><span style="font-size:11px;color:var(--pb);font-weight:700;">파랑 + 굵게</span></td>
+        <td><span style="display:inline-block;padding:3px 8px;background:var(--pb-light);color:var(--pb);font-size:11px;font-weight:700;">틴트 배경</span></td>
+        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
+    </tbody>
+  </table>
+</div>
+</div></div></section>
+
+<section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 · 패널</div></div><div class="card-body">
+<h4 class="sub">조각별</h4>
+<div data-cls=".sectit / .panel / .actions" class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">섹션 제목<span class="cls">.sectit · .hint</span></td>
+          <td><div class="sectit" style="margin:0;padding:0;">학급별 충원 현황<span class="hint">Grid · 정렬 가능</span></div></td></tr>
+      <tr><td class="k">패널<span class="cls">.panel</span></td>
+          <td><div class="panel" style="width:220px;">내용이 들어가는 상자</div></td></tr>
+      <tr><td class="k">액션바<span class="cls">.actions</span></td>
+          <td><div class="actions" style="width:260px;"><button class="btn g">가져오기</button><button class="btn">신규 등록</button></div></td></tr>
+      <tr><td class="k">카드<span class="cls">.card</span></td>
+          <td><div class="card" style="width:220px;"><div class="card-header"><span class="card-title">요약</span></div>
+              <div class="card-body" style="font-size:11.5px;">머리글이 필요한 묶음</div></div></td></tr>
+    </tbody>
+  </table>
+</div>
+
+<h4 class="sub">조합 · 실제 화면 한 조각</h4>
+<div class="demo">
+  <div class="sectit">예비생 목록<span class="hint">최근 등록순</span></div>
+  <div class="actions" style="margin-bottom:6px;">
+    <span class="badge">전체 1,284명</span>
+    <button class="btn g">엑셀</button><button class="btn">신규 등록</button>
+  </div>
+  <div class="tblwrap" style="max-height:120px;">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr><th>이름</th><th>학년</th><th>등록일</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td>최○○</td><td>초3</td><td>2026-08-12</td><td><span class="statuspill">재원</span></td></tr>
+        <tr><td>김○○</td><td>초4</td><td>2026-08-14</td><td><span class="to-badge now">바로 입학</span></td></tr>
+        <tr><td>박○○</td><td>초3</td><td>2026-08-18</td><td><span class="to-badge mar">신학년</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="paging" id="pagingSample"></div>
+</div>
+<h4 class="sub">여백 규칙</h4>
+</div></div></section>
+
+<section id="gnb"><div class="card"><div class="card-header"><div class="card-title">GNB 메뉴</div></div><div class="card-body">
+<div data-cls=".topnav / .tab / .dd" class="demo dark">
+  <div class="topnav" style="position:relative;">
+    <div class="brand">PCMS</div>
+    <div class="tabs" id="tabs"></div>
+  </div>
+</div>
+</div></div></section>
+
+<section id="shell"><div class="card"><div class="card-header"><div class="card-title">화면 골격</div></div><div class="card-body">
+<div data-cls=".rail / .bcbar / .worktabs" class="demo flush">
+  <div style="display:flex;height:150px;">
+    <div class="rail" id="rail" style="flex:0 0 58px;"></div>
+    <div class="main" style="flex:1;">
+      <div class="bcbar"><span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span> 입학관리 › <b>예비생 등록·관리</b>
+        <span class="meta">최종 갱신: 2026-08-27 09:00</span></div>
+      <div class="content" style="background:#fff;">본문 영역 — 좌우 여백 14px</div>
+      <div class="worktabs"><div class="wtscroll">
+        <div class="wtab">HOME</div><div class="wtab on">예비생 등록·관리<span class="x">✕</span></div>
+      </div></div>
+    </div>
+  </div>
+</div>
+</div></div></section>
+
+<section id="color"><div class="card"><div class="card-header"><div class="card-title">색</div></div><div class="card-body">
 <div data-cls="tokens.css" class="demo" id="sws"></div>
-<h4 class="sub part">타이포</h4>
-<h4 class="sub">① 크기 단계</h4>
+</div></div></section>
+
+<section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
+<h4 class="sub">크기 단계</h4>
 <div data-cls="타이포 스케일" class="demo flush">
   <table class="type-spec">
     <thead><tr><th>역할</th><th>크기 / 굵기</th><th>색</th><th>예시</th></tr></thead>
@@ -156,7 +633,7 @@
   </table>
 </div>
 
-<h4 class="sub">② 실제 화면에서의 위계</h4>
+<h4 class="sub">실제 화면에서의 위계</h4>
 <div class="demo">
   <div style="font-size:16px;font-weight:700;margin-bottom:2px;">예비생 등록·관리</div>
   <div style="font-size:11.5px;color:var(--txt-mut);margin-bottom:12px;">신규 등록과 상태 관리를 한 화면에서</div>
@@ -173,7 +650,7 @@
   </div>
 </div>
 
-<h4 class="sub">③ 숫자 표기 규칙</h4>
+<h4 class="sub">숫자 표기 규칙</h4>
 <div class="demo">
   <table class="type-spec">
     <tbody>
@@ -190,7 +667,9 @@
     </tbody>
   </table>
 </div>
-<h4 class="sub part">간격 · 라운드 · 그림자 · 아이콘</h4>
+</div></div></section>
+
+<section id="token"><div class="card"><div class="card-header"><div class="card-title">간격 · 라운드 · 그림자 · 아이콘</div></div><div class="card-body">
 <h4 class="sub">간격</h4>
 <div class="demo flush" data-cls="gap / padding">
   <table class="type-spec">
@@ -229,441 +708,6 @@
   <span style="font-size:11px;color:var(--txt-mut);">13px — 버튼 라벨 앞</span>
   <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
   <span style="font-size:11px;color:var(--txt-mut);">19px — 좌측 레일</span>
-</div>
-</div></div></section>
-
-<section id="layout"><div class="card"><div class="card-header"><div class="card-title">레이아웃</div></div><div class="card-body">
-
-<h4 class="sub part">화면 골격</h4>
-<div data-cls=".rail / .bcbar / .worktabs" class="demo flush">
-  <div style="display:flex;height:150px;">
-    <div class="rail" id="rail" style="flex:0 0 58px;"></div>
-    <div class="main" style="flex:1;">
-      <div class="bcbar"><span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span> 입학관리 › <b>예비생 등록·관리</b>
-        <span class="meta">최종 갱신: 2026-08-27 09:00</span></div>
-      <div class="content" style="background:#fff;">본문 영역 — 좌우 여백 14px</div>
-      <div class="worktabs"><div class="wtscroll">
-        <div class="wtab">HOME</div><div class="wtab on">예비생 등록·관리<span class="x">✕</span></div>
-      </div></div>
-    </div>
-  </div>
-</div>
-<h4 class="sub part">섹션 · 패널 · 액션바</h4>
-<h4 class="sub">① 조각별</h4>
-<div data-cls=".sectit / .panel / .actions" class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">섹션 제목<span class="cls">.sectit · .hint</span></td>
-          <td><div class="sectit" style="margin:0;padding:0;">학급별 충원 현황<span class="hint">Grid · 정렬 가능</span></div></td></tr>
-      <tr><td class="k">패널<span class="cls">.panel</span></td>
-          <td><div class="panel" style="width:220px;">내용이 들어가는 상자</div></td></tr>
-      <tr><td class="k">액션바<span class="cls">.actions</span></td>
-          <td><div class="actions" style="width:260px;"><button class="btn g">가져오기</button><button class="btn">신규 등록</button></div></td></tr>
-      <tr><td class="k">카드<span class="cls">.card</span></td>
-          <td><div class="card" style="width:220px;"><div class="card-header"><span class="card-title">요약</span></div>
-              <div class="card-body" style="font-size:11.5px;">머리글이 필요한 묶음</div></div></td></tr>
-    </tbody>
-  </table>
-</div>
-
-<h4 class="sub">② 조합 — 실제 화면 한 조각</h4>
-<div class="demo">
-  <div class="sectit">예비생 목록<span class="hint">최근 등록순</span></div>
-  <div class="actions" style="margin-bottom:6px;">
-    <span class="badge">전체 1,284명</span>
-    <button class="btn g">엑셀</button><button class="btn">신규 등록</button>
-  </div>
-  <div class="tblwrap" style="max-height:120px;">
-    <table class="grid" style="table-layout:auto;">
-      <thead><tr><th>이름</th><th>학년</th><th>등록일</th><th>상태</th></tr></thead>
-      <tbody>
-        <tr><td>최○○</td><td>초3</td><td>2026-08-12</td><td><span class="statuspill">재원</span></td></tr>
-        <tr><td>김○○</td><td>초4</td><td>2026-08-14</td><td><span class="to-badge now">바로 입학</span></td></tr>
-        <tr><td>박○○</td><td>초3</td><td>2026-08-18</td><td><span class="to-badge mar">신학년</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="paging" id="pagingSample"></div>
-</div>
-<h4 class="sub">③ 여백 규칙</h4>
-</div></div></section>
-
-<section id="nav"><div class="card"><div class="card-header"><div class="card-title">내비게이션</div></div><div class="card-body">
-
-<h4 class="sub part">GNB 메뉴 (3뎁스)</h4>
-<div data-cls=".topnav / .tab / .dd" class="demo dark">
-  <div class="topnav" style="position:relative;">
-    <div class="brand">PCMS</div>
-    <div class="tabs" id="tabs"></div>
-  </div>
-</div>
-<h4 class="sub part">탭 3종</h4>
-<h4 class="sub">① 상위 탭 — 밑줄형 (.dtabs / .dtab)</h4>
-<div class="demo flush" data-cls=".dtab">
-  <div class="dtabs" style="margin:0;">
-    <div class="dtab on">예비생정보</div><div class="dtab">MAP 예약</div>
-    <div class="dtab">채점</div><div class="dtab">MAP 결과</div>
-  </div>
-  <div style="padding:14px;font-size:11.5px;color:var(--txt-mut);">선택한 탭의 내용 영역</div>
-</div>
-<h4 class="sub">② 하위 탭 — 알약형 (.quickpill)</h4>
-<div class="demo row" data-cls=".quickpill">
-  <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
-</div>
-<h4 class="sub">③ 토글 — 붙은 라운드 박스 (.seg)</h4>
-<div class="demo row" data-cls=".seg">
-  <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
-</div>
-<h4 class="sub part">페이지네이션</h4>
-<div data-cls=".paging" class="demo flush">
-  <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
-</div>
-</div></div></section>
-
-<section id="table"><div class="card"><div class="card-header"><div class="card-title">표</div></div><div class="card-body">
-<h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
-<div data-cls="table.grid / table.infotbl" class="demo flush">
-  <div class="tblwrap" style="max-height:190px;">
-    <table class="grid" style="table-layout:auto;">
-      <thead><tr>
-        <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow on">▼</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
-      </tr></thead>
-      <tbody>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">② 세로형 — 상세 (table.infotbl)</h3>
-<div class="demo">
-  <table class="infotbl">
-    <tr><th>국적</th><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td>
-        <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-0000-0000"></td></tr>
-    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="최○○"></td>
-        <th>전화번호</th><td><input class="finput" placeholder="선택 입력"></td></tr>
-    <tr><th>생년월일<span class="req">*</span></th>
-        <td><span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span></td>
-        <th>성별<span class="req">*</span></th>
-        <td><span class="seg"><button class="on">남</button><button>여</button></span></td></tr>
-  </table>
-</div>
-
-</div></div></section>
-
-<section id="display"><div class="card"><div class="card-header"><div class="card-title">표시</div></div><div class="card-body">
-
-<h4 class="sub part">배지</h4>
-<div data-cls=".badge 계열" class="demo row">
-  <span class="badge">기본</span>
-  <span class="badge has">값 있음</span>
-  <span class="typebadge">타입</span>
-  <span class="statuspill">재원</span>
-  <span class="agebadge">7세</span>
-  <span class="agebadge cur">현재</span>
-  <span class="agebadge mapin">MAP 대상</span>
-  <span class="agebadge mapex">MAP 제외</span>
-  <span class="agebadge mar">3월</span>
-</div>
-<div class="demo row">
-  <span class="mapbadge brand">MAP : 44</span>
-  <span class="mapbadge muted">MAP : 0</span>
-  <span class="to-badge now">바로 입학</span>
-  <span class="to-badge mar">신학년 입학</span>
-  <span class="ddaybadge">D-14</span>
-  <span class="ddaybadge warn">D-3</span>
-  <span class="ddaybadge danger">D-DAY</span>
-  <span class="cntbadge">12</span>
-  <span class="tabbadge">NEW</span>
-  <span class="ddbadge">신규</span>
-  <span class="ddbadge muted">준비중</span>
-</div>
-<div class="demo row">
-  <span class="fambadge">가족</span>
-  <span class="waitbadge">대기</span>
-  <span class="rosterbadge">명단</span>
-  <span class="impdupbadge">중복</span>
-  <span class="tbadge">태그</span>
-  <span class="tobadge">TO</span>
-  <span class="qbadge">Q</span>
-  <span class="kpi-badge">78.0%</span>
-  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
-</div>
-<h4 class="sub part">지표 · 상태 표시</h4>
-<div data-cls=".progress-track / .avatar / .period-tab" class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">진행바<span class="cls">.progress-track · .progress-fill · .ok · .low</span></td>
-          <td style="width:180px;"><div class="progress-track"><i class="progress-fill ok" style="display:block;width:78%"></i></div></td></tr>
-      <tr><td class="k">아바타<span class="cls">.avatar · .avatar.lg</span></td>
-          <td><span class="avatar">최</span> <span class="avatar lg">김</span></td></tr>
-      <tr><td class="k">기간 탭<span class="cls">.period-tabs</span></td>
-          <td><span class="period-tabs"><button class="period-tab on">주</button><button class="period-tab">월</button><button class="period-tab">분기</button></span></td></tr>
-      <tr><td class="k">빈 상태<span class="cls">.empty-state · .emptynote</span></td>
-          <td><div class="empty-state" style="padding:14px 0;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
-              <div class="es-title">조회 결과가 없습니다</div></div></td></tr>
-    </tbody>
-  </table>
-</div>
-
-</div></div></section>
-
-<section id="input"><div class="card"><div class="card-header"><div class="card-title">입력</div></div><div class="card-body">
-
-<h4 class="sub part">폼 컨트롤</h4>
-<h4 class="sub">① 텍스트 입력 — 상태별</h4>
-<div data-cls=".finput / .fselect / .seg" class="demo">
-  <table class="spec">
-    <tr><td class="k">기본<span class="cls">.finput</span></td><td><input class="finput" value="최○○"></td></tr>
-    <tr><td class="k">placeholder</td><td><input class="finput" placeholder="이름 입력"></td></tr>
-    <tr><td class="k">읽기 전용<span class="cls">.roflat</span></td><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td></tr>
-    <tr><td class="k">비활성<span class="cls">disabled</span></td><td><input class="finput" value="수정 불가" disabled></td></tr>
-    <tr><td class="k">여러 줄<span class="cls">.ftextarea</span></td><td><textarea class="ftextarea" rows="2" style="width:240px" placeholder="상담 메모"></textarea></td></tr>
-  </table>
-</div>
-
-<h4 class="sub">② 선택 컨트롤</h4>
-<div class="demo">
-  <table class="spec">
-    <tr><td class="k">셀렉트<span class="cls">.fselect</span></td><td><select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select></td></tr>
-    <tr><td class="k">커스텀 셀렉트<span class="cls">data-csel</span></td><td><span style="width:150px;display:inline-block;"><select data-csel><option>전체 과정</option><option>ECP</option><option>ELE</option></select></span></td></tr>
-    <tr><td class="k">세그먼트<span class="cls">.seg</span></td><td><span style="font-size:11.5px;color:var(--txt-mut);">→ <a href="#nav">탭 3종</a>의 ③ 토글 탭</span></td></tr>
-    <tr><td class="k">토글<span class="cls">.toggle</span></td><td><label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span>충원율 반영</label></td></tr>
-    <tr><td class="k">체크박스</td><td><label class="chk"><input type="checkbox" checked> 재원생만</label>
-        <label class="chk"><input type="checkbox"> 대기 포함</label></td></tr>
-    <tr><td class="k">라디오</td><td><label class="chk"><input type="radio" name="gg" checked> 남</label>
-        <label class="chk"><input type="radio" name="gg"> 여</label></td></tr>
-  </table>
-</div>
-<h4 class="sub">③ 날짜 · 검색</h4>
-<div class="demo">
-  <table class="spec">
-    <tr><td class="k">날짜 필드<span class="cls">input[type=date]</span></td>
-        <td><span class="iwrap">
-          <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10" style="width:110px;">
-          <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
-          <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
-        </span></td></tr>
-    <tr><td class="k">검색 상자<span class="cls">.search-box</span></td>
-        <td><span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span></td></tr>
-  </table>
-</div>
-
-<h4 class="sub">④ 라벨 · 도움말 · 오류</h4>
-<div class="demo">
-  <div class="form-grid-2">
-    <div class="form-group">
-      <label class="form-label">학생명<span class="req">*</span></label>
-      <input class="finput" value="최○○">
-      <span class="form-hint">동명이인은 생년월일로 구분합니다.</span>
-    </div>
-    <div class="form-group">
-      <label class="form-label">학부모 연락처<span class="req">*</span></label>
-      <input class="finput" value="010-0000">
-      <span class="form-error">형식을 확인해 주세요.</span>
-    </div>
-  </div>
-</div>
-
-<h4 class="sub">⑤ 검색 필터 줄</h4>
-<div class="demo">
-  <div class="filters">
-    <span class="flabel">캠퍼스</span><select class="fselect"><option>시범캠퍼스</option></select>
-    <span class="flabel">학생명</span><input class="finput" placeholder="이름">
-    <span class="flabel">상태</span><select class="fselect"><option>전체</option><option>재원</option><option>대기</option></select>
-    <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
-  </div>
-</div>
-<h4 class="sub part">트리 셀렉트</h4>
-<h4 class="sub">단일 선택 — .tsel</h4>
-<div class="demo row" data-cls=".tsel">
-  <span class="flabel">학급</span>
-  <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
-    <ul>
-      <li data-label="ECP" data-count="12">ECP
-        <ul>
-          <li data-label="ECP5" data-count="4">ECP5
-            <ul><li data-v="ECP5-Bee">ECP5-Bee</li><li data-v="ECP5-Ladybug">ECP5-Ladybug</li></ul>
-          </li>
-          <li data-label="ECP6" data-count="3">ECP6
-            <ul><li data-v="ECP6-Bee">ECP6-Bee</li></ul>
-          </li>
-        </ul>
-      </li>
-      <li data-label="ELE" data-count="18">ELE
-        <ul>
-          <li data-label="GT1" data-count="2">GT1
-            <ul><li data-v="GT1-Falcon">GT1-Falcon</li><li data-v="GT1-Eagle">GT1-Eagle</li></ul>
-          </li>
-          <li data-v="MGT2-Comet">MGT2-Comet</li>
-        </ul>
-      </li>
-      <li data-v="전체">전체 학급</li>
-    </ul>
-  </span>
-  <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
-</div>
-
-<h4 class="sub">다중 선택 — 체크박스 트리 .ctree</h4>
-<div class="demo row" data-cls=".ctree">
-  <span class="flabel">현재 레벨</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
-      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
-      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
-      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
-      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
-      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
-      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
-      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
-      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
-      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
-    </ul>
-  </span>
-  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
-</div>
-
-<div class="demo row" data-cls=".ctree + data-count">
-  <span class="flabel">현재 학급</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul>
-        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
-        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
-        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
-      <li data-label="GT"><ul>
-        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
-        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
-    </ul>
-  </span>
-  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계.
-  현재 학급은 <code>curClass</code>, 진학 학급은 <code>nextClass</code> 로 세어 같은 반이라도 숫자가 다릅니다.</span>
-</div>
-
-<h4 class="sub part">날짜 선택</h4>
-<div data-cls=".pcmsdp" class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">오늘</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
-              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td></tr>
-      <tr><td class="k">선택한 날짜</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:transparent;
-              color:var(--pb);box-shadow:inset 0 0 0 1px var(--pb);align-items:center;justify-content:center;
-              font-size:11.5px;font-weight:700;">30</span></td></tr>
-      <tr><td class="k">오늘이자 선택</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
-              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td></tr>
-      <tr><td class="k">그 외 날짜</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;
-              font-size:11.5px;">12</span></td></tr>
-    </tbody>
-  </table>
-</div>
-</div></div></section>
-
-<section id="action"><div class="card"><div class="card-header"><div class="card-title">액션 · 상태</div></div><div class="card-body">
-
-<h4 class="sub part">버튼</h4>
-
-<h4 class="sub">기본 · 24PX</h4>
-<div class="demo row" data-cls=".btn · .btn.g · .btn.s · .btn.danger">
-  <button class="btn">검색</button>
-  <button class="btn g">초기화</button>
-  <button class="btn s">엑셀</button>
-  <button class="btn danger">영구 삭제</button>
-  <button class="btn" disabled>저장</button>
-</div>
-
-<h4 class="sub">작게 · BTN.SM · 22PX</h4>
-<div class="demo row">
-  <button class="btn sm">상세</button>
-  <button class="btn g sm">수정</button>
-  <button class="btn s sm">인쇄</button>
-</div>
-
-<h4 class="sub">아이콘 포함</h4>
-<div class="demo row" data-cls=".btn > svg + 글자">
-  <button class="btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> 등록</button>
-  <button class="btn g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4v16h16v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg> 수정</button>
-  <button class="btn s"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> 다운로드</button>
-</div>
-
-<h4 class="sub">아이콘 전용 · IBTN · ICON-BTN · 22PX</h4>
-<div class="demo row">
-  <button class="ibtn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
-  <button class="icon-btn" aria-label="추가"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-  <button class="icon-btn" aria-label="새로고침"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
-  <button class="icon-btn" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-</div>
-
-<h4 class="sub part">상태 5종</h4>
-<div class="demo flush" data-cls="상태 매트릭스">
-  <table class="type-spec">
-    <thead><tr><th>컴포넌트</th><th>기본</th><th>hover</th><th>선택 · 포커스</th><th>비활성</th></tr></thead>
-    <tbody>
-      <tr><td class="k">버튼</td>
-        <td><button class="btn">저장</button></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">배경 <code>--pb-dark</code></span></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">테두리 <code>--pb-dark</code></span></td>
-        <td><button class="btn" disabled>저장</button></td></tr>
-      <tr><td class="k">입력</td>
-        <td><input class="finput" value="값" style="width:100px;"></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">변화 없음</span></td>
-        <td><input class="finput" value="포커스" style="width:100px;border-color:var(--pb);"></td>
-        <td><input class="finput" value="비활성" style="width:100px;" disabled></td></tr>
-      <tr><td class="k">표 행</td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">짝수 행 <code>#F7F9FC</code></span></td>
-        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-a08);font-size:11px;">파랑 8%</span></td>
-        <td><span style="display:inline-block;padding:3px 10px;background:var(--pb-light);font-size:11px;">파랑 틴트</span></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
-      <tr><td class="k">탭</td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">회색 글자</span></td>
-        <td><span style="font-size:11px;color:var(--pb);">파란 글자</span></td>
-        <td><span style="font-size:11px;color:var(--pb-deeper);font-weight:700;border-bottom:3px solid var(--pb);padding-bottom:2px;">파란 밑줄</span></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
-      <tr><td class="k">메뉴 항목</td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">기본</span></td>
-        <td><span style="font-size:11px;color:var(--pb);font-weight:700;">파랑 + 굵게</span></td>
-        <td><span style="display:inline-block;padding:3px 8px;background:var(--pb-light);color:var(--pb);font-size:11px;font-weight:700;">틴트 배경</span></td>
-        <td><span style="font-size:11px;color:var(--txt-mut);">—</span></td></tr>
-    </tbody>
-  </table>
-</div>
-</div></div></section>
-
-<section id="feedback"><div class="card"><div class="card-header"><div class="card-title">피드백</div></div><div class="card-body">
-
-<h4 class="sub part">토스트</h4>
-<div data-cls=".kistoast" class="demo row">
-  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
-  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
-  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
-  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
-  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
-  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
-</div>
-<h4 class="sub part">모달</h4>
-<div data-cls=".modal-ov" class="demo row">
-  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
-</div>
-<h4 class="sub part">도움말 팝오버</h4>
-<div data-cls=".helpwrap" class="demo row">
-  <span style="font-size:11.5px;">입학구분(현재 결정)</span>
-  <span class="helpwrap" style="position:relative;">
-    <button type="button" class="helpbtn" aria-haspopup="true">?</button>
-    <div class="helppop" role="tooltip" style="display:block;position:static;margin-top:8px;max-width:420px;">
-      <div class="hp-sec">
-        <div class="hp-tit">입학구분이란?</div>
-        <b>바로 입학</b>(당해 즉시 입학)과 <b>신학년 입학</b>(다음 해 3월 입학) 중 현재 결정된 값입니다.
-      </div>
-    </div>
-  </span>
 </div>
 </div></div></section>
 
