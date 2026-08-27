@@ -111,19 +111,23 @@
 
   <h2 id="table">표</h2>
   <div class="demo col">
+    <div class="grid-wrap" style="max-height:190px;">
     <table class="grid">
       <thead>
         <tr><th class="grp" colspan="2">학생</th><th class="grp" colspan="2">MAP</th></tr>
         <tr><th>이름</th><th>학년</th><th>응시일</th><th class="num">점수</th></tr>
       </thead>
       <tbody>
-        <tr><td class="ctr">최○○</td><td class="ctr">초3</td><td class="ctr">2026.08.12</td><td class="num">218</td></tr>
-        <tr class="on"><td class="ctr">김○○</td><td class="ctr">초4</td><td class="ctr">2026.08.14</td><td class="num">231</td></tr>
+        <tr><td>최○○</td><td>초3</td><td>2026.08.12</td><td class="num">218</td></tr>
+        <tr><td>김○○</td><td>초4</td><td>2026.08.14</td><td class="num">231</td></tr>
+        <tr class="sel"><td>박○○</td><td>초3</td><td>2026.08.14</td><td class="num">205</td></tr>
+        <tr><td>이○○</td><td>초5</td><td>2026.08.18</td><td class="num">243</td></tr>
       </tbody>
-      <tfoot><tr><td colspan="3" class="ctr">평균</td><td class="num">224.5</td></tr></tfoot>
+      <tfoot><tr><td colspan="3">평균</td><td class="num">224.3</td></tr></tfoot>
     </table>
+    </div>
   </div>
-  <p class="note">헤더 <b>33px · #F4F7FD · 11.5px/700</b>, 2단 그룹 헤더는 <code>.grp</code>(#EAF1FB). 숫자 칸은 <code>.num</code> 으로 우측 정렬 + 등폭 숫자.</p>
+  <p class="note">헤더 <b>33px · #F4F7FD</b>, 본문 셀 <b>24px</b>, 좌우 패딩 8px, 기본 가운데 정렬, 짝수 행 <code>#F7F9FC</code> 줄무늬. 2단 그룹 헤더 <code>.grp</code>(#EAF1FB) · 숫자 칸 <code>.num</code>(우측 정렬 + 등폭) · 좌측 정렬은 <code>.lft</code>. 표는 <code>.grid-wrap</code>(상단 2px 파란선 + 스크롤) 안에 넣고, 헤더는 스크롤해도 고정됩니다.</p>
 
   <h2 id="form">폼</h2>
   <div class="demo">
@@ -134,7 +138,18 @@
     <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
     <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
   </div>
-  <p class="note">입력 높이 24px. <code>data-autowidth</code> 를 붙이면 옵션 최대 길이에 맞춰 셀렉트 폭이 자동 계산됩니다(리스트가 잘리지 않게).</p>
+  <div class="demo gray" style="background:#F3F5F9;border:0;">
+    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="checkbox" checked> 재원생만</label>
+    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="d" checked> 전체</label>
+    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="d"> 미납</label>
+    <textarea class="ftextarea" rows="2" style="width:240px" placeholder="상담 메모"></textarea>
+    <input class="finput" disabled value="비활성 입력">
+  </div>
+  <p class="note">입력 높이 <b>24px</b> · 테두리 <code>#CFD6E0</code> · 라운드 3px · 11.5px.
+  포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음 — 밀도 높은 표 화면에서 링은 시끄럽습니다).
+  체크박스·라디오는 14px, <code>accent-color</code> 로 브랜드 파랑.
+  검색 영역은 <code>.filters</code> 가 기본이고, 회색 띠가 필요하면 <code>.filters.gray</code>.
+  <code>data-autowidth</code> 를 붙이면 옵션 최대 길이에 맞춰 셀렉트 폭이 자동 계산됩니다.</p>
 
   <h2 id="tab">탭</h2>
   <div class="demo col">
