@@ -205,6 +205,74 @@ function initCsel(root){
   });
 }
 
+
+/* ---------- 트리 셀렉트 (.tsel) ----------
+   중첩 <ul><li data-v="값">라벨</li></ul> 을 읽어 트리 목록을 만든다.
+   잎(leaf) 노드만 값으로 선택되고, 상위 노드는 펼침/접힘만 한다.
+   숨은 <input type="hidden"> 에 값을 넣고 change 를 쏘므로 폼 전송·검증에 그대로 쓰인다. */
+function initTreeSelect(root){
+  (root||document).querySelectorAll('.tsel[data-tree]').forEach(function(wrap){
+    if(wrap.__tsel) return; wrap.__tsel=true;
+    var srcList=wrap.querySelector('ul'); if(!srcList) return;
+    var box=document.createElement('div'); box.className='tsel-box'; box.tabIndex=0;
+    var menu=document.createElement('div'); menu.className='tsel-menu';
+    var hidden=wrap.querySelector('input[type=hidden]');
+    if(!hidden){ hidden=document.createElement('input'); hidden.type='hidden'; wrap.appendChild(hidden); }
+    srcList.style.display='none';
+    wrap.insertBefore(box, wrap.firstChild); wrap.insertBefore(menu, srcList);
+
+    var CHEV='<svg class="tchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" '+
+             'stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg>';
+    function build(list, depth, parent){
+      [].forEach.call(list.children, function(li){
+        var kids=li.querySelector('ul');
+        var node=document.createElement('div');
+        node.className='tnode'+(kids?'':' leaf');
+        node.setAttribute('data-depth', depth);
+        if(li.dataset.v) node.setAttribute('data-v', li.dataset.v);
+        var label=(li.childNodes[0] && li.childNodes[0].nodeValue || '').trim() || li.dataset.label || '';
+        node.innerHTML=CHEV+'<span class="tlabel"></span>'+
+          (li.dataset.count?'<span class="tcount">'+li.dataset.count+'</span>':'');
+        node.querySelector('.tlabel').textContent=label;
+        parent.appendChild(node);
+        if(kids){
+          var g=document.createElement('div'); g.className='tgroup'; parent.appendChild(g);
+          node.addEventListener('click', function(e){
+            e.stopPropagation();
+            node.classList.toggle('open'); g.classList.toggle('open');
+          });
+          build(kids, depth+1, g);
+        } else {
+          node.addEventListener('click', function(e){
+            e.stopPropagation();
+            menu.querySelectorAll('.tnode.on').forEach(function(o){ o.classList.remove('on'); });
+            node.classList.add('on');
+            box.textContent=label;
+            hidden.value=node.getAttribute('data-v')||label;
+            close();
+            hidden.dispatchEvent(new Event('change',{bubbles:true}));
+          });
+        }
+      });
+    }
+    build(srcList, 0, menu);
+    box.textContent=wrap.dataset.placeholder||'선택하세요';
+
+    function place(){ var r=box.getBoundingClientRect();
+      menu.style.left=r.left+'px'; menu.style.top=(r.bottom+1)+'px'; menu.style.minWidth=r.width+'px'; }
+    function open(){ wrap.classList.add('open'); place(); }
+    function close(){ wrap.classList.remove('open'); }
+    box.addEventListener('click', function(){ wrap.classList.contains('open')?close():open(); });
+    box.addEventListener('keydown', function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }
+      if(e.key==='Escape') close();
+    });
+    document.addEventListener('mousedown', function(e){ if(!wrap.contains(e.target)) close(); }, true);
+    window.addEventListener('scroll', function(){ if(wrap.classList.contains('open')) place(); }, true);
+    window.addEventListener('resize', function(){ if(wrap.classList.contains('open')) place(); });
+  });
+}
+
 /* ---------- 페이지네이션 ----------
    실제 화면(02-012)의 renderPaging 과 같은 구성·순서다.
      « ‹ [번호…] › »  ·  페이지 [입력] / N  ·  새로고침  ·  페이지당 [30/50/100]
@@ -255,6 +323,7 @@ function initLayout(opt){
     renderWorkTabs($(opt.workTabs||'#worktabs'),opt.openTabs,opt.onTabOpen,opt.onTabClose);
   syncSelectWidths();
   initCsel();
+  initTreeSelect();
   document.querySelectorAll('.modal-box').forEach(function(b){ makeDraggable(b); });
   if(global.KCMS&&global.KCMS.bindModals) global.KCMS.bindModals();
   return {renderTabs:renderTabs,renderRail:renderRail,renderWorkTabs:renderWorkTabs};
@@ -263,7 +332,7 @@ function initLayout(opt){
 global.KCMS=Object.assign(global.KCMS||{},{
   initLayout:initLayout, renderTabs:renderTabs, renderRail:renderRail,
   renderWorkTabs:renderWorkTabs, syncSelectWidths:syncSelectWidths,
-  initCsel:initCsel, renderPaging:renderPaging, makeDraggable:makeDraggable, SVG:SVG
+  initCsel:initCsel, initTreeSelect:initTreeSelect, renderPaging:renderPaging, makeDraggable:makeDraggable, SVG:SVG
 });
 global.initLayout=initLayout;
 })(window);

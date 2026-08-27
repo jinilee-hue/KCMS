@@ -110,7 +110,7 @@
 <a href="#badge">배지 22종</a>
 <a href="#extra">지표 · 상태 표시</a>
 <div class="nav-group">입력</div>
-<a href="#form">폼 컨트롤</a>
+<a href="#tsel">트리 셀렉트</a><a href="#form">폼 컨트롤</a>
 
 <a href="#btn">버튼</a>
 <div class="nav-group">상태</div><a href="#state">상태 매트릭스</a><div class="nav-group">피드백 · 오버레이</div>
@@ -422,7 +422,7 @@
 <section id="table"><h3>표 — 가로형 / 세로형</h3>
 <p class="note">업무 화면의 표는 <b>두 가지</b>입니다. <b>가로형</b>은 여러 건을 나열하는 목록(<code>table.grid</code>),
 <b>세로형</b>은 한 건을 라벨-값으로 보여주는 상세(<code>table.infotbl</code>)입니다.
-검색 조건은 표가 아니라 <a href="#form">폼 컨트롤</a>의 필터 줄로 다룹니다.</p>
+검색 조건은 표가 아니라 <a href="#tsel">트리 셀렉트</a><a href="#form">폼 컨트롤</a>의 필터 줄로 다룹니다.</p>
 
 <h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
 <div data-cls="table.grid / table.infotbl" class="demo flush">
@@ -531,6 +531,58 @@
 </section>
 
 <h2 class="grp">입력</h2>
+<section id="tsel"><h3>트리 셀렉트</h3>
+
+<p class="note">과정 → 레벨 → 반 처럼 <b>계층이 있는 값</b>을 고를 때 씁니다. 겉모양은 커스텀 셀렉트와 같고 목록만 트리로 펼쳐집니다.
+상위 노드는 펼침/접힘만 하고, <b>잎 노드만 선택</b>됩니다.</p>
+
+<div class="demo row" data-cls=".tsel">
+  <span class="flabel">학급</span>
+  <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
+    <ul>
+      <li data-label="ECP" data-count="12">ECP
+        <ul>
+          <li data-label="ECP5" data-count="4">ECP5
+            <ul><li data-v="ECP5-Bee">ECP5-Bee</li><li data-v="ECP5-Ladybug">ECP5-Ladybug</li></ul>
+          </li>
+          <li data-label="ECP6" data-count="3">ECP6
+            <ul><li data-v="ECP6-Bee">ECP6-Bee</li></ul>
+          </li>
+        </ul>
+      </li>
+      <li data-label="ELE" data-count="18">ELE
+        <ul>
+          <li data-label="GT1" data-count="2">GT1
+            <ul><li data-v="GT1-Falcon">GT1-Falcon</li><li data-v="GT1-Eagle">GT1-Eagle</li></ul>
+          </li>
+          <li data-v="MGT2-Comet">MGT2-Comet</li>
+        </ul>
+      </li>
+      <li data-v="전체">전체 학급</li>
+    </ul>
+  </span>
+  <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
+</div>
+
+<p class="note">
+  깊이는 들여쓰기(<code>data-depth</code> 0·1·2)로 나타내고, 접힘 화살표는 펼치면 90° 돌아갑니다.
+  오른쪽 끝의 회색 숫자(<code>data-count</code>)는 하위 개수처럼 참고값을 넣을 때 씁니다.<br>
+  값은 숨은 <code>input[type=hidden]</code> 에 들어가고 <code>change</code> 가 발생하므로,
+  폼 전송·검증 코드는 일반 <code>select</code> 와 같은 방식으로 붙이면 됩니다.
+</p>
+
+<pre><code>&lt;span class="tsel" data-tree data-placeholder="학급 선택"&gt;
+  &lt;ul&gt;
+    &lt;li data-label="ECP" data-count="12"&gt;ECP
+      &lt;ul&gt;&lt;li data-v="ECP5-Bee"&gt;ECP5-Bee&lt;/li&gt;&lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
+
+</section>
+
 <section id="form"><h3>폼 컨트롤</h3>
 
 <p class="note">모든 입력 컨트롤은 <b>높이 24px</b>, 테두리 <code>#CFD6E0</code> 1px, 라운드 3px, 글자 11.5px 입니다.
@@ -565,6 +617,13 @@
   </table>
 </div>
 
+<div class="rule">
+  <b>셀렉트 세 가지 — 언제 무엇을</b><br>
+  · <b>기본 <code>.fselect</code></b> — 목록을 브라우저가 그립니다. 항목이 짧고 스타일을 맞출 필요가 없을 때 (기본값)<br>
+  · <b>커스텀 <code>data-csel</code></b> — 목록이 길거나 잘리면 안 될 때. 박스 바로 아래·같은 라운드로 열립니다<br>
+  · <b>트리 <code>.tsel</code></b> — 값에 계층이 있을 때 (과정 → 레벨 → 반)<br>
+  세 가지의 <b>박스 모양은 모두 같습니다</b>(24px · 라운드 3px · 오른쪽 v 화살표). 다른 건 열렸을 때의 목록뿐입니다.
+</div>
 <p class="note"><b>커스텀 셀렉트</b>는 <code>data-csel</code> 만 붙이면 <code>initLayout()</code> 이 변환합니다.
 원본 <code>select</code> 가 DOM 에 그대로 남아 <code>value</code>·<code>change</code> 는 손대지 않아도 됩니다.
 목록은 <code>position:fixed</code> 로 띄워 <code>.content</code> 의 <code>overflow</code> 에 잘리지 않습니다.</p>
@@ -856,6 +915,10 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
   var RAIL=PCMS_LEFT_RAIL_ITEMS;
   initLayout({menu:MENU, current:'입학관리', badges:PCMS_GNB_TAB_BADGES,
               railItems:RAIL, railCurrent:'HOME'});
+  document.addEventListener('change',function(e){
+    if(e.target.closest && e.target.closest('.tsel'))
+      document.getElementById('tselOut').textContent='선택값 '+e.target.value;
+  });
   KCMS.renderPaging('#pagingFirst', {page:1, total:24, size:30});
   KCMS.renderPaging('#pagingSample', {page:1, total:1284, size:30});
   KCMS.renderPaging('#pagingDemo', {page:3, total:1284, size:30,

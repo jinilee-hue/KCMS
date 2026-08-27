@@ -1371,6 +1371,30 @@ table.infotbl th,table.infotbl td{padding-top:0;padding-bottom:0;vertical-align:
 table.infotbl td > .finput,table.infotbl td > .iwrap,table.infotbl td > .seg{vertical-align:middle;}
 .sarrow{font-size:11.5px;margin-left:3px;color:var(--gnb);line-height:1;}
 .seg button{border-right:0;}
+.tsel{position:relative;display:inline-block;width:100%;vertical-align:middle;}
+.tsel-box{box-sizing:border-box;width:100%;height:24px;line-height:22px;border:1px solid var(--line);
+  border-radius:3px;background:#fff;color:var(--txt);font-size:11.5px;cursor:pointer;
+  padding:0 18px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%235b6776' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 7px center;}
+.tsel.open .tsel-box,.tsel-box:focus{border-color:var(--pb);outline:none;}
+.tsel-menu{display:none;position:fixed;z-index:200;min-width:200px;max-height:320px;overflow:auto;
+  background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 6px 16px rgba(0,40,100,.18);padding:4px 0;}
+.tsel.open .tsel-menu{display:block;}
+.tnode{display:flex;align-items:center;gap:5px;height:26px;padding:0 10px;font-size:11.5px;
+  color:var(--txt);cursor:pointer;white-space:nowrap;}
+.tnode:hover{background:var(--pb-a08);}
+.tnode.on{background:var(--pb-light);color:var(--pb-deeper);font-weight:700;}
+.tnode .tchev{width:12px;height:12px;flex:0 0 auto;color:var(--txt-mut);transition:transform .14s ease;}
+.tnode.open > .tchev{transform:rotate(90deg);}
+.tnode.leaf .tchev{visibility:hidden;}
+.tnode .tcount{margin-left:auto;font-size:10.5px;color:var(--txt-mut);font-weight:400;}
+.tnode[data-depth="1"]{padding-left:24px;}
+.tnode[data-depth="2"]{padding-left:38px;}
+.tnode[data-depth="3"]{padding-left:52px;}
+.tsel-menu .tgroup{display:none;}
+.tsel-menu .tgroup.open{display:block;}
+.tsel-empty{padding:10px;font-size:11.5px;color:var(--txt-mut);text-align:center;}
 .pagetabs{flex:0 0 auto;background:#fff;border-bottom:1px solid var(--line);display:flex;gap:2px;padding:0 12px;}
 .calDay{font-size:11px;font-weight:700;color:var(--txt);margin-bottom:2px;}
 .calDay.sunTxt{color:#e5484d;}
