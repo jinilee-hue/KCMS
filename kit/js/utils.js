@@ -11,10 +11,12 @@ function num(v){ return (v==null||v==='')?'':String(v).replace(/\B(?=(\d{3})+(?!
 function pct(v,digits){ return (v==null)?'':Number(v).toFixed(digits==null?1:digits)+'%'; }
 /** 퍼센트를 "숫자 + 작은 % 기호" HTML 로 — 표·카드 공통 규칙 */
 function pctHtml(v,digits){ return Number(v).toFixed(digits==null?1:digits)+'<span class="pcts">%</span>'; }
-function date(v,sep){ /* 2026-08-26 → 2026.08.26 */
+/** 날짜 표기는 하이픈으로 통일한다 — 화면 전체가 2026-08-27 형식이다(점 표기 금지). */
+function date(v,sep){
   if(!v) return ''; var s=String(v).replace(/[^0-9]/g,'');
   if(s.length<8) return String(v);
-  return s.slice(0,4)+(sep||'.')+s.slice(4,6)+(sep||'.')+s.slice(6,8);
+  sep = sep || '-';
+  return s.slice(0,4)+sep+s.slice(4,6)+sep+s.slice(6,8);
 }
 function phone(v){
   var s=String(v||'').replace(/[^0-9]/g,'');

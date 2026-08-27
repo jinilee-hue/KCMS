@@ -3271,3 +3271,18 @@ table.matrix > tbody > tr:not(:last-child) > th:first-child, table.matrix > tbod
 /* 모달 표시 클래스 — 화면 구현은 `.modal-ov.open` 을 씁니다.
    과거 코드가 `.on` 을 쓰는 경우가 있어 별칭으로 함께 받아 줍니다. */
 .modal-ov.on{display:flex;}
+
+/* ── 기준 화면에 부분 정의만 있던 컴포넌트의 표준값 (2026-08-27 확정) ──
+   02-012 에는 패치 조각만 있어 추출본만으로는 값이 비어 있던 것들이다.
+   가이드에서 정한 표준을 여기서 못박는다. */
+.sectit{display:flex;align-items:center;gap:5px;font-size:13px;font-weight:700;color:#000;
+  margin:12px 0 8px;padding:6px 2px;}
+.sectit::before{content:'';width:4px;height:14px;border-radius:2px;
+  background:linear-gradient(180deg,var(--pb) 0%,var(--pb-deeper) 100%);}
+.sectit .hint{font-weight:400;font-size:11px;color:var(--txt-mut);margin-left:4px;}
+.panel{background:#fff;border:1px solid var(--line-soft);border-radius:8px;padding:14px;}
+.actions{display:flex;align-items:center;gap:6px;}
+.actions > .btn:first-of-type{margin-left:auto;}
+/* 작업 탭 닫기(✕) — 삭제 버튼에 빨강 금지 규칙에 따라 중립 톤 */
+.worktabs .wtab .x{cursor:pointer;}
+.worktabs .wtab .x:hover{background:#d7dde6;color:#1F2937;}

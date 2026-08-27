@@ -206,8 +206,9 @@ function initCsel(root){
 }
 
 /* ---------- 페이지네이션 ----------
-   실제 화면(02-012)의 renderPaging 과 같은 마크업을 만든다.
-   « ‹ [번호…] › »  ·  페이지 [입력]/N  ·  새로고침  ·  페이지당 [30/50/100]  ·  총 N건 */
+   실제 화면(02-012)의 renderPaging 과 같은 구성·순서다.
+     « ‹ [번호…] › »  ·  페이지 [입력] / N  ·  새로고침  ·  페이지당 [30/50/100]
+   총 건수(.pgtotal)는 화면에서 쓰지 않는다 — 필요하면 {total:true} 로 켠다. */
 function renderPaging(el, opt){
   el=typeof el==='string'?document.querySelector(el):el; if(!el) return;
   opt=opt||{};
@@ -217,7 +218,6 @@ function renderPaging(el, opt){
   var end=Math.min(pages, Math.max(5, cur+2)), start=Math.max(1, end-4);
   var nums='';
   for(var p=start;p<=end;p++) nums+='<button type="button" class="pgnum'+(p===cur?' on':'')+'" data-p="'+p+'">'+p+'</button>';
-  var from=total?((cur-1)*size+1):0, to=total?Math.min(cur*size,total):0;
   el.className='paging';
   el.innerHTML=
     '<button type="button" class="pgnav" title="처음"'+(cur<=1?' disabled':'')+'>«</button>'+
@@ -231,7 +231,7 @@ function renderPaging(el, opt){
     '<span class="pgsize">페이지당 <select class="pgsizesel" aria-label="페이지당 표시 개수">'+
       [30,50,100].map(function(n){ return '<option value="'+n+'"'+(n===size?' selected':'')+'>'+n+'</option>'; }).join('')+
     '</select></span>'+
-    '<span class="pgtotal">'+(total?from+'–'+to+' / 총 '+KCMSnum(total)+'건':'총 0건')+'</span>';
+    (opt.showTotal ? '<span class="pgtotal">총 '+KCMSnum(total)+'건</span>' : '');
   el.querySelectorAll('.pgnum').forEach(function(b){
     b.addEventListener('click',function(){ if(opt.onPage) opt.onPage(Number(b.dataset.p)); });
   });
