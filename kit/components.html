@@ -42,6 +42,10 @@
 
   /* 카드 안 소제목 — 조용한 라벨 */
   h4.sub{font-size:10.5px;font-weight:800;color:#8794a8;letter-spacing:.7px;margin:24px 0 10px;}
+  /* 카테고리 안의 구성요소 이름 — 그 아래 작은 라벨(소제목)과 단계를 가른다 */
+  h4.sub.part{font-size:12.5px;font-weight:800;color:var(--gnb);letter-spacing:-.2px;
+    margin:34px 0 14px;padding-bottom:8px;border-bottom:1px solid #EDF1F6;}
+  section > .card > .card-body > h4.sub.part:first-child{margin-top:0;}
   section > .card > .card-body > h4.sub:first-child{margin-top:0;}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;}
   .chips b{display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 10px;border-radius:999px;
@@ -97,30 +101,17 @@
 <body>
 <div class="wrap">
 <aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
-<div class="nav-group">기초</div>
 <a href="#start">시작하기</a>
-<a href="#color">색 팔레트</a>
-<a href="#type">타이포</a><a href="#token">토큰 · 간격 · 아이콘</a>
-<div class="nav-group">레이아웃</div>
-<a href="#layout">레이아웃 골격</a>
-<a href="#sec">섹션 · 패널</a>
-<div class="nav-group">내비게이션</div>
-<a href="#gnb">GNB 메뉴 (3뎁스)</a>
-<a href="#tab">탭</a>
-<a href="#page">페이지네이션</a>
-<div class="nav-group">데이터 표시</div>
-<a href="#table">표 — 가로형 / 세로형</a>
-<a href="#badge">배지 22종</a>
-<a href="#extra">지표 · 상태 표시</a>
-<div class="nav-group">입력</div>
-<a href="#tsel">트리 셀렉트</a><a href="#form">폼 컨트롤</a>
-
-<a href="#btn">버튼</a>
-<div class="nav-group">상태</div><a href="#state">상태 매트릭스</a><div class="nav-group">피드백 · 오버레이</div>
-<a href="#toast">토스트</a>
-<a href="#help">도움말 팝오버</a><a href="#modal">모달</a>
-<a href="#date">날짜 선택</a>
-<div class="nav-group">규칙</div><a href="#rules">Do / Don’t</a><a href="#a11y">접근성 · 키보드</a><div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside><main class="doc"><header class="doc-hd">
+<a href="#base">기초</a>
+<a href="#layout">레이아웃</a>
+<a href="#nav">내비게이션</a>
+<a href="#table">표</a>
+<a href="#display">표시</a>
+<a href="#input">입력</a>
+<a href="#action">액션 · 상태</a>
+<a href="#feedback">피드백</a>
+<a href="#rules">규칙</a>
+<div class="nav-foot"><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a></div></aside><main class="doc"><header class="doc-hd">
   <h1>컴포넌트 가이드</h1>
   <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다 —
   <code>common.css</code> 는 새로 쓴 게 아니라 화면의 CSS 를 추출한 것이기 때문입니다.</p>
@@ -131,8 +122,8 @@
     <div class="fact"><b>구성</b><span>common.css 1,413 규칙 · 화면 전용 256 규칙 분리</span></div>
   </div>
 </header>
-<h2 class="grp">기초</h2>
 <section id="start"><div class="card"><div class="card-header"><div class="card-title">시작하기</div></div><div class="card-body">
+
 <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
 &lt;link rel="stylesheet" href="styles/common.css"&gt;
 &lt;script src="js/utils.js"&gt;&lt;/script&gt;
@@ -141,7 +132,10 @@
 &lt;script src="js/modal-drag.js"&gt;&lt;/script&gt;    &lt;!-- 모달을 쓰면 --&gt;</code></pre>
 
 </div></div></section>
-<section id="color"><div class="card"><div class="card-header"><div class="card-title">색 팔레트</div></div><div class="card-body">
+
+<section id="base"><div class="card"><div class="card-header"><div class="card-title">기초</div></div><div class="card-body">
+
+<h4 class="sub part">색</h4>
 <div data-cls="tokens.css" class="demo" id="sws"></div>
 <div class="rule">
   <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
@@ -149,9 +143,7 @@
   면적이 좁은 <b>글자·아이콘</b>은 원색(<code>--pb</code>/<code>--danger</code>).
 </div>
 
-</div></div></section>
-<section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
-
+<h4 class="sub part">타이포</h4>
 <div class="chips"><b>Pretendard</b><b>본문 <i>11.5px</i></b><b>크기 단계 <i>6개</i></b><b class="no">단계 추가 금지</b></div>
 
 <h4 class="sub">① 크기 단계</h4>
@@ -228,9 +220,7 @@
   · 지표 수치만 800 을 씁니다. 그 외 강조는 700 까지입니다.
 </div>
 
-</div></div></section>
-
-<section id="token"><div class="card"><div class="card-header"><div class="card-title">토큰 — 간격 · 라운드 · 그림자 · 아이콘</div></div><div class="card-body">
+<h4 class="sub part">간격 · 라운드 · 그림자 · 아이콘</h4>
 <div class="chips"><b>화면 CSS 사용 빈도 기준</b><b class="no">새 값 만들지 않기</b></div>
 
 <h4 class="sub">간격</h4>
@@ -275,10 +265,12 @@
   <span style="font-size:11px;color:var(--txt-mut);">19px — 좌측 레일</span>
 </div>
 <div class="chips"><b>viewBox <i>0 0 24 24</i></b><b>굵기 <i>1.8 / 2</i></b><b>linecap <i>round</i></b><b>색 <i>currentColor</i></b><b class="no">채움 아이콘 금지</b></div>
+
 </div></div></section>
 
-<h2 class="grp">레이아웃</h2>
-<section id="layout"><div class="card"><div class="card-header"><div class="card-title">레이아웃 골격</div></div><div class="card-body">
+<section id="layout"><div class="card"><div class="card-header"><div class="card-title">레이아웃</div></div><div class="card-body">
+
+<h4 class="sub part">화면 골격</h4>
 <div data-cls=".rail / .bcbar / .worktabs" class="demo flush">
   <div style="display:flex;height:150px;">
     <div class="rail" id="rail" style="flex:0 0 58px;"></div>
@@ -294,9 +286,7 @@
 </div>
 <div class="chips"><b>GNB <i>64</i></b><b>레일 <i>58</i></b><b>히스토리 네비 <i>30</i></b><b>작업 탭 <i>30</i></b><b>작업 탭은 옆으로 누적</b></div>
 
-</div></div></section>
-<section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 · 패널</div></div><div class="card-body">
-
+<h4 class="sub part">섹션 · 패널 · 액션바</h4>
 <div class="chips"><b>섹션 제목 <i>영역을 연다</i></b><b>패널 <i>내용을 담는다</i></b><b>액션바 <i>버튼을 모은다</i></b></div>
 
 <h4 class="sub">① 조각별</h4>
@@ -339,8 +329,6 @@
   </div>
   <div class="paging" id="pagingSample"></div>
 </div>
-<div class="chips"><b>① 섹션 제목</b><b>② 액션바</b><b>③ 내용</b><b>④ 페이징</b><b>버튼 <i>오른쪽</i></b><b>건수·상태 <i>왼쪽</i></b></div>
-
 <h4 class="sub">③ 여백 규칙</h4>
 <div class="rule">
   섹션 제목 위 <b>12px</b> · 아래 <b>8px</b><br>
@@ -351,8 +339,9 @@
 
 </div></div></section>
 
-<h2 class="grp">내비게이션</h2>
-<section id="gnb"><div class="card"><div class="card-header"><div class="card-title">GNB 메뉴 (3뎁스)</div></div><div class="card-body">
+<section id="nav"><div class="card"><div class="card-header"><div class="card-title">내비게이션</div></div><div class="card-body">
+
+<h4 class="sub part">GNB 메뉴 (3뎁스)</h4>
 <div data-cls=".topnav / .tab / .dd" class="demo dark">
   <div class="topnav" style="position:relative;">
     <div class="brand">PCMS</div>
@@ -363,9 +352,9 @@
 
 <pre><code>initLayout({ menu: PCMS_GNB_MENU, current: '입학관리',
             badges: PCMS_GNB_TAB_BADGES,
-            railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre></div></div></section>
-<section id="tab"><div class="card"><div class="card-header"><div class="card-title">탭 — 3종</div></div><div class="card-body">
+            railItems: PCMS_LEFT_RAIL_ITEMS, railCurrent: 'HOME' });</code></pre>
 
+<h4 class="sub part">탭 3종</h4>
 <div class="chips"><b>상위 <i>.tabs</i></b><b>하위 <i>.quickpill</i></b><b>토글 <i>.seg</i></b><b class="ok">세 모양이 서로 달라야 한다</b></div>
 
 <h4 class="sub">① 상위 탭 — 밑줄형 (.dtabs / .dtab)</h4>
@@ -376,8 +365,6 @@
   </div>
   <div style="padding:14px;font-size:11.5px;color:var(--txt-mut);">선택한 탭의 내용 영역</div>
 </div>
-<div class="chips"><b>12px / 700</b><b>밑줄 <i>3px</i></b><b>컨테이너 하단 <i>1px</i></b></div>
-
 <h4 class="sub">② 하위 탭 — 알약형 (.quickpill)</h4>
 <div class="demo row" data-cls=".quickpill">
   <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
@@ -397,9 +384,7 @@
   · 값을 바꾸거나 조건을 켠다/끈다 → <b>토글</b>(붙은 박스)
 </div>
 
-</div></div></section>
-
-<section id="page"><div class="card"><div class="card-header"><div class="card-title">페이지네이션</div></div><div class="card-body">
+<h4 class="sub part">페이지네이션</h4>
 <div data-cls=".paging" class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
@@ -408,9 +393,12 @@
 <pre><code>KCMS.renderPaging('#paging', {
   page: 3, total: 1284, size: 30,
   onPage: function(p){ /* 페이지 이동 */ }
-});</code></pre></div></div></section>
-<h2 class="grp">데이터 표시</h2>
-<section id="table"><div class="card"><div class="card-header"><div class="card-title">표 — 가로형 / 세로형</div></div><div class="card-body">
+});</code></pre>
+
+</div></div></section>
+
+<section id="table"><div class="card"><div class="card-header"><div class="card-title">표</div></div><div class="card-body">
+
 <div class="chips"><b>가로형 <i>table.grid · 목록</i></b><b>세로형 <i>table.infotbl · 상세</i></b><b>검색 조건 <i>필터 줄</i></b></div>
 
 <h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
@@ -430,8 +418,6 @@
     </table>
   </div>
 </div>
-<div class="chips"><b>헤더 <i>33px 고정</i></b><b>셀 <i>24px</i></b><b>짝수 행 줄무늬</b><b>선택 <i>.sel</i></b><b>정렬 <i>.sortable</i></b><b>감싸기 <i>.tblwrap</i></b></div>
-
 <h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">② 세로형 — 상세 (table.infotbl)</h3>
 <div class="demo">
   <table class="infotbl">
@@ -445,12 +431,12 @@
         <td><span class="seg"><button class="on">남</button><button>여</button></span></td></tr>
   </table>
 </div>
-<div class="chips"><b>라벨 th <i>92px · #F4F7FD</i></b><b>라벨 정렬 <i>가운데</i></b><b>한 행 <i>라벨-값 2쌍</i></b><b>읽기 전용 <i>.roflat</i></b></div>
 
-<pre><code>&lt;div class="tblwrap"&gt;&lt;table class="grid"&gt; … &lt;/table&gt;&lt;/div&gt;   &lt;!-- 가로형(목록) --&gt;
-&lt;table class="infotbl"&gt;&lt;tr&gt;&lt;th&gt;라벨&lt;/th&gt;&lt;td&gt;값&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;  &lt;!-- 세로형(상세) --&gt;
-</code></pre></div></div></section>
-<section id="badge"><div class="card"><div class="card-header"><div class="card-title">배지 22종</div></div><div class="card-body">
+</div></div></section>
+
+<section id="display"><div class="card"><div class="card-header"><div class="card-title">표시</div></div><div class="card-body">
+
+<h4 class="sub part">배지</h4>
 <div data-cls=".badge 계열" class="demo row">
   <span class="badge">기본</span>
   <span class="badge has">값 있음</span>
@@ -488,9 +474,7 @@
 </div>
 <div class="chips"><b>굵기 <i>500</i></b><b class="no">700 금지</b><b>계열 <i>22종</i></b><b>용도 고정 <i>agebadge · to-badge · ddaybadge</i></b></div>
 
-</div></div></section>
-<section id="extra"><div class="card"><div class="card-header"><div class="card-title">지표 · 상태 표시</div></div><div class="card-body">
-
+<h4 class="sub part">지표 · 상태 표시</h4>
 <div class="chips"><b>수치 표시 전용</b><b>입력→폼</b><b>상자→섹션·패널</b><b>증감·점→타이포·배지</b></div>
 
 <div data-cls=".progress-track / .avatar / .period-tab" class="demo flush">
@@ -516,112 +500,9 @@
 
 </div></div></section>
 
-<h2 class="grp">입력</h2>
-<section id="tsel"><div class="card"><div class="card-header"><div class="card-title">트리 셀렉트</div></div><div class="card-body">
+<section id="input"><div class="card"><div class="card-header"><div class="card-title">입력</div></div><div class="card-body">
 
-<h4 class="sub">단일 선택 — .tsel</h4>
-
-<div class="chips"><b>과정 › 레벨 › 반</b><b>잎 노드만 선택</b><b>상위 노드 <i>펼침·접힘만</i></b></div>
-
-<div class="demo row" data-cls=".tsel">
-  <span class="flabel">학급</span>
-  <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
-    <ul>
-      <li data-label="ECP" data-count="12">ECP
-        <ul>
-          <li data-label="ECP5" data-count="4">ECP5
-            <ul><li data-v="ECP5-Bee">ECP5-Bee</li><li data-v="ECP5-Ladybug">ECP5-Ladybug</li></ul>
-          </li>
-          <li data-label="ECP6" data-count="3">ECP6
-            <ul><li data-v="ECP6-Bee">ECP6-Bee</li></ul>
-          </li>
-        </ul>
-      </li>
-      <li data-label="ELE" data-count="18">ELE
-        <ul>
-          <li data-label="GT1" data-count="2">GT1
-            <ul><li data-v="GT1-Falcon">GT1-Falcon</li><li data-v="GT1-Eagle">GT1-Eagle</li></ul>
-          </li>
-          <li data-v="MGT2-Comet">MGT2-Comet</li>
-        </ul>
-      </li>
-      <li data-v="전체">전체 학급</li>
-    </ul>
-  </span>
-  <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
-</div>
-
-<div class="chips"><b>깊이 <i>data-depth 0·1·2</i></b><b>화살표 <i>펼치면 90°</i></b><b>참고값 <i>data-count</i></b><b>값 <i>hidden input + change</i></b></div>
-
-<pre><code>&lt;span class="tsel" data-tree data-placeholder="학급 선택"&gt;
-  &lt;ul&gt;
-    &lt;li data-label="ECP" data-count="12"&gt;ECP
-      &lt;ul&gt;&lt;li data-v="ECP5-Bee"&gt;ECP5-Bee&lt;/li&gt;&lt;/ul&gt;
-    &lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;
-
-KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
-
-<h4 class="sub">다중 선택 — 체크박스 트리 .ctree</h4>
-
-<div class="chips"><b>여러 개를 한 번에</b><b>묶음 <i>과정군 → 레벨</i></b><b>검색 · 전체펼치기 · 전체해제</b><b>상위 체크 <i>하위 전체</i></b><b>일부만 체크 <i>중간 상태</i></b><b class="ok">전부 체크 = 전체</b></div>
-
-<div class="demo row" data-cls=".ctree">
-  <span class="flabel">현재 레벨</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
-      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
-      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
-      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
-      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
-      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
-      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
-      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
-      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
-      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
-    </ul>
-  </span>
-  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
-</div>
-
-<div class="demo row" data-cls=".ctree + data-count">
-  <span class="flabel">진학 학급</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul>
-        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
-        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
-        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
-      <li data-label="GT"><ul>
-        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
-        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
-    </ul>
-  </span>
-  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계 <code>[10/120]</code></span>
-</div>
-
-<div class="chips"><b>잎 아이콘 <i>끝 항목</i></b><b>참고 수치 <i>[배정/정원]</i></b><b>묶음 <i>자동 합계</i></b><b class="no">숫자를 장식으로 넣지 않기 — 실제 값만</b></div>
-
-<div class="chips"><b>박스 <i>24px · .csel-box 와 동일</i></b><b>목록 <i>268px · fixed</i></b><b>행 <i>26px</i></b><b>값 <i>hidden input + change</i></b><b class="no">단일 선택에 쓰지 않기</b></div>
-
-<pre><code>&lt;span class="ctree" data-ctree data-all data-placeholder="전체"&gt;
-  &lt;ul&gt;
-    &lt;li data-label="ECP"&gt;&lt;ul&gt;&lt;li&gt;ECP5&lt;/li&gt;&lt;li data-count="3/12"&gt;ECP6&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/span&gt;
-
-KCMS.initCTree();                 // initLayout() 안에서 자동 호출됨
-el.__ctree.values();              // 선택 배열 · 전체면 null
-el.__ctree.setAll(); el.__ctree.reset();</code></pre>
-
-<div class="chips"><b>쓰는 곳 <i>진학생 관리 — 현재 레벨 · 진학 레벨</i></b><b>레벨 <i>40종</i></b></div>
-
-</div></div></section>
-
-<section id="form"><div class="card"><div class="card-header"><div class="card-title">폼 컨트롤</div></div><div class="card-body">
-
+<h4 class="sub part">폼 컨트롤</h4>
 <div class="chips"><b>높이 <i>24px</i></b><b>테두리 <i>#CFD6E0 1px</i></b><b>라운드 <i>3px</i></b><b>글자 <i>11.5px</i></b><b>포커스 <i>테두리 색만</i></b><b class="no">포커스 링·그림자 금지</b></div>
 
 <h4 class="sub">① 텍스트 입력 — 상태별</h4>
@@ -660,7 +541,6 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
   · <b>트리 <code>.tsel</code></b> — 값에 계층이 있을 때 (과정 → 레벨 → 반)<br>
   세 가지의 <b>박스 모양은 모두 같습니다</b>(24px · 라운드 3px · 오른쪽 v 화살표). 다른 건 열렸을 때의 목록뿐입니다.
 </div>
-<div class="chips"><b>변환 <i>data-csel</i></b><b>원본 select 유지</b><b>목록 <i>position:fixed</i></b><b>잘림 없음</b></div>
 <h4 class="sub">③ 날짜 · 검색</h4>
 <div class="demo">
   <table class="spec">
@@ -710,9 +590,136 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
   도움말 <code>.form-hint</code> · 오류 <code>.form-error</code>
 </div>
 
+<h4 class="sub part">트리 셀렉트</h4>
+<h4 class="sub">단일 선택 — .tsel</h4>
+
+<div class="chips"><b>과정 › 레벨 › 반</b><b>잎 노드만 선택</b><b>상위 노드 <i>펼침·접힘만</i></b></div>
+
+<div class="demo row" data-cls=".tsel">
+  <span class="flabel">학급</span>
+  <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
+    <ul>
+      <li data-label="ECP" data-count="12">ECP
+        <ul>
+          <li data-label="ECP5" data-count="4">ECP5
+            <ul><li data-v="ECP5-Bee">ECP5-Bee</li><li data-v="ECP5-Ladybug">ECP5-Ladybug</li></ul>
+          </li>
+          <li data-label="ECP6" data-count="3">ECP6
+            <ul><li data-v="ECP6-Bee">ECP6-Bee</li></ul>
+          </li>
+        </ul>
+      </li>
+      <li data-label="ELE" data-count="18">ELE
+        <ul>
+          <li data-label="GT1" data-count="2">GT1
+            <ul><li data-v="GT1-Falcon">GT1-Falcon</li><li data-v="GT1-Eagle">GT1-Eagle</li></ul>
+          </li>
+          <li data-v="MGT2-Comet">MGT2-Comet</li>
+        </ul>
+      </li>
+      <li data-v="전체">전체 학급</li>
+    </ul>
+  </span>
+  <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
+</div>
+
+<pre><code>&lt;span class="tsel" data-tree data-placeholder="학급 선택"&gt;
+  &lt;ul&gt;
+    &lt;li data-label="ECP" data-count="12"&gt;ECP
+      &lt;ul&gt;&lt;li data-v="ECP5-Bee"&gt;ECP5-Bee&lt;/li&gt;&lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
+
+<h4 class="sub">다중 선택 — 체크박스 트리 .ctree</h4>
+
+<div class="chips"><b class="ok">전부 체크 = 전체</b><b class="no">숫자를 장식으로 넣지 않기 — 실제 값만</b><b class="no">단일 선택에 쓰지 않기</b><b class="ok">같은 트리라도 세는 칸이 다르면 숫자도 다르다</b><b>여러 개를 한 번에</b><b>묶음 <i>과정군 → 레벨</i></b><b>검색 · 전체펼치기 · 전체해제</b></div>
+<div class="demo row" data-cls=".ctree">
+  <span class="flabel">현재 레벨</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
+      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
+      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
+      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
+      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
+      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
+      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
+      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
+      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
+      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
+    </ul>
+  </span>
+  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
+</div>
+
+<div class="demo row" data-cls=".ctree + data-count">
+  <span class="flabel">현재 학급</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul>
+        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
+        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
+        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
+      <li data-label="GT"><ul>
+        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
+        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
+    </ul>
+  </span>
+  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계.
+  현재 학급은 <code>curClass</code>, 진학 학급은 <code>nextClass</code> 로 세어 같은 반이라도 숫자가 다릅니다.</span>
+</div>
+
+<pre><code>&lt;span class="ctree" data-ctree data-all data-placeholder="전체"&gt;
+  &lt;ul&gt;
+    &lt;li data-label="ECP"&gt;&lt;ul&gt;&lt;li&gt;ECP5&lt;/li&gt;&lt;li data-count="3/12"&gt;ECP6&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+KCMS.initCTree();                 // initLayout() 안에서 자동 호출됨
+el.__ctree.values();              // 선택 배열 · 전체면 null
+el.__ctree.setAll(); el.__ctree.reset();</code></pre>
+
+<h4 class="sub part">날짜 선택</h4>
+<div class="chips"><b>오늘 <i>파랑 채움</i></b><b>선택일 <i>파랑 링</i></b><b class="no">파랑 두 가지 금지</b><b>필드 구조 <i>폼 ③</i></b></div>
+
+<div data-cls=".pcmsdp" class="demo flush">
+  <table class="type-spec">
+    <tbody>
+      <tr><td class="k">오늘</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
+              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td>
+          <td class="c">파란 원 <b>채움</b> + 흰 글자</td></tr>
+      <tr><td class="k">선택한 날짜</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:transparent;
+              color:var(--pb);box-shadow:inset 0 0 0 1px var(--pb);align-items:center;justify-content:center;
+              font-size:11.5px;font-weight:700;">30</span></td>
+          <td class="c">파란 <b>1px 링</b> + 파란 글자</td></tr>
+      <tr><td class="k">오늘이자 선택</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
+              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td>
+          <td class="c">채움 (링 없음)</td></tr>
+      <tr><td class="k">그 외 날짜</td>
+          <td><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;
+              font-size:11.5px;">12</span></td>
+          <td class="c">기본 글자색, hover 시 파랑 8% 틴트</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="rule">
+  파랑은 <code>#0066FF</code> <b>한 가지만</b> 씁니다. 오늘과 선택일의 구분은 색이 아니라 <b>형태</b>(채움 ↔ 링)로 합니다.<br>
+  이전에는 오늘 <code>#0066FF</code> 채움 / 선택 <code>#003D99</code> 남색 채움이라, 같은 달력인데 파랑이 두 가지로 보였습니다.<br>
+  날짜 표기는 <b>하이픈</b>(2026-08-27). 점 표기는 쓰지 않습니다 — <code>KCMS.date('20260827')</code>.
+</div>
+
 </div></div></section>
 
-<section id="btn"><div class="card"><div class="card-header"><div class="card-title">버튼</div></div><div class="card-body">
+<section id="action"><div class="card"><div class="card-header"><div class="card-title">액션 · 상태</div></div><div class="card-body">
+
+<h4 class="sub part">버튼</h4>
 <div data-cls=".btn / .ibtn" class="demo flush">
   <table class="type-spec">
     <tbody>
@@ -739,9 +746,8 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
   높이 <b>24px</b>(작게 22px) · 라운드 3px · 글자 11.5px/500.<br>
   한 줄에 버튼이 여러 개면 <b>주요 1개 + 보조 여러 개</b>로 두고, 주요 버튼을 가장 오른쪽에 둡니다.
 </div>
-</div></div></section>
 
-<section id="state"><div class="card"><div class="card-header"><div class="card-title">상태 — 기본 · hover · 포커스 · 선택 · 비활성</div></div><div class="card-body">
+<h4 class="sub part">상태 5종</h4>
 <div class="chips"><b>hover</b><b>active</b><b>focus</b><b>disabled</b><b>비활성 · 읽기 전용</b><b>한 컴포넌트 <i>한 규칙</i></b></div>
 <div class="demo flush" data-cls="상태 매트릭스">
   <table class="type-spec">
@@ -780,10 +786,12 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
   <b>비활성</b>은 <code>opacity:.45</code> 또는 회색 배경(<code>#F0F2F5</code>) + 회색 글자.<br>
   <b>선택</b>은 파랑 틴트(<code>--pb-light</code>), <b>hover</b> 는 그보다 옅은 파랑 8%(<code>--pb-a08</code>).
 </div>
+
 </div></div></section>
 
-<h2 class="grp">피드백 · 오버레이</h2>
-<section id="toast"><div class="card"><div class="card-header"><div class="card-title">토스트</div></div><div class="card-body">
+<section id="feedback"><div class="card"><div class="card-header"><div class="card-title">피드백</div></div><div class="card-body">
+
+<h4 class="sub part">토스트</h4>
 <div data-cls=".kistoast" class="demo row">
   <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
   <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
@@ -801,8 +809,19 @@ el.__ctree.setAll(); el.__ctree.reset();</code></pre>
 </div>
 
 <pre><code>KCMS.toast('저장되었습니다.', 'success');   // success · warning · danger · neutral
-KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre></div></div></section>
-<section id="help"><div class="card"><div class="card-header"><div class="card-title">도움말 팝오버</div></div><div class="card-body">
+KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 기본 neutral</code></pre>
+
+<h4 class="sub part">모달</h4>
+<div data-cls=".modal-ov" class="demo row">
+  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
+</div>
+<div class="chips"><b>헤더 <i>40px</i></b><b>드래그 이동</b><b>Esc · 오버레이 클릭 닫기</b><b class="no">본문 테두리 없음</b></div>
+
+<pre><code>KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
+KCMS.closeModal('myModal');
+KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre>
+
+<h4 class="sub part">도움말 팝오버</h4>
 <div data-cls=".helpwrap" class="demo row">
   <span style="font-size:11.5px;">입학구분(현재 결정)</span>
   <span class="helpwrap" style="position:relative;">
@@ -816,55 +835,12 @@ KCMS.toast('조회 결과가 12건입니다.');            // 타입 생략 → 
   </span>
 </div>
 <div class="chips"><b>버튼 <i>.helpbtn 16px 원형</i></b><b>팝오버 <i>.helppop</i></b><b>라운드 <i>5px</i></b><b>문단 <i>.hp-sec</i></b></div>
-</div></div></section>
-
-<section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
-<div data-cls=".modal-ov" class="demo row">
-  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
-</div>
-<div class="chips"><b>헤더 <i>40px</i></b><b>드래그 이동</b><b>Esc · 오버레이 클릭 닫기</b><b class="no">본문 테두리 없음</b></div>
-
-<pre><code>KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
-KCMS.closeModal('myModal');
-KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결</code></pre></div></div></section>
-<section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 선택 — 달력 팝업</div></div><div class="card-body">
-
-<div class="chips"><b>오늘 <i>파랑 채움</i></b><b>선택일 <i>파랑 링</i></b><b class="no">파랑 두 가지 금지</b><b>필드 구조 <i>폼 ③</i></b></div>
-
-<div data-cls=".pcmsdp" class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">오늘</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
-              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td>
-          <td class="c">파란 원 <b>채움</b> + 흰 글자</td></tr>
-      <tr><td class="k">선택한 날짜</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:transparent;
-              color:var(--pb);box-shadow:inset 0 0 0 1px var(--pb);align-items:center;justify-content:center;
-              font-size:11.5px;font-weight:700;">30</span></td>
-          <td class="c">파란 <b>1px 링</b> + 파란 글자</td></tr>
-      <tr><td class="k">오늘이자 선택</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--pb);color:#fff;
-              align-items:center;justify-content:center;font-size:11.5px;font-weight:700;">27</span></td>
-          <td class="c">채움 (링 없음)</td></tr>
-      <tr><td class="k">그 외 날짜</td>
-          <td><span style="display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;
-              font-size:11.5px;">12</span></td>
-          <td class="c">기본 글자색, hover 시 파랑 8% 틴트</td></tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="rule">
-  파랑은 <code>#0066FF</code> <b>한 가지만</b> 씁니다. 오늘과 선택일의 구분은 색이 아니라 <b>형태</b>(채움 ↔ 링)로 합니다.<br>
-  이전에는 오늘 <code>#0066FF</code> 채움 / 선택 <code>#003D99</code> 남색 채움이라, 같은 달력인데 파랑이 두 가지로 보였습니다.<br>
-  날짜 표기는 <b>하이픈</b>(2026-08-27). 점 표기는 쓰지 않습니다 — <code>KCMS.date('20260827')</code>.
-</div>
 
 </div></div></section>
 
-<h2 class="grp">규칙</h2>
-<section id="rules"><div class="card"><div class="card-header"><div class="card-title">Do / Don&rsquo;t</div></div><div class="card-body">
+<section id="rules"><div class="card"><div class="card-header"><div class="card-title">규칙</div></div><div class="card-body">
+
+<h4 class="sub part">Do / Don&rsquo;t</h4>
 <div class="demo flush" data-cls="공통 규칙">
   <table class="type-spec">
     <thead><tr><th>영역</th><th>이렇게</th><th>이러지 않기</th></tr></thead>
@@ -882,9 +858,8 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     </tbody>
   </table>
 </div>
-</div></div></section>
 
-<section id="a11y"><div class="card"><div class="card-header"><div class="card-title">접근성 · 키보드</div></div><div class="card-body">
+<h4 class="sub part">접근성 · 키보드</h4>
 <div class="demo flush" data-cls="a11y">
   <table class="type-spec">
     <tbody>
@@ -897,6 +872,7 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     </tbody>
   </table>
 </div>
+
 </div></div></section>
 
 </main>
