@@ -91,7 +91,7 @@ body{font-family:Pretendard,Pretendard Variable,Malgun Gothic,맑은 고딕,Dotu
 .btn.danger:hover{background:#c73a3f;}
 .btn.danger.soft{background:var(--danger-bg);color:var(--danger);border-color:#f3b4b4;}
 .btn.danger.soft:hover{background:#fbdada;}
-.btn.sm{height:22px;padding:0 8px;font-size:11px;}
+.btn.sm{padding:0 8px;}   /* 높이·글자는 .btn 과 같다(24px/12px) — 좌우 여백만 좁힌 변형 */
 .btn[disabled]{opacity:.45;cursor:not-allowed;}
 .finput, .fselect, .ftextarea{height:24px;border:1px solid var(--line);border-radius:3px;padding:0 8px;font-size:11.5px;background:#fff;color:var(--txt);width:100%;}
 .finput::placeholder, .ftextarea::placeholder{color:var(--txt-mut);opacity:1;}
