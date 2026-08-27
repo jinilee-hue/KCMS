@@ -1597,8 +1597,7 @@ tr.vacant td{background:#F7F9FC;color:#c4ccd8;}
 .ctnode{display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;font-size:11.5px;color:var(--txt);cursor:pointer;}
 .ctnode:hover{background:#F4F7FD;}
 .ctnode.hide{display:none;}
-.ctnode[data-depth="1"]{padding-left:30px;}
-.ctleaf{flex:0 0 13px;color:#94a3b5;display:inline-flex;}   /* 잎(끝 항목) 표시 — 폴더와 짝 */
+.ctnode[data-depth="1"]{padding-left:34px;}   /* 잎(끝 항목) 표시 — 폴더와 짝 */
 .ctnode[data-depth="1"].hide2{display:none;}
 .ctchev{flex:0 0 12px;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;
   color:#8a97a8;transition:transform .12s;}

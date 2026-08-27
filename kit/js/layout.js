@@ -342,7 +342,6 @@ function initCTree(root){
 }
 
 var CT_CHEV='<svg class="ctchev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>';
-var CT_LEAF='<svg class="ctleaf" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 4C10 4 4 9 4 17c0 1 .2 2 .5 3"/><path d="M20 4c0 9-6 14-14 15"/></svg>';
 var CT_FOLD='<svg class="ctfold" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>';
 
 function buildCTree(host, groups, opt){
@@ -381,7 +380,7 @@ function buildCTree(host, groups, opt){
       var val=(v&&typeof v==='object')?v.value:v, cnt=(v&&typeof v==='object'&&v.count)?v.count:'';
       var row=document.createElement('div');
       row.className='ctnode hide2'; row.setAttribute('data-depth','1');
-      row.innerHTML=CT_CHEV+CT_LEAF+'<input type="checkbox"><span></span>'+
+      row.innerHTML=CT_CHEV+'<input type="checkbox"><span></span>'+
         (cnt?'<span class="ctcount">['+cnt+']</span>':'');
       row.querySelector('span').textContent=val;
       list.appendChild(row);
