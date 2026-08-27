@@ -663,11 +663,8 @@ table.grid tbody tr.empty td .emptymsg{position:absolute;left:var(--wrap-x,0px);
 .seg:not(.gender), .score-subtabs{height:24px !important;padding:1px !important;}
 .seg:not(.gender) button, .score-subtabs button{height:20px !important;}
 /* 구분선과 버튼 사이 여백 — 종전엔 구분선이 버튼 자신의 border-right 라서 활성 버튼의 파란 배경이 구분선에 그대로 맞닿았다(2026-08-24 요청). 버튼 보더를 걷고 flex gap 7px 을 준 뒤, 그 간격의 가운데에 1px 선을 ::after 로 그린다 → 버튼 | 3px | 1px 선 | 3px | 버튼. .seg{overflow:hidden}
-안쪽 간격에 그리므로 잘리지 않는다. */ .seg:not(.gender), .score-subtabs{gap:7px !important;}
+안쪽 간격에 그리므로 잘리지 않는다. */ .seg:not(.gender), .score-subtabs{gap:0 !important;}   /* 버튼 사이 구분선 없음 (2026-08-27) */
 .seg:not(.gender) button, .score-subtabs button{border-right:0 !important;position:relative;}
-.seg:not(.gender) button:not(:last-child)::after, .score-subtabs button:not(:last-child)::after{content:'';position:absolute;top:0;bottom:0;right:-4px;width:1px;
-  background:var(--line);pointer-events:none;}
-.seg:not(.gender) button:first-child:nth-last-child(2)::after, .score-subtabs button:first-child:nth-last-child(2)::after{display:none;}
 .iwrap .ibtn, .drange .ibtn, .dwrap .ibtn, table.grid .iwrap .ibtn{height:18px !important;}
 .bcic{height:20px !important;}
 .contact-v{height:26px !important;}
