@@ -267,41 +267,48 @@
 </div></div></section>
 
 <section id="scroll"><div class="card"><div class="card-header"><div class="card-title">스크롤</div></div><div class="card-body">
-
-<h4 class="sub">본문 목록 · 페이지가 스크롤한다</h4>
-<div class="demo row">
-  <span style="font-size:11.5px;color:var(--txt-mut);">목록 표는 내부 스크롤을 두지 않고 페이징으로 끊습니다(기본 30건).</span>
-</div>
-
-<h4 class="sub">모달 · 보조 목록 · 내부 스크롤 + 헤더 고정</h4>
+<h4 class="sub">세로 스크롤 · 항상 표 안에서 · 헤더 고정</h4>
 <div class="demo flush">
   <div class="tblwrap" style="max-height:132px;">
-    <table class="grid" style="table-layout:auto;">
-      <thead><tr>
-        <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th>
-      </tr></thead>
-      <tbody>
-<tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
-</tbody>
-    </table>
+    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>박○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초3</td><td>2026-08-16</td><td>242</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초4</td><td>2026-08-17</td><td>249</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초5</td><td>2026-08-18</td><td>256</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초3</td><td>2026-08-19</td><td>263</td><td><span class="statuspill">재원</span></td></tr></tbody></table>
   </div>
 </div>
 
-<h4 class="sub">자리별 최대 높이</h4>
+<h4 class="sub">가로 스크롤 · 열이 넓을 때</h4>
 <div class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">모달 안 검색 결과 표</td><td>420px</td></tr>
-      <tr><td class="k">가져오기 미리보기 표</td><td>280px</td></tr>
-      <tr><td class="k">주소 검색 결과</td><td>360px</td></tr>
-      <tr><td class="k">컬럼 선택 하위 목록</td><td>300px</td></tr>
-      <tr><td class="k">커스텀 셀렉트 목록</td><td>400px</td></tr>
-      <tr><td class="k">트리 셀렉트 목록</td><td>266px</td></tr>
-      <tr><td class="k">학생 선택 목록</td><td>230px</td></tr>
-      <tr><td class="k">메모 로그</td><td>150px</td></tr>
-    </tbody>
-  </table>
+  <div class="tblwrap">
+    <table class="grid" style="width:1560px;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th style="width:120px;">학번</th><th style="width:120px;">이름</th><th style="width:120px;">성별</th><th style="width:120px;">학년</th><th style="width:120px;">현재 레벨</th><th style="width:120px;">현재 학급</th><th style="width:120px;">응시일</th><th style="width:120px;">점수</th><th style="width:120px;">진학 여부</th><th style="width:120px;">진학 레벨</th><th style="width:120px;">진학 학급</th><th style="width:120px;">담당 교사</th><th style="width:120px;">최종 상담</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>06100000</td><td>최○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-10</td><td>210</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-20</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100001</td><td>김○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-11</td><td>216</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-21</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100002</td><td>박○○</td><td>여</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-12</td><td>222</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>이수진</td><td>2026-08-22</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>이○○</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-23</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100004</td><td>정○○</td><td>여</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-14</td><td>234</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-24</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100005</td><td>강○○</td><td>남</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-15</td><td>240</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>이수진</td><td>2026-08-25</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100006</td><td>조○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-16</td><td>246</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-26</td></tr>
+</tbody></table>
+  </div>
+</div>
+
+<h4 class="sub">가로 · 세로 동시</h4>
+<div class="demo flush">
+  <div class="tblwrap" style="max-height:132px;">
+    <table class="grid" style="width:1560px;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th style="width:120px;">학번</th><th style="width:120px;">이름</th><th style="width:120px;">성별</th><th style="width:120px;">학년</th><th style="width:120px;">현재 레벨</th><th style="width:120px;">현재 학급</th><th style="width:120px;">응시일</th><th style="width:120px;">점수</th><th style="width:120px;">진학 여부</th><th style="width:120px;">진학 레벨</th><th style="width:120px;">진학 학급</th><th style="width:120px;">담당 교사</th><th style="width:120px;">최종 상담</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>06100000</td><td>최○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-10</td><td>210</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-20</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100001</td><td>김○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-11</td><td>216</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-21</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100002</td><td>박○○</td><td>여</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-12</td><td>222</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>이수진</td><td>2026-08-22</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>이○○</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-23</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100004</td><td>정○○</td><td>여</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-14</td><td>234</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-24</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100005</td><td>강○○</td><td>남</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-15</td><td>240</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>이수진</td><td>2026-08-25</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100006</td><td>조○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-16</td><td>246</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-26</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100007</td><td>윤○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-17</td><td>252</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-27</td></tr></tbody></table>
+  </div>
 </div>
 </div></div></section>
 
