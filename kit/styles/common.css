@@ -3267,3 +3267,7 @@ table.matrix > tbody > tr:not(:last-child) > th:first-child, table.matrix > tbod
 /* 구분선 */
 .divider{height:1px;background:var(--line-soft);border:0;margin:12px 0;}
 .divider.strong{background:var(--line);}
+
+/* 모달 표시 클래스 — 화면 구현은 `.modal-ov.open` 을 씁니다.
+   과거 코드가 `.on` 을 쓰는 경우가 있어 별칭으로 함께 받아 줍니다. */
+.modal-ov.on{display:flex;}

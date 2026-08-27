@@ -82,13 +82,13 @@ function esc(s){ return String(s==null?'':s).replace(/[&<>"\']/g,function(c){
 /* ---------- 3. 모달 ---------- */
 function openModal(id){
   var m=typeof id==='string'?document.getElementById(id):id; if(!m) return null;
-  m.classList.add('on'); m.__prevFocus=document.activeElement;
+  m.classList.add('open'); m.__prevFocus=document.activeElement;   /* 화면과 동일하게 .open */
   var f=m.querySelector('input,select,textarea,button'); if(f) f.focus();
   return m;
 }
 function closeModal(id){
   var m=typeof id==='string'?document.getElementById(id):id; if(!m) return;
-  m.classList.remove('on');
+  m.classList.remove('open');
   if(m.__prevFocus&&m.__prevFocus.focus) m.__prevFocus.focus();
 }
 /** 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
@@ -102,7 +102,7 @@ function bindModals(root){
     document.__escBound=true;
     document.addEventListener('keydown',function(ev){
       if(ev.key!=='Escape') return;
-      var open=[].slice.call(document.querySelectorAll('.modal-ov.on')).pop();
+      var open=[].slice.call(document.querySelectorAll('.modal-ov.open')).pop();
       if(open){ closeModal(open); ev.stopPropagation(); }
     },true);
   }

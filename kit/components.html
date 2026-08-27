@@ -106,31 +106,97 @@
 <h2 id="badge">배지</h2>
 <div class="demo row">
   <span class="badge">기본</span>
+  <span class="badge has">값 있음</span>
   <span class="typebadge">타입</span>
-  <span class="statuspill">상태</span>
+  <span class="statuspill">재원</span>
   <span class="agebadge">7세</span>
-  <span class="cntbadge">12</span>
+  <span class="agebadge cur">현재</span>
+  <span class="agebadge mapin">MAP 대상</span>
+  <span class="agebadge mapex">MAP 제외</span>
+  <span class="agebadge mar">3월</span>
 </div>
-<p class="note">굵기 500 고정. 실제 화면에서 쓰는 배지 클래스를 그대로 제공합니다.</p>
+<div class="demo row">
+  <span class="mapbadge brand">MAP : 44</span>
+  <span class="mapbadge muted">MAP : 0</span>
+  <span class="to-badge now">바로 입학</span>
+  <span class="to-badge mar">신학년 입학</span>
+  <span class="ddaybadge">D-14</span>
+  <span class="ddaybadge warn">D-3</span>
+  <span class="ddaybadge danger">D-DAY</span>
+  <span class="cntbadge">12</span>
+  <span class="tabbadge">NEW</span>
+  <span class="ddbadge">신규</span>
+  <span class="ddbadge muted">준비중</span>
+</div>
+<div class="demo row">
+  <span class="fambadge">가족</span>
+  <span class="waitbadge">대기</span>
+  <span class="rosterbadge">명단</span>
+  <span class="impdupbadge">중복</span>
+  <span class="tbadge">태그</span>
+  <span class="tobadge">TO</span>
+  <span class="qbadge">Q</span>
+  <span class="kpi-badge">78.0%</span>
+  <span class="badge-dot">정상</span><span class="badge-dot warn">확인</span><span class="badge-dot danger">오류</span>
+</div>
+<p class="note">굵기는 <b>500</b> 으로 통일돼 있습니다(700 금지). 화면에서 쓰는 배지 계열 <b>22종</b>을 그대로 제공합니다 —
+용도가 정해진 것(<code>agebadge</code> 연령·MAP 대상, <code>to-badge</code> 입학 시기, <code>ddaybadge</code> 잔여일)은 그 용도로만 쓰세요.</p>
 
-<h2 id="table">표</h2>
+<h2 id="table">표 — 가로형 / 세로형</h2>
+<p class="note">업무 화면의 표는 두 가지입니다. <b>가로형</b>은 여러 건을 나열하는 목록(<code>table.grid</code>),
+<b>세로형</b>은 한 건의 항목을 라벨-값으로 보여주는 상세(<code>table.infotbl</code>)입니다.</p>
+
+<h3 style="font-size:12.5px;margin:16px 0 6px;color:var(--gnb);">① 가로형 — 목록 (table.grid)</h3>
 <div class="demo" style="padding:0;">
-  <div class="tblwrap" style="max-height:210px;">
+  <div class="tblwrap" style="max-height:190px;">
     <table class="grid" style="table-layout:auto;">
       <thead><tr>
         <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow">▾</span></th><th>학년</th><th>응시일</th><th>점수</th>
+        <th class="sortable">이름<span class="sarrow">▾</span></th><th>학년</th><th>응시일</th><th>점수</th><th>상태</th>
       </tr></thead>
       <tbody>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026.08.12</td><td>218</td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026.08.14</td><td>231</td></tr>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026.08.14</td><td>205</td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026.08.18</td><td>243</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026.08.12</td><td>218</td><td><span class="statuspill">재원</span></td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026.08.14</td><td>231</td><td><span class="statuspill">재원</span></td></tr>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026.08.14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026.08.18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr>
       </tbody>
     </table>
   </div>
 </div>
-<p class="note">헤더 33px 고정(스크롤해도 상단 고정) · 본문 셀 24px · 짝수 행 줄무늬 · 선택 행 <code>.sel</code>. 표는 <code>.tblwrap</code> 안에 넣습니다.</p>
+<p class="note">헤더 33px(스크롤해도 고정) · 셀 24px · 짝수 행 줄무늬 · 선택 행 <code>.sel</code> · 정렬 가능 헤더 <code>.sortable</code>.
+표는 <code>.tblwrap</code> 안에 넣습니다.</p>
+
+<h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">② 세로형 — 상세 (table.infotbl)</h3>
+<div class="demo">
+  <table class="infotbl">
+    <tr><th>국적</th><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td>
+        <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-0000-0000"></td></tr>
+    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="최○○"></td>
+        <th>전화번호</th><td><input class="finput" placeholder="선택 입력"></td></tr>
+    <tr><th>생년월일<span class="req">*</span></th>
+        <td><span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span></td>
+        <th>성별<span class="req">*</span></th>
+        <td><span class="seg"><button class="on">남</button><button>여</button></span></td></tr>
+  </table>
+</div>
+<p class="note">라벨 칸은 <code>th</code>(92px · <code>#F4F7FD</code> · 가운데 정렬), 값 칸은 <code>td</code>. 한 행에 라벨-값 쌍을 2개까지 넣습니다.
+읽기 전용 값은 <code>.roflat</code> 을 붙여 입력창 테두리를 없앱니다.</p>
+
+<h3 style="font-size:12.5px;margin:20px 0 6px;color:var(--gnb);">③ 검색 폼 표 (table.fbox)</h3>
+<div class="demo" style="padding:14px;">
+  <table class="fbox">
+    <tr>
+      <td class="flabel">학생구분</td>
+      <td class="hascell"><select class="fselect" style="width:100%"><option>예비</option><option>재원</option></select></td>
+      <td class="flabel">학생명</td>
+      <td class="hascell"><input class="finput" style="width:100%" placeholder="이름"></td>
+      <td class="flabel">등록일</td>
+      <td class="hascell"><span class="iwrap"><input type="date" class="finput" style="width:100%"></span></td>
+    </tr>
+  </table>
+</div>
+<p class="note">검색 조건 표입니다. 라벨 칸 <code>.flabel</code>, 입력 칸 <code>.hascell</code>(테두리 담당), 셀 높이 33px.
+표 상단에는 파란 1px 강조선이 자동으로 붙습니다.</p>
 
 <h2 id="form">폼</h2>
 <div class="demo row">
@@ -138,10 +204,39 @@
   <select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
   <span class="flabel">학생명</span>
   <input class="finput" placeholder="이름 입력">
-  <label style="display:inline-flex;align-items:center;gap:5px;"><input type="checkbox" checked> 재원생만</label>
-  <button class="btn">검색</button>
+  <span class="flabel">상태</span>
+  <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+  <button class="btn">검색</button><button class="btn g">초기화</button>
 </div>
-<p class="note">입력 24px · 포커스는 테두리 색만 파랑으로(링 없음) · 체크박스 14px.</p>
+<div class="demo row">
+  <span class="flabel">생년월일</span>
+  <span class="iwrap">
+    <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10">
+    <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
+    <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+  </span>
+  <span class="flabel">읽기 전용</span><input class="finput roflat" value="한국 (여)" readonly>
+  <span class="flabel">비활성</span><input class="finput" value="수정 불가" disabled>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="checkbox" checked> 재원생만</label>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g" checked> 남</label>
+  <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="g"> 여</label>
+</div>
+<div class="demo row">
+  <span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span>
+  <textarea class="ftextarea" rows="2" style="width:260px" placeholder="상담 메모"></textarea>
+  <div class="form-group" style="width:200px;">
+    <label class="form-label">학부모 연락처<span class="req">*</span></label>
+    <input class="finput" value="010-0000-0000">
+    <span class="form-error">형식을 확인해 주세요.</span>
+  </div>
+</div>
+<p class="note">
+  입력·셀렉트·날짜 필드 모두 <b>높이 24px</b>. 포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음).<br>
+  날짜 필드는 <code>.iwrap</code> 안에 [텍스트 입력 + 숨은 <code>input[type=date]</code> + 달력 버튼] 구조입니다 —
+  버튼을 누르면 <code>date-picker.js</code> 의 공통 달력이 열립니다.<br>
+  읽기 전용 값은 <code>.roflat</code>(테두리 없음), 비활성은 <code>disabled</code>.
+  체크박스·라디오는 14px, 브랜드 파랑(<code>accent-color</code>).
+</p>
 
 <h2 id="tab">탭</h2>
 <div class="demo row">
@@ -151,7 +246,7 @@
 
 <h2 id="modal">모달</h2>
 <div class="demo row">
-  <button class="btn" onclick="document.getElementById('demoModal').classList.add('on')">모달 열기</button>
+  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
 </div>
 <p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
 
@@ -248,7 +343,7 @@
 
 <div class="modal-ov" id="demoModal">
   <div class="modal-box" style="width:520px;">
-    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" onclick="document.getElementById('demoModal').classList.remove('on')">✕</button></div>
+    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" onclick="KCMS.closeModal('demoModal')">✕</button></div>
     <div class="modal-body">
       <table class="form" style="width:100%;">
         <tr><th>학생명<span class="req">*</span></th><td><input class="finput" style="width:100%" value="최○○"></td></tr>
@@ -260,22 +355,14 @@
 
 <script src="js/utils.js"></script>
 <script src="js/layout.js"></script>
+<script src="js/menu.sample.js"></script>
 <script src="js/date-picker.js"></script>
 <script src="js/modal-drag.js"></script>
 <script>
-  var MENU={
-    '입학관리':[
-      {cat:'예비생 대시보드', items:['예비생 대시보드']},
-      {cat:'예비생 관리', items:['예비생 등록·관리','설명회 예약자 현황']},
-      {cat:'진학생 관리', items:['진학생 관리']},
-      {cat:'신학기 학급편성', items:['반편성 배치관리']}
-    ],
-    '학생관리':[{cat:'학생정보', items:['학생등록','학생정보','학생이름변경']},
-               {cat:'대기/휴학', items:['대기생','휴·탈퇴생']}],
-    '수납회계':[{cat:'청구', items:['청구관리','미납관리']}]
-  };
-  var RAIL=[{label:'HOME',svg:KCMS.SVG.home},{label:'즐겨찾기',svg:''},{label:'예약표',svg:''}];
-  initLayout({menu:MENU, current:'입학관리', badges:{'입학관리':'NEW'},
+  /* 실제 화면과 같은 11개 1뎁스 메뉴 — js/menu.sample.js 에서 불러온다 */
+  var MENU=PCMS_GNB_MENU;
+  var RAIL=PCMS_LEFT_RAIL_ITEMS;
+  initLayout({menu:MENU, current:'입학관리', badges:PCMS_GNB_TAB_BADGES,
               railItems:RAIL, railCurrent:'HOME'});
   KCMS.renderPaging('#pagingDemo', {page:3, total:1284, size:30,
     onPage:function(p){ KCMS.renderPaging('#pagingDemo', {page:p, total:1284, size:30, onPage:arguments.callee}); }});
@@ -285,11 +372,9 @@
     ['--warn','경고'],['--danger','위험'],['--chart-ok','기준 이상'],['--chart-low','기준 미만']
   ].map(function(s){return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';}).join('');
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape') document.querySelectorAll('.modal-ov.on').forEach(function(m){m.classList.remove('on');});
+    if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });
-  document.getElementById('demoModal').addEventListener('mousedown',function(e){
-    if(e.target===this) this.classList.remove('on');
-  });
+  KCMS.bindModals();   /* 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
 </script>
 </body>
 </html>
