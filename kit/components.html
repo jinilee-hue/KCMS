@@ -7,222 +7,225 @@
 <link rel="stylesheet" href="styles/tokens.css">
 <link rel="stylesheet" href="styles/common.css">
 <style>
-  body{background:var(--bg);}
-  .doc{max-width:1080px;margin:0 auto;padding:32px 24px 80px;background:#fff;min-height:100vh;}
-  .doc h1{font-size:26px;margin:0 0 6px;letter-spacing:-.4px;}
-  .doc .lede{color:var(--txt-mut);font-size:13px;margin:0 0 28px;line-height:1.6;}
-  .doc h2{font-size:17px;margin:36px 0 4px;padding-top:20px;border-top:1px solid var(--line-soft);}
-  .doc h3{font-size:13px;margin:20px 0 8px;color:var(--gnb);}
-  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.6;margin:6px 0 12px;}
-  .demo{border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:18px;margin:10px 0;
-    display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fff;}
-  .demo.col{flex-direction:column;align-items:stretch;}
-  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.55;padding:12px 14px;
-    border-radius:var(--r-sm);overflow:auto;margin:0 0 14px;}
-  code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
-  .toc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;}
-  .toc a{font-size:11.5px;padding:4px 10px;border:1px solid var(--line);border-radius:var(--r-pill);
-    color:var(--txt-mut);text-decoration:none;}
+  /* 가이드 문서 전용 스타일 — Kit 컴포넌트가 아닙니다 */
+  body{background:#fff;}
+  .doc{max-width:1080px;margin:0 auto;padding:30px 24px 90px;}
+  .doc h1{font-size:26px;margin:0 0 6px;letter-spacing:-.5px;}
+  .doc .lede{color:var(--txt-mut);font-size:13px;line-height:1.7;margin:0 0 24px;}
+  .doc h2{font-size:17px;margin:38px 0 6px;padding-top:20px;border-top:1px solid var(--line-soft);}
+  .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.7;margin:8px 0 14px;}
+  .demo{border:1px solid var(--line-soft);border-radius:8px;padding:16px;margin:10px 0;background:#fff;}
+  .demo.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
+  .demo.dark{background:var(--gnb);}
+  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.6;padding:12px 14px;border-radius:3px;overflow:auto;margin:0 0 14px;}
+  .toc{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;}
+  .toc a{font-size:11.5px;padding:4px 10px;border:1px solid var(--line);border-radius:999px;color:var(--txt-mut);text-decoration:none;}
   .toc a:hover{border-color:var(--pb);color:var(--pb);}
-  .swatch{width:74px;}
-  .swatch i{display:block;height:44px;border-radius:var(--r-sm);border:1px solid rgba(0,0,0,.06);}
-  .swatch b{display:block;font-size:10.5px;margin-top:5px;font-weight:600;}
-  .swatch span{display:block;font-size:10px;color:var(--txt-mut);}
-  .rulebox{border-left:3px solid var(--pb);background:var(--pb-a08);padding:10px 14px;font-size:12px;
-    line-height:1.65;border-radius:0 var(--r-sm) var(--r-sm) 0;margin:10px 0 16px;}
-  .rulebox b{color:var(--pb-deeper);}
+  .sw{width:76px;display:inline-block;margin:0 8px 8px 0;}
+  .sw i{display:block;height:42px;border-radius:3px;border:1px solid rgba(0,0,0,.06);}
+  .sw b{display:block;font-size:10.5px;margin-top:5px;}
+  .sw span{display:block;font-size:10px;color:var(--txt-mut);}
+  .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:10px 14px;font-size:12px;line-height:1.7;margin:10px 0 16px;}
 </style>
 </head>
 <body>
 <div class="doc">
 
-  <h1>KCMS 입학관리 Kit</h1>
-  <p class="lede">
-    PCMS 입학관리 화면에서 확정된 규격을 그대로 옮긴 컴포넌트 모음입니다.
-    빌드 도구 없이 <code>tokens.css → common.css → utils.js → layout.js</code> 4개만 불러오면 됩니다.
-    <br>기준 화면: <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b>
-  </p>
+<h1>KCMS 입학관리 Kit — 컴포넌트 가이드</h1>
+<p class="lede">
+  아래 예시는 모두 <b>Kit CSS 그대로</b> 렌더링한 것입니다. Kit 의 <code>common.css</code> 는 새로 쓴 게 아니라
+  실제 화면 <b>PCMS-SCR-ET-02-012 예비생 등록·관리</b> 의 CSS 에서 컴포넌트 규칙만 원본 순서대로 뽑아낸 것이라,
+  여기 보이는 모습이 실제 화면과 같습니다. (31개 항목 실측 대조 완료)
+</p>
 
-  <div class="toc">
-    <a href="#start">시작하기</a><a href="#color">색</a><a href="#type">타이포</a>
-    <a href="#button">버튼</a><a href="#badge">배지</a><a href="#table">표</a>
-    <a href="#form">폼</a><a href="#tab">탭</a><a href="#modal">모달</a>
-    <a href="#toast">토스트</a><a href="#chart">차트</a><a href="#layout">레이아웃</a>
-  </div>
+<div class="toc">
+  <a href="#start">시작하기</a><a href="#color">색</a><a href="#gnb">GNB</a><a href="#layout">레이아웃</a>
+  <a href="#sec">섹션·패널</a><a href="#btn">버튼</a><a href="#badge">배지</a><a href="#table">표</a>
+  <a href="#form">폼</a><a href="#tab">탭</a><a href="#modal">모달</a><a href="#toast">토스트</a>
+  <a href="#date">날짜</a><a href="#page">페이지네이션</a>
+</div>
 
-  <h2 id="start">시작하기</h2>
-  <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
+<h2 id="start">시작하기</h2>
+<pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
 &lt;link rel="stylesheet" href="styles/common.css"&gt;
 &lt;script src="js/utils.js"&gt;&lt;/script&gt;
 &lt;script src="js/layout.js"&gt;&lt;/script&gt;
+&lt;script src="js/date-picker.js"&gt;&lt;/script&gt;   &lt;!-- 날짜 입력이 있으면 --&gt;
+&lt;script src="js/modal-drag.js"&gt;&lt;/script&gt;    &lt;!-- 모달을 쓰면 --&gt;</code></pre>
 
-&lt;script&gt;
-  initLayout({
-    menu: MENU, current: '입학관리', badges: {'입학관리':'NEW'},
-    railItems: RAIL, railCurrent: 'HOME',
-    openTabs: [{key:'a', label:'예비생 등록·관리', cur:true}],
-    onTabOpen: function(key){ /* 화면 이동 */ },
-    onTabClose: function(key){ /* 탭 닫기 */ }
-  });
-&lt;/script&gt;</code></pre>
+<h2 id="color">색</h2>
+<div class="demo" id="sws"></div>
+<div class="rule">
+  <b>지표 색</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.
+  면적이 넓은 <b>그래프·진행바</b>는 톤다운(<code>--chart-ok</code>/<code>--chart-low</code>),
+  면적이 좁은 <b>글자·아이콘</b>은 원색(<code>--pb</code>/<code>--danger</code>).
+</div>
 
-  <h2 id="color">색</h2>
-  <p class="note">브랜드 파랑은 본문 강조, 네이비는 상단 바 — 역할을 분리합니다. 그래프는 톤다운 색을 따로 씁니다.</p>
-  <div class="demo" id="swatches"></div>
-  <div class="rulebox">
-    <b>지표 색 규칙</b> — 기준선이 있는 지표(충원율 70% · 가동률 30%)는 두 가지로만 가릅니다.<br>
-    그래프처럼 <b>면적이 넓은 곳</b>은 톤다운(<code>--chart-ok</code> / <code>--chart-low</code>),
-    <b>글자·아이콘</b>은 원색(<code>--pb</code> / <code>--danger</code>)을 씁니다.
-    면적이 넓은데 원색이면 촌스럽고, 작은 글자에 톤다운이면 뿌옇습니다.
+<h2 id="gnb">GNB (1 · 2 · 3뎁스)</h2>
+<div class="demo dark" style="padding:0;">
+  <div class="topnav" style="position:relative;">
+    <div class="brand">PCMS</div>
+    <div class="tabs" id="tabs"></div>
   </div>
+</div>
+<p class="note">탭에 마우스를 올리면 2뎁스가 열립니다. 1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 점이 같은 세로선에서 시작합니다(점은 2뎁스 첫 글자 가운데). 탭이 넘치면 좌우 <code>‹ ›</code> 버튼이 나타납니다.</p>
 
-  <h2 id="type">타이포</h2>
-  <div class="demo col">
-    <div class="sectit">섹션 제목 13px / 700<span class="hint">앞에 4×14 파란 막대</span></div>
-    <div style="font-size:12.5px;font-weight:700;">탭·강조 라벨 12.5px / 700</div>
-    <div style="font-size:11.5px;">표·폼 본문 11.5px — 업무 화면 기본 크기</div>
-    <div style="font-size:11px;color:var(--txt-mut);">배지·캡션 11px / 보조색</div>
-    <div style="font-size:22px;font-weight:700;color:var(--pb);">348<span class="pcts">%</span> ← 숫자 강조, % 기호만 0.68em</div>
+<h2 id="layout">레이아웃 골격</h2>
+<div class="demo" style="padding:0;overflow:hidden;">
+  <div style="display:flex;height:150px;">
+    <div class="rail" id="rail" style="flex:0 0 58px;"></div>
+    <div class="main" style="flex:1;">
+      <div class="bcbar"><span class="home">⌂</span> 입학관리 › <b>예비생 등록·관리</b>
+        <span class="meta">최종 갱신: 2026-08-27 09:00</span></div>
+      <div class="content" style="background:#fff;">본문 영역 — 좌우 여백 14px</div>
+      <div class="worktabs"><div class="wtscroll">
+        <div class="wtab">HOME</div><div class="wtab on">예비생 등록·관리<span class="x">✕</span></div>
+      </div></div>
+    </div>
   </div>
+</div>
+<p class="note">상단 GNB 64 · 좌측 레일 58 · 히스토리 네비 30 · 하단 작업 탭 30px. 화면을 열 때마다 작업 탭이 옆으로 쌓입니다.</p>
 
-  <h2 id="button">버튼</h2>
-  <div class="demo">
-    <button class="btn">주요 동작</button>
-    <button class="btn g">보조</button>
-    <button class="btn s">시스템</button>
-    <button class="btn danger">삭제</button>
-    <button class="btn sm">작게</button>
-    <button class="btn" disabled>비활성</button>
-    <button class="ibtn" title="아이콘">＋</button>
-  </div>
-  <p class="note">높이 24px 고정(작게 22px). <b>삭제 버튼에 빨강은 파괴적 동작에만</b> 쓰고, 목록의 행 삭제·탭 닫기 같은 일상 동작은 중립 톤을 씁니다.</p>
+<h2 id="sec">섹션 · 패널</h2>
+<div class="demo">
+  <div class="sectit">예비생 목록<span class="hint">Grid · 정렬 가능</span></div>
+  <div class="panel">패널 — 안쪽 여백 14px</div>
+</div>
 
-  <h2 id="badge">배지</h2>
-  <div class="demo">
-    <span class="badge">기본</span>
-    <span class="badge primary">재원</span>
-    <span class="badge ok">완납</span>
-    <span class="badge warn">미납</span>
-    <span class="badge danger">결석</span>
-    <span class="badge line">태그</span>
-    <span class="badge pill primary">알약형</span>
-  </div>
-  <p class="note">굵기는 <b>500</b> 입니다(700 금지). 알약형은 <code>.pill</code>.</p>
+<h2 id="btn">버튼</h2>
+<div class="demo row">
+  <button class="btn">검색</button>
+  <button class="btn g">초기화</button>
+  <button class="btn s">엑셀</button>
+  <button class="btn danger">삭제</button>
+  <button class="btn sm">작게</button>
+  <button class="btn" disabled>비활성</button>
+</div>
+<p class="note">높이 24px(작게 22px). 빨강은 파괴적 동작에만 씁니다.</p>
 
-  <h2 id="table">표</h2>
-  <div class="demo col">
-    <div class="grid-wrap" style="max-height:190px;">
-    <table class="grid">
-      <thead>
-        <tr><th class="grp" colspan="2">학생</th><th class="grp" colspan="2">MAP</th></tr>
-        <tr><th>이름</th><th>학년</th><th>응시일</th><th class="num">점수</th></tr>
-      </thead>
+<h2 id="badge">배지</h2>
+<div class="demo row">
+  <span class="badge">기본</span>
+  <span class="typebadge">타입</span>
+  <span class="statuspill">상태</span>
+  <span class="agebadge">7세</span>
+  <span class="cntbadge">12</span>
+</div>
+<p class="note">굵기 500 고정. 실제 화면에서 쓰는 배지 클래스를 그대로 제공합니다.</p>
+
+<h2 id="table">표</h2>
+<div class="demo" style="padding:0;">
+  <div class="tblwrap" style="max-height:210px;">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr>
+        <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
+        <th class="sortable">이름<span class="sarrow">▾</span></th><th>학년</th><th>응시일</th><th>점수</th>
+      </tr></thead>
       <tbody>
-        <tr><td>최○○</td><td>초3</td><td>2026.08.12</td><td class="num">218</td></tr>
-        <tr><td>김○○</td><td>초4</td><td>2026.08.14</td><td class="num">231</td></tr>
-        <tr class="sel"><td>박○○</td><td>초3</td><td>2026.08.14</td><td class="num">205</td></tr>
-        <tr><td>이○○</td><td>초5</td><td>2026.08.18</td><td class="num">243</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026.08.12</td><td>218</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026.08.14</td><td>231</td></tr>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026.08.14</td><td>205</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026.08.18</td><td>243</td></tr>
       </tbody>
-      <tfoot><tr><td colspan="3">평균</td><td class="num">224.3</td></tr></tfoot>
     </table>
-    </div>
   </div>
-  <p class="note">헤더 <b>33px · #F4F7FD</b>, 본문 셀 <b>24px</b>, 좌우 패딩 8px, 기본 가운데 정렬, 짝수 행 <code>#F7F9FC</code> 줄무늬. 2단 그룹 헤더 <code>.grp</code>(#EAF1FB) · 숫자 칸 <code>.num</code>(우측 정렬 + 등폭) · 좌측 정렬은 <code>.lft</code>. 표는 <code>.grid-wrap</code>(상단 2px 파란선 + 스크롤) 안에 넣고, 헤더는 스크롤해도 고정됩니다.</p>
+</div>
+<p class="note">헤더 33px 고정(스크롤해도 상단 고정) · 본문 셀 24px · 짝수 행 줄무늬 · 선택 행 <code>.sel</code>. 표는 <code>.tblwrap</code> 안에 넣습니다.</p>
 
-  <h2 id="form">폼</h2>
-  <div class="demo">
-    <span class="flabel">캠퍼스</span>
-    <select class="fselect" data-autowidth><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
-    <span class="flabel">학생명</span>
-    <input class="finput" placeholder="이름 입력">
-    <span class="seg"><button class="on">전체</button><button>재원</button><button>대기</button></span>
-    <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
-  </div>
-  <div class="demo gray" style="background:#F3F5F9;border:0;">
-    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="checkbox" checked> 재원생만</label>
-    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="d" checked> 전체</label>
-    <label style="display:inline-flex;align-items:center;gap:5px;font-size:11.5px;"><input type="radio" name="d"> 미납</label>
-    <textarea class="ftextarea" rows="2" style="width:240px" placeholder="상담 메모"></textarea>
-    <input class="finput" disabled value="비활성 입력">
-  </div>
-  <p class="note">입력 높이 <b>24px</b> · 테두리 <code>#CFD6E0</code> · 라운드 3px · 11.5px.
-  포커스는 <b>테두리 색만</b> 파랑으로 바뀝니다(링·그림자 없음 — 밀도 높은 표 화면에서 링은 시끄럽습니다).
-  체크박스·라디오는 14px, <code>accent-color</code> 로 브랜드 파랑.
-  검색 영역은 <code>.filters</code> 가 기본이고, 회색 띠가 필요하면 <code>.filters.gray</code>.
-  <code>data-autowidth</code> 를 붙이면 옵션 최대 길이에 맞춰 셀렉트 폭이 자동 계산됩니다.</p>
+<h2 id="form">폼</h2>
+<div class="demo row">
+  <span class="flabel">캠퍼스</span>
+  <select class="fselect"><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select>
+  <span class="flabel">학생명</span>
+  <input class="finput" placeholder="이름 입력">
+  <label style="display:inline-flex;align-items:center;gap:5px;"><input type="checkbox" checked> 재원생만</label>
+  <button class="btn">검색</button>
+</div>
+<p class="note">입력 24px · 포커스는 테두리 색만 파랑으로(링 없음) · 체크박스 14px.</p>
 
-  <h2 id="tab">탭</h2>
-  <div class="demo col">
-    <div class="ptabs"><button class="ptab on">예비생정보</button><button class="ptab">MAP 예약</button><button class="ptab">채점</button></div>
-    <div style="display:flex;gap:6px;margin-top:12px;">
-      <button class="quickpill on">전체</button><button class="quickpill">진학</button><button class="quickpill">유입</button>
-    </div>
-  </div>
-  <p class="note">상위 탭은 밑줄형(<code>.ptab</code>), 하위 필터는 알약형(<code>.quickpill</code>). 토글 스위치형은 쓰지 않습니다.</p>
+<h2 id="tab">탭</h2>
+<div class="demo row">
+  <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
+</div>
+<p class="note"><code>.quickpill</code> 은 <b>컨테이너</b>이고 그 안의 <code>button</code> 이 각 탭입니다(활성은 <code>.on</code>).</p>
 
-  <h2 id="modal">모달</h2>
-  <div class="demo">
-    <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
-    <span class="badge line">헤더 40px · 드래그 이동 · Esc/오버레이 클릭으로 닫힘</span>
-  </div>
+<h2 id="modal">모달</h2>
+<div class="demo row">
+  <button class="btn" onclick="document.getElementById('demoModal').classList.add('on')">모달 열기</button>
+</div>
+<p class="note">헤더 40px · 드래그 이동 · 본문은 흰 박스(테두리 없음). Esc·오버레이 클릭으로 닫힙니다.</p>
 
-  <h2 id="toast">토스트</h2>
-  <div class="demo">
-    <button class="btn" onclick="KCMS.toast('저장했습니다.','success','저장 완료')">success</button>
-    <button class="btn g" onclick="KCMS.toast('필수값을 확인해 주세요.','warning','확인 필요')">warning</button>
-    <button class="btn g" onclick="KCMS.toast('전송에 실패했습니다.','danger','오류')">danger</button>
-    <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.')">neutral</button>
-  </div>
-  <div class="rulebox">
-    왼쪽 두꺼운 액센트 바를 넣지 않고 <b>배경색 자체로</b> 상황을 구분합니다.
-    <b>문구에 이모지를 넣지 않습니다</b> — 구분은 색과 제목이 합니다. 동시에 최대 3개까지 쌓입니다.
-  </div>
+<h2 id="toast">토스트</h2>
+<div class="demo row">
+  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
+  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
+  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
+  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
+  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 자동 추정</button>
+</div>
+<div class="rule">
+  배경은 의미색을 <b>92% 불투명</b>으로 깔고(<code>color-mix</code>) 글자·아이콘은 흰색입니다.
+  왼쪽 두꺼운 액센트 바를 쓰지 않고, <b>문구에 이모지를 넣지 않습니다.</b> 최대 4개까지 쌓입니다.
+  타입을 생략하면 문구로 추정합니다(<code>되었습니다</code> → success, <code>주세요</code> → warning).
+</div>
 
-  <h2 id="chart">차트 (Chart.js 프리셋)</h2>
-  <pre><code>KCMS.setChartDefaults();                 // 폰트·막대 두께·점 크기 일괄 설정
-const c = KCMS.getChartColors();         // 브랜드 파랑 1색을 투명도로만 나눈 팔레트
-new Chart(el, { type:'bar', data:{ datasets:[{ backgroundColor:c[0] }] } });
+<h2 id="date">날짜 선택</h2>
+<div class="demo row">
+  <span class="flabel">생년월일</span>
+  <span class="iwrap"><input type="date" class="finput" value="2017-06-30"></span>
+</div>
+<p class="note">오늘 = 파란 원 채움 + 흰 글자 / 선택일 = 파란 테두리 링. 파랑은 <code>#0066FF</code> 한 가지만 씁니다.</p>
 
-// 기준선이 있는 지표는 두 색으로만
-bar.backgroundColor = KCMS.ruleColor(pct, 70);   // 70% 이상 파랑 / 미만 경고 레드</code></pre>
-  <div class="rulebox">차트에 <b>시맨틱 색(빨강·주황·초록)을 쓰지 않습니다.</b> 예외는 기준 미달 경고뿐입니다.</div>
-
-  <h2 id="layout">레이아웃 골격</h2>
-  <pre><code>상단 GNB      64px    #3A5170 → #2C3E5A
-좌측 레일      58px    (1000px 이하 50px)
-히스토리 네비   30px
-하단 작업 탭    30px    ← 화면을 열 때마다 탭이 옆으로 쌓임
-콘텐츠 기준선   73px    (밴드는 풀 너비, 안쪽 여백 14px)</code></pre>
-  <p class="note">1뎁스 탭 글자 · 2뎁스 카테고리 · 3뎁스 항목의 점이 같은 세로선에서 시작합니다. 3뎁스 점은 2뎁스 첫 글자 가운데(+3.2px)에 맞춥니다.</p>
+<h2 id="page">페이지네이션</h2>
+<div class="demo row">
+  <div class="pagerow"><button class="pgbtn">‹</button><button class="pgbtn on">1</button>
+    <button class="pgbtn">2</button><button class="pgbtn">3</button><button class="pgbtn">›</button></div>
+</div>
 
 </div>
 
-<!-- 데모 모달 -->
 <div class="modal-ov" id="demoModal">
-  <div class="modal-box" style="width:460px;">
-    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" aria-label="닫기">✕</button></div>
+  <div class="modal-box" style="width:520px;">
+    <div class="modal-hd"><span>학생 중복 확인</span><button class="modal-x" onclick="document.getElementById('demoModal').classList.remove('on')">✕</button></div>
     <div class="modal-body">
-      <table class="form" style="width:100%;border-collapse:separate;border-spacing:0;">
+      <table class="form" style="width:100%;">
         <tr><th>학생명<span class="req">*</span></th><td><input class="finput" style="width:100%" value="최○○"></td></tr>
-        <tr><th>생년월일<span class="req">*</span></th><td><input class="finput" style="width:100%" value="2017-06-30"></td></tr>
+        <tr><th>생년월일<span class="req">*</span></th><td><input type="date" class="finput" style="width:100%" value="2017-06-30"></td></tr>
       </table>
     </div>
-    <div class="modal-ft"><button class="btn g" onclick="KCMS.closeModal('demoModal')">닫기</button><button class="btn">확인</button></div>
   </div>
 </div>
 
 <script src="js/utils.js"></script>
 <script src="js/layout.js"></script>
+<script src="js/date-picker.js"></script>
+<script src="js/modal-drag.js"></script>
 <script>
-  var SW=[['--pb','브랜드'],['--pb-light','틴트'],['--pb-dark','호버'],['--pb-deeper','최심'],
-          ['--gnb','GNB'],['--txt','본문'],['--txt-mut','보조'],['--line','테두리'],
-          ['--tbl-head','표 헤더'],['--tbl-head-grp','그룹 헤더'],
-          ['--chart-ok','기준 이상'],['--chart-low','기준 미만'],
-          ['--warn','경고'],['--danger','위험']];
-  document.getElementById('swatches').innerHTML = SW.map(function(s){
-    return '<div class="swatch"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></div>';
-  }).join('');
-  initLayout({});
+  var MENU={
+    '입학관리':[
+      {cat:'예비생 대시보드', items:['예비생 대시보드']},
+      {cat:'예비생 관리', items:['예비생 등록·관리','설명회 예약자 현황']},
+      {cat:'진학생 관리', items:['진학생 관리']},
+      {cat:'신학기 학급편성', items:['반편성 배치관리']}
+    ],
+    '학생관리':[{cat:'학생정보', items:['학생등록','학생정보','학생이름변경']},
+               {cat:'대기/휴학', items:['대기생','휴·탈퇴생']}],
+    '수납회계':[{cat:'청구', items:['청구관리','미납관리']}]
+  };
+  var RAIL=[{label:'HOME',svg:KCMS.SVG.home},{label:'즐겨찾기',svg:''},{label:'예약표',svg:''}];
+  initLayout({menu:MENU, current:'입학관리', badges:{'입학관리':'NEW'},
+              railItems:RAIL, railCurrent:'HOME'});
+  document.getElementById('sws').innerHTML=[
+    ['--pb','브랜드'],['--pb-light','틴트'],['--pb-dark','호버'],['--pb-deeper','최심'],
+    ['--gnb','GNB'],['--txt','본문'],['--txt-mut','보조'],['--line','테두리'],['--bg','바탕'],
+    ['--warn','경고'],['--danger','위험'],['--chart-ok','기준 이상'],['--chart-low','기준 미만']
+  ].map(function(s){return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';}).join('');
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape') document.querySelectorAll('.modal-ov.on').forEach(function(m){m.classList.remove('on');});
+  });
+  document.getElementById('demoModal').addEventListener('mousedown',function(e){
+    if(e.target===this) this.classList.remove('on');
+  });
 </script>
 </body>
 </html>

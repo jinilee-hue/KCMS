@@ -26,28 +26,57 @@ function phone(v){
 function mask(v,keep){ var s=String(v||''); keep=keep==null?1:keep;
   return s.length<=keep?s:s.slice(0,keep)+'*'.repeat(s.length-keep); }
 
-/* ---------- 2. 토스트 (success / warning / danger / neutral) ---------- */
-var TOAST_MAX=3;
-function toast(msg,type,title){
+/* ---------- 2. 토스트 (실제 화면 구현을 그대로 옮김) ----------
+   배경은 의미색을 92% 불투명으로 깔고(color-mix) 글자·아이콘은 흰색.
+   왼쪽 액센트 바 없음 · 문구에 이모지 금지 · 최대 4개까지 쌓임.
+   success = 초록 / warning = 황색 / danger = 적색 / neutral = Poly Blue */
+var KT_MAX=4;
+var KT_ICONS={
+  success:'<path d="M20 6L9 17l-5-5"/>',
+  warning:'<path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  danger:'<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>',
+  neutral:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>'
+};
+/** 타입을 생략하면 문구로 추정한다 — 기존 호출부를 그대로 두기 위한 규칙 */
+function guessType(msg){
+  if(/수 없|없습니다|없는|않습니다|않은|불가|실패|오류|잘못/.test(msg)) return 'danger';
+  if(/주세요|하세요|필수|입력해|선택해|필요합니다|확인해/.test(msg))     return 'warning';
+  if(/되었습니다|완료되|성공|저장했/.test(msg))                          return 'success';
+  return 'neutral';
+}
+function toast(msg,type){
   var wrap=document.querySelector('.kistoast-wrap');
   if(!wrap){ wrap=document.createElement('div'); wrap.className='kistoast-wrap'; document.body.appendChild(wrap); }
-  /* 넘치는 토스트는 동기적으로 제거한다 — 비동기 제거는 무한루프가 된다 */
-  while(wrap.children.length>=TOAST_MAX) wrap.removeChild(wrap.firstChild);
-
+  var t=type||guessType(String(msg==null?'':msg));
+  if(!KT_ICONS[t]) t='neutral';
   var el=document.createElement('div');
-  el.className='kistoast'+(type?' is-'+type:'');
-  el.setAttribute('role', type==='danger'?'alert':'status');
-  var head=title?'<div class="kt-hd">'+esc(title)+'</div>':'';
-  el.innerHTML=head+'<div class="kt-msg">'+esc(msg)+'</div>';   /* 문구에 이모지 금지 */
+  el.className='kistoast is-'+t;
+  el.setAttribute('role', (t==='danger'||t==='warning')?'alert':'status');
+  el.innerHTML='<div class="kt-body">'+
+    '<svg class="kt-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" '+
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+KT_ICONS[t]+'</svg>'+
+    '<span class="kt-msg"></span></div>';
+  el.querySelector('.kt-msg').textContent=msg;
   wrap.appendChild(el);
-  setTimeout(function(){ el.classList.add('show'); },16);        /* rAF 는 일부 환경에서 누락된다 */
-  setTimeout(function(){
-    el.classList.remove('show');
-    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },240);
-  }, type==='danger'?5200:3600);
+  /* 넘친 것은 애니메이션 없이 즉시 제거한다 —
+     hide() 는 260ms 뒤에 노드를 지우므로 여기서 쓰면 while 이 무한 루프에 빠진다 */
+  while(wrap.children.length>KT_MAX){
+    var oldest=wrap.firstElementChild;
+    clearTimeout(oldest._ktTimer); oldest._ktHiding=true; wrap.removeChild(oldest);
+  }
+  /* 붙자마자 .show 를 주면 시작값이 없어 트랜지션이 안 걸린다 — 한 틱 뒤에.
+     rAF 는 프레임이 안 그려지는 환경에서 호출되지 않을 수 있어 setTimeout 을 쓴다 */
+  setTimeout(function(){ el.classList.add('show'); },16);
+  el._ktTimer=setTimeout(function(){ hideToast(el); },3500);
   return el;
 }
-function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+function hideToast(el){
+  if(!el||el._ktHiding) return;
+  el._ktHiding=true; clearTimeout(el._ktTimer);
+  el.classList.remove('show');
+  setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); },260);
+}
+function esc(s){ return String(s==null?'':s).replace(/[&<>"\']/g,function(c){
   return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
 /* ---------- 3. 모달 ---------- */
@@ -117,7 +146,7 @@ function setChartDefaults(){
 
 global.KCMS=Object.assign(global.KCMS||{},{
   num:num, pct:pct, pctHtml:pctHtml, date:date, phone:phone, mask:mask, esc:esc,
-  toast:toast, openModal:openModal, closeModal:closeModal, bindModals:bindModals,
+  toast:toast, hideToast:hideToast, guessType:guessType, openModal:openModal, closeModal:closeModal, bindModals:bindModals,
   cssVar:cssVar, getChartColors:getChartColors, ruleColor:ruleColor, setChartDefaults:setChartDefaults
 });
 })(window);

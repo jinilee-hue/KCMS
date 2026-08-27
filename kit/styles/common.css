@@ -1,258 +1,1294 @@
 /* ============================================================
-   KCMS 입학관리 Kit — 컴포넌트 스타일
-   tokens.css 를 먼저 로드해야 한다.
+   KCMS 입학관리 Kit — 컴포넌트 스타일 (common.css)
+
+   손으로 다시 쓴 파일이 아닙니다. 실제 화면
+   PCMS-SCR-ET-02-012 «예비생 등록·관리» 의 CSS 에서 컴포넌트 규칙만 뽑아
+   **원본 순서 그대로** 옮겼습니다. 같은 선택자가 여러 번 나오는 것은
+   뒤쪽 패치가 앞쪽 기본값을 덮는 구조이기 때문이며, 순서를 바꾸면 결과가 달라집니다.
+   원본에 달려 있던 결정 근거 주석도 함께 옮겼습니다.
+
+   tokens.css 를 먼저 로드하세요.
    ============================================================ */
 
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;}
-body{font-family:var(--font);font-size:var(--fs-base);color:var(--txt);background:#fff;}
 
-/* ============ 1. 레이아웃 골격 ============ */
-.app{display:flex;flex-direction:column;height:100vh;}
-.topnav{flex:0 0 auto;height:var(--h-topnav);
-  background:linear-gradient(180deg,var(--gnb-top),var(--gnb));
-  display:flex;align-items:center;padding:0 16px;gap:18px;}
-.topnav .brand{font-size:24px;font-weight:800;color:#fff;letter-spacing:-.5px;}
+/* ───────── 기본 ───────── */
+*{box-sizing:border-box;margin:0;padding:0;}
+
+/* ───────── 기타 ───────── */
+html,body{height:100%;}
+
+/* ───────── 기본 ───────── */
+body{font-family:Pretendard,Pretendard Variable,Malgun Gothic,맑은 고딕,Dotum,돋움,sans-serif;font-size:12px;color:var(--txt);background:var(--bg);}
+
+/* ───────── 레이아웃 골격 ───────── */
+.app{display:flex;flex-direction:column;height:100vh;overflow:hidden;}
 .lower{flex:1;min-height:0;display:flex;}
-.rail{flex:0 0 var(--h-rail);background:var(--lnb-bg);border-right:1px solid var(--line);
-  display:flex;flex-direction:column;align-items:center;}
-.rail .ic{width:var(--h-rail);height:var(--h-rail);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:3px;color:var(--txt-mut);cursor:pointer;
-  border-left:3px solid transparent;font-size:10px;position:relative;}
+/* ===== left icon rail ===== */
+.rail{flex:0 0 58px;background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;align-items:center;padding-top:0;}
+.rail .ic{width:54px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:var(--txt-mut);cursor:pointer;border-left:3px solid transparent;font-size:10px;}
 .rail .ic svg{width:19px;height:19px;}
 .rail .ic:hover{background:var(--pb-light);color:var(--pb);}
-.rail .ic.on{background:var(--pb-light);color:var(--pb);font-weight:var(--fw-bold);}
-.rail .ic.on::before{content:'';position:absolute;top:calc(50% - 16px);right:calc(50% - 9px);
-  width:4px;height:4px;border-radius:50%;background:var(--pb);box-shadow:0 0 0 1.5px var(--pb-light);}
+.rail .ic.on{background:var(--pb-light);color:var(--pb);font-weight:700;border-left-color:var(--pb);}
+/* ===== main ===== */
 .main{flex:1;min-width:0;display:flex;flex-direction:column;}
-.content{flex:1;min-height:0;overflow:auto;padding:var(--sp-6);}
 
-/* 히스토리 네비 */
-.bcbar{flex:0 0 auto;height:var(--h-bcbar);background:#fff;border-bottom:1px solid var(--line);
-  display:flex;align-items:center;padding:0 12px;gap:6px;font-size:12px;color:var(--txt-mut);}
-.bcbar .home{color:var(--gnb);display:inline-flex;align-items:center;}
-.bcbar b{color:var(--txt);font-weight:var(--fw-bold);}
-.bcbar .meta{margin-left:auto;color:#7C8794;font-size:11.5px;}
-.bcbar .bctools{margin-left:10px;display:flex;gap:4px;}
-.bcbar .bcic{width:20px;height:20px;border:0;background:transparent;color:var(--txt-mut);
-  border-radius:var(--r-sm);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
-.bcbar .bcic:hover{background:var(--pb-light);color:var(--pb);}
-.bcbar .bcic.star{color:#F5A623;}
-
-/* ============ 2. GNB 메뉴 (1·2·3뎁스) ============ */
-.tabs{display:flex;align-items:stretch;height:100%;overflow-x:auto;scrollbar-width:none;}
-.tabs::-webkit-scrollbar{display:none;}
-.topnav .tab{height:100%;padding:0 18px;display:flex;align-items:center;color:var(--gnb-txt);
-  font-size:15px;font-weight:var(--fw-bold);cursor:pointer;white-space:nowrap;position:relative;}
-.topnav .tab:hover,.topnav .tab.on{color:#fff;}
-.topnav .tab.on::after{content:'';position:absolute;left:0;right:0;bottom:0;height:3px;background:#fff;}
-.tabbadge{margin-left:6px;background:#E6483C;color:#fff;font-size:9px;font-weight:var(--fw-bold);
-  padding:1px 5px;border-radius:var(--r-sm);}
-.dd{display:none;position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-top:none;
-  box-shadow:var(--sh-dd);padding:14px 18px;flex-direction:column;}
-.topnav .tab:hover .dd{display:flex;}
-.ddrow{display:flex;flex-wrap:wrap;gap:18px 26px;}
-.ddcol{min-width:118px;}
-.ddcat{font-size:12px;font-weight:var(--fw-bold);color:var(--gnb-deep);padding-bottom:7px;
-  margin-bottom:7px;border-bottom:1px solid var(--gnb-bd);display:flex;align-items:center;gap:6px;white-space:nowrap;}
-/* 3뎁스 점은 2뎁스 첫 글자 가운데(+5.2px)에 중심을 맞춘다 — 점 4px 이므로 여백 3.2px */
-.dditem{font-size:12px;color:var(--gnb-deep);padding:5px 2px 5px 3.2px;cursor:pointer;
-  display:flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;}
-.dditem::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gnb);flex:0 0 auto;}
-.dditem:hover,.dditem.cur{color:var(--gnb);font-weight:var(--fw-bold);}
-/* 탭 바 좌우 이동 버튼 — 어두운 바 위이므로 흰 박스 */
-.tabnav{display:none;width:26px;height:26px;flex:0 0 26px;align-self:center;border-radius:7px;
-  background:#fff;color:var(--gnb);border:0;cursor:pointer;padding:0;
-  box-shadow:0 1px 2px rgba(0,0,0,.18);transition:background .14s ease,color .14s ease;
-  align-items:center;justify-content:center;}
+/* ───────── GNB · 상단바 ───────── */
+/* top nav */
+.topnav{flex:0 0 auto;height:64px;background:linear-gradient(180deg,#1f7bff,var(--pb));display:flex;align-items:center;padding:0 16px;gap:18px;}
+.topnav .brand{color:#fff;font-size:24px;font-weight:700;letter-spacing:.5px;}
+.topnav .tabs{display:flex;gap:0;flex:1;min-width:0;align-self:stretch;overflow-x:auto;overflow-y:hidden;scrollbar-width:none;}
+.topnav .tabs::-webkit-scrollbar{display:none;}
+.tabnav{display:none;flex:0 0 22px;height:100%;align-items:center;justify-content:center;background:transparent;color:#fff;border:none;cursor:pointer;padding:0;opacity:.9;}
+.tabnav.show{display:flex;}
+.tabnav svg{width:16px;height:16px;}
+/* 2026-08-26 요청: ‹ › 버튼을 라운드 박스로 — 바 배경(어두운 남색)보다 한 단계 어둡게.
+     hover 는 배경 전체가 아니라 이 박스만 진해진다(칸 전체가 밝아지던 기존 방식 폐기). */
+.tabnav{width:26px;height:26px;flex:0 0 26px;align-self:center;border-radius:7px;
+    background:#fff;color:var(--gnb,#2C3E5A);opacity:1;
+    box-shadow:0 1px 2px rgba(0,0,0,.18);transition:background .14s ease,color .14s ease;}
 .tabnav.show{display:inline-flex;}
-.tabnav:hover{background:var(--pb-light);color:var(--pb);}
-.tabnav:disabled{opacity:.3;cursor:default;pointer-events:none;}
+.tabnav:hover{background:var(--pb-light,#E8F0FF);color:var(--pb,#0066FF);}
+.tabnav:active{background:#DCE7FF;color:var(--pb,#0066FF);}
 .tabnav svg{width:14px;height:14px;}
+.tabnav.prev{margin-right:4px;}
+.tabnav.next{margin-left:4px;}
+.tabnav:disabled{opacity:.3;cursor:default;pointer-events:none;}
+.topnav .tab{height:100%;padding:0 18px;display:flex;align-items:center;color:#fff;font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;position:relative;}
+.topnav .tab .tabbadge{background:#e6483c;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;margin-left:6px;letter-spacing:.2px;}
+.topnav .tab:hover{background:rgba(255,255,255,.14);color:#fff;}
+.topnav .tab.on{background:#fff;color:var(--pb);}
+.contactwrap{position:relative;margin-left:auto;display:inline-flex;align-items:center;gap:4px;}
+.topnav .contact{color:#fff;font-size:12px;font-weight:600;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:3px;white-space:nowrap;cursor:pointer;}
+.topnav .contact:hover{background:rgba(255,255,255,.3);}
+.contact-v{height:26px;min-width:24px;background:rgba(255,255,255,.18);color:#fff;border:none;cursor:pointer;font-size:10px;display:inline-flex;align-items:center;justify-content:center;}
+.contact-v:hover{background:rgba(255,255,255,.3);}
+.contactdd{display:none;position:absolute;top:100%;right:0;margin-top:6px;z-index:70;background:#fff;border:1px solid var(--line);box-shadow:0 8px 20px rgba(0,40,100,.22);padding:8px 12px;white-space:nowrap;font-weight:400;border-radius:3px;align-items:center;gap:14px;cursor:default;}
+.contactdd.open{display:flex;}
+.contactdd .cinfo{font-size:12.5px;color:var(--txt);display:inline-flex;align-items:center;gap:6px;}
+.contactdd .cdot{color:#e5533d;font-size:9px;}
+.contactdd .cinfo b{color:var(--pb-deeper);}
+.contactdd .cstat{font-size:11.5px;color:#5b6875;background:#eef1f5;border-radius:3px;padding:5px 10px;display:inline-flex;align-items:center;gap:8px;}
+.contactdd .cnum{background:#2d3748;color:#fff;padding:1px 6px;border-radius:3px;font-size:11px;font-weight:700;margin:0 2px;}
+.contactdd .csep{color:#c3ccd6;}
+.dd{display:none;position:fixed;z-index:50;background:#fff;border:1px solid var(--line);border-top:none;box-shadow:0 10px 22px rgba(0,40,100,.16);padding:14px 18px;flex-direction:column;max-width:calc(100vw - 16px);}
+.ddrow{display:flex;flex-direction:row;flex-wrap:wrap;gap:18px 26px;}
+.ddnote{margin-top:12px;padding-top:10px;border-top:1px solid var(--line-soft);font-size:11px;color:var(--txt-mut);white-space:pre-line;}
+.topnav .tab:hover .dd{display:flex;}
+.ddcol{min-width:118px;}
+.ddcat{font-size:12px;font-weight:700;color:var(--pb-deeper);padding-bottom:7px;margin-bottom:7px;border-bottom:1px solid var(--label-bd);display:flex;align-items:center;gap:6px;white-space:nowrap;}
+.ddbadge{background:#e6483c;color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;white-space:nowrap;}
+.ddbadge.muted{background:#eef1f5;color:#7a8699;}
+.dditem{font-size:12px;font-weight:400;color:var(--txt);padding:5px 2px;cursor:pointer;display:flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;}
+/* 2026-08-26: 3뎁스 항목의 점은 유지하되, 점을 기준선에 맞춘다.
+     기존에는 항목 자체에 좌측 패딩 2px 이 있어 점이 기준선에서 2px 밀려 있었다.
+     패딩을 0 으로 두면 [점]이 1뎁스 탭 글자·2뎁스 카테고리와 같은 세로선에서 시작하고,
+     항목 글자는 그만큼(10px) 들여쓰기돼 뎁스 위계가 자연스럽게 보인다.
+     점을 바깥으로 띄우는 방식(-10px)은 열 사이 여백을 파고들어 그리드가 비대칭이 되므로 쓰지 않는다. */
+/* 점 위치 기준 (2026-08-26): 2뎁스 카테고리 '첫 글자의 가운데'에 점 중심을 맞춘다.
+     카테고리 12px 한글 글리프 폭 ≈ 10.4px → 중심 +5.2px, 점 4px → 왼쪽 여백 3.2px. */
+.dditem{padding-left:3.2px;}
+.dditem::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--pb);flex:0 0 auto;}
+.dditem:hover{color:var(--pb);font-weight:700;}
+.dditem.cur{color:var(--pb);font-weight:700;}
 
-/* ============ 3. 하단 작업 탭 ============ */
-.worktabs{flex:0 0 auto;height:var(--h-worktabs);background:#E5EAF1;border-top:1px solid var(--line);
-  display:flex;align-items:flex-end;padding:0 8px;}
-.wtscroll{display:flex;align-items:flex-end;gap:3px;overflow-x:auto;scrollbar-width:none;flex:0 1 auto;min-width:0;height:100%;}
-.wtscroll::-webkit-scrollbar{display:none;}
-.wtab{height:24px;flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;padding:0 12px;
-  background:#F4F6F9;border:1px solid var(--line);border-bottom:none;border-radius:5px 5px 0 0;
-  font-size:12px;color:var(--txt-mut);cursor:pointer;white-space:nowrap;}
-.wtab.on{background:#fff;color:var(--pb-deeper);font-weight:var(--fw-bold);}
-.wtab .x{width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;
-  border-radius:var(--r-sm);font-size:10px;color:var(--txt-mut);cursor:pointer;}
-.wtab .x:hover{background:#D7DDE6;color:var(--txt);}   /* 삭제 버튼에 빨강 금지 */
-.wtnav{display:none;width:24px;height:24px;flex:0 0 24px;align-self:flex-end;border-radius:6px;
-  background:#fff;border:1px solid #CFD7E3;color:#41505F;cursor:pointer;padding:0;
-  box-shadow:0 1px 2px rgba(0,0,0,.10);transition:background .14s ease;
-  align-items:center;justify-content:center;}
-.wtnav.show{display:inline-flex;}
-.wtnav:hover{background:var(--pb-light);border-color:#9DBCF5;color:var(--pb);}
-.wtnav:disabled{opacity:.35;pointer-events:none;}
-.wtnav svg{width:13px;height:13px;}
-.wtnav.prev{margin-right:5px;} .wtnav.next{margin-left:5px;}
+/* ───────── 히스토리 네비 ───────── */
+/* breadcrumb bar */
+.bcbar{flex:0 0 auto;height:30px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 12px;gap:6px;font-size:12px;color:var(--txt-mut);}
+.bcbar .home{color:var(--pb);display:inline-flex;align-items:center;}
+.bcbar b{color:var(--txt);font-weight:700;}
+.bctools{display:inline-flex;align-items:center;gap:4px;}
+.bcic{width:22px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);cursor:pointer;}
+.bcic:hover{border-color:var(--pb);color:var(--pb);}
+.bcic.star{color:#0052CC;border-color:#f3d38a;}
 
-/* ============ 4. 섹션 · 패널 ============ */
-.sectit{font-size:var(--fs-sec);font-weight:var(--fw-bold);color:#000;display:flex;align-items:center;
-  gap:5px;margin:12px 0 8px;padding:6px 2px;}
-.sectit::before{content:'';width:4px;height:14px;border-radius:2px;
-  background:linear-gradient(180deg,var(--pb) 0%,var(--pb-deeper) 100%);}
-.sectit .hint{font-weight:400;font-size:11px;color:var(--txt-mut);margin-left:4px;}
-.panel{background:#fff;border:1px solid var(--line-soft);border-radius:var(--r-lg);padding:var(--pad-panel);}
-.card{background:#fff;border:1px solid #E4EBF6;border-radius:var(--r-lg);padding:var(--pad-panel);}
+/* ───────── 하단 작업 탭 ───────── */
+/* bottom work tabs */
+.worktabs{flex:0 0 auto;height:30px;background:#e5eaf1;border-top:1px solid var(--line);display:flex;align-items:flex-end;gap:3px;padding:0 8px;}
+.worktabs .wtab{height:24px;display:inline-flex;align-items:center;gap:7px;padding:0 12px;background:#f4f6f9;border:1px solid var(--line);border-bottom:none;border-radius:5px 5px 0 0;font-size:12px;color:var(--txt-mut);cursor:pointer;}
+.worktabs .wtab.on{background:#fff;color:var(--pb-deeper);font-weight:700;}
+.worktabs .wtab .x{width:15px;height:15px;display:inline-flex;align-items:center;justify-content:center;border-radius:3px;font-size:10px;color:var(--txt-mut);}
 
-/* ============ 5. 버튼 ============ */
-.btn{height:var(--h-btn);padding:0 10px;border:1px solid var(--pb-dark);border-radius:var(--r-sm);
-  background:var(--pb);color:#fff;font-size:var(--fs-base);font-weight:var(--fw-badge);cursor:pointer;
-  display:inline-flex;align-items:center;gap:5px;white-space:nowrap;font-family:inherit;}
+/* ───────── 버튼 ───────── */
+/* generic controls */
+.btn{height:24px;padding:0 10px;border:1px solid var(--pb-dark);border-radius:3px;background:var(--pb);color:#fff;font-size:11.5px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;}
 .btn:hover{background:var(--pb-dark);}
-.btn.g{background:#fff;color:var(--txt);border-color:var(--line);}       /* 보조 */
-.btn.g:hover{background:var(--bg);}
-.btn.s{background:var(--gnb);border-color:var(--gnb-deep);color:#fff;}   /* 시스템 */
-.btn.danger{background:var(--danger);border-color:#C73A3F;}              /* 파괴적 동작에만 */
-.btn.sm{height:var(--h-btn-sm);padding:0 8px;font-size:var(--fs-sm);}
-.btn:disabled{opacity:.45;cursor:default;pointer-events:none;}
-.btn svg{width:12px;height:12px;}
-.ibtn{width:22px;height:22px;border:1px solid var(--line);background:#fff;border-radius:var(--r-sm);
-  color:var(--txt-mut);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;}
-.ibtn:hover{border-color:var(--pb);color:var(--pb);}
+.btn.g{background:#fff;color:var(--txt);border-color:var(--line);}
+.btn.g:hover{border-color:var(--pb);color:var(--pb);}
+.btn.g.xls:hover{border-color:#2C3E5A;color:#2C3E5A;}
+.btn.danger{background:var(--danger);border-color:#c73a3f;}
+.btn.danger:hover{background:#c73a3f;}
+/* "예약취소" 버튼 전용 톤다운 — .btn.danger 대신 옅은 배경(--danger-bg)+빨간 테두리로 완화(msgbanner.err와 동일 팔레트), 다른 danger 버튼엔 영향 없음 */
+.btn.danger.soft{background:var(--danger-bg);color:var(--danger);border-color:#f3b4b4;}
+.btn.danger.soft:hover{background:#fbdada;}
+.btn.sm{height:22px;padding:0 8px;font-size:11px;}
+.btn[disabled]{opacity:.45;cursor:not-allowed;}
 
-/* ============ 6. 배지 ============ */
-.badge{display:inline-block;background:var(--bg);color:var(--txt-mut);border-radius:var(--r-sm);
-  padding:2px 7px;font-size:var(--fs-sm);font-weight:var(--fw-badge);white-space:nowrap;border:1px solid transparent;}
-.badge.pill{border-radius:var(--r-pill);}
-.badge.primary{background:var(--pb-light);color:var(--pb-deeper);}
-.badge.ok{background:var(--ok-bg);color:var(--pb-deeper);}
-.badge.warn{background:var(--warn-bg);color:#9A4B12;}
-.badge.danger{background:var(--danger-bg);color:#A32126;}
-.badge.line{background:#fff;border-color:var(--line);color:var(--txt-mut);}
+/* ───────── 폼 ───────── */
+.finput,.fselect,.ftextarea{height:24px;border:1px solid var(--line);border-radius:3px;padding:0 8px;font-size:11.5px;background:#fff;color:var(--txt);width:100%;}
+/* 안내(placeholder) 문구와 실제 입력 글자 색이 너무 비슷해 구분이 안 된다는 지적(2026-08-10) — 브라우저
+     기본 placeholder 색이 입력 글자색(--txt, 진한 남회색)과 크게 다르지 않아 헷갈렸음. 더 옅은 회색(--txt-mut)
+     으로 명시해 입력 전/후 색 차이를 뚜렷하게 함. opacity:1은 Firefox가 기본으로 거는 반투명 처리를 덮어써
+     지정한 색이 그대로 나오게 하기 위함 */
+.finput::placeholder,.ftextarea::placeholder{color:var(--txt-mut);opacity:1;}
+.fselect{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%235b6776' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 8px center;padding-right:20px;}
+.fselect:disabled{background-color:#f0f2f5;color:var(--txt-mut);cursor:not-allowed;}
+.finput:disabled{background-color:#f0f2f5;color:var(--txt-mut);cursor:not-allowed;}
+.ftextarea{height:auto;min-height:56px;padding:6px 8px;resize:vertical;font-family:inherit;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--pb);}
+.iwrap{position:relative;display:inline-block;width:100%;}
+.iwrap .finput{padding-right:22px;}
+.iwrap .finput::-webkit-calendar-picker-indicator{display:none;}
 
-/* ============ 7. 표 ============ */
-/* 실제 화면 실측 기준: th 33px · td 24px · 좌우 패딩 8px · 가운데 정렬 · 짝수 행 줄무늬 */
-.grid-wrap{border:1px solid var(--tbl-bd);border-top:2px solid var(--tbl-line);
-  border-radius:0 0 var(--r-sm) var(--r-sm);overflow:auto;background:#fff;}
-table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:var(--fs-base);
-  table-layout:fixed;white-space:nowrap;}
-table.grid thead th{position:sticky;top:0;z-index:2;height:var(--h-th);
-  background:var(--tbl-head);color:var(--gnb);font-weight:var(--fw-bold);
-  border-top:1px solid var(--tbl-bd);border-bottom:1px solid var(--tbl-bd);border-right:1px solid var(--tbl-bd);
-  padding:0 var(--pad-cell);text-align:center;}
-table.grid thead th.grp{background:var(--tbl-head-grp);}      /* 2단(그룹) 헤더 */
-table.grid thead th:first-child{border-left:1px solid var(--tbl-bd);}
-table.grid td{height:24px;padding:0 var(--pad-cell);color:var(--txt);text-align:center;
-  border-bottom:1px solid var(--tbl-bd);border-right:1px solid var(--tbl-bd);
-  overflow:hidden;text-overflow:ellipsis;}
-table.grid td:first-child{border-left:1px solid var(--tbl-bd);}
+/* ───────── 버튼 ───────── */
+.iwrap .ibtn{position:absolute;right:2px;top:50%;transform:translateY(-50%);width:19px;height:18px;border-radius:3px;color:var(--pb-deeper);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}
+.iwrap .ibtn:hover{border-color:var(--pb);color:var(--pb);}
+
+/* ───────── GNB · 상단바 ───────── */
+.cntbadge{display:inline-flex;align-items:center;justify-content:center;min-width:16px;height:16px;padding:0 4px;background:#fff;color:var(--pb);border-radius:999px;font-size:10px;font-weight:700;}
+
+/* ───────── 배지 ───────── */
+.agebadge{display:inline-flex;align-items:center;height:16px;padding:0 6px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap;}
+.agebadge.cur{background:var(--pb-light);color:var(--pb-dark);margin-left:10px;}
+.agebadge.mar{background:var(--ok-bg);color:#2C3E5A;}
+/* MAP 대상/비대상 뱃지(2026-08-07 신설 — 8/5 방향회의 "4가지 입학유형 명확 구분" 반영, 상세패널 한정) */
+.agebadge.mapin{background:var(--pb-light);color:var(--pb-dark);}
+.agebadge.mapex{background:#EDF1F6;color:#2C3E5A;}
+
+/* ───────── 표 ───────── */
+.req{color:var(--danger);}
+
+/* ───────── 배지 ───────── */
+/* sms-modal.js(공용 SMS 발송 모달)가 자체 CSS 없이 호출 화면 쪽 정의를 그대로 사용하는 클래스들
+     (컴포넌트 파일 상단 주석 "필요로 하는 CSS" 목록 참조) — 이 화면에 누락되어 있어 발송대상 테이블에
+     테두리가 표시되지 않던 문제를 여기서 해결(2026-07-30). ET-02-002 등 기존 화면과 동일한 정의를 그대로 이식 */
+.badge{display:inline-block;background:#eef1f5;color:var(--txt-mut);border-radius:3px;padding:2px 7px;font-size:11px;white-space:nowrap;border:1px solid transparent;}
+.badge.has{background:#fff;color:var(--txt);font-weight:400;}
+
+/* ───────── 레이아웃 골격 ───────── */
+/* ===== T2: 좌 목록(마스터) / 우 탭 상세 — KCMS ETA01_1 P1 마스터-디테일 원형(pattern-mapping.md "예비생정보→T2" 근거) ===== */
+.content{flex:1;min-height:0;overflow:hidden;background:#fff;display:flex;}
+
+/* ───────── 폼 ───────── */
+/* 검색바(D1) */
+.filters{padding:8px 12px 10px;border-bottom:1px solid var(--line-soft);flex:0 0 auto;overflow-x:auto;}
+
+/* ───────── 표 ───────── */
+table.fbox .finput,table.fbox .fselect{overflow:hidden;text-overflow:ellipsis;}
+
+/* ───────── 폼 ───────── */
+.flabel{background:#F4F7FD;border:1px solid #C8D5EB;color:#2C3E5A;font-weight:700;font-size:11px;text-align:center;width:78px;height:24px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.drange .iwrap{flex:1 1 auto;min-width:64px;height:100%;}
+.drange .iwrap input{height:100%;}
+
+/* ───────── 버튼 ───────── */
+.drangeclear,.dclear{width:20px;height:20px;flex:0 0 auto;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);cursor:pointer;font-size:11px;display:inline-flex;align-items:center;justify-content:center;padding:0;margin-left:2px;}
+.drangeclear:hover,.dclear:hover{border-color:var(--danger);color:var(--danger);}
+.iwrap .ibtn:disabled{opacity:.4;cursor:not-allowed;}
+
+/* ───────── 폼 ───────── */
+.dualrange .drgroup>.flabel{flex:0 0 78px;width:78px;height:auto;padding:0 2px;display:flex;align-items:center;justify-content:center;}
+/* .flabel 자체가 flex 컨테이너가 되면 text-overflow가 먹지 않으므로 라벨 텍스트는 .ltxt로 한 번 감싼다 */
+.dualrange .drgroup>.flabel .ltxt{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ftools{display:flex;justify-content:space-between;align-items:center;gap:6px;margin-top:6px;}
+
+/* ───────── 섹션 · 패널 ───────── */
+/* 목록그리드(D2) + 툴바 */
+.toolbar{display:flex;align-items:center;gap:16px;margin-bottom:6px;padding:8px 12px 0;flex:0 0 auto;}
+
+/* ───────── 탭 ───────── */
+.quickadmrow{display:flex;align-items:center;gap:8px;}
+.quickadmrow-lbl{font-size:11.5px;color:var(--txt-mut);white-space:nowrap;}
+
+/* ───────── 배지 ───────── */
+.quickpill{display:flex;align-items:center;gap:6px;}
+.quickpill button{height:22px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--txt-mut);font-size:11px;cursor:pointer;white-space:nowrap;}
+.quickpill button:hover{border-color:var(--pb);color:var(--pb);}
+.quickpill button.on{background:var(--pb);border-color:var(--pb);color:#fff;font-weight:700;}
+.quickpill button.on:hover{color:#fff;}
+
+/* ───────── 표 ───────── */
+.tblwrap{flex:1;min-height:0;overflow:auto;padding:0 12px;}
+/* 컬럼별 너비 드래그 조절 지원을 위해 table-layout:fixed로 전환, 넘치는 내용은 말줄임(…) 처리 */
+table.grid{border-collapse:separate;border-spacing:0;width:100%;font-size:11px;white-space:nowrap;table-layout:fixed;}
+table.grid thead th{position:sticky;top:0;background:#F4F7FD;color:#2C3E5A;font-weight:700;height:26px;border-top:1px solid #C8D5EB;border-bottom:1px solid #C8D5EB;border-right:1px solid #C8D5EB;padding:0 6px;text-align:center;z-index:2;}
+table.grid thead th:first-child{border-left:1px solid #C8D5EB;}
+table.grid thead th:hover .tharrow,table.stathisttbl thead th:hover .tharrow,table.staytbl thead th:hover .tharrow,table.reslist thead th:hover .tharrow,table.schtbl thead th:hover .tharrow{display:inline-flex;align-items:center;justify-content:center;}
+/* 모달(.modal-ov z-index:200) 위에서 열려도 가려지지 않도록 컬럼 메뉴는 그보다 높은 z-index로 고정 */
+.colmenu{display:none;position:fixed;z-index:210;background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 8px 20px rgba(0,40,100,.2);min-width:122px;padding:4px 0;}
+.colmenu.open{display:block;}
+.colmenu-item{padding:8px 12px;font-size:12px;color:var(--txt);cursor:pointer;white-space:nowrap;display:flex;align-items:center;justify-content:space-between;gap:10px;position:relative;}
+.colmenu-item:hover{background:var(--pb-a08);color:var(--pb-deeper);}
+.colmenu-item .subarrow{color:var(--txt-mut);font-size:10px;}
+.cmicon{flex:0 0 auto;}
+.colmenu-item.has-sub:hover .colsubmenu{display:flex;}
+table.grid td{height:24px;border-bottom:1px solid #C8D5EB;border-right:1px solid #C8D5EB;padding:0 6px;color:var(--txt);text-align:center;overflow:hidden;text-overflow:ellipsis;}
+/* 체크박스 칸은 overflow:hidden을 상속하면 .dirtydot+체크박스가 좁은 칸 폭에 밀려 말줄임 처리되어
+     체크박스 자체가 안 보이는 문제가 있어(2026-08-08 수정), 이 칸만 overflow를 되돌린다 */
+table.grid td:first-child{border-left:1px solid #C8D5EB;overflow:visible;text-overflow:clip;}
+table.grid td.l{text-align:left;}
 table.grid tbody tr{cursor:pointer;}
-table.grid tbody tr:nth-child(even){background:#F7F9FC;}       /* 줄무늬 */
+table.grid tbody tr:nth-child(even){background:#f7f9fc;}
 table.grid tbody tr:hover{background:var(--pb-a08);}
-table.grid tbody tr.sel{background:var(--pb-light);}
-table.grid tbody tr.empty td{height:80px;color:var(--txt-mut);font-size:12px;cursor:default;}
-table.grid .num{text-align:right;font-variant-numeric:tabular-nums;}
-table.grid .lft{text-align:left;}
-table.grid tfoot td{background:var(--tbl-head);font-weight:var(--fw-bold);border-top:1px solid var(--tbl-bd);}
-/* 라벨 셀(폼형 표) */
-table.form{border-collapse:separate;border-spacing:0;width:100%;font-size:var(--fs-base);}
-table.form th{background:var(--tbl-head);border:1px solid var(--label-bd);color:var(--gnb);
-  font-weight:var(--fw-bold);text-align:center;width:110px;height:28px;padding:0 8px;}
-table.form td{border:1px solid var(--line-soft);padding:4px 8px;}
-.req{color:var(--danger);margin-left:2px;}
-/* 정렬 화살표 */
-.sortable{cursor:pointer;} .sarrow{font-size:9px;margin-left:3px;color:var(--gnb);}
+table.grid tbody tr.sel{background:var(--pb-a15);box-shadow:inset 3px 0 0 var(--pb);}
+table.grid tbody tr.sel td{font-weight:700;}
+table.grid tbody tr.empty td{height:80px;color:var(--txt-mut);font-size:12px;cursor:default;text-align:left;padding:0;}
+/* 빈 목록 안내문구는 표 전체폭(가로 스크롤 대상)이 아니라 "지금 보이는 영역"에 붙여 둔다(2026-08-14,
+     ET-02-011과 동일) — sticky가 없으면 컬럼이 많아 표가 뷰포트보다 넓을 때 문구가 오른쪽으로 밀려 잘린다 */
+table.grid tbody tr.empty td{position:relative;}
+table.grid tbody tr.empty td .emptymsg{position:absolute;left:var(--wrap-x,0px);top:0;height:100%;width:var(--wrap-w,100%);
+  display:flex;align-items:center;justify-content:center;padding:0 12px;box-sizing:border-box;}
+.rowchk{width:14px;height:14px;cursor:pointer;}
+table.grid .iwrap .gridinput{padding-right:20px;}
+table.grid .iwrap .gridinput::-webkit-calendar-picker-indicator{display:none;}
+table.grid tbody tr.dirty{background:var(--warn-bg);}
+table.grid tbody tr.dirty.sel{background:var(--pb-a15);}
 
-/* ============ 8. 폼 ============ */
-/* 실측 기준: 입력 24px · 테두리 #CFD6E0 1px · 라운드 3px · 11.5px
-   포커스는 테두리 색만 파랑으로 (링/그림자 없음 — 업무 화면 밀도에서 링은 시끄럽다) */
-.finput,.fselect{height:var(--h-input);border:1px solid var(--line);border-radius:var(--r-sm);
-  font-size:var(--fs-base);font-family:inherit;color:var(--txt);background:#fff;padding:0 6px;}
-.ftextarea{border:1px solid var(--line);border-radius:var(--r-sm);font-size:var(--fs-base);
-  font-family:inherit;color:var(--txt);background:#fff;padding:6px 8px;resize:vertical;}
-.finput:focus,.fselect:focus,.ftextarea:focus{outline:none;border-color:var(--pb);}
-.finput:disabled,.fselect:disabled,.ftextarea:disabled{background:var(--bg);color:var(--txt-mut);}
-.finput::placeholder,.ftextarea::placeholder{color:#9AA5B4;}
-.fselect{appearance:none;-webkit-appearance:none;padding:0 20px 0 8px;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%235b6776' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-  background-repeat:no-repeat;background-position:calc(100% - 8px) 50%;
-  overflow:hidden;text-overflow:ellipsis;}
-input[type=checkbox],input[type=radio]{width:14px;height:14px;accent-color:var(--pb);margin:0;}
-.iwrap{position:relative;display:inline-flex;align-items:center;gap:4px;}
-.flabel{font-size:var(--fs-base);font-weight:var(--fw-bold);color:var(--gnb);white-space:nowrap;}
+/* ───────── 기타 ───────── */
+.actionrow>*{flex:0 0 auto;}
 
-/* 검색 필터 — 한 줄 배치가 기본, 회색 띠가 필요하면 .gray */
-.filters{display:flex;align-items:center;gap:8px;padding:8px 10px;flex-wrap:wrap;}
-.filters.gray{background:#F3F5F9;padding:12px 14px;}
-.filters .fbtns{margin-left:auto;display:flex;gap:6px;}
+/* ───────── 히스토리 네비 ───────── */
+/* 잔여수량 표시(quotabar)는 상단 .bcbar에 병합 배치(즐겨찾기/새로고침/닫기 아이콘과 중복 표출 방지) — 배경/테두리 없는 텍스트, margin-left:auto로 우측 아이콘 옆에 정렬 */
+.quotabar{font-size:12px;color:var(--txt-mut);flex:0 0 auto;margin-left:auto;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
-/* 세그먼트 (2~3개 상태 전환) */
-.seg{display:inline-flex;border:1px solid var(--line);border-radius:var(--r-sm);overflow:hidden;}
-.seg button{height:22px;padding:0 10px;border:0;background:#fff;font-size:var(--fs-sm);
-  cursor:pointer;color:var(--txt-mut);font-family:inherit;}
-.seg button+button{border-left:1px solid var(--line);}
-.seg button.on{background:var(--pb);color:#fff;font-weight:var(--fw-badge);}
+/* ───────── 탭 ───────── */
+.dtabs{flex:0 0 auto;display:flex;gap:2px;margin:0 14px;padding:0;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;}
+.dtab{flex:0 0 auto;padding:9px 14px;font-size:12px;font-weight:700;color:var(--txt-mut);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;}
+.dtab:hover{color:var(--pb);}
+.dtab.on{color:var(--pb-deeper);border-bottom-color:var(--pb);}
 
-/* ============ 9. 모달 ============ */
-.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;
-  align-items:center;justify-content:center;}
-.modal-ov.on{display:flex;}
-.modal-box{width:640px;max-width:92vw;max-height:86vh;background:var(--bg);border:1px solid #8F9DAC;
-  border-radius:var(--r-md);box-shadow:var(--sh-modal);display:flex;flex-direction:column;overflow:hidden;}
-.modal-hd{height:var(--h-modal-hd);background:linear-gradient(180deg,var(--gnb-top),var(--gnb));
-  color:#fff;display:flex;align-items:center;gap:7px;padding:0 10px;font-size:13px;font-weight:var(--fw-bold);cursor:move;}
-.modal-hd .modal-x{margin-left:auto;width:22px;height:22px;border:0;background:transparent;color:#fff;
-  border-radius:var(--r-sm);cursor:pointer;font-size:12px;}
-.modal-hd .modal-x:hover{background:rgba(255,255,255,.18);}
-.modal-body{flex:1;min-height:0;overflow:auto;background:#fff;margin:12px;border:1px solid #BCC6D1;
-  border-radius:var(--r-sm);padding:14px;font-size:var(--fs-base);}
-.modal-ft{padding:0 12px 12px;display:flex;justify-content:flex-end;gap:6px;}
+/* ───────── 기타 ───────── */
+.scoreside > *{flex:0 0 auto;}
 
-/* ============ 10. 탭 (본문) ============ */
-.ptabs{display:flex;gap:4px;border-bottom:1px solid var(--line-soft);}
-.ptab{height:28px;padding:0 14px;font-size:var(--fs-lg);font-weight:var(--fw-bold);color:var(--txt-mut);
-  background:transparent;border:0;border-bottom:2px solid transparent;cursor:pointer;}
-.ptab.on{color:var(--pb);border-bottom-color:var(--pb);}
-.quickpill{height:24px;padding:0 12px;border-radius:var(--r-pill);border:1px solid var(--line);
-  background:#fff;font-size:var(--fs-sm);color:var(--txt-mut);cursor:pointer;}
-.quickpill.on{background:var(--pb-light);border-color:var(--pb);color:var(--pb);font-weight:var(--fw-bold);}
+/* ───────── 폼 ───────── */
+.seg{display:inline-flex;border:1px solid var(--line);overflow:hidden;width:100%;}
+.seg button{flex:1;height:24px;border:none;background:#fff;font-size:11.5px;color:var(--txt-mut);cursor:pointer;border-right:1px solid var(--line);}
+.seg button:last-child{border-right:none;}
+.seg button.on{background:var(--pb);color:#fff;font-weight:700;}
 
-/* ============ 11. 토스트 (4색) ============ */
-.kistoast-wrap{position:fixed;right:20px;bottom:20px;z-index:300;display:flex;flex-direction:column;
-  align-items:flex-end;gap:8px;pointer-events:none;}
-.kistoast{width:260px;border-radius:var(--r-md);box-shadow:var(--sh-toast);backdrop-filter:blur(6px);
-  overflow:hidden;color:#fff;pointer-events:auto;opacity:0;transform:translateX(24px);
-  transition:opacity .22s ease,transform .22s ease;background:color-mix(in srgb, var(--gnb) 92%, transparent);}
-.kistoast.show{opacity:1;transform:none;}
-.kistoast .kt-hd{display:flex;align-items:center;gap:6px;padding:9px 12px 0;font-weight:var(--fw-bold);font-size:12px;}
-.kistoast .kt-msg{padding:4px 12px 11px;font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.92);}
+/* ───────── 버튼 ───────── */
+/* "MAP 등록"(구 "상담/MAP 등록", 2026-08-11 명칭 환원) 모달 "입학구분" — 바로입학(파랑)/내년 3월 입학(초록) 색상 차별화(2026-08-06 요청,
+     PCMS-SCR-ET-02-001과 동일한 색상값). 우측 "과정별 잔여 TO" 패널의 배지(.to-badge)와 색상을 맞춰
+     전환 시점을 한눈에 인지할 수 있게 한다 */
+/* #mapFormAdmSeg 과 마찬가지로 값별 개별 색(#185FA5 / #2C3E5A)을 제거하고 공통
+     .seg button.on(var(--pb) 파랑) 하나로 통일한다 — 같은 토글이 화면마다 다른 색이면 안 된다
+     (2026-08-24 요청, "토글 선택 컬러는 파란색으로 통일"). */
+/* 토글 바깥 테두리와 안쪽 버튼 사이에 상하좌우 2px 여백을 둔다(2026-08-24 요청) — 종전엔 버튼이 테두리에 그대로 붙어 선택 배경이 테두리를 덮었다. 바깥 높이는 컨트롤 공통 24px 을 유지해야 같은 행의 .csel-box/.finput/.btn 과 위아래가 맞으므로, 높이는 두고 안쪽 버튼을 줄인다: 24 = 테두리 1+1 + padding 2+2 + 버튼 18. (전역 .seg:not(.gender) button{height:22px !important}
+
+/* ───────── 폼 ───────── */
+보다 ID 선택자라 우선한다.) */ /* (토글 안쪽 여백은 아래 공통 규칙 `.seg:not(.gender){padding:2px}
+/* 세그먼트 비활성 — 예약상태가 변경 불가일 때([MAP 예약]은 '취소', [상담예약 및 결과]는 '취소'/'완료').
+     선택된 값은 계속 읽히도록 채도만 낮추고, 나머지 버튼은 회색 배경으로 클릭 불가임을 드러낸다.
+     위 id 스코프 색상 규칙과 특정도가 같으므로 반드시 그 뒤에 와야 한다 */
+.seg button:disabled{cursor:not-allowed;background:#F0F2F5;color:#9AA5B1;}
+
+/* ───────── 배지 ───────── */
+/* "과정별 잔여 TO" 패널(2026-08-06 신규, PCMS-SCR-ET-02-001 "과정별 잔여 TO" 카드와 동일 패턴 포팅) */
+/* 텍스트 굵기 800 → 600 (2026-08-24 요청 — 조금 얇게). 타이틀 옆 배지는 강조가 아니라 상태 표시다. */
+.to-badge{display:inline-block;margin-left:4px;padding:2px 10px;border-radius:12px;font-size:11px;font-weight:600;color:#fff;vertical-align:middle;}
+.to-badge.now,.to-badge.mar{background:var(--pb);}
+.to-badge.pulse{animation:toBadgePulse .5s ease-out;}
+
+/* ───────── 기타 ───────── */
+.course-tabs button{flex:0 0 auto;height:auto;padding:9px 14px;border:0;border-bottom:3px solid transparent;border-radius:0;background:none;font-family:inherit;font-size:12px;font-weight:700;color:var(--txt-mut);cursor:pointer;white-space:nowrap;}
+.course-tabs button:hover{color:var(--pb);}
+.course-tabs button.on{background:none;color:var(--pb-deeper);border-bottom-color:var(--pb);}
+
+/* ───────── GNB · 상단바 ───────── */
+.ddaybadge{display:inline-flex;align-items:center;height:16px;padding:0 6px;border-radius:999px;font-size:10px;font-weight:700;white-space:nowrap;background:#eef1f5;color:var(--txt-mut);}
+.ddaybadge.warn{background:var(--warn-bg);color:#2C3E5A;}
+.ddaybadge.danger{background:var(--danger-bg);color:var(--danger);}
+
+/* ───────── 기타 ───────── */
+.schedpop .sp-nav button{width:20px;height:20px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);cursor:pointer;font-size:11px;line-height:1;padding:0;}
+.schedpop .sp-nav button:hover{border-color:var(--pb);color:var(--pb);}
+.schedpop .sp-calfoot button{border:none;background:none;color:var(--pb-deeper);font-size:11px;cursor:pointer;padding:2px 4px;}
+.schedpop .sp-calfoot button:hover{text-decoration:underline;}
+
+/* ───────── GNB · 상단바 ───────── */
+.schedpop .sp-listhd .cnt{font-weight:700;color:var(--pb-deeper);}
+
+/* ───────── 폼 ───────── */
+/* 검색바(.filters)의 .drange는 표 셀을 가득 채우도록 width:100% + .iwrap{flex:1 1 auto}
+
+/* ───────── 기타 ───────── */
++ 입력 테두리 제거 상태인데, 모달에서는 라벨 옆에 딱 필요한 폭만 차지해야 하고 배경이 흰색이라 테두리가 없으면 입력칸이 보이지 않는다 — 두 값을 이 모달 스코프에서만 되돌린다 */ .shfilter .drange{display:flex;align-items:center;gap:4px;width:auto;}
+
+/* ───────── 폼 ───────── */
+.shfilter .drange .iwrap{flex:0 0 112px;width:112px;}
+.shfilter .drange .iwrap input.dateinput{border:1px solid var(--line);border-radius:3px;}
+
+/* ───────── 표 ───────── */
+table.staytbl select,table.staytbl input.finput{width:100%;}
+table.edutbl select,table.edutbl input.finput{width:100%;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+/* "KIS" 토스트 — 검증 실패/성공 안내를 브라우저 alert() 대신 우측 하단 팝업으로 표시, 모달 위에서도 보이도록 z-index를 최상위로 */
+/* 토스트 — 흰 박스 + 짙은 헤더바(#424D59) 였던 것을, GNB 네이비를 반투명(92%)으로 깐
+     한 덩어리 패널 + 흰 글씨로 바꾼다(2026-08-24 요청). 헤더바 배경은 지우고 아래쪽
+     구분선만 남겨 "KIS" 라벨과 본문을 나눈다. */
+.kistoast{position:fixed;right:20px;bottom:20px;z-index:300;width:260px;background:var(--gnb-a92);border:1px solid rgba(255,255,255,.16);border-radius:5px;box-shadow:0 10px 28px rgba(15,30,60,.34);backdrop-filter:blur(6px);overflow:hidden;display:none;}
+.kistoast.show{display:block;}
+.kistoast .kt-hd{background:transparent;color:#fff;font-size:12px;font-weight:700;padding:6px 10px;border-bottom:1px solid rgba(255,255,255,.16);}
+.kistoast .kt-body{padding:14px 12px;font-size:12px;color:#fff;text-align:center;line-height:1.6;}
+/* 'KIS' 라벨 행 삭제(2026-08-25 요청) — 남아 있던 헤더 규칙은 무효화 */
+.kistoast .kt-hd{display:none;}
+
+/* ───────── 폼 ───────── */
+.withbtn .finput{flex:1;}
+
+/* ───────── 버튼 ───────── */
+.withbtn .btn{flex:0 0 auto;}
+
+/* ───────── 표 ───────── */
+.colresize{position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;z-index:6;touch-action:none;}
+.colresize:hover,.colresize.dragging{background:rgba(255,255,255,.45);}
+
+/* ───────── 레이아웃 골격 ───────── */
+.applyform{background:#F9F9FB;border:1px solid var(--line-soft);padding:10px;margin-top:10px;display:flex;flex-direction:column;gap:6px;}
+.applyform .row{display:flex;align-items:center;gap:8px;}
+.applyform .row .k{width:74px;flex:0 0 auto;background:#EAEAEA;border:1px solid var(--line);text-align:center;font-size:11px;font-weight:700;color:#444;padding:6px 2px;}
+.applyform .row input,.applyform .row select{flex:1;}
+.applyform .foot{display:flex;justify-content:flex-end;gap:6px;margin-top:2px;}
+
+/* ───────── 배지 ───────── */
+/* [MAP 예약] 탭 — 상단 뱃지/필수필드 강조/담당자 검색 미니 드롭다운/MAP 등록 모달용 달력 */
+/* 텍스트 굵기 800 → 600 (2026-08-24 요청 — 조금 얇게). 타이틀 옆 배지는 강조가 아니라 상태 표시다. */
+.mapbadge{display:inline-flex;align-items:center;padding:3px 12px;border-radius:999px;font-size:12px;font-weight:600;color:#fff;line-height:1.3;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* MAP:44 = 파란(브랜드) / 예약:12 = 회색(중립) — 2026-08-24 요청.
+     종전 클래스명 .pink(실제로는 회색) / .orange(실제로는 남색·파랑)는 색과 무관한 잔재라
+     역할명(.brand/.muted)으로 바꿨다. 이 두 배지는 011·012 두 화면에만 쓰인다. */
+.mapbadge.brand{background:var(--pb);}
+
+/* ───────── 배지 ───────── */
+.mapbadge.muted{background:#5B6776;}
+
+/* ───────── 표 ───────── */
+.reqempty{border-color:#f1a3a3 !important;background:#FFF6F6 !important;color:#c0392b !important;}
+
+/* ───────── 기타 ───────── */
+.mapcal *{box-sizing:border-box;}
+.mapcal-ymgrid button{height:26px;border:1px solid var(--line);background:#fff;border-radius:3px;font-size:11px;cursor:pointer;color:var(--txt);}
+.mapcal-ymgrid button:hover{border-color:var(--pb);color:var(--pb);}
+.mapcal-ymgrid button.on{background:var(--pb);color:#fff;border-color:var(--pb-dark);font-weight:700;}
+.mapcal-yrlist button{display:block;width:100%;height:24px;border:none;background:#fff;text-align:center;font-size:11px;cursor:pointer;color:var(--txt);border-radius:3px;}
+.mapcal-yrlist button:hover{background:var(--pb-a08);}
+.mapcal-yrlist button.on{background:var(--pb);color:#fff;font-weight:700;}
+
+/* ───────── 폼 ───────── */
+.namerow .finput{flex:1;min-width:0;}
+.namechk input[type="checkbox"]{width:13px;height:13px;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+.emptynote{padding:40px 10px;text-align:center;color:var(--txt-mut);font-size:11.5px;}
+
+/* ───────── 탭 ───────── */
+.score-subtabs button{flex:1;border:none;border-right:1px solid var(--line);background:#fff;font-size:11.5px;font-weight:700;color:var(--txt-mut);cursor:pointer;}
+.score-subtabs button:last-child{border-right:none;}
+.score-subtabs button:hover{color:var(--pb);}
+.score-subtabs button.on{background:var(--pb);color:#fff;box-shadow:none;}
+
+/* ───────── 폼 ───────── */
+.scorecomment textarea{width:100%;min-height:60px;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+.msgbanner{margin-top:8px;padding:8px 12px;border-radius:6px;font-size:11.5px;display:flex;align-items:center;gap:6px;}
+.msgbanner.err{background:var(--danger-bg);color:#b42318;border:1px solid #f3b4b4;}
+.msgbanner.ok{background:var(--ok-bg);color:#2C3E5A;border:1px solid #D2D9E4;}
+
+/* ───────── 기타 ───────── */
+.sbmore button{font-size:11px;font-weight:700;color:var(--pb);background:none;border:none;cursor:pointer;padding:2px 6px;}
+.sbmore button:hover{text-decoration:underline;}
+
+/* ───────── 모달 ───────── */
+/* 모달 공용 */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:200;align-items:center;justify-content:center;}
+.modal-ov.open{display:flex;}
+/* 모든 모달(.modal-box) 공용 — 가로/세로 리사이즈 가능. overflow:hidden을 유지한 채 resize/min-width/min-height만 추가, max-width/max-height(92vw/86vh)로 뷰포트 밖 확장은 방지 */
+.modal-box{width:640px;max-width:92vw;max-height:86vh;min-width:320px;min-height:160px;background:#eef1f5;border:1px solid #8f9dac;border-radius:5px;box-shadow:0 14px 44px rgba(0,0,0,.4);display:flex;flex-direction:column;overflow:hidden;resize:both;}
+.modal-box.wide{width:900px;max-width:94vw;}
+.modal-hd{height:24px;background:linear-gradient(180deg,#5d6b7c,#3f4c5a);color:#fff;display:flex;align-items:center;gap:7px;padding:0 12px;font-size:12.5px;font-weight:700;}
+
+/* ───────── 섹션 · 패널 ───────── */
+.modal-hd .hdi{width:13px;height:13px;background:#cfe0ff;border:1px solid #fff;border-radius:2px;}
+
+/* ───────── 모달 ───────── */
+.modal-x{margin-left:auto;width:20px;height:20px;background:#fff;border:1px solid #8f9dac;border-radius:2px;cursor:pointer;color:#333;font-size:11px;display:inline-flex;align-items:center;justify-content:center;}
+.modal-x:hover{background:#ffe0e0;color:#d23b3b;}
+.modal-body{flex:1;min-height:0;overflow:auto;background:#fff;margin:12px;border:1px solid #bcc6d1;border-radius:3px;padding:14px;font-size:11.5px;}
+.modal-tabs{display:flex;gap:4px;padding:9px 12px 0;}
+.mtab{padding:6px 16px;font-size:12px;background:#dbe1e8;border:1px solid #bcc6d1;border-bottom:none;color:#5b6875;cursor:pointer;white-space:nowrap;}
+.mtab.on{background:#fff;color:var(--pb-deeper);font-weight:700;}
+
+/* ───────── GNB · 상단바 ───────── */
+.cntbl{border-collapse:collapse;width:100%;font-size:12px;}
+.cntbl thead th{position:sticky;top:0;background:#F4F7FD;color:#2C3E5A;font-weight:700;border:1px solid #C8D5EB;padding:0 8px;z-index:1;}
+.cntbl td{border:1px solid #C8D5EB;padding:7px 8px;color:var(--txt);text-align:center;}
+.cntbl tbody tr:nth-child(even){background:#f6f8fa;}
+.cntbl tbody tr:hover{background:var(--pb-a08);}
+
+/* ───────── 폼 ───────── */
+.schsearch-row select,.schsearch-row input{width:130px;}
+
+/* ───────── 기타 ───────── */
+@media (max-width:1400px){ .topnav{padding:0 10px;gap:10px;} .topnav .brand{font-size:20px;} .topnav .tab{padding:0 11px;font-size:12px;} }
+
+/* ───────── GNB · 상단바 ───────── */
+/* ---- 2. 상단바: 밝은 블루 → 네이비 -------------------------------------- */
+.topnav{background:linear-gradient(180deg,var(--gnb-top),var(--gnb));}
+.topnav .tab{color:var(--gnb-txt);font-size:15px;}
+.topnav .tab:hover{background:rgba(255,255,255,.18);color:#fff;}
+.topnav .tab.on{background:#fff;color:var(--gnb);}
+.topnav .contact{background:rgba(255,255,255,.16);}
+.topnav .contact:hover{background:rgba(255,255,255,.28);}
+
+/* ───────── 기타 ───────── */
+@media (max-width:1400px){ .topnav .tab{font-size:14px;} }
+@media (max-width:1180px){ .topnav .tab{font-size:13px;} }
+
+/* ───────── 레이아웃 골격 ───────── */
+/* ---- 3. 좌측 퀵메뉴 레일 ------------------------------------------------- */
+.rail{background:var(--lnb-bg);}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ---- 2b. 상단바 탭: 좌우 여백 변수화 + 활성 탭 점 인디케이터 -------------- */
+.topnav .tab{position:relative;padding:0 var(--tab-pad,18px);}
+.topnav .tab.on::before{content:'';position:absolute;
+  left:calc(var(--tab-pad,18px) + .5em - 2px);
+  top:calc(50% - .5em - 10px);
+  width:4px;height:4px;border-radius:50%;background:var(--gnb);}
+
+/* ───────── 기타 ───────── */
+@media (max-width:1400px){ .topnav .tab{--tab-pad:11px;} }
+@media (max-width:1180px){ .topnav .tab{--tab-pad:8px;} }
+
+/* ───────── GNB · 상단바 ───────── */
+/* ---- 2c. GNB 드롭다운: 블루 계열 → 네이비 계열로 통일 -------------------- */
+/* 상단바가 네이비가 되었으므로 그 아래 열리는 패널도 같은 계열로 맞춘다.
+   본문 강조색(--pb)은 콘텐츠 영역 전용으로 남긴다. */
+.ddcat{color:var(--gnb-deep);border-bottom-color:var(--gnb-bd);}
+.dditem{color:var(--gnb-deep);}
+.dditem::before{background:var(--gnb);}
+.dditem:hover,.dditem.cur{color:var(--gnb);}
+
+/* ───────── 레이아웃 골격 ───────── */
+/* ---- 3b. 좌측 레일: 정사각형 아이콘 + 점 인디케이터 ---------------------- */
+/* 활성 표시를 3px 좌측 바에서 점으로 교체(D타입 기준). */
+.rail{--rail-w:58px;flex:0 0 var(--rail-w);}
+.rail .ic{position:relative;width:var(--rail-w);height:var(--rail-w);}
+.rail .ic.on{border-left-color:transparent;}
+.rail .ic.on::before{content:'';position:absolute;top:calc(50% - 16px);right:calc(50% - 9px);
+  width:4px;height:4px;border-radius:50%;background:var(--pb);
+  box-shadow:0 0 0 1.5px var(--pb-light);}
+
+/* ───────── 기타 ───────── */
+@media (max-width:1000px){ .rail{--rail-w:50px;} .rail .ic{font-size:9px;} }
+
+/* ───────── GNB · 상단바 ───────── */
+/* ---- 3c. Contact 드롭다운: 하드코딩 색 정리 ------------------------------ */
+.contactdd .cdot{color:var(--pb);}
+
+/* ───────── 폼 ───────── */
+/* ---- 4. 셀렉트 화살표: 삼각형(▼) → v 셰브론 ----------------------------- */
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%235b6776' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 7px center;
+  padding-right:18px;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ---- 5. 모든 테이블 상단 1px 공통 라인 ---------------------------------- */
+/* sticky thead 테이블은 헤더가 라인 위로 스크롤되므로 th::after 로 처리 */
+/* 주의: position 을 선언하면 기존 position:sticky 를 덮어써 헤더 고정이 깨진다.
+   sticky 요소 자체가 배치 요소이므로 ::after 의 기준이 된다. */
+table.grid thead th,.cntbl thead th, table.uptbl thead th,table.histtbl thead th{border-top:0;}
+/* thead th 의 overflow:hidden 이 아래 ::after(좌우 -1px 확장)를 잘라내
+   셀 경계마다 라인이 1px 끊기고 th 의 세로 border 가 관통해 보였다.
+   overflow:clip + overflow-clip-margin 으로 1px 만 넘치도록 허용한다.
+   (원래 text-overflow 가 clip 이므로 헤더 텍스트 클리핑 동작은 동일하다) */
+table.grid thead th,.cntbl thead th, table.uptbl thead th,table.histtbl thead th{overflow:clip;overflow-clip-margin:var(--tbl-w);}
+table.grid thead th::after,.cntbl thead th::after, table.uptbl thead th::after,table.histtbl thead th::after{content:'';position:absolute;top:0;left:-1px;right:-1px;
+  height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+.tip{position:fixed;left:0;top:0;z-index:3000;max-width:360px;
+  background:var(--gnb-deep);color:#fff;font-size:11.5px;line-height:1.5;
+  padding:5px 8px;border-radius:4px;box-shadow:0 4px 12px rgba(15,30,60,.28);
+  pointer-events:none;opacity:0;visibility:hidden;transition:opacity .1s;
+  white-space:normal;word-break:break-all;}
+.tip.show{opacity:1;visibility:visible;}
+
+/* ───────── 버튼 ───────── */
+/* ---- 8. 버튼 규칙 (D타입 기준) ------------------------------------------- */
+/* .btn = 강조(파랑) / .btn.g = 보조(흰 배경) / .btn.s = 네이비(GNB 계열)
+   .btn.s 는 D타입에서 신설된 변형으로, 상단바와 같은 계열의 중립 강조에 쓴다. */
+.btn.s{background:var(--gnb);border-color:var(--gnb-deep);color:#fff;}
+.btn.s:hover{background:var(--gnb-deep);}
+/* 보조 버튼은 hover 시에도 배경 흰색 유지 (.btn:hover 의 파랑 배경이 새지 않도록 명시) */
+.btn.g:hover{background:#fff;}
+
+/* ───────── 표 ───────── */
+/* ==========================================================================
+   9. 콘텐츠 영역 — D타입 선언 강제
+   --------------------------------------------------------------------------
+   PCMS와 D타입에 같은 이름으로 존재하나 값이 어긋난 선택자들을 D타입 값으로 맞춘다.
+   (PCMS 고유 기능에 필요한 선언 — table-layout:fixed, overflow:hidden 등 — 은
+    제거하지 않고 유지한다. 아래 주석에 사유를 표기.)
+   ========================================================================== */
+/* --- 목록 그리드 --- */
+table.grid{font-size:11.5px;}
+/* PCMS 11px → D타입 11.5px */
+table.grid tbody tr.sel{background:var(--pb-light);box-shadow:none;}
+/* 좌측 3px 바 제거 */
+table.grid tbody tr.sel td{border-color:var(--label-bd);font-weight:400;}
+
+/* ───────── 폼 ───────── */
+/* --- 섹션 구분: 1px 실선 → 6px 밴드 (D타입 규칙) --- */
+.filters{padding:8px 10px;border-bottom:var(--sec-w) solid var(--sec-line);}
+
+/* ───────── 표 ───────── */
+.tblwrap{padding:0 10px;}
+
+/* ───────── 레이아웃 골격 ───────── */
+.content{gap:0;}
+
+/* ───────── 폼 ───────── */
+/* --- 검색 영역 라벨/입력 --- */
+.finput{padding:0 6px;}
+/* border-radius 는 border-collapse:collapse 셀에서 무효라 D타입에서도 보이지 않는다.
+   PCMS 예약기간 행은 .flabel 이 flex 아이템이어서 유일하게 둥글어지므로 넣지 않는다. */
+.flabel{font-size:11.5px;}
+
+/* ───────── 버튼 ───────── */
+/* --- 버튼/포커스 --- */
+.btn{vertical-align:middle;}
+
+/* ───────── 폼 ───────── */
+input:focus,textarea:focus{outline:none !important;border-color:var(--pb) !important;box-shadow:none !important;}
+
+/* ───────── 히스토리 네비 ───────── */
+/* --- 즐겨찾기(별) 아이콘: 노랑 → 브랜드 블루 --- */
+.bcic.star{color:var(--pb);border-color:#bcd4ff;}
+.bctools{margin-left:10px;}
+
+/* ───────── 폼 ───────── */
+.ftools{gap:0;}
+
+/* ───────── 모달 ───────── */
+/* --- 모달 크롬 (헤더/탭/닫기) : 회색 → 네이비 계열 ---
+   modal-box 폭과 modal-body 박스모델은 PCMS 모달 콘텐츠가 의존하므로 유지한다. */
+.modal-hd{background:linear-gradient(180deg,var(--gnb-top),var(--gnb));padding:0 10px;}
+.modal-tabs{gap:6px;padding:10px 12px 12px;}
+.mtab{background:#eef1f5;border:1px solid var(--line);border-radius:3px;}
+.mtab.on{background:var(--pb);border-color:var(--pb-dark);color:#fff;font-weight:700;}
+.modal-x{background:none;border:none;border-radius:3px;color:#fff;font-size:13px;}
+.modal-x:hover{background:var(--gnb-deep);color:#fff;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* --- Contact 테이블 셀 정렬 (D타입은 좌측) --- */
+.cntbl td{text-align:left;}
+
+/* ───────── 버튼 ───────── */
+/* ==========================================================================
+   10. 입력창 내부 아이콘 버튼 — 테두리 제거 (D타입 규칙)
+   --------------------------------------------------------------------------
+   D타입: 단독 .ibtn 은 테두리 있는 박스, 입력창 안에 겹쳐 놓이는 .ibtn 은
+          테두리·배경 없이 아이콘만. 달력·검색(찾기) 버튼 모두 해당한다.
+   ========================================================================== */
+.iwrap .ibtn, .drange .ibtn, .dwrap .ibtn, table.grid .iwrap .ibtn{border:none;border-radius:0;background:transparent;}
+.iwrap .ibtn:hover, .drange .ibtn:hover, .dwrap .ibtn:hover, table.grid .iwrap .ibtn:hover{border-color:transparent;background:transparent;color:var(--pb);}
+/* 페이징 영역: 액션 버튼을 우측으로 밀고 버튼 글자 크기 통일 */
+.paging .btn{font-size:12px;}
+
+/* ───────── 표 ───────── */
+/* ==========================================================================
+   12. 모든 데이터 테이블 상단 공통 라인 (D타입 --tbl-line 규칙)
+   --------------------------------------------------------------------------
+   PCMS 테이블 33종 중 라인이 없던 28종에 적용.
+   · position / 의사요소를 쓰지 않고 border-top 만 바꾼다 —
+     th 에 position 을 선언하면 기존 position:sticky 가 깨지기 때문.
+   · thead 가 있으면 thead 첫 행, 없으면 tbody 첫 행이 대상.
+     `> thead:first-child` 를 쓰면 <colgroup> 이 먼저 오는 테이블(to2)에서
+     빗나가므로 :has() 로 분기한다.
+   ========================================================================== */
+table.reslist > thead > tr:first-child > *, table.schtbl > thead > tr:first-child > *, table.sumtbl > thead > tr:first-child > *, table.stathisttbl > thead > tr:first-child > *, table.testinfo-tbl > thead > tr:first-child > *, table.to2 > thead > tr:first-child > *, table.edutbl > thead > tr:first-child > *, table.scoregrid > thead > tr:first-child > *, table.stattbl > thead > tr:first-child > *, table.matrix > thead > tr:first-child > *, table.infotbl > thead > tr:first-child > *, table.notetbl > thead > tr:first-child > *, table.scoretbl > thead > tr:first-child > *, table.staytbl > thead > tr:first-child > *, table.clsroster > thead > tr:first-child > *, table.calTbl > thead > tr:first-child > *, table.schedlist > thead > tr:first-child > *, table.edcmttbl > thead > tr:first-child > *, table.board > thead > tr:first-child > *, table.sp-days > thead > tr:first-child > *, table.sp-sched > thead > tr:first-child > *, table.sbtbl > thead > tr:first-child > *, table.score > thead > tr:first-child > *, table.recordtbl > thead > tr:first-child > *, table.calsumtbl > thead > tr:first-child > *, table.imptbl > thead > tr:first-child > *, table.cal > thead > tr:first-child > *, table.rcal > thead > tr:first-child > *, table.reslist:not(:has(thead)) > tbody > tr:first-child > *, table.schtbl:not(:has(thead)) > tbody > tr:first-child > *, table.sumtbl:not(:has(thead)) > tbody > tr:first-child > *, table.stathisttbl:not(:has(thead)) > tbody > tr:first-child > *, table.testinfo-tbl:not(:has(thead)) > tbody > tr:first-child > *, table.to2:not(:has(thead)) > tbody > tr:first-child > *, table.edutbl:not(:has(thead)) > tbody > tr:first-child > *, table.scoregrid:not(:has(thead)) > tbody > tr:first-child > *, table.stattbl:not(:has(thead)) > tbody > tr:first-child > *, table.matrix:not(:has(thead)) > tbody > tr:first-child > *, table.infotbl:not(:has(thead)) > tbody > tr:first-child > *, table.notetbl:not(:has(thead)) > tbody > tr:first-child > *, table.scoretbl:not(:has(thead)) > tbody > tr:first-child > *, table.staytbl:not(:has(thead)) > tbody > tr:first-child > *, table.clsroster:not(:has(thead)) > tbody > tr:first-child > *, table.calTbl:not(:has(thead)) > tbody > tr:first-child > *, table.schedlist:not(:has(thead)) > tbody > tr:first-child > *, table.edcmttbl:not(:has(thead)) > tbody > tr:first-child > *, table.board:not(:has(thead)) > tbody > tr:first-child > *, table.sp-days:not(:has(thead)) > tbody > tr:first-child > *, table.sp-sched:not(:has(thead)) > tbody > tr:first-child > *, table.sbtbl:not(:has(thead)) > tbody > tr:first-child > *, table.score:not(:has(thead)) > tbody > tr:first-child > *, table.recordtbl:not(:has(thead)) > tbody > tr:first-child > *, table.calsumtbl:not(:has(thead)) > tbody > tr:first-child > *, table.imptbl:not(:has(thead)) > tbody > tr:first-child > *, table.cal:not(:has(thead)) > tbody > tr:first-child > *, table.rcal:not(:has(thead)) > tbody > tr:first-child > *{border-top:var(--tbl-w) solid var(--tbl-line);}
+
+/* ───────── 섹션 · 패널 ───────── */
+/* ==========================================================================
+   13. 섹션 분리 — 제목 위 6px 밴드 (D타입 --sec-line 규칙)
+   ========================================================================== */
+.sectit{border-top:var(--sec-w) solid var(--sec-line);padding-top:12px;margin-top:12px;}
+.sectit:first-child{border-top:0;margin-top:0;}
+
+/* ───────── 폼 ───────── */
+.drange .iwrap{flex:1 1 96px;min-width:0;}
+
+/* ───────── 배지 ───────── */
+/* ==========================================================================
+   14b. 「비대상」 상태 배지 — 주황 → 회색 톤
+   --------------------------------------------------------------------------
+   MAP 비대상(.agebadge.mapex)은 경고가 아니라 "해당 없음"이므로 중립색으로.
+   MAP 대상(.mapin)은 브랜드 블루 유지 — 대상/비대상 대비가 유지된다.
+   ========================================================================== */
+.agebadge.mapex{background:var(--bg);color:var(--txt-mut);}
+
+/* ───────── 표 ───────── */
+/* ==========================================================================
+   16. 목록 빈 상태 안내 문구 — 보이는 영역 기준 가운데 정렬
+   --------------------------------------------------------------------------
+   .emptymsg 는 가로 스크롤 시에도 보이도록 position:sticky;left:0 로 좌측에
+   고정돼 있다. 테이블이 화면보다 넓어 text-align:center 로는 화면 밖으로
+   나가므로, 스크롤 컨테이너의 보이는 폭(--wrap-w, JS 가 주입)을 폭으로 잡고
+   그 안에서 가운데 정렬한다. 스크롤해도 문구는 항상 화면 중앙에 남는다.
+   ========================================================================== */
+table.grid tbody tr.empty td{text-align:left;}
+table.grid tbody tr.empty td{position:relative;}
+table.grid tbody tr.empty td .emptymsg{position:absolute;left:var(--wrap-x,0px);top:0;height:100%;width:var(--wrap-w,100%);
+  display:flex;align-items:center;justify-content:center;padding:0 12px;box-sizing:border-box;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ==========================================================================
+   17. 컴포넌트 메트릭 통일 — D타입 기준 (강제)
+   --------------------------------------------------------------------------
+   PCMS 는 버튼 height 12종, 입력 height 12종, radius 6종이 섞여 있었고
+   화면별 선택자 특이도가 서로 달라 일반 오버라이드로는 통일되지 않았다.
+   "무조건 D타입 우선" 원칙에 따라 표준 컴포넌트 클래스에 !important 로 확정한다.
+
+   D타입 기준값
+     radius            3px  (입력창 안 아이콘 버튼만 0)
+     버튼 / 입력·셀렉트  24px
+     표 안 컨트롤        22px
+     입력창 안 아이콘     18px
+     .bcic (경로 아이콘)  20px   ← D타입 원값
+     .contact-v          26px   ← D타입 원값
+     th (1줄)            26px
+   예외(성격이 다른 컴포넌트): 큰 단계선택 버튼, 성별 세그먼트, 체크박스,
+     여러 줄 textarea, 캘린더 셀
+   ========================================================================== */
+/* --- 라운드 3px --- */
+/* 토글 안쪽 버튼(.seg button / .score-subtabs button)은 이 목록에서 뺐다 — 바깥 박스만 3px
+   라운드다. 버튼마다 라운드가 들어가면 활성 배경의 둥근 모서리가 구분선과 만나 구분선이 휘어
+   보였다(2026-08-24 요청). 각지게 하는 규칙은 바로 아래에 둔다. */
+.btn,.advtoggle,.bcic,.ibtn,.contact-v, .finput,.fselect,.ftextarea,.gridinput,.ta, .reset-btn,.score-subtabs,.savedhint .btns button, .seg,.pillbar button, .tag2,.sib-jump,.addrsbtn,.printtb .ptpage input,.mtab{border-radius:3px !important;}
+
+/* ───────── 버튼 ───────── */
+.iwrap .ibtn,.drange .ibtn,.dwrap .ibtn, table.grid .iwrap .ibtn{border-radius:0 !important;}
+
+/* ───────── 폼 ───────── */
+/* 토글 바깥 박스만 라운드를 공통 3px 보다 크게 준다(2026-08-24 요청 — "라운드 더 줘").
+   높이가 24px 이라 6px 이면 모서리가 확실히 둥글면서 알약처럼 과하지도 않다. */
+.seg:not(.gender),.score-subtabs{border-radius:8px !important;}
+
+/* ───────── 표 ───────── */
+/* --- 표 안 컨트롤 22px --- */
+.gridinput, table.grid input:not([type=checkbox]):not([type=radio]), table.grid select{height:22px !important;}
+
+/* ───────── 폼 ───────── */
+/* --- .seg 는 바깥 박스가 컨트롤 --- */
+/* .seg 자체에 보더 1px 이 있어 안쪽 버튼을 24px 로 두면 박스는 26px 이 된다.
+   그 결과 이 셀만 행 높이가 35px 로 남았다(입학구분 행). 버튼을 22px 로 내려
+   박스 전체를 다른 input/select 와 같은 24px 로 맞춘다. */
+/* 토글 바깥 테두리와 안쪽 버튼 사이에 상하좌우 2px 여백을 둔다(2026-08-24 요청) — 종전엔 버튼이
+   테두리에 그대로 붙어 활성 배경(파랑)이 테두리를 덮었다. 컨트롤 공통 높이 24px 은 그대로 둬야
+   같은 행의 .csel-box / .finput / .btn 과 위아래가 맞으므로, 바깥 높이는 두고 안쪽 버튼만 줄인다:
+   24px = 테두리 1+1 + padding 1+1 + 버튼 20 (박스는 border-box, 실측 검증).
+   2026-08-24 재요청으로 여백을 2px → 1px 로 줄였다. */
+.seg:not(.gender),.score-subtabs{height:24px !important;padding:1px !important;}
+/* 구분선과 버튼 사이 여백 — 종전엔 구분선이 버튼 자신의 border-right 라서 활성 버튼의 파란 배경이 구분선에 그대로 맞닿았다(2026-08-24 요청). 버튼 보더를 걷고 flex gap 7px 을 준 뒤, 그 간격의 가운데에 1px 선을 ::after 로 그린다 → 버튼 | 3px | 1px 선 | 3px | 버튼. .seg{overflow:hidden}
+안쪽 간격에 그리므로 잘리지 않는다. */ .seg:not(.gender),.score-subtabs{gap:7px !important;}
+.seg:not(.gender) button,.score-subtabs button{border-right:0 !important;position:relative;}
+.seg:not(.gender) button:not(:last-child)::after, .score-subtabs button:not(:last-child)::after{content:'';position:absolute;top:0;bottom:0;right:-4px;width:1px;
+  background:var(--line);pointer-events:none;}
+/* 버튼이 정확히 2개인 토글은 구분선이 필요 없다(2026-08-24 요청) — 좌/우 둘 중 하나가 활성인
+   구조라 선 없이도 구분이 분명하다. 선이 실제로 필요한 건 3개 이상(예: 채점 서브탭
+   Speaking / StarReading / Lang. Composition)일 때다.
+   "첫 자식이면서 뒤에서 두 번째" = 버튼이 딱 2개인 경우만 정확히 집는다(:has() 불필요).
+   간격(gap 7px)은 그대로 둔다 — 3개 토글과 리듬이 어긋나지 않게. */
+.seg:not(.gender) button:first-child:nth-last-child(2)::after, .score-subtabs button:first-child:nth-last-child(2)::after{display:none;}
+
+/* ───────── 버튼 ───────── */
+/* --- 입력창 안 아이콘 버튼 18px --- */
+.iwrap .ibtn,.drange .ibtn,.dwrap .ibtn, table.grid .iwrap .ibtn{height:18px !important;}
+
+/* ───────── 히스토리 네비 ───────── */
+/* --- D타입 원값 유지 --- */
+.bcic{height:20px !important;}
+
+/* ───────── GNB · 상단바 ───────── */
+.contact-v{height:26px !important;}
+
+/* ───────── 버튼 ───────── */
+/* --- 성격이 다른 컴포넌트: 예외 --- */
+.stepbtns .btn,.seg.gender button{height:auto !important;min-height:40px;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* --- th 1줄 26px ---
+   표 셀의 height 는 최소값이라 1줄은 26px 로 통일되고 2줄 이상은 자동 확장된다. */
+/* 세로형 th(행 라벨) — 1줄 최소 26px, 내용이 크면 자동 확장 */
+table.reslist th, table.schtbl th, table.sumtbl th, table.stathisttbl th, table.testinfo-tbl th, table.to2 th, table.edutbl th, table.scoregrid th, table.stattbl th, table.matrix th, table.infotbl th, table.notetbl th, table.scoretbl th, table.staytbl th, table.clsroster th, table.calTbl th, table.schedlist th, table.edcmttbl th, table.board th, table.sbtbl th, table.score th, table.recordtbl th, table.calsumtbl th, table.imptbl th, table.grid th, table.cntbl th, table.uptbl th, table.histtbl th, .cntbl th{height:26px !important;}
+/* 가로형 th(열 헤더) — 세로형 1줄 높이(33px)에 맞춘다.
+   PCMS 폼 행은 입력 24px + 셀 패딩으로 33px 이 되므로 열 헤더도 같은 높이로. */
+table.reslist thead th, table.schtbl thead th, table.sumtbl thead th, table.stathisttbl thead th, table.testinfo-tbl thead th, table.to2 thead th, table.edutbl thead th, table.scoregrid thead th, table.stattbl thead th, table.matrix thead th, table.infotbl thead th, table.scoretbl thead th, table.staytbl thead th, table.clsroster thead th, table.calTbl thead th, table.schedlist thead th, table.edcmttbl thead th, table.board thead th, table.sbtbl thead th, table.score thead th, table.recordtbl thead th, table.calsumtbl thead th, table.imptbl thead th, table.grid thead th, table.cntbl thead th, table.uptbl thead th, table.histtbl thead th, .cntbl thead th{height:33px !important;}
+
+/* ───────── 히스토리 네비 ───────── */
+/* ==========================================================================
+   18. 공통 버튼군 위치·간격 통일 — D타입 기준
+   --------------------------------------------------------------------------
+   같은 기능의 버튼이 화면마다 좌/우로 갈리던 문제를 잡는다.
+   감사 결과(11개 화면):
+     · 히스토리네비(즐겨찾기·새로고침·닫기): 우측 3개 / 좌측 8개  ← 순서는 동일
+       원인은 CSS 가 아니라 마크업 — 우측인 화면은 .quotabar(잔여수량)가
+       margin-left:auto 로 남는 공간을 먹어 뒤 버튼을 밀어낸다.
+       .quotabar 가 없는 화면에서만 .bctools 를 밀어야 하므로 :has() 로 분기.
+     · .tactions 의 SMS 가 02-002 는 좌측, 02-010 은 우측  ← 같은 클래스인데 반대
+     · .ftools justify 가 space-between / flex-end 혼재
+     · gap 이 4·6·8px·미지정으로 섞여 버튼끼리 붙는 화면이 있었다
+   D타입 기준:  .bctools 4px·우측 / .ftools space-between / .paging 8px·액션 우측
+                액션바 5px·우측정렬 / .sectit 5px·액션 우측
+   ========================================================================== */
+/* 히스토리 네비 버튼 — 항상 우측 */
+.bctools{gap:4px;}
+/* 히스토리 네비 홈 아이콘 — 상단바 배경과 같은 네이비 계열로 */
+.bcbar .home{color:var(--gnb);}
+.bcbar:not(:has(.quotabar)) .bctools{margin-left:auto;}
+
+/* ───────── 폼 ───────── */
+/* 검색 영역 툴바 — 좌: 세부검색 / 우: 초기화·Search */
+.ftools{display:flex;align-items:center;justify-content:space-between;gap:6px;}
+
+/* ───────── 섹션 · 패널 ───────── */
+/* 액션 바 — 우측 정렬 + 간격 5px (붙어 보이던 화면 해소) */
+.actions,.tactions,.actionrow,.edactions{display:flex;flex-wrap:wrap;align-items:center;gap:5px;justify-content:flex-end;}
+/* 섹션 제목의 액션 버튼 — 항상 우측 */
+.sectit{gap:5px;}
+.sectit > .btn:first-of-type, .sectit > button:first-of-type{margin-left:auto;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ==========================================================================
+   19. 헤더행 ↔ 본문 첫 행 경계를 정확히 1px 로
+   --------------------------------------------------------------------------
+   thead th 와 tbody 첫 행이 각각 1px 보더를 선언하면 Chrome 이 row-group
+   경계에서 두 보더를 별도 밴드로 놓아 2px 로 보이는 경우가 있다.
+   본문 첫 행의 상단 보더를 없애 thead 의 하단 보더 하나만 남긴다.
+   ========================================================================== */
+table.reslist > tbody > tr:first-child > *, table.schtbl > tbody > tr:first-child > *, table.sumtbl > tbody > tr:first-child > *, table.stathisttbl > tbody > tr:first-child > *, table.testinfo-tbl > tbody > tr:first-child > *, table.to2 > tbody > tr:first-child > *, table.edutbl > tbody > tr:first-child > *, table.scoregrid > tbody > tr:first-child > *, table.stattbl > tbody > tr:first-child > *, table.matrix > tbody > tr:first-child > *, table.infotbl > tbody > tr:first-child > *, table.scoretbl > tbody > tr:first-child > *, table.staytbl > tbody > tr:first-child > *, table.clsroster > tbody > tr:first-child > *, table.calTbl > tbody > tr:first-child > *, table.schedlist > tbody > tr:first-child > *, table.edcmttbl > tbody > tr:first-child > *, table.board > tbody > tr:first-child > *, table.sbtbl > tbody > tr:first-child > *, table.score > tbody > tr:first-child > *, table.recordtbl > tbody > tr:first-child > *, table.calsumtbl > tbody > tr:first-child > *, table.imptbl > tbody > tr:first-child > *, table.grid > tbody > tr:first-child > *, table.cntbl > tbody > tr:first-child > *, table.uptbl > tbody > tr:first-child > *, table.histtbl > tbody > tr:first-child > *{border-top:0;}
+
+/* ───────── 폼 ───────── */
+.filters.adv-on tr.advrow{display:table-row;}
+/* ==========================================================================
+   22. 셀렉트 → 커스텀 드롭다운 (D타입 .csel 위젯 이식)
+   --------------------------------------------------------------------------
+   네이티브 <select> 의 팝업은 OS 가 그리므로 위치·정렬·라운드를 CSS 로
+   제어할 수 없다(박스를 덮고, 좌측 정렬도 안 맞고, 라운드도 다름).
+   D타입처럼 커스텀 위젯으로 대체해 다음을 만족시킨다:
+     · 목록이 박스 바로 아래에 열린다        (top:100%)
+     · 박스 좌측 라인에 정렬된다             (left:0, min-width:100%)
+     · 라운드를 박스와 동일하게 맞춘다        (border-radius:3px)
+   원본 <select> 는 DOM 에 남겨 두고 change 이벤트를 그대로 발생시키므로
+   기존 스크립트(value 읽기/change 핸들러)는 수정 없이 동작한다.
+   ========================================================================== */
+.csel{position:relative;display:inline-block;width:100%;vertical-align:middle;}
+.csel-box{box-sizing:border-box;width:100%;height:24px;line-height:22px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt);font-size:11.5px;cursor:pointer;padding:0 18px 0 8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='5' viewBox='0 0 8 5'%3E%3Cpath d='M1 1l3 3 3-3' fill='none' stroke='%235b6776' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 7px center;}
+.csel.h22 .csel-box{height:22px;line-height:20px;padding-left:5px;}
+.csel.open .csel-box,.csel-box:focus{border-color:var(--pb);outline:none;}
+/* 비활성 셀렉트 — 네이티브 select 의 disabled 를 대체 위젯에 반영한다(위 build() 의 syncDisabled).
+   톤은 .finput:disabled / .roinput 과 같은 #f0f2f5 + 흐린 글자(2026-08-24 요청). */
+.csel.csel-disabled .csel-box{background:#f0f2f5 !important;color:var(--txt-mut) !important;cursor:not-allowed;}
+.csel.csel-disabled .csel-box:focus{border-color:var(--line) !important;}
+/* 조상(.filters/.lpane/.content/.app)이 overflow 로 클리핑하므로 absolute 로는 잘린다.
+   position:fixed 로 클리핑을 벗어나고, 위치는 JS 가 박스 기준으로 계산한다. */
+.csel-menu{display:none;position:fixed;z-index:200;max-height:400px;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 6px 16px rgba(0,40,100,.18);}
+.csel.open .csel-menu{display:block;}
+.csel-menu .prtitem{padding:7px 12px;}
+.csel-menu .prtitem.sel{background:var(--pb-light);color:var(--pb-deeper);font-weight:700;}
+/* ==========================================================================
+   23. 섹션 구분 밴드 다음 요소의 상단 여백
+   --------------------------------------------------------------------------
+   6px 밴드 바로 아래에 테이블이 붙어 답답했고, 화면마다 0/8/10px 로 갈렸다.
+   밴드를 가진 블록의 다음 형제에 8px 을 일괄 적용해 통일한다.
+   (.actions + .sectit 은 12px 규칙이 더 구체적이라 그대로 유지된다)
+   ========================================================================== */
+.pagingbar + *, .paging + *, .filters + *{padding-top:8px;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ==========================================================================
+   24. td 1줄 높이 통일 — 29px
+   --------------------------------------------------------------------------
+   측정: 25px(grid) / 26px(stattbl) / 29px(fbox) / 33px(infotbl) 4종 혼재.
+   기준값 29px = 셀 안에 24px 컨트롤이 들어갈 때 필요한 높이
+                 (컨트롤 24 + 셀 패딩 2×2 + 보더 1). 검색영역이 이미 이 값이다.
+   표 셀의 height 는 최소값이라 여러 줄·큰 콘텐츠는 자동으로 늘어난다.
+   th 가 있는 행은 th(33px)가 더 커서 행 높이가 33px 로 결정된다.
+   캘린더 셀과 빈 상태 안내 행은 성격이 달라 제외.
+   ========================================================================== */
+table.reslist td, table.schtbl td, table.sumtbl td, table.stathisttbl td, table.testinfo-tbl td, table.to2 td, table.edutbl td, table.scoregrid td, table.stattbl td, table.matrix td, table.infotbl td, table.notetbl td, table.scoretbl td, table.staytbl td, table.clsroster td, table.schedlist td, table.edcmttbl td, table.board td, table.sbtbl td, table.score td, table.recordtbl td, table.calsumtbl td, table.imptbl td, table.grid td, table.cntbl td, table.uptbl td, table.histtbl td, table.fbox td, .cntbl td{height:29px;}
+
+/* ───────── 기타 ───────── */
+가 담당하므로 여기서 auto 를 걷어내면 액션 버튼만 우측에 남는다. 구분선(border-left)도 우측 배치용이었으므로 함께 제거. ========================================================================== */ .pgtotal,.paging .pgtotal{margin-left:4px;padding-left:0;border-left:0;order:1;}
+
+/* ───────── GNB · 상단바 ───────── */
+.mapcal-ympanel,.csel-menu,.prtmenu,.contactdd,.tip{border-radius:3px !important;}
+
+/* ───────── 폼 ───────── */
+.csel-menu{border-radius:3px !important;}
+
+/* ───────── 섹션 · 패널 ───────── */
+/* --- (2) 타이틀 앞 아이콘 전부 제거 — 상단은 타이틀이 바로 나온다 ---
+   .hdi(연파랑 사각형) / 헤더 직계 <svg> 아이콘 / 드래그 그립(마크업에 박혀 있는
+   .modal-drag-hint·.clsmodal-drag-hint 와 modal-drag.js 가 런타임에 끼워넣는
+   .pcms-drag-grip) 을 모두 감춘다. 그립을 감춰도 드래그는 그대로 동작한다 —
+   modal-drag.js 의 손잡이는 그립이 아니라 헤더(.modal-hd 등) 자체이고,
+   그립 유무 판정(GRIP_PRESENT)도 display 가 아니라 DOM 존재로 하기 때문이다. */
+.modal-hd > .hdi,.modal-hd > svg, .modal-hd > .modal-drag-hint,.modal-hd > .clsmodal-drag-hint,.modal-hd > .pcms-drag-grip, .impmodal-hd > .modal-drag-hint,.impmodal-hd > .clsmodal-drag-hint,.impmodal-hd > .pcms-drag-grip, .clsmodal-hd > .modal-drag-hint,.clsmodal-hd > .clsmodal-drag-hint,.clsmodal-hd > .pcms-drag-grip, .mcHead > .modal-drag-hint,.mcHead > .clsmodal-drag-hint,.mcHead > .pcms-drag-grip, .shHead > .modal-drag-hint,.shHead > .clsmodal-drag-hint,.shHead > .pcms-drag-grip{display:none !important;}
+
+/* ───────── 모달 ───────── */
+/* --- (3) 타이틀 줄 높이 --- */
+.modal-hd{height:40px !important;font-size:13px !important;}
+/* --- (4) 팝업 콘텐츠 패널 = 선 없는 흰 박스 하나로 통일 ---
+   팝업마다 본문 껍데기가 제각각이었다(모달 26개 전수 확인).
+     · .modal-body                        흰 배경 + #bcc6d1 1px 선
+     · 인라인 래퍼 [style*="flex:1"] 13곳  배경 없이 선만 (모달 회색 위에 표가 바로 얹힘)
+       — statusHistModal / platHistModal / stayModal / semHistModal / campusModal …
+     · #transferModal                     배경도 선도 없음 (회색이 그대로 비침)
+     · #eduModal                          흰 배경은 있으나 margin·padding 없음 (모달 끝에 붙음)
+     · #mapRegModal                       바깥 flex 행이 투명, 안쪽 pane 만 선 보유
+     · .schtbl-wrap / .eduTblWrap         배경 없이 선만
+   기준: 본문 패널 = .modal-box 의 스크롤 자식 하나.
+     margin 12px · padding 14px · 흰 배경 · 선 없음 · radius 3px
+     → 모달 가장자리에서 콘텐츠까지 26px 로 어느 팝업이든 같다.
+   패널 안에 중첩된 옛 박스(mapRegModal 의 pane, .eduTblWrap)는 패널이 이미 흰 박스이므로
+   껍데기(선·배경·여백)를 걷어내 이중 박스/이중 여백이 생기지 않게 한다. */
+.modal-ov > .modal-box > .modal-body{background:#fff !important;border:0 !important;border-radius:3px !important;}
+/* --- (4-2) 팝업 폭은 콘텐츠에 맞춘다 — .wide 고정 900px 제거 ---
+   .modal-box.wide 는 폭이 900px 로 못 박혀 있어, 내용이 짧은 팝업(학생중복체크 = [신규등록]
+   진입 팝업)은 오른쪽이 크게 비어 보였다. 폭을 콘텐츠 기준으로 두고 하한/상한만 공통으로 잡는다.
+   학생중복체크처럼 검색 전에는 입력 4줄뿐이다가 [중복검사] 후 10칼럼 결과표가 나타나는 팝업은
+   내용이 늘어나는 만큼 상한까지 자연스럽게 넓어진다.
+   인라인으로 width 를 명시한 팝업(표 칼럼 수에 맞춰 폭을 정해 둔 것들)은 그 값을 존중한다. */
+.modal-ov > .modal-box.wide:not([style*="width"]){width:fit-content !important;min-width:480px;max-width:min(94vw,900px);}
+.modal-ov > .modal-box > [style*="flex:1"], .schtbl-wrap{margin:12px !important;padding:14px !important;background:#fff !important;
+  border:0 !important;border-radius:3px !important;}
+/* 검색 영역 ↔ 흰 콘텐츠 박스 = 6px (검색줄 아래 padding 하나로만 띄운다).
+   패널의 margin-top 12px 를 없애 이중 여백을 제거한다. */
+.modal-ov > .modal-box > .shfilter + [style*="flex:1"]{margin-top:0 !important;}
+
+/* ───────── 표 ───────── */
+table.mddFormTable > * > tr > th, table.mddInfoTable > * > tr > th{background:#F4F7FD !important;color:#2C3E5A !important;
+  border:1px solid #C8D5EB !important;text-align:center !important;}
+table.mddFormTable > * > tr > td, table.mddInfoTable > * > tr > td{border:1px solid #C8D5EB !important;}
+
+/* ───────── 버튼 ───────── */
+/* 비활성 검색 버튼은 같은 톤을 흐리게 (본문 .btn:disabled 와 동일한 느낌) */
+.btn[id$="SearchBtn"]:disabled{opacity:.45 !important;cursor:not-allowed !important;}
+
+/* ───────── 표 ───────── */
+/* --- 표 헤더 고정 (팝업 공통) ---
+   스크롤은 th 아래(데이터 행)부터 움직인다. 스크롤 컨테이너가 .tblwrap 이든
+   표 래퍼(.shTableWrap/.mcTableWrap)든 흰 박스 자체든 모두 동일하게 적용한다.
+   래퍼 padding-top 이 0 이라 sticky 헤더 위로 내용이 비치는 틈이 생기지 않는다. */
+.modal-ov .tblwrap > table > thead > tr > th, .modal-ov .shTableWrap > table > thead > tr > th, .modal-ov .mcTableWrap > table > thead > tr > th, .modal-ov .eduTblWrap > table > thead > tr > th, .modal-ov .schtbl-wrap > table > thead > tr > th, .modal-ov > .modal-box > [style*="flex:1"] > table > thead > tr > th{position:sticky !important;top:0 !important;z-index:2 !important;background:#F4F7FD !important;}
+/* 표는 흰 박스 안쪽 폭을 꽉 채운다 — .tblwrap 의 좌우 padding(본문 화면용 10~14px)을 없앤다.
+   팝업 안에서는 흰 박스가 이미 14px 을 주므로 이중 여백이 되어 표만 좁아 보였다. 팝업 전체 공통. */
+/* 표의 바깥 세로선을 셀이 아니라 "래퍼"가 그린다.
+   border-collapse:collapse 에서 셀의 바깥 보더는 절반이 표 박스 밖으로 나가기 때문에,
+   셀이 그리면 파란 상단선(래퍼 폭)과 좌우가 1px 씩 어긋나고 가로 스크롤도 생겼다.
+   좌·우선을 래퍼로 옮기면 상단 파란선과 정확히 같은 폭이 되고 넘침도 없다. */
+/* 좌우 세로선은 "표"가 그린다. 래퍼에 주면 래퍼가 표보다 길 때(빈 영역) 그 아래까지
+   선이 내려가 표 밑으로 두 줄이 뻗어 보인다. 위 파란선만 래퍼가 그린다(틱 방지). */
+.modal-ov .tblwrap{padding-left:0 !important;padding-right:0 !important;}
+/* 마지막 칼럼의 리사이저 손잡이(.colResizer)는 표 오른쪽 밖으로 4px 나가 가로 스크롤을 만든다.
+   맨 끝 칼럼은 오른쪽으로 넓힐 대상이 없으므로 손잡이를 감춘다. */
+.modal-ov .tblwrap > table > thead > tr > th:last-child .colResizer{display:none !important;}
+/* 표를 래퍼 폭에 정확히 맞춘다(파란 상단선과 같은 폭). 병합 보더가 0.5px 씩 밖으로
+   나가는 만큼은 가로 넘침을 숨겨 흡수한다 — 폭을 1px 깎으면 선보다 짧아 보였다. */
+.modal-ov .tblwrap{overflow-x:hidden !important;}
+.modal-ov .tblwrap > table{max-width:none !important;width:100% !important;}
+.modal-ov .tblwrap::-webkit-scrollbar-thumb{background:rgba(44,62,90,.28) !important;border-radius:4px !important;}
+/* -2px 인 이유 — border-collapse:collapse 표는 바깥쪽 세로 보더의 절반이 표 박스 밖으로
+   나가서(좌우 1px씩) scrollWidth 가 2px 커지고, 그 2px 때문에 가로 스크롤바가 생겼다. */
+/* --- (5-11) 팝업 안 .tblwrap 표의 상단 파란 라인은 래퍼 보더로 ---
+   표(::before 오버레이 + 셀 border-top)로 그리면 2px 로 겹치거나 th 세로선에 끊긴다.
+   SMS 발송내역 표에서 검증한 방식대로, 래퍼의 border-top 하나로만 그린다. */
+.modal-ov .tblwrap{border-top:var(--tbl-w) solid var(--tbl-line) !important;border-radius:0 !important;}
+.modal-ov .tblwrap > table::before{display:none !important;}
+.modal-ov .tblwrap > table{margin-top:0 !important;}
+.modal-ov .tblwrap > table > thead > tr:first-child > *{border-top:0 !important;}
+
+/* ───────── 모달 ───────── */
+.modal-ov .sect-hd{margin-bottom:6px !important;}
+
+/* ───────── 표 ───────── */
+/* --- (5-3) 표 좌측 세로선 빠진 것 보정 ---
+   아래 표들은 셀에 border-right/bottom 만 있어 맨 왼쪽 열의 세로선이 없었다
+   (헤더는 th 에 border 가 다 있어 왼쪽 선이 보이고 본문만 열려 보이는 상태).
+   첫 칸에 그 표가 쓰는 선 색으로 border-left 를 더한다. */
+table.grid > tbody > tr > td:first-child, table.board > thead > tr > th:first-child,table.board > tbody > tr > td:first-child, table.clsroster > tbody > tr > td:first-child, table.matrix > thead > tr > th:first-child,table.matrix > tbody > tr > td:first-child{border-left:1px solid #C8D5EB;}
+/* --- (5) 표 상단 파란 1px 라인 — D타입 공통 규칙을 새로 만든 표에도 ---
+   §12(첫 행 border-top) + §14(세로 보더가 만드는 틱을 덮는 ::before 오버레이)와 같은 방식.
+   table.dupform 은 thead 없이 tbody 만 있으므로 tbody 첫 행이 대상이다. */
+table.dupform:not(:has(thead)) > tbody > tr:first-child > *{border-top:var(--tbl-w) solid var(--tbl-line);}
+
+/* ───────── 토스트 · 피드백 ───────── */
+/* --- (6-6) 빈 목록 안내 문구 — §16 의 "보이는 폭 기준 가운데"를 모든 표로 확장 ------------
+   §16 은 table.grid 전용이고, 폭으로 쓰는 --wrap-w 를 주입하는 스크립트가 없어 100%(=셀 폭)로
+   떨어져 있었다 → 표가 화면보다 넓으면 문구가 가로 스크롤 밖에 있었다.
+   아래 스크립트가 스크롤 래퍼의 clientWidth 를 --wrap-w 로 넣고, 이 규칙이 §16 과 같은 선언을
+   나머지 빈 상태 셀(td.reslist-empty / td.emptynote / td.dupempty …)까지 확장한다.
+   display:flex + align-items:center + height:100% 이므로 세로도 가운데에 온다
+   (2026-08-24 요청 — 별도 규칙으로 display:inline-block 을 덮었다가 §16 의 height:100% 만 남아
+    문구가 셀 상단에 붙었던 것을 바로잡음). */
+td > .emptymsg{position:sticky;left:0;
+  display:flex;align-items:center;justify-content:center;
+  width:var(--wrap-w,100%);height:100%;
+  /* 좌측 보정(transform:translateX)은 스크립트가 인라인으로 넣는다 — margin 은 position:sticky 의
+     left:0 제약에 되밀려 무효였고(실측), CSS 변수 경유 transform 도 §16 과의 캐스케이드에서
+     적용되지 않았다. 인라인 style 이면 확실하다. */
+  padding:0 12px;box-sizing:border-box;text-align:center;}
+
+/* ───────── 표 ───────── */
+table.notetbl > * > tr > th, table.notetbl > * > tr > td{border-top:0 !important;border-left:0 !important;
+  border-bottom:1px solid #C8D5EB !important;border-right:1px solid #C8D5EB !important;}
+table.notetbl > * > tr > th:first-child, table.notetbl > * > tr > td:first-child{border-left:1px solid #C8D5EB !important;}
+/* --- (5-13) 표 상단 "파란 선 + 회색 선" 이중 라인 제거 (2026-08-24 요청) --------------
+   §12 가 첫 행 셀에 넣은 border-top(--tbl-line, 파랑)이 뒤따르는 "표 th 톤 통일" 규칙의
+   `border-color:#C8D5EB !important` 에 덮여 회색이 되었고, 파란 선은 §14 의 ::before 오버레이가
+   따로 그리고 있었다. 결과적으로 파란 1px 바로 아래에 회색 1px 이 한 줄 더 깔렸다.
+   대상은 §5-4 목록 전체가 아니라 "헤드리스로 이중 라인이 실측된 표"로만 한정한다 — 목록 전체에
+   걸면 오버레이가 실제로는 안 보이는 표(스크롤 래퍼가 top:-1px 오버레이를 클리핑하는
+   table.notetbl = 학생 메모, sticky thead 계열 등)에서 유일한 파란 선까지 지워진다(실측 회귀).
+   thead 있는 표 — 실측 이중 라인: edutbl / reslist / schtbl / spmTbl / stathisttbl / testinfo-tbl */
+table.edutbl:has(thead) > thead > tr:first-child > *, table.to2:has(thead) > thead > tr:first-child > *, table.reslist:has(thead) > thead > tr:first-child > *, table.schtbl:has(thead) > thead > tr:first-child > *, table.spmTbl:has(thead) > thead > tr:first-child > *, table.stathisttbl:has(thead) > thead > tr:first-child > *, table.testinfo-tbl:has(thead) > thead > tr:first-child > *{border-top:0 !important;}
+` 가 상단선을 담당한다. */ table.dupform:not(:has(thead)) > tbody > tr:first-child > *, table.fbox:not(:has(thead)) > tbody > tr:first-child > *, table.mddFormTable:not(:has(thead)) > tbody > tr:first-child > *, table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !important;}
+` 가 상단선을 담당한다. 실측 잔여 16건(dupform / fbox / mddFormTable / mddInfoTable)이 모두 이 경우였다. */ table.cal:not(:has(thead)) > tbody > tr:first-child > *, table.calTbl:not(:has(thead)) > tbody > tr:first-child > *, table.calsumtbl:not(:has(thead)) > tbody > tr:first-child > *, table.clsroster:not(:has(thead)) > tbody > tr:first-child > *, table.dupform:not(:has(thead)) > tbody > tr:first-child > *, table.edcmttbl:not(:has(thead)) > tbody > tr:first-child > *, table.edutbl:not(:has(thead)) > tbody > tr:first-child > *, table.fbox:not(:has(thead)) > tbody > tr:first-child > *, table.imptbl:not(:has(thead)) > tbody > tr:first-child > *, table.infotbl:not(:has(thead)) > tbody > tr:first-child > *, table.notetbl:not(:has(thead)) > tbody > tr:first-child > *, table.rcal:not(:has(thead)) > tbody > tr:first-child > *, table.recordtbl:not(:has(thead)) > tbody > tr:first-child > *, table.reslist:not(:has(thead)) > tbody > tr:first-child > *, table.sbtbl:not(:has(thead)) > tbody > tr:first-child > *, table.schedlist:not(:has(thead)) > tbody > tr:first-child > *, table.schtbl:not(:has(thead)) > tbody > tr:first-child > *, table.score:not(:has(thead)) > tbody > tr:first-child > *, table.scoregrid:not(:has(thead)) > tbody > tr:first-child > *, table.scoretbl:not(:has(thead)) > tbody > tr:first-child > *, table.sp-days:not(:has(thead)) > tbody > tr:first-child > *, table.sp-sched:not(:has(thead)) > tbody > tr:first-child > *, table.stathisttbl:not(:has(thead)) > tbody > tr:first-child > *, table.stattbl:not(:has(thead)) > tbody > tr:first-child > *, table.staytbl:not(:has(thead)) > tbody > tr:first-child > *, table.sumtbl:not(:has(thead)) > tbody > tr:first-child > *, table.testinfo-tbl:not(:has(thead)) > tbody > tr:first-child > *, table.to2:not(:has(thead)) > tbody > tr:first-child > *, table.mcTable:not(:has(thead)) > tbody > tr:first-child > *, table.mddFormTable:not(:has(thead)) > tbody > tr:first-child > *, table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *, table.rpt-table:not(:has(thead)) > tbody > tr:first-child > *, table.shTable:not(:has(thead)) > tbody > tr:first-child > *, table.spmTbl:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !important;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* --- (5-6) 표 셀 가로 여백 공통 8px ---
+   td/th 좌우 padding 이 0 / 4 / 6 / 7 / 8 / 9px 로 제각각이었고 선언이 아예 없는 표도 10종이었다.
+   좌우만 8px 로 통일하고, 세로 padding 은 표마다 다른 행 높이·줄바꿈 규칙을 지키도록 그대로 둔다.
+   날짜 셀 격자(table.cal / .rcal / .sp-days / .calTbl)는 칸이 좁아 제외. */
+table.calsumtbl > * > tr > th,table.calsumtbl > * > tr > td, table.clsroster > * > tr > th,table.clsroster > * > tr > td, table.dupform > * > tr > th,table.dupform > * > tr > td, table.edcmttbl > * > tr > th,table.edcmttbl > * > tr > td, table.edutbl > * > tr > th,table.edutbl > * > tr > td, table.fbox > * > tr > th,table.fbox > * > tr > td, table.imptbl > * > tr > th,table.imptbl > * > tr > td, table.infotbl > * > tr > th,table.infotbl > * > tr > td, table.notetbl > * > tr > th,table.notetbl > * > tr > td, table.recordtbl > * > tr > th,table.recordtbl > * > tr > td, table.reslist > * > tr > th,table.reslist > * > tr > td, table.sbtbl > * > tr > th,table.sbtbl > * > tr > td, table.schedlist > * > tr > th,table.schedlist > * > tr > td, table.schtbl > * > tr > th,table.schtbl > * > tr > td, table.score > * > tr > th,table.score > * > tr > td, table.scoregrid > * > tr > th,table.scoregrid > * > tr > td, table.scoretbl > * > tr > th,table.scoretbl > * > tr > td, table.sp-sched > * > tr > th,table.sp-sched > * > tr > td, table.stathisttbl > * > tr > th,table.stathisttbl > * > tr > td, table.stattbl > * > tr > th,table.stattbl > * > tr > td, table.staytbl > * > tr > th,table.staytbl > * > tr > td, table.sumtbl > * > tr > th,table.sumtbl > * > tr > td, table.testinfo-tbl > * > tr > th,table.testinfo-tbl > * > tr > td, table.to2 > * > tr > th,table.to2 > * > tr > td, table.mcTable > * > tr > th,table.mcTable > * > tr > td, table.mddFormTable > * > tr > th,table.mddFormTable > * > tr > td, table.mddInfoTable > * > tr > th,table.mddInfoTable > * > tr > td, table.rpt-table > * > tr > th,table.rpt-table > * > tr > td, table.shTable > * > tr > th,table.shTable > * > tr > td, table.spmTbl > * > tr > th,table.spmTbl > * > tr > td, table.grid > * > tr > th,table.grid > * > tr > td, table.cntbl > * > tr > th,table.cntbl > * > tr > td, table.uptbl > * > tr > th,table.uptbl > * > tr > td, table.histtbl > * > tr > th,table.histtbl > * > tr > td, table.board > * > tr > th,table.board > * > tr > td, table.matrix > * > tr > th,table.matrix > * > tr > td{padding-left:8px !important;padding-right:8px !important;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+/* --- (6) 안내 문구 배너 — 붉은 톤 → 파란 톤 ---
+   .msgbanner.err 은 "이름·생년월일·학부모핸드폰은 필수값입니다" 같은 입력 안내에 쓰인다.
+   실패/위험이 아니라 안내이므로 danger 계열이 아닌 Poly Blue 톤온톤으로 바꾼다.
+   성공 배너(.msgbanner.ok)는 결과 피드백이라 초록 그대로 둔다. */
+.msgbanner.err{background:var(--pb-light,#E8F0FF) !important;color:var(--pb-deeper,#003D99) !important;
+  border-color:var(--label-bd,#cdddff) !important;}
+/* 완료 배너도 같은 파란 계통으로 — 안내/완료를 색으로 가르지 않고 톤을 통일한다(2026-08-24 요청) */
+.msgbanner.ok{background:var(--pb-light,#E8F0FF) !important;color:var(--pb-deeper,#003D99) !important;
+  border-color:var(--label-bd,#cdddff) !important;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* 중복검사 빈 상태 셀 — 표의 일부라 보더가 이어진다 */
+.cntbl td.dupempty{text-align:center !important;padding:16px 8px !important;}
+
+/* ───────── 모달 ───────── */
+/* 팝업 표의 빈 상태 셀은 가운데 정렬 (화면 CSS 에 text-align:left 가 걸린 경우가 있다) */
+.modal-ov td.reslist-empty{text-align:center !important;}
+
+/* ───────── 폼 ───────── */
+/* --- (6-2) 공통 안내 문구 ---
+   "…없습니다 / …하세요 / …가능합니다" 같은 안내·빈 상태 문구가 화면마다 회색(--txt-mut) 400 이었다.
+   배너(.msgbanner)와 같은 톤으로 통일한다 — 파란 텍스트(--pb-deeper) + 중간 굵기(500).
+   800 처럼 굵게 쓰지 않는다(안내는 강조가 아니라 상태 설명이다). */
+.msgbanner, div.emptynote,.empty-note,.noresult,.noselect, .spitem-empty,.stuitem-empty,.mcEmpty,.shEmpty, .modal-body.msg{color:var(--pb-deeper,#003D99) !important;font-weight:400 !important;}
+
+/* ───────── 탭 ───────── */
+.score-subtabs button{flex:0 0 auto !important; height:auto !important; padding:9px 14px !important;
+  border:0 !important; border-bottom:3px solid transparent !important;
+  border-radius:0 !important; background:#fff !important; box-shadow:none !important;
+  font-size:12px; font-weight:700; color:var(--txt-mut); cursor:pointer; white-space:nowrap;}
+/* 토글이던 시절의 버튼 사이 세로 구분선 — 탭에는 불필요 */
+.score-subtabs button::after{display:none !important;}
+.score-subtabs button:hover{color:var(--pb) !important; background:#fff !important;}
+.score-subtabs button.on{background:#fff !important; color:var(--pb-deeper) !important;
+  border-bottom-color:var(--pb) !important; border-radius:0 !important; box-shadow:none !important;}
+
+/* ───────── 표 ───────── */
+)이 뒤에 오면 이미지가 지워진다. ========================================================================== */ table.notetbl thead th, table.schtbl thead th, table.edutbl thead th, table.board thead th, table.to2 thead th, table.stathisttbl thead th, table.sp-sched thead th, table.matrix thead th, table.schedlist thead th{/* 헤더 셀의 위·아래 보더는 끈다 — 선은 아래 ::before/::after 가 전담한다.
+     보더를 남기면 선 1px 과 겹쳐 2px 로 보인다(2026-08-25 실측). */
+  border-top:0 !important;
+  border-bottom:0 !important;
+  top:0 !important;}
+/* 선은 의사요소로 그린다 — background 로 그렸더니 모달 표에 걸린 `.modal-ov .tblwrap > table > thead > tr > th{background:… !important}
+`(우선순위가 더 높다)에 지워졌다. th 는 position:sticky = 위치 지정 요소라 절대배치 기준이 되어 준다. */ table.schtbl thead th::before, table.edutbl thead th::before, table.board thead th::before, table.to2 thead th::before, table.stathisttbl thead th::before, table.sp-sched thead th::before, table.matrix thead th::before, table.schedlist thead th::before{content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);top:0;height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;z-index:2;}
+/* 본문 첫 행의 위 보더도 끈다 — 병합 보더에서 이 선이 살아 있으면 헤더 아래가 또 1px 늘어난다. */
+table.notetbl > tbody > tr:first-child > *, table.schtbl > tbody > tr:first-child > *, table.edutbl > tbody > tr:first-child > *, table.board > tbody > tr:first-child > *, table.to2 > tbody > tr:first-child > *, table.stathisttbl > tbody > tr:first-child > *, table.sp-sched > tbody > tr:first-child > *, table.matrix > tbody > tr:first-child > *, table.schedlist > tbody > tr:first-child > *{border-top:0 !important;}
+
+/* ───────── 레이아웃 골격 ───────── */
+/* ==========================================================================
+   30. 표 셀 안의 토글 (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   라벨/값 표의 값 칸에 들어가는 .seg 는 폼 컨트롤 높이(24px)를 그대로 쓰다 보니
+   행 높이에 비해 눌러야 할 면이 너무 작았다. 36px(테두리 1+1 + 여백 3+3 + 버튼 28)로 키운다.
+   폭은 값 칸을 꽉 채우던 width:100% 대신 글자 수에 맞춘 가변 폭 — 버튼마다 좌우 14px 여백.
+   ========================================================================== */
+table td .seg:not(.gender), .applyform .row .seg:not(.gender), .tfbody .tfrow .seg:not(.gender){width:auto !important;flex:0 0 auto !important;align-self:center !important;
+  border-radius:3px !important;}
+table td .seg:not(.gender) button, .applyform .row .seg:not(.gender) button, .tfbody .tfrow .seg:not(.gender) button{flex:0 0 auto !important;padding:0 14px !important;}
+
+/* ───────── 폼 ───────── */
+/* ==========================================================================
+   31. 공통 폼 컨트롤 규격 통일 (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   전 화면의 input/select 를 실측해 보니 같은 .finput 인데 글자만 12px·13px·10.5px 로
+   갈린 곳이 있었고(학생중복체크 이름/생년월일, 예비생 등록 폼, 응시료 날짜범위),
+   아예 스타일이 안 걸려 브라우저 기본으로 그려지던 입력도 있었다(학교 검색·주소 검색·일괄 수량).
+   기준값은 .finput = 24px / 11.5px / radius 3px / 1px var(--line).
+   ※ 표 안 인라인 편집 컨트롤(.gridinput/.slotqty/.csel-box/페이징 입력)은 행 높이(29px)에
+     맞춘 22px 규격이라 여기서 제외한다 — 성격이 다른 컴포넌트다.
+   ========================================================================== */
+.finput,.fselect,.ftextarea{font-size:11.5px !important;}
+
+/* ───────── 표 ───────── */
+/* ==========================================================================
+   표 글자 크기 공통 11.5px (2026-08-25 "th 와 td 폰트 크기 동일한지" 확인 요청)
+   --------------------------------------------------------------------------
+   실측 결과 표마다 11px(reslist·notetbl·to2·score·recordtbl…) / 11.5px(grid·infotbl…)
+   / 12px(schtbl·cntbl·histtbl) 세 가지가 섞여 있었고, 한 표 안에서 th 와 td 가
+   어긋난 곳도 있었다 — fbox(라벨칸 11.5 vs 값칸 12), grid(헤더 11.5 vs 빈 행 안내 12),
+   notetbl·reslist(헤더 11 vs 빈 행 안내 11.5).
+   데이터 표의 셀은 모두 11.5px 로 맞춘다. 셀에만 걸어 표 안의 컨트롤(버튼·배지 등
+   자체 크기를 선언한 것)은 그대로 둔다.
+   달력 격자(cal / rcal / calTbl / sp-days)는 요일 라벨과 날짜 숫자 크기를 일부러
+   다르게 쓰는 표라 제외한다.
+   ========================================================================== */
+table:not(.cal):not(.rcal):not(.calTbl):not(.sp-days) > * > tr > th, table:not(.cal):not(.rcal):not(.calTbl):not(.sp-days) > * > tr > td{font-size:11.5px;}
+table.rcal > * > tr > th, table.rcal > * > tr > td{width:14.2857%;}
+/* 체크박스만 든 셀 — 공통 좌우 패딩 8px 이 30px 칸을 넘겨(14+8+8=30 + 보더) 셀이 넘치는 바람에
+   text-overflow:ellipsis 가 체크박스 옆에 말줄임(…)을 찍었다("체크박스 옆에 .. 이건 뭐야",
+   2026-08-25 실측: 칸 30px vs 내용 40px). 이 칸만 좌우 패딩을 빼고 가운데 정렬한다. */
+table > * > tr > th:has(> input[type="checkbox"]:only-child), table > * > tr > td:has(> input[type="checkbox"]:only-child){padding-left:0 !important;padding-right:0 !important;text-align:center;text-overflow:clip;}
+
+/* ───────── 폼 ───────── */
+/* 폼 컨트롤은 font-family 를 상속하지 않아 브라우저 기본(Arial)로 그려졌다 —
+   실측 4,111개(버튼·셀렉트·옵션). 본문과 같은 서체를 쓰도록 상속시킨다. */
+button,input,select,textarea,option,optgroup{font-family:inherit;}
+
+/* ───────── 표 ───────── */
+/* 표의 숫자는 자리폭을 고정해 세로로 줄이 맞게 한다(Pretendard 지원) */
+table > * > tr > th,table > * > tr > td{font-variant-numeric:tabular-nums;}
+
+/* ───────── 버튼 ───────── */
+/* ==========================================================================
+   버튼 글자 크기 통일 (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   실측 결과 버튼 글자가 9 / 10 / 10.5 / 11 / 11.5 / 12 / 12.5 / 13 / 13.33 / 14px
+   10종으로 갈려 있었다. 특히 같은 .btn.g 가 화면에 따라 11px 과 11.5px 로 달랐고,
+   font-size 를 아예 선언하지 않아 브라우저 기본값(13.3333px)으로 그려지던 버튼도 있었다.
+   · 글자 버튼      → 공통 11.5px (.finput / .btn 기준값)
+   · 모달 닫기(✕)   → 13px
+   · 입력창 지우기(✕)→ 11px
+   · 달력 이전/다음  → 13px
+   정렬 화살표(.tharrow, 9px)는 글자가 아니라 표 헤더 안 기호라 제외한다.
+   ========================================================================== */
+.btn,.btn.g,.btn.s,.btn.sm,.btn.xls,.btn.danger,.btn.green, .prtitem,.qbtn,.pgnav,.pgnum,.scorebtn,.advtoggle,.sib-jump{font-size:12px;}
+
+/* ───────── 모달 ───────── */
+.modal-x,.clsmodal-x,.impmodal-x{font-size:13px;}
+
+/* ───────── 버튼 ───────── */
+.delx,.dclear,.dclr,.drangeclear,.clearx,.rst{font-size:11px;}
+
+/* ───────── 표 ───────── */
+/* 표 안 토글/버튼도 같은 11.5px — 정렬 화살표만 예외 */
+table td button,table th button:not(.tharrow){font-size:12px;}
+
+/* ───────── 모달 ───────── */
+/* 위 규칙보다 특이도가 높은 개별 선언이 남아 크기가 되돌아가던 버튼들 — 같은 값으로 못 박는다.
+   (모달 닫기 14px, 달력 이전/다음 14px, 지우기 ✕ 13px, 빠른날짜 10.5px, 페이징 11px 등)
+   ※ 탭 성격의 컨트롤(.ptab / ECP·ELE 탭)과 웰컴 SMS 템플릿은 별도 크기를 유지한다. */
+.modal-x,.clsmodal-x,.impmodal-x,.navb{font-size:13px !important;}
+
+/* ───────── 버튼 ───────── */
+.clearx,.rst,.dclear,.dclr,.drangeclear,.delx{font-size:11px !important;}
+.qbtn,.pgnav,.pgnum,.sib-jump,.stepbtns .btn{font-size:12px !important;}
+
+/* ───────── 하단 작업 탭 ───────── */
+/* 탭 성격 컨트롤도 같은 12px — .ptab/.view-tab 만 12.5px 로 남아 있었다(2026-08-25 요청) */
+.ptab,.view-tab,.wtab,.mtab,.dtab,.stab, .course-tabs button,.score-subtabs button, .pillbar button{font-size:12px !important;}
+
+/* ───────── 버튼 ───────── */
+/* ==========================================================================
+   버튼 안 아이콘 — 선이 소수 픽셀로 떨어져 흐리게 보이던 문제 (2026-08-25)
+   --------------------------------------------------------------------------
+   아이콘은 모두 viewBox="0 0 24 24" 인데 11~13px 로 줄여 쓰다 보니 화면에 실제로
+   칠해지는 선 굵기가 0.83 / 0.92 / 0.98 / 1.08px 처럼 소수가 됐다. 소수 폭 선은
+   픽셀 격자에 앉지 못해 두 픽셀에 반투명하게 나뉘어 흐릿하게(획이 끊긴 듯) 보인다.
+   24 격자가 정수 배율로 떨어지는 조합만 crisp 하다:
+     12px + stroke 2 → 0.5배 · 선 1.00px   ← 기본값으로 채택(버튼 글자 12px 와 짝)
+     16px + stroke 1.5 → 선 1.00px         ← 크게 쓰는 아이콘은 이 조합 유지
+     24px + stroke 1  → 선 1.00px
+   viewBox 가 24 가 아닌 아이콘(예: 8×5 chevron)은 비율이 달라 건드리지 않는다.
+   ========================================================================== */
+/* 2026-08-25 2차 조정: 12px/stroke2(선 1.00px)는 굵기는 맞았지만 12px 안에 담기엔 형태가
+   빡빡해 화살표·원이 뭉개져 보였다. 1배율 픽셀 실측 결과 16px/stroke1.5(선 1.00px)가
+   같은 굵기를 유지하면서 형태가 또렷하다 — 직선 아이콘은 스냅까지 걸면 100% 진한 픽셀. */
+button svg[viewBox="0 0 24 24"]:not([width="24"]), .btn svg[viewBox="0 0 24 24"]:not([width="24"]), [class*="tab"] svg[viewBox="0 0 24 24"]:not([width="24"]){width:16px;height:16px;stroke-width:1.5;}
+button svg[viewBox="0 0 24 24"][width="16"], .btn svg[viewBox="0 0 24 24"][width="16"]{stroke-width:1.5;}
+/* 드롭다운 화살표(8×5 chevron)는 1:1 배율이라 stroke 1 이 정확히 1px 이 된다 */
+button svg[viewBox="0 0 8 5"],.btn svg[viewBox="0 0 8 5"]{stroke-width:1;}
+/* ==========================================================================
+   버튼 아이콘 선명도 — 픽셀 격자 스냅 (2026-08-25 "안 깨져 보이는 방법")
+   --------------------------------------------------------------------------
+   굵기를 1.00px 로 맞춰도 1배율 모니터에서는 선의 "위치"가 문제였다.
+   24 격자를 12px 로 그리면 좌표 3 → 1.5px(1px 선이 픽셀 한 칸에 정확히 앉음)이지만
+   좌표 6 → 3.0px(선이 2.5~3.5 로 걸쳐 두 픽셀에 반씩) 이라 흐려진다.
+   shape-rendering:crispEdges 는 이 선을 픽셀 경계에 스냅한다.
+   1배율 스크린샷 픽셀 실측(잉크 픽셀 중 진한 픽셀 비율):
+     달력 76%→100% · 다운로드 4%→100% · 체크 70%→100% · ✕ 75%→100% · 엑셀 36%→100%
+   다만 원·호가 든 아이콘(검색·초기화·말풍선)은 스냅하면 각져 보이므로 제외한다
+   — path 의 곡선 명령(a/c/q/s)이나 circle/ellipse 를 가진 아이콘이 그 대상.
+   ========================================================================== */
+button svg[viewBox="0 0 24 24"], .btn svg[viewBox="0 0 24 24"], [class*="tab"] svg[viewBox="0 0 24 24"]{shape-rendering:crispEdges;}
+button svg:has(circle),button svg:has(ellipse), button svg:has(path[d*="a"]),button svg:has(path[d*="A"]), button svg:has(path[d*="c"]),button svg:has(path[d*="C"]), button svg:has(path[d*="q"]),button svg:has(path[d*="Q"]), button svg:has(path[d*="s"]),button svg:has(path[d*="S"]), .btn svg:has(circle),.btn svg:has(ellipse), .btn svg:has(path[d*="a"]),.btn svg:has(path[d*="A"]), .btn svg:has(path[d*="c"]),.btn svg:has(path[d*="C"]), .btn svg:has(path[d*="q"]),.btn svg:has(path[d*="Q"]), .btn svg:has(path[d*="s"]),.btn svg:has(path[d*="S"]), [class*="tab"] svg:has(circle),[class*="tab"] svg:has(path[d*="a"]), [class*="tab"] svg:has(path[d*="c"]){shape-rendering:geometricPrecision;}
+
+/* ───────── 폼 ───────── */
+/* 검색영역 버튼줄 — 공통 규칙은 "좌: 세부검색 / 우: 초기화·검색"(space-between)이라
+   세부검색이 없는 화면에서는 초기화가 왼쪽 끝에 혼자 떨어져 있었다.
+   세부검색이 없으면 두 버튼을 오른쪽에 붙인다(2026-08-25 요청). */
+.ftools:not(:has(.advtoggle)){justify-content:flex-end !important;gap:6px !important;}
+/* 검색영역 아래 여백 — 기준 화면(예비생 등록·관리 02-012)은 6px 섹션 밴드만 두고 여백이 0인데, 일부 화면에만 .filters{margin-bottom:10px}
+이 남아 "검색결과" 줄이 10px 더 내려가 있었다 (실측: 02-011/02-012/02-002 간격 0 · 04-001/02-010 간격 10). 기준값 0 으로 맞춘다. */ .filters{margin-bottom:0 !important;}
+.pgsize select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 6px;
+  font-size:11.5px;background:#fff;color:var(--txt);}
+
+/* ───────── 표 ───────── */
+` 가 특이도에서 앞서므로 같은 선택자 형태로 뒤에 다시 선언해야 실제로 덮인다. */ table.fbox::before, table.fbox:not(:has(thead))::before, table.fbox:has(thead)::before{left:0 !important;right:0 !important;}
+
+/* ───────── 폼 ───────── */
+/* ==========================================================================
+   숫자 입력(스피너) — 브라우저 기본 ▲▼ 삼각형을 셀렉트와 같은 v 셰브론으로 (2026-08-25 요청)
+   네이티브 스피너는 모양을 바꿀 수 없어 감추고, 같은 자리에 셰브론 버튼 두 개를 만든다.
+   (셀렉트 화살표를 삼각형 → v 셰브론으로 바꾼 기존 규칙과 같은 방침)
+   ========================================================================== */
+input[type="number"]::-webkit-inner-spin-button, input[type="number"]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
+input[type="number"]{-moz-appearance:textfield;}
+.numspin > input[type="number"]{width:100%;padding-right:20px;}
+
+/* ───────── 레이아웃 골격 ───────── */
+/* ==========================================================================
+   콘텐츠 하단 여백 공통 14px (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   화면마다 흰 박스 안 마지막 블록과 콘텐츠 바닥 사이가 0 / 14 / 28px 로 갈려 있었다.
+   스크롤 컨테이너인 .content 에 하단 패딩을 통일해 어느 화면이든 같은 여백을 남긴다.
+   (표가 자체 스크롤을 갖는 화면은 표 아래 여백을 따로 준다 — .matwrap 참조)
+   ========================================================================== */
+.content{padding-bottom:4px !important;box-sizing:border-box;}
+/* 공통 하단 여백 6 → 4px (2026-08-25 요청) */
+/* --- 마지막 블록 안쪽 하단 여백 8px 통일 (2026-08-25) ---------------------
+   실측 결과 .content 하단 여백은 모든 화면이 동일했지만, 콘텐츠의 "마지막 블록"이
+   무엇이냐에 따라 그 블록 자체의 안쪽 하단 여백이 갈려 있어 표선~회색 배경까지의
+   거리가 화면마다 달라 보였다:
+     요약표 래퍼 10 · 페이징 5(+02-002 는 border-bottom 6) · 액션행 12 ·
+     하단바 8 · 배치 패널 12 · layout2 14 · rbody 14
+   → 마지막 블록 안쪽 8px + .content 4px = 어느 화면이든 표선에서 회색까지 12px. */
+.p4wrap > .stattbl-wrap:last-child, .lpane > .stattbl-wrap:last-child, .content > .stattbl-wrap:last-child{padding-bottom:8px !important;}
+.p4wrap > .paging:last-child, .content > .paging:last-child{padding-bottom:8px !important;border-bottom:0 !important;}
+.p4wrap > .bottombar:last-child, .panel > .bottombar:last-child, .content > .bottombar:last-child{padding-bottom:8px !important;}
+.p4wrap > .actrow:last-child, .content > .actrow:last-child{padding-bottom:8px !important;}
+.p4wrap > .sumrow:last-child, .content > .sumrow:last-child{padding-bottom:8px !important;}
+.content > .layout2:last-child{padding-bottom:8px !important;}
+
+/* ───────── 표 ───────── */
+.tblwrap,.stu-tblwrap,.reslist-wrap,.notetbl-wrap,.stattbl-wrap,.schtbl-wrap,.shTableWrap, .mcTableWrap,.to2-wrap,.eduTblWrap,.matwrap,.imptbl-wrap,.board-wrap,.testinfo-card, .uptbl-wrap,.recordtbl-wrap,.ecgrid{border-radius:0 !important;}
+
+/* ───────── 레이아웃 골격 ───────── */
+/* 좌우 분할 화면 — 공통 하단 여백(14px)을 .content 에 주면 분할 구분선까지 14px 짧아진다.
+   구분선은 바닥까지 내려오고, 여백은 좌·우 pane 안쪽에서 확보하도록 옮긴다(2026-08-25 요청). */
+.content:has(> .split){padding-bottom:0 !important;}
+
+/* ───────── GNB · 상단바 ───────── */
+/* ==========================================================================
+   [공통] 라벨 배지 규격 통일 (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   기준: 입학구분 "MAP 대상"(.agebadge.mapin) · 개인정보 파기 예정일 "(D-147)"(.ddaybadge)
+     → pill(999px) · 높이 16px · 좌우 6px · 10.5px / 700 · 세로 가운데
+   감사 결과 배지류가 25종으로 갈려 있었다(라운드 3 / 12 / 14 / 999px,
+   글자 9 · 9.5 · 10 · 10.5 · 11 · 11.5 · 12px, 패딩 제각각).
+   색(의미)은 각 배지가 쓰던 값을 그대로 두고 모양·크기·글자만 통일한다.
+   ※ 클릭 대상(필터 칩·세그먼트 버튼)은 터치 영역이 필요해 제외 —
+      .pillbar button / .quickpill button / .rfilter-badge / .kcms-badge / .autoinfo .chip
+   ========================================================================== */
+.badge,.mcBadge,.shBadge,.ddbadge,.cntbadge,.tbadge,.tobadge,.fambadge,.waitbadge, .typebadge,.rosterbadge,.impdupbadge,.to-badge,.mapbadge,.statuspill,.kpi-badge, .agebadge,.ddaybadge,.agebadges span,.slot-item .badge,.topnav .tab .tabbadge, .mapquota-badges .qbadge, .sbatt,.shattend,.semban .sbcnt,.col-head .cnt,.stulist-hd .cnt,.ures,.smsQuota,.rslot .st{display:inline-flex !important;align-items:center !important;justify-content:center !important;
+  height:16px !important;padding:0 6px !important;border-radius:999px !important;
+  font-size:10.5px !important;font-weight:500 !important;line-height:1 !important;
+  white-space:nowrap !important;box-sizing:border-box !important;vertical-align:middle;}
+
+/* ───────── 모달 ───────── */
+/* ==========================================================================
+   [공통] 팝업 제목(헤더) ↔ 첫 콘텐츠 여백 12px 통일 (2026-08-25 요청)
+   --------------------------------------------------------------------------
+   실측: .modal-body 를 쓰는 팝업은 margin-top 12px 로 이미 통일돼 있었지만,
+   헤더 바로 아래에 자체 블록이 오는 팝업들은 그 블록의 padding-top 이 제각각이라
+   6 · 10 · 11 · 16px 로 갈렸다(인쇄 미리보기 6 / 탭·학급요약 10 / 필터 11 / 주소검색 16).
+   헤더에서 첫 콘텐츠까지의 거리를 12px 하나로 맞춘다.
+   ========================================================================== */
+.modal-box > .modal-tabs, .modal-box > .addrsearch-row, .modal-box > .schsearch-row, .modal-box > .shfilter, .modal-box > .printtb, .modal-box > .mcFilterRow, .clsmodal > .clsmodal-summary{padding-top:12px !important;}
+
+/* ───────── 토스트 · 피드백 ───────── */
+/* 토스트 상황별 색상 (2026-08-26 요청) — POLY 대시보드 상태 색 규칙과 동일 매핑.
+   기존 다크 패널 형태는 그대로 두고 좌측 액센트 바 + 상태 아이콘 색으로만 상황을 구분한다.
+   success=Poly Blue / warning=황색 / danger=적색 / neutral=회색(badge-info 대체). */
+.kistoast{--kt-accent:#9aa8bd;}
+.kistoast.is-success{--kt-accent:var(--pb);}
+.kistoast.is-warning{--kt-accent:var(--warn);}
+.kistoast.is-danger{--kt-accent:var(--danger);}
+.kistoast.is-neutral{--kt-accent:#9aa8bd;}
+.kistoast::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:var(--kt-accent);}
+.kistoast .kt-body{display:flex;align-items:flex-start;gap:8px;text-align:left;
+  padding:12px 12px 12px 14px;}
+.kistoast .kt-ico{flex:0 0 auto;width:14px;height:14px;margin-top:2px;color:var(--kt-accent);}
+.kistoast .kt-msg{flex:1;min-width:0;line-height:1.6;}
+
+/* ───────── 배지 ───────── */
+/* 섹션 타이틀 옆 상태 배지(.to-badge) — 파랑 채움 + 흰 글자에서 옅은 하늘색 배지로 통일 (2026-08-26 요청).
+   이 배지는 강조가 아니라 "지금 어느 입학구분인지" 알려주는 상태 표시이므로,
+   다른 배지들과 같은 틴트 방식(--pb-light 배경 + --pb-deeper 글자)을 쓴다.
+   크기·라운드·굵기는 2026-08-25 배지 규격 통일 블록이 이미 관장한다(16px pill / 10.5px / 500). */
+.to-badge{color:var(--pb-deeper);}
+.to-badge.now,.to-badge.mar{background:var(--pb-light);color:var(--pb-deeper);}
+
+/* ───────── 토스트 · 피드백 ───────── */
+/* [공통 규칙] 토스트에는 좌측 액센트 바(두꺼운 라인)를 넣지 않는다 (2026-08-26 지정).
+   상황 구분은 **배경색 자체**로 한다 — 의미색을 투명도와 함께 깔고 글자·아이콘은 흰색.
+   success = Poly Blue / warning = 황색 / danger = 적색 / neutral = GNB 네이비, 모두 92% 불투명.
+   (기존 다크 패널 + 3px 좌측 바 방식은 폐기) */
+.kistoast::before{display:none !important;}
+.kistoast{background:color-mix(in srgb, var(--gnb) 92%, transparent);}
+.kistoast.is-neutral{background:color-mix(in srgb, var(--gnb) 92%, transparent);}
 .kistoast.is-success{background:color-mix(in srgb, var(--pb) 92%, transparent);}
 .kistoast.is-warning{background:color-mix(in srgb, var(--warn) 92%, transparent);}
 .kistoast.is-danger{background:color-mix(in srgb, var(--danger) 92%, transparent);}
-/* 왼쪽 두꺼운 액센트 바 금지 · 문구에 이모지 금지 */
+.kistoast .kt-ico{color:#fff;}
+.kistoast .kt-body{padding-left:12px;}
+/* poly-dashboard 컴포넌트 데모(modal-demo.html)의 토스트 특성에 맞춘다 (2026-08-26 확인).
+   ① success 는 초록, info(=neutral)는 파랑 — kit 의 상태색 구분을 따른다.
+   ② 우측에서 슬라이드 인 / 아웃. display 토글로는 트랜지션이 안 걸리므로
+      visibility+opacity+transform 으로 바꾸고 display 는 항상 block 으로 둔다.
+   ③ 위치(우측 하단)·지속(3.5초)은 기존과 동일해 그대로 둔다.
+   ※ kit 은 토스트를 여러 개 쌓지만 이 화면은 단일 토스트 구조라 스택은 적용하지 않았다. */
+.kistoast{display:block !important;opacity:0;visibility:hidden;pointer-events:none;
+  transform:translateX(24px);
+  transition:opacity .22s ease, transform .22s ease, visibility 0s linear .22s;}
+.kistoast.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(0);
+  transition:opacity .22s ease, transform .22s ease, visibility 0s;}
+.kistoast.is-success{background:color-mix(in srgb, #52A863 92%, transparent);}
+.kistoast.is-neutral{background:color-mix(in srgb, var(--pb) 92%, transparent);}
+.kistoast{background:color-mix(in srgb, var(--pb) 92%, transparent);}
+/* 토스트 스택 (2026-08-26) — 우측 하단에 세로로 쌓고, 새 토스트가 아래에 붙는다.
+   개별 토스트의 위치 지정은 컨테이너가 대신하므로 .kistoast 는 static 으로 되돌린다. */
+.kistoast-wrap{position:fixed;right:20px;bottom:20px;z-index:300;
+  display:flex;flex-direction:column;align-items:flex-end;gap:8px;pointer-events:none;}
+.kistoast{position:static !important;right:auto !important;bottom:auto !important;}
 
-/* ============ 12. 진행바 · 지표 ============ */
-.bar{height:6px;background:#E7ECF4;border-radius:var(--r-sm);overflow:hidden;}
-.bar i{display:block;height:100%;border-radius:var(--r-sm);background:var(--pb);}
-.bar i.ok{background:linear-gradient(90deg,color-mix(in srgb,var(--chart-ok) 72%,#fff) 0%,var(--chart-ok) 100%);}
-.bar i.low{background:linear-gradient(90deg,color-mix(in srgb,var(--chart-low) 70%,#fff) 0%,var(--chart-low) 100%);}
-.pcts{font-size:.68em;font-weight:inherit;}   /* % 기호만 작게 */
-
-/* ============ 13. 페이지네이션 ============ */
-.pager{display:flex;align-items:center;justify-content:center;gap:3px;padding:10px 0;}
-.pager button{min-width:22px;height:22px;border:1px solid var(--line);background:#fff;border-radius:var(--r-sm);
-  font-size:var(--fs-sm);color:var(--txt-mut);cursor:pointer;}
-.pager button.on{background:var(--pb);border-color:var(--pb-dark);color:#fff;font-weight:var(--fw-bold);}
-.pager button:disabled{opacity:.4;pointer-events:none;}
-
-/* ============ 14. 빈 상태 · 로딩 ============ */
-.emptynote{padding:28px 0;text-align:center;color:var(--txt-mut);font-size:var(--fs-base);}
-.skel{background:linear-gradient(90deg,#eef1f5 25%,#f7f9fc 37%,#eef1f5 63%);background-size:400% 100%;
-  animation:skel 1.2s ease-in-out infinite;border-radius:var(--r-sm);}
-@keyframes skel{0%{background-position:100% 50%}100%{background-position:0 50%}}
-
-/* ============ 15. 반응형 ============ */
-@media (max-width:1300px){ .kpi-row,.matrix-row,.chart-row{grid-template-columns:1fr;} }
-@media (max-width:1100px){ .filters{flex-wrap:wrap;row-gap:8px;} }
-@media (max-width:1000px){ :root{--h-rail:50px;} .rail .ic{font-size:9px;} }
-
-@media (prefers-reduced-motion: reduce){
-  .kistoast,.skel{transition:none;animation:none;}
-}
+/* ───────── GNB · 상단바 ───────── */
+/* Contact Numbers 위젯 (2026-08-26 요청) — 텍스트 박스 24px / 화살표 버튼 26px 로 2px 어긋나
+   상단선도 1px 밀려 있었다. 둘 다 26px 로 맞추고, 화살표는 문자(▾) 대신
+   화면 공통 chevron 아이콘(stroke 2.2, currentColor)으로 바꾼다. */
+.topnav .contact{height:26px;display:inline-flex;align-items:center;
+  padding:0 12px;box-sizing:border-box;}
+.contact-v{height:26px !important;box-sizing:border-box;border-radius:3px;}
+.contact-v svg{width:11px;height:11px;flex:0 0 auto;}

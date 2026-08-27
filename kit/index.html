@@ -67,18 +67,23 @@
 <div class="sec">
   <div class="wrap">
     <h2>패키지 구성</h2>
-    <p class="sub">6개 파일로 완성되는 디자인 시스템</p>
+    <p class="sub">8개 파일로 완성되는 디자인 시스템 — CSS 는 실제 화면에서 추출한 것이라 결과가 같습니다</p>
     <div class="files">
       <div class="file"><div class="nm">kcms-admissions.md</div><div class="ti">AI Agent 프롬프트</div>
         <p>Cursor · VS Code · Claude Code 등 개발 Agent에 그대로 붙여넣는 UI 규약입니다. 규칙 설명 없이 바로 개발을 시작합니다.</p></div>
       <div class="file"><div class="nm">styles/tokens.css</div><div class="ti">디자인 토큰</div>
         <p>색·간격·타이포·컴포넌트 높이를 CSS 변수로 정의합니다. 값 하드코딩을 막는 단일 출처입니다.</p></div>
       <div class="file"><div class="nm">styles/common.css</div><div class="ti">컴포넌트 스타일</div>
-        <p>레이아웃 골격, 버튼, 배지, 표, 폼, 탭, 모달, 토스트, 진행바, 페이지네이션까지 15개 그룹.</p></div>
+        <p>실제 화면(PCMS-SCR-ET-02-012)의 CSS 에서 컴포넌트 규칙 452개를 <b>원본 순서 그대로</b> 추출했습니다.
+        손으로 다시 쓰지 않았기 때문에 화면과 결과가 어긋나지 않습니다.</p></div>
       <div class="file"><div class="nm">js/utils.js</div><div class="ti">유틸리티</div>
         <p>날짜·숫자·전화 포맷, 개인정보 마스킹, 4색 토스트, 모달 제어, Chart.js 프리셋이 들어 있습니다.</p></div>
       <div class="file"><div class="nm">js/layout.js</div><div class="ti">레이아웃 엔진</div>
         <p>GNB 3뎁스 메뉴, 좌측 레일, 하단 작업 탭, 셀렉트 폭 자동 계산, 모달 드래그를 <code>initLayout()</code> 한 줄로 초기화합니다.</p></div>
+      <div class="file"><div class="nm">js/date-picker.js</div><div class="ti">날짜 선택기</div>
+        <p>공용 달력. 오늘 = 파란 원 채움, 선택일 = 파란 테두리 링. 실제 화면 구현 그대로입니다.</p></div>
+      <div class="file"><div class="nm">js/modal-drag.js</div><div class="ti">모달 드래그</div>
+        <p>모달 헤더를 잡아 옮기는 동작. 화면 밖으로 나가지 않도록 위치를 보정합니다.</p></div>
       <div class="file"><div class="nm">design-system.md</div><div class="ti">디자인 시스템 문서</div>
         <p>색 스케일, 컴포넌트 스펙, 모달 인벤토리(44종), 반응형 브레이크포인트, 의도된 예외까지 담은 레퍼런스입니다.</p></div>
     </div>
@@ -100,6 +105,8 @@
         <p>메뉴에서 화면을 열면 하단에 탭이 쌓이고, 넘치면 좌우 이동 버튼이 나타납니다. KCMS 사용 흐름 그대로입니다.</p></div>
       <div class="feat"><h3>44종 모달 규격</h3>
         <p>공통 26종 · 화면 전용 18종을 한 셸(<code>.modal-box</code>)로 통일했습니다. 드래그 이동과 Esc 닫기가 기본입니다.</p></div>
+      <div class="feat"><h3>화면에서 추출한 CSS</h3>
+        <p>규격을 문서만 보고 다시 구현하지 않습니다. 실제 화면의 CSS 를 그대로 옮겨 왔고, 31개 항목을 실측 대조해 값이 같은 것을 확인했습니다.</p></div>
       <div class="feat"><h3>Vanilla JS · 빌드 불필요</h3>
         <p>Node·번들러 없이 브라우저에서 바로 실행됩니다. 차트가 필요하면 Chart.js CDN 한 줄만 추가합니다.</p></div>
     </div>
@@ -115,7 +122,9 @@
         <pre><code>&lt;link rel="stylesheet" href="styles/tokens.css"&gt;
 &lt;link rel="stylesheet" href="styles/common.css"&gt;
 &lt;script src="js/utils.js"&gt;&lt;/script&gt;
-&lt;script src="js/layout.js"&gt;&lt;/script&gt;</code></pre></div>
+&lt;script src="js/layout.js"&gt;&lt;/script&gt;
+&lt;script src="js/date-picker.js"&gt;&lt;/script&gt;
+&lt;script src="js/modal-drag.js"&gt;&lt;/script&gt;</code></pre></div>
       <div class="step"><div class="n">2</div>
         <pre><code>initLayout({
   menu: MENU, current: '입학관리',

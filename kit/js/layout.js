@@ -58,7 +58,12 @@ function snapGrid(el){
   [].forEach.call(tabs,function(t){ t.style.width=''; });
   var w=[].map.call(tabs,function(t){ return Math.round(t.getBoundingClientRect().width); });
   [].forEach.call(tabs,function(t,i){ t.style.width=w[i]+'px'; t.style.boxSizing='border-box'; });
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ snapGrid(el); });
+  /* 웹폰트가 늦게 오면 글자 폭이 바뀌어 격자가 다시 틀어진다 — 로드 후 한 번만 재계산한다.
+     (조건 없이 다시 부르면 fonts.ready 가 이미 resolve 된 상태라 무한 재귀가 된다) */
+  if(!el.__snapped && document.fonts && document.fonts.ready){
+    el.__snapped = true;
+    document.fonts.ready.then(function(){ snapGrid(el); });
+  }
 }
 
 /* ---------- 좌측 레일 ---------- */
