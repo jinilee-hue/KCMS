@@ -60,6 +60,20 @@
 
   /* 예시 — 카드 안이므로 테두리 없이 옅은 배경 */
   .demo{position:relative;padding:0;margin:0 0 10px;}
+  /* 변형이 여러 개인 컴포넌트(모달·토스트)는 타일로 늘어놓는다 */
+  .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px;margin:0 0 6px;}
+  .tile{border:1px solid var(--line-soft);border-radius:8px;padding:14px;background:#fff;
+    display:flex;flex-direction:column;gap:9px;}
+  .tile-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
+  .tile-hd b{font-size:12px;font-weight:700;color:var(--txt);letter-spacing:-.2px;}
+  .tile-ic{flex:0 0 26px;width:26px;height:26px;border-radius:7px;background:var(--pb-light);color:var(--pb);
+    display:inline-flex;align-items:center;justify-content:center;}
+  .tile-ic.warn{background:#FEF3E6;color:var(--warn);}
+  .tile-ic.danger{background:#FDECEC;color:var(--danger);}
+  .tile-ic.neutral{background:#EEF1F6;color:var(--txt-mut);}
+  .tile p{margin:0;font-size:11.5px;line-height:1.65;color:var(--txt-mut);flex:1;}
+  .tile p code{font-size:10.5px;}
+  .tile .btn{align-self:stretch;justify-content:center;}
   .demo[data-cls]::after{content:attr(data-cls);display:block;margin-top:8px;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#a7b3c4;}
   /* 배경이 필요한 예시만 옅은 판을 깐다 — 흰 컴포넌트가 흰 카드에 묻힐 때 */
@@ -448,39 +462,45 @@
 </div></div></section>
 
 <section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
-<h4 class="sub">기본 · 헤더 40PX · 드래그 이동</h4>
-<div data-cls=".modal-ov > .modal-box" class="demo row">
-  <button class="btn" onclick="KCMS.openModal('demoModal')">모달 열기</button>
-  <button class="btn g" onclick="KCMS.openModal('demoModal')">확인 모달</button>
+<h4 class="sub">공통 모달 · 화면들이 함께 불러 쓰는 컴포넌트</h4>
+<div class="tiles">
+<div class="tile"><div class="tile-hd"><b>담당자 찾기</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span></div><p>직원 명부 검색 후 선택 — 여러 화면의 담당자·상담교사 입력에서 호출합니다. <code>staff-pick-modal.js</code></p><button class="btn" onclick="openStaffPickModal({onApply:function(s){KCMS.toast(s.name+' 선택됨','success');}})">담당자 찾기 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>상담이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span></div><p>학생별 상담 기록 목록·등록·상세. <code>memo-modal.js</code></p><button class="btn g" onclick="openMemoModal({studentNo:'06100000',name:'김민준',ename:'Kim Minjun',classNm:'ECP6-A',motherPhone:'010-2000-3000',studentType:'예비생',records:[]})">상담이력 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>SMS 발송</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><p>수신자 목록·문자 작성·잔여 건수. <code>sms-modal.js</code></p><button class="btn g" onclick="openSmsModal({senderOptions:[{value:'031-000-7800',label:'분당캠퍼스 (031-000-7800)'}],remainingSms:299984,remainingLms:913169,recipients:[{no:'06100000',name:'김민준',studentNo:'06100000',phone:'010-2000-3000',parentPhone:'010-2000-3000'}]})">SMS 발송 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>SMS 발송이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><p>학생에게 보낸 문자 이력 조회. <code>sms-history-modal.js</code></p><button class="btn g" onclick="openSmsHistoryModal({student:{name:'김민준',ename:'Kim Minjun',studentNo:'06100000',phone:'010-2000-3000'},records:[]})">발송이력 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg></span></div><p>성적표는 모달이 아니라 <b>새 창</b>으로 엽니다. <code>map-report-modal.js</code></p><button class="btn g" onclick="openMapReportCard({studentName:'김민준',subjects:[]})">성적표 열기</button></div>
 </div>
 
-<h4 class="sub">크기 · MODAL-BOX.SM / .LG</h4>
-<div class="demo flush">
-  <table class="type-spec">
-    <tbody>
-      <tr><td class="k">작게<span class="cls">.modal-box.sm</span></td><td><span style="display:inline-block;width:105px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
-      <tr><td class="k">기본<span class="cls">.modal-box</span></td><td><span style="display:inline-block;width:160px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
-      <tr><td class="k">넓게<span class="cls">.modal-box.lg</span></td><td><span style="display:inline-block;width:225px;height:34px;border:1px solid var(--line);border-radius:3px;background:#fff;"></span></td></tr>
-    </tbody>
-  </table>
+<h4 class="sub">크기 · 실제 화면에서 쓰는 네 가지</h4>
+<div class="tiles">
+<div class="tile"><div class="tile-hd"><b>안내 · 최소 320PX</b><span class="tile-ic neutral"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span></div><p>짧은 알림 한 줄 + [확인]. <code>width:280px</code> 를 줘도 <code>min-width:320px</code> 이 이깁니다 — 실제 화면도 320px.</p><button class="btn g" onclick="KCMS.openModal('alertModal')">안내 모달 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>입력 · 480PX</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4v16h16v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg></span></div><p>메모·간단 등록 폼. <code>style="width:480px"</code></p><button class="btn g" onclick="KCMS.openModal('formModal')">입력 모달 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>기본 · 640PX</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21v-2a5 5 0 0 1 5-5h6a5 5 0 0 1 5 5v2"/></svg></span></div><p>라벨-값 표가 들어가는 표준 폼. <code>.modal-box</code></p><button class="btn" onclick="KCMS.openModal('demoModal')">기본 모달 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>넓게 · 900PX</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M9 9v11"/></svg></span></div><p>검색줄 + 목록 표. <code>.modal-box.wide</code></p><button class="btn g" onclick="KCMS.openModal('wideModal')">넓은 모달 열기</button></div>
 </div>
 
-<h4 class="sub">하단 버튼 · MODAL-FOOT</h4>
-<div class="demo row" data-cls=".modal-foot — 주요 버튼이 오른쪽 끝">
+<h4 class="sub">구성 · 헤더 40PX · 본문 흰 박스 · 하단 오른쪽 정렬</h4>
+<div class="demo row" data-cls=".modal-hd / .modal-body / .modal-foot">
   <span style="display:flex;gap:5px;padding:8px 10px;background:#F7F9FC;border:1px solid var(--line-soft);border-radius:3px;">
-    <button class="btn g">취소</button><button class="btn">저장</button>
+    <button class="btn g">닫기</button><button class="btn">저장</button>
   </span>
 </div>
 </div></div></section>
 
 <section id="toast"><div class="card"><div class="card-header"><div class="card-title">토스트</div></div><div class="card-body">
-<div data-cls=".kistoast" class="demo row">
-  <button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success</button>
-  <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
-  <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
-  <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
-  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
-  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
+<h4 class="sub">4색 · 배경은 의미색 70% · 최대 4개까지 쌓임</h4>
+<div class="tiles">
+<div class="tile"><div class="tile-hd"><b>Success</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></div><p>저장 · 완료 · 등록 성공에 씁니다.</p><button class="btn" onclick="KCMS.toast('저장되었습니다.','success')">success 토스트</button></div>
+<div class="tile"><div class="tile-hd"><b>Warning</b><span class="tile-ic warn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 16H3z"/><path d="M12 9v4M12 16h.01"/></svg></span></div><p>필수값 누락 · 확인 요청 등 주의 상황.</p><button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning 토스트</button></div>
+<div class="tile"><div class="tile-hd"><b>Danger</b><span class="tile-ic danger"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/></svg></span></div><p>실패 · 오류 · 불가 안내.</p><button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger 토스트</button></div>
+<div class="tile"><div class="tile-hd"><b>Neutral</b><span class="tile-ic neutral"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></span></div><p>단순 안내. <b>타입을 생략하면 기본값</b>입니다.</p><button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">neutral 토스트</button></div>
+</div>
+
+<h4 class="sub">문구로 타입 추정 · 타입 생략 시</h4>
+<div class="demo row" data-cls="KCMS.toast(msg) — 되었습니다→success · 주세요→warning · 수 없→danger">
+  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">저장되었습니다.</button>
+  <button class="btn g" onclick="KCMS.toast('학생을 선택해 주세요.')">학생을 선택해 주세요.</button>
+  <button class="btn g" onclick="KCMS.toast('삭제할 수 없습니다.')">삭제할 수 없습니다.</button>
 </div>
 </div></div></section>
 
@@ -730,6 +750,66 @@
 </main>
 </div>
 
+
+<div class="modal-ov" id="alertModal" role="dialog" aria-modal="true">
+  <div class="modal-box" style="width:280px;">
+    <div class="modal-hd">엑셀 다운로드<button class="modal-x" onclick="KCMS.closeModal('alertModal')">✕</button></div>
+    <div class="modal-body" style="text-align:center;padding:20px 14px;">엑셀 변환할 데이터가 없습니다.</div>
+    <div class="modal-foot"><button class="btn" onclick="KCMS.closeModal('alertModal')">확인</button></div>
+  </div>
+</div>
+
+<div class="modal-ov" id="formModal" role="dialog" aria-modal="true">
+  <div class="modal-box" style="width:480px;">
+    <div class="modal-hd">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      메모<button class="modal-x" onclick="KCMS.closeModal('formModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="notelbl">메모등록</div>
+      <textarea class="notememo-ta" rows="6" placeholder="내용을 입력하세요."></textarea>
+    </div>
+    <div class="modal-foot">
+      <button class="btn g" onclick="KCMS.closeModal('formModal')">닫기</button>
+      <button class="btn" onclick="KCMS.closeModal('formModal');KCMS.toast('저장되었습니다.','success')">저장</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-ov" id="wideModal" role="dialog" aria-modal="true">
+  <div class="modal-box wide">
+    <div class="modal-hd">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      학생 찾기<button class="modal-x" onclick="KCMS.closeModal('wideModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="filters" style="margin:0 0 8px;">
+        <table class="fbox"><tbody>
+          <tr>
+            <td class="flabel">학생 이름</td><td class="hascell"><input class="finput" placeholder="학생 이름"></td>
+            <td class="flabel">현재 레벨</td><td class="hascell"><select><option>전체</option><option>ECP5</option><option>ECP6</option></select></td>
+            <td class="hascell" style="text-align:right;border:0;"><button class="btn">검색</button></td>
+          </tr>
+        </tbody></table>
+      </div>
+      <div class="tblwrap">
+        <table class="grid">
+          <thead><tr><th style="width:34px;"></th><th>학번</th><th>이름</th><th>현재 레벨</th><th>학부모 연락처</th></tr></thead>
+          <tbody>
+            <tr class="sel"><td><input type="radio" name="wm" checked></td><td>06100000</td><td>김민준</td><td>ECP5</td><td>010-2000-3000</td></tr>
+            <tr><td><input type="radio" name="wm"></td><td>06100037</td><td>이서연 (Lee Seoyeon)</td><td>ECP5</td><td>010-2007-3011</td></tr>
+            <tr><td><input type="radio" name="wm"></td><td>06100074</td><td>박도윤 (Park Doyoon)</td><td>ECP6</td><td>010-2014-3022</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn g" onclick="KCMS.closeModal('wideModal')">닫기</button>
+      <button class="btn" onclick="KCMS.closeModal('wideModal');KCMS.toast('선택했습니다.','success')">적용</button>
+    </div>
+  </div>
+</div>
+
 <div class="modal-ov" id="demoModal" role="dialog" aria-modal="true">
   <div class="modal-box">
     <div class="modal-hd">
@@ -763,7 +843,12 @@
     </div>
   </div>
 </div>
-<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script><script>
+<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script>
+<script src="js/staff-pick-modal.js"></script>
+<script src="js/memo-modal.js"></script>
+<script src="js/sms-modal.js"></script>
+<script src="js/sms-history-modal.js"></script>
+<script src="js/map-report-modal.js"></script><script>
   /* 실제 화면과 같은 11개 1뎁스 메뉴 — js/menu.sample.js 에서 불러온다 */
   var MENU=PCMS_GNB_MENU;
   var RAIL=PCMS_LEFT_RAIL_ITEMS;

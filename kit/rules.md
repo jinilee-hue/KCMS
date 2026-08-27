@@ -127,6 +127,28 @@
 파랑은 `#0066FF` 한 가지만 씁니다. 오늘과 선택일의 구분은 색이 아니라 **형태**(채움 ↔ 링)입니다.
 표기는 하이픈 `2026-08-27` — 점 표기는 쓰지 않습니다(`KCMS.date('20260827')`).
 
+### 모달
+
+| 크기 | 값 | 쓰는 곳 |
+|---|---|---|
+| 안내 | `width:280px` → 실제 **320px**(`min-width`) | 짧은 알림 + [확인] |
+| 입력 | `width:480px` | 메모·간단 등록 폼 |
+| 기본 | `.modal-box` **640px** | 라벨-값 표가 들어가는 표준 폼 |
+| 넓게 | `.modal-box.wide` **900px** | 검색줄 + 목록 표 |
+
+헤더 40px · 본문은 흰 박스(테두리 없음) · 하단 버튼은 오른쪽 정렬(주요 버튼이 맨 오른쪽) · 드래그 이동 · `Esc`/오버레이 클릭으로 닫힘.
+`.modal-box.sm` `.modal-box.lg` 같은 임의 규격은 쓰지 않습니다 — 실제 화면에 없는 값입니다.
+
+**공통 모달**은 화면마다 새로 만들지 않고 아래 스크립트를 불러 함수로 엽니다.
+
+| 모달 | 파일 | 여는 함수 |
+|---|---|---|
+| 담당자 찾기 | `staff-pick-modal.js` | `openStaffPickModal({onApply})` |
+| 상담이력 | `memo-modal.js` | `openMemoModal({studentNo, name, records, …})` |
+| SMS 발송 | `sms-modal.js` | `openSmsModal({senderOptions, recipients, …})` |
+| SMS 발송이력 | `sms-history-modal.js` | `openSmsHistoryModal({student, records})` |
+| MAP 성적표 | `map-report-modal.js` | `openMapReportCard({studentName, subjects, …})` — 모달이 아니라 **새 창** |
+
 ### 토스트
 
 배경은 의미색을 92% 불투명으로 깔고(color-mix) 글자·아이콘은 흰색. 왼쪽 액센트 바 없음, 문구에 이모지 없음. 최대 4개까지 쌓입니다.

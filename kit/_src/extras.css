@@ -95,9 +95,6 @@
 .period-tab + .period-tab{border-left:1px solid var(--line);}
 .period-tab.on{background:var(--pb);color:#fff;font-weight:500;}
 
-/* 모달 크기 변형 */
-.modal-box.sm{width:420px;}
-.modal-box.lg{width:900px;}
 .modal-foot.split{justify-content:space-between;}
 
 /* 독립형 브레드크럼 */
