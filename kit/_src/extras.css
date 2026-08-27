@@ -158,3 +158,6 @@
 .ctree-ft{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;
   border-top:1px solid var(--line-soft);font-size:11px;color:var(--txt-mut);}
 .ctree-ft b{color:var(--pb-deeper);font-weight:700;}
+
+/* 버튼 최소 폭 — 짧은 라벨도 한 단으로 (표 안 .btn.sm 제외) */
+.btn:not(.sm){min-width:56px;justify-content:center;}
