@@ -12,21 +12,9 @@
   /* ── 가이드 문서 셸 ─────────────────────────────────────────────
      컴포넌트 하나 = 카드 하나. 카드 안에서 소제목은 조용한 라벨로 두고,
      예시는 테두리 없이 옅은 배경 위에 올려 테두리가 겹치지 않게 한다. */
-  html,body{margin:0;padding:0;height:100%;background:#F4F6F9;color:var(--txt);}
-  .app{height:100vh;}
-  .content{background:#F4F6F9;padding:0;display:block;overflow-y:auto;overflow-x:hidden;}
-  .guide{display:flex;align-items:flex-start;min-height:100%;}
-
-  .guide .nav{position:sticky;top:0;flex:0 0 200px;align-self:flex-start;max-height:calc(100vh - 124px);overflow-y:auto;
-    background:#fff;border-right:1px solid var(--line-soft);padding:18px 0 24px;}
-  .guide .nav-brand{color:var(--txt);}
-  .guide .nav-sub{color:var(--txt-mut);}
-  .guide .nav-group{color:#9aa8bd;}
-  .guide .nav a{color:var(--txt-mut);}
-  .guide .nav a:hover{background:var(--pb-a08);color:var(--pb);}
-  .guide .nav a.on{background:var(--pb-light);color:var(--pb);border-left-color:var(--pb);font-weight:700;}
-  .guide .nav-foot{border-top-color:var(--line-soft);}
-  .guide .nav-foot a{color:var(--pb);}
+  html,body{margin:0;padding:0;background:#F4F6F9;color:var(--txt);}
+  .wrap{display:flex;align-items:flex-start;min-height:100vh;}
+  .nav{position:sticky;top:0;flex:0 0 220px;height:100vh;overflow-y:auto;background:var(--gnb);padding:22px 0 28px;}
   .nav-brand{padding:0 20px;font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.3;}
   .nav-sub{padding:4px 20px 18px;font-size:11px;color:#93a4bd;}
   .nav-group{padding:16px 20px 6px;font-size:10px;font-weight:800;color:#8fa2bd;letter-spacing:1px;}
@@ -67,13 +55,16 @@
   .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.8;margin:10px 0 0;}
 
   /* 예시 — 카드 안이므로 테두리 없이 옅은 배경 */
-  .demo{position:relative;background:#FAFBFD;border:1px solid #EDF1F6;border-radius:8px;padding:16px;margin:0 0 4px;}
-  .demo[data-cls]::after{content:attr(data-cls);position:absolute;top:7px;right:10px;
+  .demo{position:relative;padding:0;margin:0 0 4px;}
+  .demo[data-cls]::after{content:attr(data-cls);display:block;margin-top:8px;
     font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10px;color:#a7b3c4;}
+  /* 배경이 필요한 예시만 옅은 판을 깐다 — 흰 컴포넌트가 흰 카드에 묻힐 때 */
+  .demo.plate{background:#FAFBFD;border:1px solid #EDF1F6;border-radius:8px;padding:16px;}
   .demo.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
   .demo.col{display:flex;flex-direction:column;gap:10px;align-items:stretch;}
   .demo.dark{background:var(--gnb);border-color:var(--gnb);padding:0;overflow:hidden;}
   .demo.flush{padding:0;overflow:hidden;background:#fff;}
+  .demo + h4.sub{margin-top:30px;}
 
   table.spec,table.type-spec{width:100%;border-collapse:collapse;}
   table.type-spec th{background:#F4F7FD;color:var(--gnb);font-weight:700;font-size:11.5px;text-align:left;
@@ -104,26 +95,7 @@
 </style>
 </head>
 <body>
-
-<div class="app">
-  <!-- 실제 화면과 같은 셸 안에서 컴포넌트를 봅니다 -->
-  <div class="topnav">
-    <div class="brand">PCMS</div>
-    <div class="tabs" id="tabs"></div>
-  </div>
-  <div class="lower">
-    <div class="rail" id="rail"></div>
-    <div class="main">
-      <div class="bcbar">
-        <span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
-        디자인 Kit &rsaquo; <b>컴포넌트 가이드</b>
-        <span class="meta">기준 화면 PCMS-SCR-ET-02-012</span>
-        <span class="bctools">
-          <button class="bcic star" title="즐겨찾기" aria-label="즐겨찾기"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg></button>
-        </span>
-      </div>
-      <div class="content" id="guideContent">
-        <div class="guide">
+<div class="wrap">
 <aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
 <div class="nav-group">기초</div>
 <a href="#start">시작하기</a>
@@ -547,6 +519,8 @@
 <h2 class="grp">입력</h2>
 <section id="tsel"><div class="card"><div class="card-header"><div class="card-title">트리 셀렉트</div></div><div class="card-body">
 
+<h4 class="sub">단일 선택 — .tsel</h4>
+
 <div class="chips"><b>과정 › 레벨 › 반</b><b>잎 노드만 선택</b><b>상위 노드 <i>펼침·접힘만</i></b></div>
 
 <div class="demo row" data-cls=".tsel">
@@ -588,6 +562,43 @@
 &lt;/span&gt;
 
 KCMS.initTreeSelect();   // initLayout() 안에서 자동 호출됨</code></pre>
+
+<h4 class="sub">다중 선택 — 체크박스 트리 .ctree</h4>
+
+<div class="chips"><b>여러 개를 한 번에</b><b>묶음 <i>과정군 → 레벨</i></b><b>검색 · 전체펼치기 · 전체해제</b><b>상위 체크 <i>하위 전체</i></b><b>일부만 체크 <i>중간 상태</i></b><b class="ok">전부 체크 = 전체</b></div>
+
+<div class="demo row" data-cls=".ctree">
+  <span class="flabel">현재 레벨</span>
+  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
+    <ul>
+      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
+      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
+      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
+      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
+      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
+      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
+      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
+      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
+      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
+      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
+    </ul>
+  </span>
+  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
+</div>
+
+<div class="chips"><b>박스 <i>24px · .csel-box 와 동일</i></b><b>목록 <i>268px · fixed</i></b><b>행 <i>26px</i></b><b>값 <i>hidden input + change</i></b><b class="no">단일 선택에 쓰지 않기</b></div>
+
+<pre><code>&lt;span class="ctree" data-ctree data-all data-placeholder="전체"&gt;
+  &lt;ul&gt;
+    &lt;li data-label="ECP"&gt;&lt;ul&gt;&lt;li&gt;ECP5&lt;/li&gt;&lt;li&gt;ECP6&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/span&gt;
+
+KCMS.initCTree();                 // initLayout() 안에서 자동 호출됨
+el.__ctree.values();              // 선택 배열 · 전체면 null
+el.__ctree.setAll(); el.__ctree.reset();</code></pre>
+
+<div class="chips"><b>쓰는 곳 <i>진학생 관리 — 현재 레벨 · 진학 레벨</i></b><b>레벨 <i>40종</i></b></div>
 
 </div></div></section>
 
@@ -871,11 +882,6 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
 </div></div></section>
 
 </main>
-        </div>
-      </div>
-      <div class="worktabs" id="worktabs"></div>
-    </div>
-  </div>
 </div>
 
 <div class="modal-ov" id="demoModal" role="dialog" aria-modal="true">
@@ -910,13 +916,13 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
       <button class="btn">중복 확인</button>
     </div>
   </div>
-</div><script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script><script>
+</div>
+<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script><script>
   /* 실제 화면과 같은 11개 1뎁스 메뉴 — js/menu.sample.js 에서 불러온다 */
   var MENU=PCMS_GNB_MENU;
   var RAIL=PCMS_LEFT_RAIL_ITEMS;
   initLayout({menu:MENU, current:'입학관리', badges:PCMS_GNB_TAB_BADGES,
-              railItems:RAIL, railCurrent:'HOME',
-              openTabs:[{key:'kit', label:'디자인 Kit — 컴포넌트 가이드', cur:true, closable:false}]});
+              railItems:RAIL, railCurrent:'HOME'});
   document.addEventListener('change',function(e){
     if(e.target.closest && e.target.closest('.tsel'))
       document.getElementById('tselOut').textContent='선택값 '+e.target.value;
@@ -934,18 +940,20 @@ KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도
     if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });
   KCMS.bindModals();   /* 오버레이 클릭·Esc·✕ 로 닫히도록 일괄 연결 */
+
+  /* 체크박스 트리 — 선택 결과를 옆에 보여 준다 */
+  var ct=document.querySelector('.ctree[data-ctree]');
+  if(ct) ct.addEventListener('change', function(){
+    var v=ct.__ctree.values();
+    document.getElementById('ctreeOut').textContent='선택값 — '+(v?v.join(', '):'전체');
+  });
 </script><script>
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  function spy(){ var top=document.getElementById('guideContent').getBoundingClientRect().top+130, cur=0;
-    secs.forEach(function(s,i){ if(s && s.getBoundingClientRect().top<=top) cur=i; });
+  function spy(){ var y=window.scrollY+130, cur=0;
+    secs.forEach(function(s,i){ if(s && s.offsetTop<=y) cur=i; });
     links.forEach(function(a,i){ a.classList.toggle('on', i===cur); }); }
-  var sc=document.getElementById('guideContent');
-  sc.addEventListener('scroll', spy); spy();
-  links.forEach(function(a,i){ a.addEventListener('click', function(e){ e.preventDefault();
-    var t=secs[i]; if(!t) return;
-    sc.scrollTo({top: sc.scrollTop + t.getBoundingClientRect().top - sc.getBoundingClientRect().top - 12, behavior:'smooth'});
-  }); });
+  window.addEventListener('scroll', spy); spy();
 </script>
 </body>
 </html>
