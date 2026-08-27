@@ -184,3 +184,6 @@
 .icon-btn{width:24px;height:24px;}
 .ibtn{width:24px;height:24px;}
 .iwrap .ibtn,.drange .ibtn,.dwrap .ibtn,table.grid .iwrap .ibtn{width:19px;height:18px !important;}
+
+/* 모달 안 검색 줄도 표와 같은 좌우 기준선(27px)에 맞춘다 — 실제 공통 모달과 동일 */
+.modal-ov .filters{padding-left:0 !important;padding-right:0 !important;}
