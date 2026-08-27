@@ -456,7 +456,12 @@ function buildCTree(host, groups, opt){
   /* 조상이 overflow 로 자르므로 fixed + JS 위치 계산 (커스텀 셀렉트와 같은 방식) */
   function place(){
     var r=box.getBoundingClientRect();
-    menu.style.left=Math.round(Math.min(r.left, window.innerWidth-menu.offsetWidth-8))+'px';
+    /* 목록은 박스보다 좁아 보이지 않게 하고(최소 박스 너비),
+       오른쪽에 여유가 없으면 박스 오른쪽 끝에 맞춰 편다 — 그리드가 어긋나 보이지 않도록. */
+    menu.style.width=Math.round(Math.max(240, r.width))+'px';
+    var mw=menu.offsetWidth, left=r.left;
+    if(left+mw > window.innerWidth-8) left=r.right-mw;
+    menu.style.left=Math.round(Math.max(8,left))+'px';
     menu.style.top=Math.round(r.bottom+2)+'px';
     var below=window.innerHeight-r.bottom-8;
     list.style.maxHeight='';

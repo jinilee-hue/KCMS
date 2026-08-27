@@ -1585,7 +1585,7 @@ tr.vacant td{background:#F7F9FC;color:#c4ccd8;}
 .ctree.open .ctree-box,.ctree-box:focus{border-color:var(--pb);outline:none;}
 .ctree-box.has{color:var(--pb-deeper);font-weight:700;}
 
-.ctree-menu{display:none;position:fixed;z-index:200;width:268px;background:#fff;border:1px solid var(--line);
+.ctree-menu{display:none;position:fixed;z-index:200;min-width:240px;background:#fff;border:1px solid var(--line);
   border-radius:3px;box-shadow:0 6px 16px rgba(0,40,100,.18);}
 .ctree.open .ctree-menu{display:block;}
 
