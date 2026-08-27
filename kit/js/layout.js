@@ -163,8 +163,11 @@ function makeDraggable(box,handle){
    네이티브 <select> 의 드롭다운은 브라우저가 그려서 라운드·정렬을 맞출 수 없다.
    원본 select 는 DOM 에 남겨 두고(값 읽기·change 핸들러가 그대로 동작) 표시용 위젯을 덧씌운다.
    메뉴는 position:fixed 로 띄운다 — 조상(.content)이 overflow 로 자르기 때문. */
+/* 셀렉트의 기본은 커스텀 셀렉트다 — 화면 안의 <select> 를 모두 바꾼다.
+   브라우저 기본 목록을 그대로 써야 하면 select 에 data-nocsel 을 준다.
+   (다중 선택 select[multiple] 은 대상이 아니다 — 계층 다중 선택은 .ctree 를 쓴다) */
 function initCsel(root){
-  (root||document).querySelectorAll('select[data-csel]').forEach(function(sel){
+  (root||document).querySelectorAll('select:not([data-nocsel]):not([multiple])').forEach(function(sel){
     if(sel.__csel) return; sel.__csel=true;
     var wrap=document.createElement('span'); wrap.className='csel';
     var box=document.createElement('div'); box.className='csel-box'; box.tabIndex=0;
