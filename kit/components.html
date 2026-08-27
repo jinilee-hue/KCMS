@@ -256,12 +256,15 @@
   <button class="btn g" onclick="KCMS.toast('필수값을 입력해 주세요.','warning')">warning</button>
   <button class="btn g" onclick="KCMS.toast('처리할 수 없습니다.','danger')">danger</button>
   <button class="btn g" onclick="KCMS.toast('목록을 새로 불러왔습니다.','neutral')">neutral</button>
-  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 자동 추정</button>
+  <button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">타입 생략 → neutral</button>
+  <button class="btn g" onclick="KCMS.toast('저장되었습니다.')">타입 생략 → success 추정</button>
 </div>
 <div class="rule">
   배경은 의미색을 <b>92% 불투명</b>으로 깔고(<code>color-mix</code>) 글자·아이콘은 흰색입니다.
   왼쪽 두꺼운 액센트 바를 쓰지 않고, <b>문구에 이모지를 넣지 않습니다.</b> 최대 4개까지 쌓입니다.
-  타입을 생략하면 문구로 추정합니다(<code>되었습니다</code> → success, <code>주세요</code> → warning).
+  <b>타입을 생략하면 기본은 neutral</b> 이고, 문구에 뚜렷한 단서가 있을 때만 그쪽으로 추정합니다 —
+  <code>되었습니다·완료·성공·저장했</code> → success, <code>주세요·하세요·필수·확인해</code> → warning,
+  <code>수 없·실패·오류·불가</code> → danger. 어디에도 걸리지 않으면 neutral 입니다.
 </div>
 
 <h2 id="date">날짜 선택</h2>

@@ -37,7 +37,9 @@ var KT_ICONS={
   danger:'<circle cx="12" cy="12" r="9"/><path d="M15 9l-6 6M9 9l6 6"/>',
   neutral:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/>'
 };
-/** 타입을 생략하면 문구로 추정한다 — 기존 호출부를 그대로 두기 위한 규칙 */
+/** 타입을 생략하면 기본은 neutral.
+    문구에 뚜렷한 단서가 있을 때만 success/warning/danger 로 올린다
+    (기존 호출부를 타입 인자 없이 그대로 두기 위한 규칙). */
 function guessType(msg){
   if(/수 없|없습니다|없는|않습니다|않은|불가|실패|오류|잘못/.test(msg)) return 'danger';
   if(/주세요|하세요|필수|입력해|선택해|필요합니다|확인해/.test(msg))     return 'warning';
