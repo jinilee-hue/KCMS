@@ -174,3 +174,6 @@ table.grid .csel-box, .csel.h22 .csel-box,
 .spmJump input{height:24px !important;}
 .csel.h22 .csel-box{line-height:22px !important;}
 .pgnav, .pgnum{min-width:24px !important;}
+
+/* 하위 탭(알약)도 24px — 다른 컨트롤과 같은 높이로 (2026-08-28 요청) */
+.quickpill button{height:24px !important;}

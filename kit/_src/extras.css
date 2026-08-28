@@ -206,3 +206,6 @@ table.grid .csel-box, .csel.h22 .csel-box,
 
 /* 날짜 필드 — 모달마다 이름만 다르던 것을 공통 클래스로 함께 잡는다(구조는 동일) */
 .mcIwrap input:not([type=date]), .shIwrap input:not([type=date]){height:24px;}
+
+/* 하위 탭(알약)도 24px — 다른 컨트롤과 같은 높이로 (2026-08-28 요청) */
+.quickpill button{height:24px !important;}
