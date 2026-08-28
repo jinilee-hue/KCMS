@@ -233,3 +233,77 @@ table.grid .csel-box, .csel.h22 .csel-box,
 .modal-ov .imptbl-wrap::-webkit-scrollbar-track, .modal-ov .schtbl-wrap::-webkit-scrollbar-track,
 .modal-ov .stu-tblwrap::-webkit-scrollbar-track, .modal-ov .shTableWrap::-webkit-scrollbar-track,
 .modal-ov .mcTableWrap::-webkit-scrollbar-track, .modal-ov .eduTblWrap::-webkit-scrollbar-track{background:transparent;}
+
+/* ==========================================================================
+   모달 안 표 세로 스크롤 — 표 위에 겹치는 반투명 막대 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   막대가 8~11px 폭을 차지해 표가 밀려 있었다. overflow:overlay 로 표 위에 얹어
+   폭을 차지하지 않게 하고(미지원 브라우저는 auto 로 되돌아간다),
+   헤더(th)는 sticky 로 고정해 아래 td 만 스크롤한다.
+   ========================================================================== */
+.modal-ov .tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap, .modal-ov .stu-tblwrap,
+.modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap{overflow-y:auto;overflow-y:overlay;}
+.modal-ov .imptbl-wrap > table > thead > tr > th,
+.modal-ov .stu-tblwrap > table > thead > tr > th,
+.modal-ov .eduTblWrap > table > thead > tr > th{position:sticky !important;top:0 !important;z-index:2 !important;
+  background:#F4F7FD !important;}
+
+/* ==========================================================================
+   세로 스크롤 정책 통일 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   · 표 상단 파란 선은 감싼 박스의 border-top 으로 그려 스크롤해도 남는다
+     (표 자신의 ::before 로 그리면 td 와 함께 위로 밀려 사라진다)
+   · th 는 sticky 로 고정, 아래 td 만 스크롤
+   · 막대는 얇고 반투명(rgba(44,62,90,.28)) — 트랙은 투명이라 표 위에 얹힌 것처럼 보인다
+   ========================================================================== */
+.modal-ov .tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap, .modal-ov .stu-tblwrap,
+.modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap{
+  border-top:1px solid var(--pb,#0066FF) !important;}
+.modal-ov .imptbl-wrap > table::before, .modal-ov .schtbl-wrap > table::before,
+.modal-ov .stu-tblwrap > table::before, .modal-ov .shTableWrap > table::before,
+.modal-ov .mcTableWrap > table::before, .modal-ov .eduTblWrap > table::before{display:none !important;}
+.modal-ov .imptbl-wrap > table, .modal-ov .schtbl-wrap > table, .modal-ov .stu-tblwrap > table,
+.modal-ov .shTableWrap > table, .modal-ov .mcTableWrap > table, .modal-ov .eduTblWrap > table{margin-top:0 !important;}
+.modal-ov .imptbl-wrap > table > thead > tr:first-child > *, .modal-ov .schtbl-wrap > table > thead > tr:first-child > *,
+.modal-ov .stu-tblwrap > table > thead > tr:first-child > *, .modal-ov .shTableWrap > table > thead > tr:first-child > *,
+.modal-ov .mcTableWrap > table > thead > tr:first-child > *, .modal-ov .eduTblWrap > table > thead > tr:first-child > *{border-top:0 !important;}
+
+/* 표 상단 파란 선을 고정 헤더(th)에 얹는다 (2026-08-28)
+   감싼 박스의 border-top 은 모달마다 id 로 막아 둔 곳이 있어(예: #importModalOv .imptbl-wrap{border:0})
+   선을 th 안쪽 그림자로 그린다 — th 가 sticky 라 스크롤해도 선이 함께 남는다. */
+.modal-ov .tblwrap > table > thead > tr:first-child > *,
+.modal-ov .imptbl-wrap > table > thead > tr:first-child > *,
+.modal-ov .schtbl-wrap > table > thead > tr:first-child > *,
+.modal-ov .stu-tblwrap > table > thead > tr:first-child > *,
+.modal-ov .shTableWrap > table > thead > tr:first-child > *,
+.modal-ov .mcTableWrap > table > thead > tr:first-child > *,
+.modal-ov .eduTblWrap > table > thead > tr:first-child > *{
+  box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
+
+/* ==========================================================================
+   세로 스크롤 공통 정책 — 화면 · 모달 모두 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   · th 는 sticky 로 고정하고 그 위 파란 선은 th 안쪽 그림자로 그린다
+     (표 자신의 ::before 로 그리면 td 와 함께 밀려 사라진다)
+   · 스크롤 막대는 얇고 반투명 — 트랙은 투명이라 표 위에 얹힌 것처럼 보인다
+   ========================================================================== */
+.tblwrap, .stu-tblwrap, .reslist-wrap, .notetbl-wrap, .stattbl-wrap, .matwrap,
+.imptbl-wrap, .schtbl-wrap, .shTableWrap, .mcTableWrap, .eduTblWrap{
+  scrollbar-width:thin;scrollbar-color:rgba(44,62,90,.28) transparent;}
+.tblwrap::-webkit-scrollbar, .stu-tblwrap::-webkit-scrollbar, .reslist-wrap::-webkit-scrollbar,
+.notetbl-wrap::-webkit-scrollbar, .stattbl-wrap::-webkit-scrollbar, .matwrap::-webkit-scrollbar,
+.imptbl-wrap::-webkit-scrollbar, .schtbl-wrap::-webkit-scrollbar, .shTableWrap::-webkit-scrollbar,
+.mcTableWrap::-webkit-scrollbar, .eduTblWrap::-webkit-scrollbar{width:8px;height:8px;}
+.tblwrap::-webkit-scrollbar-thumb, .stu-tblwrap::-webkit-scrollbar-thumb, .reslist-wrap::-webkit-scrollbar-thumb,
+.notetbl-wrap::-webkit-scrollbar-thumb, .stattbl-wrap::-webkit-scrollbar-thumb, .matwrap::-webkit-scrollbar-thumb,
+.imptbl-wrap::-webkit-scrollbar-thumb, .schtbl-wrap::-webkit-scrollbar-thumb, .shTableWrap::-webkit-scrollbar-thumb,
+.mcTableWrap::-webkit-scrollbar-thumb, .eduTblWrap::-webkit-scrollbar-thumb{
+  background:rgba(44,62,90,.28) !important;border-radius:4px !important;}
+.tblwrap::-webkit-scrollbar-track, .stu-tblwrap::-webkit-scrollbar-track, .matwrap::-webkit-scrollbar-track,
+.imptbl-wrap::-webkit-scrollbar-track, .schtbl-wrap::-webkit-scrollbar-track,
+.shTableWrap::-webkit-scrollbar-track, .mcTableWrap::-webkit-scrollbar-track{background:transparent !important;}
+.tblwrap > table > thead > tr:first-child > *, .stu-tblwrap > table > thead > tr:first-child > *,
+.reslist-wrap > table > thead > tr:first-child > *, .notetbl-wrap > table > thead > tr:first-child > *,
+.stattbl-wrap > table > thead > tr:first-child > *{box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
+.tblwrap > table::before, .stu-tblwrap > table::before, .reslist-wrap > table::before,
+.notetbl-wrap > table::before, .stattbl-wrap > table::before{display:none !important;}

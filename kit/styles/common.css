@@ -181,3 +181,31 @@ table.grid .csel-box, .csel.h22 .csel-box,
 /* 기간 탭(주/월/분기)도 24px — 컨트롤 높이 한 값으로 (2026-08-28 요청) */
 .period-tab{height:24px !important;}
 .period-tabs{height:24px;}
+
+/* ==========================================================================
+   세로 스크롤 공통 정책 — 화면 · 모달 모두 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   · th 는 sticky 로 고정하고 그 위 파란 선은 th 안쪽 그림자로 그린다
+     (표 자신의 ::before 로 그리면 td 와 함께 밀려 사라진다)
+   · 스크롤 막대는 얇고 반투명 — 트랙은 투명이라 표 위에 얹힌 것처럼 보인다
+   ========================================================================== */
+.tblwrap, .stu-tblwrap, .reslist-wrap, .notetbl-wrap, .stattbl-wrap, .matwrap,
+.imptbl-wrap, .schtbl-wrap, .shTableWrap, .mcTableWrap, .eduTblWrap{
+  scrollbar-width:thin;scrollbar-color:rgba(44,62,90,.28) transparent;}
+.tblwrap::-webkit-scrollbar, .stu-tblwrap::-webkit-scrollbar, .reslist-wrap::-webkit-scrollbar,
+.notetbl-wrap::-webkit-scrollbar, .stattbl-wrap::-webkit-scrollbar, .matwrap::-webkit-scrollbar,
+.imptbl-wrap::-webkit-scrollbar, .schtbl-wrap::-webkit-scrollbar, .shTableWrap::-webkit-scrollbar,
+.mcTableWrap::-webkit-scrollbar, .eduTblWrap::-webkit-scrollbar{width:8px;height:8px;}
+.tblwrap::-webkit-scrollbar-thumb, .stu-tblwrap::-webkit-scrollbar-thumb, .reslist-wrap::-webkit-scrollbar-thumb,
+.notetbl-wrap::-webkit-scrollbar-thumb, .stattbl-wrap::-webkit-scrollbar-thumb, .matwrap::-webkit-scrollbar-thumb,
+.imptbl-wrap::-webkit-scrollbar-thumb, .schtbl-wrap::-webkit-scrollbar-thumb, .shTableWrap::-webkit-scrollbar-thumb,
+.mcTableWrap::-webkit-scrollbar-thumb, .eduTblWrap::-webkit-scrollbar-thumb{
+  background:rgba(44,62,90,.28) !important;border-radius:4px !important;}
+.tblwrap::-webkit-scrollbar-track, .stu-tblwrap::-webkit-scrollbar-track, .matwrap::-webkit-scrollbar-track,
+.imptbl-wrap::-webkit-scrollbar-track, .schtbl-wrap::-webkit-scrollbar-track,
+.shTableWrap::-webkit-scrollbar-track, .mcTableWrap::-webkit-scrollbar-track{background:transparent !important;}
+.tblwrap > table > thead > tr:first-child > *, .stu-tblwrap > table > thead > tr:first-child > *,
+.reslist-wrap > table > thead > tr:first-child > *, .notetbl-wrap > table > thead > tr:first-child > *,
+.stattbl-wrap > table > thead > tr:first-child > *{box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
+.tblwrap > table::before, .stu-tblwrap > table::before, .reslist-wrap > table::before,
+.notetbl-wrap > table::before, .stattbl-wrap > table::before{display:none !important;}
