@@ -104,3 +104,6 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .tblwrap,.stu-tblwrap,.reslist-wrap,.notetbl-wrap,.stattbl-wrap,.schtbl-wrap,.shTableWrap,
 .mcTableWrap,.to2-wrap,.eduTblWrap,.matwrap,.imptbl-wrap,.board-wrap,.testinfo-card,
 .uptbl-wrap,.recordtbl-wrap,.ecgrid{border-radius:0 !important;}
+
+/* 날짜 필드 — 모달마다 이름만 다르던 것을 공통 클래스로 함께 잡는다(구조는 동일) */
+.mcIwrap input:not([type=date]), .shIwrap input:not([type=date]){height:24px;}

@@ -187,3 +187,22 @@
 
 /* 모달 안 검색 줄도 표와 같은 좌우 기준선(27px)에 맞춘다 — 실제 공통 모달과 동일 */
 .modal-ov .filters{padding-left:0 !important;padding-right:0 !important;}
+
+/* ==========================================================================
+   컨트롤 높이 24px 통일 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   검색폼은 24px 인데 표 안 인라인 편집과 페이징만 22px 이라 두 규격이 섞여 있었다.
+   입력 계열(입력·셀렉트·버튼)은 모두 24px 하나로 맞춘다.
+   ※ 탭 계열(.quickpill 하위 탭 · .period-tab 기간 탭)은 크기가 위계를 나타내므로 제외.
+   ========================================================================== */
+.gridsel, .gridinput,
+table.grid input:not([type=checkbox]):not([type=radio]), table.grid select,
+table.grid .csel-box, .csel.h22 .csel-box,
+.gridcountbtn, .slotcell input,
+.pgnav, .pgnum, .pgjump input, .pgsize select, .pgsizesel,
+.spmJump input{height:24px !important;}
+.csel.h22 .csel-box{line-height:22px !important;}
+.pgnav, .pgnum{min-width:24px !important;}
+
+/* 날짜 필드 — 모달마다 이름만 다르던 것을 공통 클래스로 함께 잡는다(구조는 동일) */
+.mcIwrap input:not([type=date]), .shIwrap input:not([type=date]){height:24px;}

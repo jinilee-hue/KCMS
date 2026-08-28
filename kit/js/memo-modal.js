@@ -238,9 +238,9 @@
               '<button type="button" data-preset="all" class="on">전체</button>' +
             '</div>' +
             '<div class="mcDrange">' +
-              '<span class="mcIwrap"><input type="text" id="mcStart" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="mcDateSh" tabindex="-1" aria-hidden="true"><button type="button" class="mcIbtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
+              '<span class="mcIwrap iwrap"><input type="text" id="mcStart" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="mcDateSh dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="mcIbtn ibtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
               '<span class="mcSep">~</span>' +
-              '<span class="mcIwrap"><input type="text" id="mcEnd" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="mcDateSh" tabindex="-1" aria-hidden="true"><button type="button" class="mcIbtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
+              '<span class="mcIwrap iwrap"><input type="text" id="mcEnd" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="mcDateSh dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="mcIbtn ibtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
               '<button type="button" class="mcRst" id="mcRangeReset" title="기간 초기화">✕</button>' +
             '</div>' +
             '<span class="lbl">상담상태</span>' +

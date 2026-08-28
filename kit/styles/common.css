@@ -158,3 +158,19 @@
   color:#8a97a8;transition:transform .12s;}.ctnode.open > .ctchev{transform:rotate(90deg);}.ctnode[data-depth="1"] .ctchev{visibility:hidden;}.ctfold{flex:0 0 14px;color:var(--pb);display:inline-flex;}.ctnode input[type="checkbox"]{width:13px;height:13px;margin:0;accent-color:var(--pb);cursor:pointer;}.ctnode > span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}.ctnode[data-depth="0"] > span{font-weight:700;color:var(--gnb);}.ctcount{margin-left:auto;font-size:11px;color:#9aa8bd;}.ctree-ft{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;
   border-top:1px solid var(--line-soft);font-size:11px;color:var(--txt-mut);}.ctree-ft b{color:var(--pb-deeper);font-weight:700;}.btn:not(.sm){min-width:56px;justify-content:center;}.ibtn{width:22px;height:22px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);
   cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}.ibtn:hover{border-color:var(--pb);color:var(--pb);}.to-badge, .agebadge.mar, .cntbadge{background:var(--pb-light) !important;color:var(--pb-dark) !important;}.mapbadge.muted, .ddbadge.muted{background:#EEF1F5 !important;color:var(--txt-mut) !important;}.sarrow.on{color:var(--pb);}.icon-btn{width:24px;height:24px;}.ibtn{width:24px;height:24px;}.iwrap .ibtn,.drange .ibtn,.dwrap .ibtn,table.grid .iwrap .ibtn{width:19px;height:18px !important;}.modal-ov .filters{padding-left:0 !important;padding-right:0 !important;}
+
+/* ==========================================================================
+   컨트롤 높이 24px 통일 (2026-08-28 요청)
+   --------------------------------------------------------------------------
+   검색폼은 24px 인데 표 안 인라인 편집과 페이징만 22px 이라 두 규격이 섞여 있었다.
+   입력 계열(입력·셀렉트·버튼)은 모두 24px 하나로 맞춘다.
+   ※ 탭 계열(.quickpill 하위 탭 · .period-tab 기간 탭)은 크기가 위계를 나타내므로 제외.
+   ========================================================================== */
+.gridsel, .gridinput,
+table.grid input:not([type=checkbox]):not([type=radio]), table.grid select,
+table.grid .csel-box, .csel.h22 .csel-box,
+.gridcountbtn, .slotcell input,
+.pgnav, .pgnum, .pgjump input, .pgsize select, .pgsizesel,
+.spmJump input{height:24px !important;}
+.csel.h22 .csel-box{line-height:22px !important;}
+.pgnav, .pgnum{min-width:24px !important;}

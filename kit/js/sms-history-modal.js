@@ -162,9 +162,9 @@
           '<button type="button" data-preset="15d">15일</button>' +
           '<button type="button" data-preset="1m">1달</button>' +
           '</div>' +
-          '<span class="shIwrap"><input type="text" id="shStart" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="shDateSh" tabindex="-1" aria-hidden="true"><button type="button" class="shIbtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
+          '<span class="shIwrap iwrap"><input type="text" id="shStart" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="shDateSh dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="shIbtn ibtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
           '<span class="shSep">~</span>' +
-          '<span class="shIwrap"><input type="text" id="shEnd" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="shDateSh" tabindex="-1" aria-hidden="true"><button type="button" class="shIbtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
+          '<span class="shIwrap iwrap"><input type="text" id="shEnd" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="shDateSh dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="shIbtn ibtn" tabindex="-1"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
           '</div>' +
           '<div class="shFilterRow2">' +
           '<span class="lbl">구분</span><select class="fselect" id="shTypeSel" style="width:104px;"></select>' +
