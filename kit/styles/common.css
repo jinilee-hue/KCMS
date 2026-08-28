@@ -177,3 +177,7 @@ table.grid .csel-box, .csel.h22 .csel-box,
 
 /* 하위 탭(알약)도 24px — 다른 컨트롤과 같은 높이로 (2026-08-28 요청) */
 .quickpill button{height:24px !important;}
+
+/* 기간 탭(주/월/분기)도 24px — 컨트롤 높이 한 값으로 (2026-08-28 요청) */
+.period-tab{height:24px !important;}
+.period-tabs{height:24px;}
