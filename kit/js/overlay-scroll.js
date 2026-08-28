@@ -30,7 +30,7 @@
     /* scrollbar-width 가 지정돼 있으면 크롬이 ::-webkit-scrollbar 규칙을 무시한다 — 되돌린다 */
     SEL.split(',').map(function (s) { return s; }).join(',') +
       '{position:relative;scrollbar-width:auto !important;scrollbar-color:auto !important;}' +
-    '.ovbar{position:absolute;right:2px;width:6px;border-radius:3px;background:transparent;' +
+    '.ovbar{position:absolute;left:0;width:6px;border-radius:3px;background:transparent;' +
       'pointer-events:none;opacity:0;transition:opacity .18s ease;z-index:5;}' +
     '.ovbar.show{opacity:1;}' +
     '.ovbar > i{display:block;width:100%;border-radius:3px;background:rgba(44,62,90,.28);}';
@@ -53,10 +53,14 @@
     function paint() {
       var ch = wrap.clientHeight, sh = wrap.scrollHeight;
       var top = headH(wrap);                 /* 헤더 아래에서 시작 */
+      /* 스크롤 컨테이너 안의 absolute 는 내용과 함께 움직인다 —
+         가로로 밀어도 막대가 오른쪽 끝에 붙어 있도록 scrollLeft 를 더해 준다 */
+      var right = wrap.scrollLeft + wrap.clientWidth - 8;
       var trackH = Math.max(0, ch - top - 4);
       if (sh > ch + 2 && trackH > 20) {
         y.style.display = 'block';
         y.style.top = (wrap.scrollTop + top + 2) + 'px';
+        y.style.left = right + 'px';
         y.style.height = trackH + 'px';
         var th2 = Math.max(24, Math.round(trackH * (ch / sh)));
         var ty = Math.round((trackH - th2) * (wrap.scrollTop / (sh - ch)));
