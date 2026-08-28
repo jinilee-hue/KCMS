@@ -94,7 +94,7 @@
     style.id = 'staffPickModalStyles';
     style.textContent =
       '#staffPickModal .spmRow{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#eef1f5;border-bottom:1px solid #bcc6d1;flex-wrap:wrap;flex:0 0 auto;}' +
-      '#staffPickModal .spmLbl{background:#3f4c5a;color:#fff;font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:3px;white-space:nowrap;}' +
+      '#staffPickModal .spmLbl{background:none;color:var(--gnb,#2C3E5A);font-size:11.5px;font-weight:700;padding:0;white-space:nowrap;}' +
       '#staffPickModal .spmRow select,#staffPickModal .spmRow input{height:24px;width:130px;}' +
       '#staffPickModal table.spmTbl{border-collapse:collapse;width:100%;font-size:12px;}' +
       '#staffPickModal table.spmTbl th{position:sticky;top:0;background:#7B9BB7;color:#fff;font-weight:700;height:26px;border:1px solid #6a89a5;text-align:center;}' +
@@ -128,8 +128,6 @@
           '<div class="spmRow">' +
             '<span class="spmLbl">직급</span><select class="fselect" id="spmFRank">' + rankOpts + '</select>' +
             '<span class="spmLbl">직책</span><select class="fselect" id="spmFPosition">' + posOpts + '</select>' +
-          '</div>' +
-          '<div class="spmRow">' +
             '<span class="spmLbl">상태</span><select class="fselect" id="spmFStatus"><option value="재직">재직</option><option value="퇴직">퇴직</option><option value="">전체</option></select>' +
             '<span class="spmLbl">직원명</span><input class="finput" id="spmFName" placeholder="직원명 입력">' +
             '<button type="button" class="btn sm" id="spmSearchBtn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>검색</button>' +

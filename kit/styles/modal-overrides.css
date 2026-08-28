@@ -104,8 +104,3 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .tblwrap,.stu-tblwrap,.reslist-wrap,.notetbl-wrap,.stattbl-wrap,.schtbl-wrap,.shTableWrap,
 .mcTableWrap,.to2-wrap,.eduTblWrap,.matwrap,.imptbl-wrap,.board-wrap,.testinfo-card,
 .uptbl-wrap,.recordtbl-wrap,.ecgrid{border-radius:0 !important;}
-
-/* 담당자 찾기 검색 라벨 — 혼자 진한 회남색 칩이라 다른 팝업/검색폼과 톤이 달랐다.
-   공통 검색 라벨(.flabel: 연한 파랑 배경 + 남색 글자)과 같은 톤으로 맞춘다. (2026-08-28) */
-#staffPickModal .spmLbl{background:#F4F7FD !important;color:var(--gnb,#2C3E5A) !important;
-  border:1px solid #C8D5EB !important;font-weight:700 !important;}
