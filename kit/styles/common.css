@@ -209,3 +209,10 @@ table.grid .csel-box, .csel.h22 .csel-box,
 .stattbl-wrap > table > thead > tr:first-child > *{box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
 .tblwrap > table::before, .stu-tblwrap > table::before, .reslist-wrap > table::before,
 .notetbl-wrap > table::before, .stattbl-wrap > table::before{display:none !important;}
+
+/* 세로형 표에서 여러 줄 입력(textarea)이 든 칸은 위아래 4px 여백을 돌려준다.
+   한 줄 칸을 33px 로 맞추려고 padding-top/bottom 을 0 으로 둔 규칙(2026-08-27) 때문에
+   특이사항처럼 textarea 가 들어가는 칸이 위아래로 붙어 보였다. (2026-08-28) */
+table.infotbl td:has(textarea), table.infotbl th:has(textarea),
+table.dupform td:has(textarea), table.staytbl td:has(textarea), table.edutbl td:has(textarea){
+  padding-top:4px !important;padding-bottom:4px !important;height:auto !important;}
