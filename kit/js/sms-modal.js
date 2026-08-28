@@ -701,7 +701,7 @@
     // mock 한계: 실제 .xlsx 바이너리가 아니라 플레인 텍스트(CSV형)를 .xlsx 확장자로 내려받는다.
     // 빌드 스텝 없는 정적 목업 특성상 실제 엑셀 라이브러리 없이 재현한 것 — 실제 개발 시 서버에서
     // 진짜 SMSTargetUpload2.xlsx(시트명 "SMS등록폼")를 내려주도록 교체 필요(§17 참조).
-    var content = 'NO,*Name,*MEMBER_CODE,*Phone_Number\r\n1,홍길동,123456789,010-0100-0200\r\n\r\n' +
+    var content = 'NO,*Name,*MEMBER_CODE,*Phone_Number\r\n1,홍길동,123456789,010-1234-1234\r\n\r\n' +
       '※ 표가 표시된 항목은 필수 입력사항입니다. 필수사항 중 빈칸이 있으면 업로드 되지 않습니다.\r\n' +
       '※ 휴대폰 번호는 -로 구분하여 입력해 주십시오.\r\n';
     var blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });

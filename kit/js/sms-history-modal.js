@@ -27,12 +27,12 @@
  * records 배열 원소 스키마:
  *   { id: 'sh1',
  *     type: '수동 발송',              // 구분 — TYPE_OPTIONS(수동 발송/출결 발송/자동 발송)
- *     name: '동대문 이상준',           // 수신자 이름
- *     phone: '010-9232-3191',        // 수신 휴대폰
+ *     name: '동대문 홍길동',           // 수신자 이름
+ *     phone: '010-1234-1234',        // 수신 휴대폰
  *     content: '원장님, 안녕하세요...', // 발송내용(본문)
  *     msgType: 'LMS',                // 메시지구분 — SMS 또는 LMS
  *     sentAt: '2026-07-20 13:26',    // 발송일시(YYYY-MM-DD HH:MM)
- *     sender: '나준미 (Lisa)',        // 발송자
+ *     sender: '홍길동 (Gildong Hong)',        // 발송자
  *     sentCount: 1,                  // 발송건수
  *     successCount: 1,               // 성공건수
  *     failCount: 0,                  // 실패건수

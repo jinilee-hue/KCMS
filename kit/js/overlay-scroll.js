@@ -13,16 +13,18 @@
   global.__pcmsOverlayScroll = true;
 
   var SEL = '.tblwrap,.stu-tblwrap,.reslist-wrap,.notetbl-wrap,.stattbl-wrap,.matwrap,' +
-            '.imptbl-wrap,.schtbl-wrap,.shTableWrap,.mcTableWrap,.eduTblWrap';
+            '.imptbl-wrap,.schtbl-wrap,.shTableWrap,.mcTableWrap,.eduTblWrap,' +
+            /* 클래스 없이 인라인 style 로만 스크롤을 주던 모달 표 패널에 붙인 공통 클래스 */
+            '.modaltbl-wrap,.ovscroll';
 
   var css = document.createElement('style');
   css.id = 'pcmsOverlayScrollStyles';
   css.textContent =
-    /* 세로 막대만 감춘다 — 가로 막대는 표 아래에 그대로 둔다 */
-    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar:vertical'; }).join(',') +
-      '{width:0 !important;}' +
-    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar:horizontal'; }).join(',') +
-      '{height:8px !important;}' +
+    /* 세로 막대만 감춘다 — 가로 막대는 표 아래에 그대로 둔다.
+       ::-webkit-scrollbar:vertical / :horizontal 는 크롬이 더 이상 적용하지 않는다(실측).
+       방향 없는 ::-webkit-scrollbar 에서 width = 세로 막대 폭, height = 가로 막대 높이다. */
+    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar'; }).join(',') +
+      '{width:0 !important;height:8px !important;}' +
     SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar-thumb'; }).join(',') +
       '{background:rgba(44,62,90,.28) !important;border-radius:4px !important;}' +
     SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar-track'; }).join(',') +
@@ -39,8 +41,10 @@
   function headH(wrap) {
     var th = wrap.querySelector('thead th');
     if (!th) return 0;
-    var r = th.getBoundingClientRect();
-    return Math.round(r.height);
+    /* 표 위에 "전체 N건" 같은 줄이 함께 들어간 패널이 있다 — th 높이만 쓰면 막대가 헤더 위에서
+       시작한다. 래퍼 상단부터 헤더 아래까지를 그대로 재서 항상 헤더 밑에서 시작하게 한다. */
+    var r = th.getBoundingClientRect(), w = wrap.getBoundingClientRect();
+    return Math.max(0, Math.round(r.bottom - w.top));
   }
 
   function attach(wrap) {
@@ -84,8 +88,25 @@
     paint();
   }
 
+
+  /* 모달 안에는 클래스 없이 style="overflow:auto" 로만 만든 표 패널이 있다(설명회 내역 등).
+     그런 패널은 SEL 에 걸리지 않아 네이티브 막대가 표 밖에 그려졌다 — 표를 감싼
+     스크롤 조상을 직접 찾아 같은 오버레이 막대를 붙인다(.modal-body 는 표 전용이 아니라 제외). */
+  function autoScan(root) {
+    (root || document).querySelectorAll('.modal-ov table').forEach(function (t) {
+      var p = t.parentElement;
+      while (p && !p.classList.contains('modal-ov')) {
+        if (p.classList.contains('modal-body') || p.classList.contains('modal-box')) break;
+        var s = getComputedStyle(p);
+        if (/(auto|scroll)/.test(s.overflowY)) { p.classList.add('ovscroll'); attach(p); break; }
+        p = p.parentElement;
+      }
+    });
+  }
+
   function scan(root) {
     (root || document).querySelectorAll(SEL).forEach(attach);
+    autoScan(root);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { scan(); });

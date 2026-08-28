@@ -135,8 +135,7 @@
 <a href="#badge">배지</a>
 <a href="#table">표</a>
 <a href="#scroll">스크롤</a>
-<a href="#input">입력 필드</a>
-<a href="#select">셀렉트</a>
+<a href="#input">입력 · 셀렉트</a>
 <a href="#choice">체크 · 라디오 · 토글</a>
 <a href="#filter">검색 필터</a>
 <a href="#date">날짜 피커</a>
@@ -237,7 +236,7 @@
         <th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th>
       </tr></thead>
       <tbody>
-<tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
 </tbody>
     </table>
   </div>
@@ -246,8 +245,8 @@
 <div class="demo">
   <table class="infotbl">
     <tr><th>국적</th><td><input class="finput roflat" value="한국 (여) 20260804" readonly></td>
-        <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-0000-0000"></td></tr>
-    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="최○○"></td>
+        <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-1234-1234"></td></tr>
+    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="홍○○"></td>
         <th>전화번호</th><td><input class="finput" placeholder="선택 입력"></td></tr>
     <tr><th>생년월일<span class="req">*</span></th>
         <td><span class="iwrap" style="width:130px;"><input type="text" class="finput dateinput" value="2017-06-30" maxlength="10" style="width:100%;"><input type="date" class="dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="ibtn" title="날짜" aria-label="날짜 선택"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span></td>
@@ -261,72 +260,52 @@
 <h4 class="sub">세로 스크롤 · 표 안에서 · 헤더 고정</h4>
 <div class="demo flush">
   <div class="tblwrap" style="max-height:132px;">
-    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>박○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>이○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>정○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>강○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>조○○</td><td>초3</td><td>2026-08-16</td><td>242</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>윤○○</td><td>초4</td><td>2026-08-17</td><td>249</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>장○○</td><td>초5</td><td>2026-08-18</td><td>256</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>임○○</td><td>초3</td><td>2026-08-19</td><td>263</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>한○○</td><td>초4</td><td>2026-08-20</td><td>270</td><td><span class="statuspill">재원</span></td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>오○○</td><td>초5</td><td>2026-08-21</td><td>277</td><td><span class="statuspill">재원</span></td></tr></tbody></table>
+    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-14</td><td>228</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-15</td><td>235</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-16</td><td>242</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-17</td><td>249</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-18</td><td>256</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-19</td><td>263</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-20</td><td>270</td><td><span class="statuspill">재원</span></td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-21</td><td>277</td><td><span class="statuspill">재원</span></td></tr></tbody></table>
   </div>
 </div>
 
 <h4 class="sub">가로 스크롤 · 열이 넓을 때</h4>
 <div class="demo flush">
   <div class="tblwrap">
-    <table class="grid" style="width:1560px;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th style="width:120px;">학번</th><th style="width:120px;">이름</th><th style="width:120px;">성별</th><th style="width:120px;">학년</th><th style="width:120px;">현재 레벨</th><th style="width:120px;">현재 학급</th><th style="width:120px;">응시일</th><th style="width:120px;">점수</th><th style="width:120px;">진학 여부</th><th style="width:120px;">진학 레벨</th><th style="width:120px;">진학 학급</th><th style="width:120px;">담당 교사</th><th style="width:120px;">최종 상담</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>06100000</td><td>최○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-10</td><td>210</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-20</td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>06100001</td><td>김○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-11</td><td>216</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>이수진</td><td>2026-08-21</td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>06100002</td><td>박○○</td><td>여</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-12</td><td>222</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>이수진</td><td>2026-08-22</td></tr>
-<tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>이○○</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>이수진</td><td>2026-08-23</td></tr></tbody></table>
+    <table class="grid" style="width:1560px;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th style="width:120px;">학번</th><th style="width:120px;">이름</th><th style="width:120px;">성별</th><th style="width:120px;">학년</th><th style="width:120px;">현재 레벨</th><th style="width:120px;">현재 학급</th><th style="width:120px;">응시일</th><th style="width:120px;">점수</th><th style="width:120px;">진학 여부</th><th style="width:120px;">진학 레벨</th><th style="width:120px;">진학 학급</th><th style="width:120px;">담당 교사</th><th style="width:120px;">최종 상담</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>06100000</td><td>홍○○</td><td>여</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-10</td><td>210</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>홍길동</td><td>2026-08-20</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100001</td><td>홍○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-11</td><td>216</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>홍길동</td><td>2026-08-21</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100002</td><td>홍○○</td><td>여</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-12</td><td>222</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>홍길동</td><td>2026-08-22</td></tr>
+<tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>홍○○</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>홍길동</td><td>2026-08-23</td></tr></tbody></table>
   </div>
 </div>
 </div></div></section>
 
 
-<section id="input"><div class="card"><div class="card-header"><div class="card-title">입력 필드</div></div><div class="card-body">
-<h4 class="sub">텍스트 입력</h4>
+<section id="input"><div class="card"><div class="card-header"><div class="card-title">입력 · 셀렉트</div></div><div class="card-body">
+<h4 class="sub">텍스트 입력 · 24PX</h4>
 <div class="demo row">
-  <input class="finput" value="최○○" style="width:150px;">
+  <input class="finput" value="홍○○" style="width:150px;">
   <input class="finput" placeholder="이름 입력" style="width:150px;">
   <input class="finput roflat" value="한국 (여) 20260804" readonly style="width:180px;">
   <input class="finput" value="수정 불가" disabled style="width:120px;">
+  <textarea class="ftextarea" rows="2" style="width:220px;" placeholder="상담 메모"></textarea>
 </div>
 
-<h4 class="sub">여러 줄</h4>
-<div class="demo row">
-  <textarea class="ftextarea" rows="2" style="width:300px;" placeholder="상담 메모"></textarea>
-</div>
-
-<h4 class="sub">라벨 · 도움말 · 오류</h4>
-<div class="demo">
-  <div class="form-grid-2">
-    <div class="form-group">
-      <label class="form-label">학생명<span class="req">*</span></label>
-      <input class="finput" value="최○○">
-      <span class="form-hint">동명이인은 생년월일로 구분합니다.</span>
-    </div>
-    <div class="form-group">
-      <label class="form-label">학부모 연락처<span class="req">*</span></label>
-      <input class="finput" value="010-0000">
-      <span class="form-error">형식을 확인해 주세요.</span>
-    </div>
-  </div>
-</div>
-</div></div></section>
-
-<section id="select"><div class="card"><div class="card-header"><div class="card-title">셀렉트</div></div><div class="card-body">
-<h4 class="sub">기본 · 커스텀 셀렉트 · 24PX</h4>
+<h4 class="sub">셀렉트</h4>
 <div class="demo row">
   <span style="width:150px;display:inline-block;"><select><option>전체 과정</option><option>ECP</option><option>ELE</option></select></span>
   <span style="width:170px;display:inline-block;"><select><option>시범캠퍼스</option><option>목동매그넷캠퍼스</option></select></span>
+  <span style="font-size:11.5px;color:var(--txt-mut);margin-left:8px;">브라우저 기본</span>
+  <select class="fselect" data-nocsel style="width:90px;"><option>30</option><option>50</option><option>100</option></select>
 </div>
 
-<h4 class="sub">트리 · 단일 선택</h4>
+<h4 class="sub">트리 셀렉트 · 단일</h4>
 <div class="demo row">
   <span class="flabel">학급</span>
   <span class="tsel" data-tree data-placeholder="학급 선택" style="width:190px;">
@@ -355,7 +334,7 @@
   <span id="tselOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 —</span>
 </div>
 
-<h4 class="sub">트리 · 다중 선택</h4>
+<h4 class="sub">트리 셀렉트 · 다중</h4>
 <div class="demo row">
   <span class="flabel">현재 레벨</span>
   <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
@@ -374,7 +353,6 @@
   </span>
   <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
 </div>
-
 <div class="demo row">
   <span class="flabel">현재 학급</span>
   <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
@@ -388,13 +366,23 @@
         <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
     </ul>
   </span>
-  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count="3/12"</code> → 묶음은 합계.
-  현재 학급은 <code>curClass</code>, 진학 학급은 <code>nextClass</code> 로 세어 같은 반이라도 숫자가 다릅니다.</span>
+  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count</code> → 묶음은 합계</span>
 </div>
 
-<h4 class="sub">예외 · 브라우저 기본 목록</h4>
-<div class="demo row">
-  <select class="fselect" data-nocsel style="width:90px;"><option>30</option><option>50</option><option>100</option></select>
+<h4 class="sub">라벨 · 도움말 · 오류</h4>
+<div class="demo">
+  <div class="form-grid-2">
+    <div class="form-group">
+      <label class="form-label">학생명<span class="req">*</span></label>
+      <input class="finput" value="홍○○">
+      <span class="form-hint">동명이인은 생년월일로 구분합니다.</span>
+    </div>
+    <div class="form-group">
+      <label class="form-label">학부모 연락처<span class="req">*</span></label>
+      <input class="finput" value="010-0000">
+      <span class="form-error">형식을 확인해 주세요.</span>
+    </div>
+  </div>
 </div>
 </div></div></section>
 
@@ -467,10 +455,10 @@
 <h4 class="sub">공통 모달 · 화면들이 함께 불러 쓰는 컴포넌트</h4>
 <div class="tiles">
 <div class="tile"><div class="tile-hd"><b>담당자 찾기</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></span></div><p>직원 명부 검색 후 선택 — 여러 화면의 담당자·상담교사 입력에서 호출합니다. <code>staff-pick-modal.js</code></p><button class="btn" onclick="openStaffPickModal({onApply:function(s){KCMS.toast(s.name+' 선택됨','success');}})">담당자 찾기 열기</button></div>
-<div class="tile"><div class="tile-hd"><b>상담이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span></div><p>학생별 상담 기록 목록·등록·상세. <code>memo-modal.js</code></p><button class="btn g" onclick="openMemoModal({studentNo:'06100000',name:'김민준',ename:'Kim Minjun',classNm:'ECP6-A',motherPhone:'010-2000-3000',studentType:'예비생',records:[]})">상담이력 열기</button></div>
-<div class="tile"><div class="tile-hd"><b>SMS 발송</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><p>수신자 목록·문자 작성·잔여 건수. <code>sms-modal.js</code></p><button class="btn g" onclick="openSmsModal({senderOptions:[{value:'031-000-7800',label:'분당캠퍼스 (031-000-7800)'}],remainingSms:299984,remainingLms:913169,recipients:[{no:'06100000',name:'김민준',studentNo:'06100000',phone:'010-2000-3000',parentPhone:'010-2000-3000'}]})">SMS 발송 열기</button></div>
-<div class="tile"><div class="tile-hd"><b>SMS 발송이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><p>학생에게 보낸 문자 이력 조회. <code>sms-history-modal.js</code></p><button class="btn g" onclick="openSmsHistoryModal({student:{name:'김민준',ename:'Kim Minjun',studentNo:'06100000',phone:'010-2000-3000'},records:[]})">발송이력 열기</button></div>
-<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg></span></div><p>성적표는 모달이 아니라 <b>새 창</b>으로 엽니다. <code>map-report-modal.js</code></p><button class="btn g" onclick="openMapReportCard({studentName:'김민준',subjects:[]})">성적표 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>상담이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span></div><p>학생별 상담 기록 목록·등록·상세. <code>memo-modal.js</code></p><button class="btn g" onclick="openMemoModal({studentNo:'06100000',name:'홍길동',ename:'Gildong Hong',classNm:'ECP6-A',motherPhone:'010-1234-1234',studentType:'예비생',records:[]})">상담이력 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>SMS 발송</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><p>수신자 목록·문자 작성·잔여 건수. <code>sms-modal.js</code></p><button class="btn g" onclick="openSmsModal({senderOptions:[{value:'031-000-7800',label:'분당캠퍼스 (031-000-7800)'}],remainingSms:299984,remainingLms:913169,recipients:[{no:'06100000',name:'홍길동',studentNo:'06100000',phone:'010-1234-1234',parentPhone:'010-1234-1234'}]})">SMS 발송 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>SMS 발송이력</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><p>학생에게 보낸 문자 이력 조회. <code>sms-history-modal.js</code></p><button class="btn g" onclick="openSmsHistoryModal({student:{name:'홍길동',ename:'Gildong Hong',studentNo:'06100000',phone:'010-1234-1234'},records:[]})">발송이력 열기</button></div>
+<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic "><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M8 13h8M8 17h5"/></svg></span></div><p>성적표는 모달이 아니라 <b>새 창</b>으로 엽니다. <code>map-report-modal.js</code></p><button class="btn g" onclick="openMapReportCard({studentName:'홍길동',subjects:[]})">성적표 열기</button></div>
 </div>
 
 <h4 class="sub">크기 · 실제 화면에서 쓰는 네 가지</h4>
@@ -563,9 +551,9 @@
     <table class="grid" style="table-layout:auto;">
       <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th>이름</th><th>학년</th><th>상태</th></tr></thead>
       <tbody>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>최○○</td><td>초3</td><td>기본</td></tr>
-        <tr style="background:var(--pb-a08);"><td><input type="checkbox" class="rowchk"></td><td>김○○</td><td>초4</td><td>hover</td></tr>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>박○○</td><td>초3</td><td>선택</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>기본</td></tr>
+        <tr style="background:var(--pb-a08);"><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>hover</td></tr>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍○○</td><td>초3</td><td>선택</td></tr>
       </tbody>
     </table>
   </div>
@@ -601,10 +589,10 @@
     <table class="grid" style="table-layout:auto;">
       <thead><tr><th>이름</th><th>학년</th><th>응시일</th><th>점수</th></tr></thead>
       <tbody>
-        <tr><td>최○○</td><td>초3</td><td>2026-08-12</td><td>218</td></tr>
-        <tr><td>김○○</td><td>초4</td><td>2026-08-14</td><td>231</td></tr>
-        <tr><td>박○○</td><td>초3</td><td>2026-08-14</td><td>205</td></tr>
-        <tr><td>이○○</td><td>초5</td><td>2026-08-18</td><td>243</td></tr>
+        <tr><td>홍○○</td><td>초3</td><td>2026-08-12</td><td>218</td></tr>
+        <tr><td>홍○○</td><td>초4</td><td>2026-08-14</td><td>231</td></tr>
+        <tr><td>홍○○</td><td>초3</td><td>2026-08-14</td><td>205</td></tr>
+        <tr><td>홍○○</td><td>초5</td><td>2026-08-18</td><td>243</td></tr>
       </tbody>
     </table>
   </div>
@@ -647,7 +635,7 @@
   <span style="font-size:16px;font-weight:700;">예비생 등록·관리</span>
   <span class="sectit" style="margin:0;padding:0;">학급별 충원 현황</span>
   <span style="font-size:12.5px;font-weight:700;">예비생정보</span>
-  <span style="font-size:11.5px;">최○○ · 초3 · 2026-08-12</span>
+  <span style="font-size:11.5px;">홍○○ · 초3 · 2026-08-12</span>
   <span style="font-size:11.5px;font-weight:700;color:var(--gnb);">학생명</span>
   <span><span class="badge">기본</span> <span style="font-size:11px;color:var(--txt-mut);">최종 갱신 09:00</span></span>
   <span style="font-size:10.5px;color:var(--txt-mut);">(직전 학기)</span>
@@ -747,18 +735,18 @@
         <table class="grid">
           <thead><tr><th style="width:34px;"></th><th>학번</th><th>이름</th><th>현재 레벨</th><th>학부모 연락처</th></tr></thead>
           <tbody>
-<tr class="sel"><td><input type="radio" name="wm" checked></td><td>06100000</td><td>김민준</td><td>ECP5</td><td>010-2000-3000</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100037</td><td>이서연 (Lee Seoyeon)</td><td>ECP5</td><td>010-2007-3011</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100074</td><td>박도윤 (Park Doyoon)</td><td>ECP6</td><td>010-2014-3022</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100111</td><td>최하윤</td><td>ECP6</td><td>010-2021-3033</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100148</td><td>정시우 (Jung Siwoo)</td><td>ECP6m</td><td>010-2028-3044</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100185</td><td>강지안</td><td>ECP7</td><td>010-2035-3055</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100222</td><td>조예준 (Cho Yejun)</td><td>ECP7</td><td>010-2042-3066</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100259</td><td>윤수아</td><td>ECP7m</td><td>010-2049-3077</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100296</td><td>장지호 (Jang Jiho)</td><td>GT1</td><td>010-2056-3088</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100333</td><td>임하은</td><td>GT1</td><td>010-2063-3099</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100370</td><td>한준서</td><td>GT2</td><td>010-2070-3110</td></tr>
-<tr><td><input type="radio" name="wm"></td><td>06100407</td><td>오세준 (Oh Sejun)</td><td>GT2</td><td>010-2077-3121</td></tr>
+<tr class="sel"><td><input type="radio" name="wm" checked></td><td>06100000</td><td>김민준</td><td>ECP5</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100037</td><td>홍길동 (Gildong Hong)</td><td>ECP5</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100074</td><td>홍길동 (Gildong Hong)</td><td>ECP6</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100111</td><td>최하윤</td><td>ECP6</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100148</td><td>홍길동 (Gildong Hong)</td><td>ECP6m</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100185</td><td>강지안</td><td>ECP7</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100222</td><td>홍길동 (Gildong Hong)</td><td>ECP7</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100259</td><td>윤수아</td><td>ECP7m</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100296</td><td>홍길동 (Gildong Hong)</td><td>GT1</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100333</td><td>임하은</td><td>GT1</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100370</td><td>한준서</td><td>GT2</td><td>010-1234-1234</td></tr>
+<tr><td><input type="radio" name="wm"></td><td>06100407</td><td>홍길동 (Gildong Hong)</td><td>GT2</td><td>010-1234-1234</td></tr>
           </tbody>
         </table>
       </div>
@@ -793,7 +781,7 @@
               <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
             </span></td></tr>
         <tr><th>학부모핸드폰<span class="req">*</span></th>
-            <td><input class="finput" value="010-0000-0000" style="width:150px;"></td></tr>
+            <td><input class="finput" value="010-1234-1234" style="width:150px;"></td></tr>
       </table>
     </div>
     <div class="modal-foot">

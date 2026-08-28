@@ -44,7 +44,7 @@
  *   <script>
  *     document.getElementById('printReportBtn').addEventListener('click', function(){
  *       openMapReportCard({
- *         studentName: '강현구', studentEname: 'Kai Kang',      // 학생 국/영문명(영문명 없으면 생략 가능)
+ *         studentName:'홍길동', studentEname: 'Gildong Hong',      // 학생 국/영문명(영문명 없으면 생략 가능)
  *         gradeLevel: 'ELE', testDateLong: 'June 30, 2026', testedLevel: 'ELE',
  *         standardLevels: ['MAG3', 'S3', 'MGT3', 'GT3'],        // "MAP 유형"별 시험 레벨 기준점 사다리(왼쪽=높은 레벨)
  *         subjects: [                                           // 과목별 채점 결과 — standardValues는 standardLevels와 같은 순서/길이

@@ -77,8 +77,8 @@
  *     method: '전화',                  // 상담방법 — METHOD_OPTIONS(전화/IB전화/OB전화/방문/알림장/기타)
  *     result: '만족',                  // 상담결과(2026-07-19 추가) — RESULT_OPTIONS(선택/만족/해결/재상담필요/불만족)
  *                                      //   status가 '완료'일 때만 콤보박스가 활성화되고 값이 유효함. 그 외 상태에서는 ''(선택 없음)로 강제 저장
- *     teacher: '홍우리 (Olivia Hong)',  // 상담교사
- *     registrant: '우아영 (Annie)',     // 등록자
+ *     teacher: '홍길동 (Gildong Hong)',  // 상담교사
+ *     registrant: '홍길동 (Gildong Hong)',     // 등록자
  *     registeredAt: '2026-07-17 15:28' // 등록일시(YYYY-MM-DD HH:MM)
  *   }
  * (2026-07-19 이전에 등록된 mock 레코드는 target/method/result가 없을 수 있음 — 상세 모달에서 열람 시
@@ -124,8 +124,8 @@
   var METHOD_OPTIONS = ['전화', 'IB전화', 'OB전화', '방문', '알림장', '기타'];
   var TOPIC_OPTIONS = ['종합상담', '상담(MAP)예약', '입학상담', '설명회예약', 'MAP결과상담', '레벨상담', '진학상담', '기타']; // 2026-08-10 "진학상담" 추가(7종→8종, §공통상담이력모달_spec.md 참조)
   var RESULT_OPTIONS = ['선택', '만족', '해결', '재상담필요', '불만족']; // 상담결과 — '선택'은 미선택 placeholder(값 ''), 상담상태가 '완료'일 때만 콤보박스 활성화(2026-07-19)
-  var TEACHER_POOL = ['이수진', '박서준', '홍우리 (Olivia Hong)', '김태호', '정민아'];
-  var CURRENT_USER = '우아영 (Annie)'; // mock 고정값 — 실제 로그인 사용자 연동 전까지 placeholder(§공통상담이력모달_spec.md 참조)
+  var TEACHER_POOL = ['홍길동'];
+  var CURRENT_USER = '홍길동 (Gildong Hong)'; // mock 고정값 — 실제 로그인 사용자 연동 전까지 placeholder(§공통상담이력모달_spec.md 참조)
 
   var _built = false;
   var _state = {

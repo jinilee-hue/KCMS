@@ -24,15 +24,15 @@
  *     document.getElementById('someSearchBtn').addEventListener('click', function(){
  *       openStaffPickModal({
  *         onApply: function(staff){                 // 사용자가 [적용] 클릭 시 1회 호출
- *           document.getElementById('someInput').value = staff.name; // "이수진 (Sujin Lee)" 형태
+ *           document.getElementById('someInput').value = staff.name; // "홍길동 (Gildong Hong)" 형태
  *         }
  *       });
  *     });
  *   <\/script>
  *
  * onApply(staff)로 전달되는 staff 객체 스키마(STAFF_DIRECTORY 원소와 동일):
- *   { name: '이수진 (Sujin Lee)', position: 'POLY MAP교사', rank: '주임', status: '재직',
- *     mobile: '010-2000-1001', hireDate: '2019-03-04' }
+ *   { name: '홍길동 (Gildong Hong)', position: 'POLY MAP교사', rank: '주임', status: '재직',
+ *     mobile: '010-1234-1234', hireDate: '2019-03-04' }
  *
  * openStaffPickModal()가 필요로 하는 CSS(각 화면 <style>에 이미 정의되어 있어야 함 — PCMS 전 화면
  * 공통 셸 스타일이므로 대부분 이미 있음): .modal-ov/.modal-ov.open, .modal-box, .modal-box.wide,
@@ -47,30 +47,30 @@
 
 (function (global) {
   // 전부 가상 더미(실제 KCMS 직원정보 아님). 다른 화면 mock에서 이미 담당교사/접수자로 쓰이는
-  // 이름(이수진/최연지/김민서)은 재직·POLY MAP교사로 포함시켜 이름 일관성 유지
+  // 이름(홍길동/최연지/홍길동)은 재직·POLY MAP교사로 포함시켜 이름 일관성 유지
   var STAFF_DIRECTORY = [
-    { name: '이수진 (Sujin Lee)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-2000-1001', hireDate: '2019-03-04' },
-    { name: '최연지 (Nina Choi)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-2000-1002', hireDate: '2020-07-13' },
-    { name: '김민서', position: 'POLY MAP교사', rank: '사원', status: '재직', mobile: '010-2000-1003', hireDate: '2022-01-10' },
-    { name: '김성원', position: '기타', rank: '사원', status: '재직', mobile: '010-2000-1004', hireDate: '2007-11-11' },
-    { name: '이은숙', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-2000-1005', hireDate: '2012-04-09' },
-    { name: '전영실', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-2000-1006', hireDate: '2014-07-21' },
-    { name: '원미경', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-2000-1007', hireDate: '2016-04-19' },
-    { name: '박인숙', position: 'POLY안전요원', rank: '대리', status: '재직', mobile: '010-2000-1008', hireDate: '2016-07-07' },
-    { name: '차연주', position: '유치부교사', rank: '주임', status: '재직', mobile: '010-2000-1009', hireDate: '2022-02-28' },
-    { name: '박춘자', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-2000-1010', hireDate: '2018-05-16' },
-    { name: '윤혜민', position: '사서', rank: '사원', status: '재직', mobile: '010-2000-1011', hireDate: '2018-07-16' },
-    { name: '김미경', position: 'POLY안전요원', rank: '대리', status: '재직', mobile: '010-2000-1012', hireDate: '2018-11-19' },
-    { name: '한도영', position: '초등부교사', rank: '과장', status: '재직', mobile: '010-2000-1013', hireDate: '2015-09-02' },
-    { name: '서지훈', position: '중등부교사', rank: '대리', status: '재직', mobile: '010-2000-1014', hireDate: '2019-10-21' },
-    { name: '배소연', position: '행정직', rank: '사원', status: '재직', mobile: '010-2000-1015', hireDate: '2021-03-15' },
-    { name: '오정민', position: '행정직', rank: '주임', status: '재직', mobile: '010-2000-1016', hireDate: '2017-06-01' },
-    { name: '남기석', position: '원장', rank: '원장', status: '재직', mobile: '010-2000-1017', hireDate: '2010-01-05' },
-    { name: '조하늘', position: 'POLY MAP교사', rank: '대리', status: '재직', mobile: '010-2000-1018', hireDate: '2020-02-17' },
-    { name: '문세라', position: '초등부교사', rank: '사원', status: '재직', mobile: '010-2000-1019', hireDate: '2023-03-06' },
-    { name: '유경아', position: '유치부교사', rank: '사원', status: '재직', mobile: '010-2000-1020', hireDate: '2023-09-11' },
-    { name: '백승호', position: '중등부교사', rank: '과장', status: '퇴직', mobile: '010-2000-1021', hireDate: '2013-04-08' },
-    { name: '정하윤', position: '행정직', rank: '사원', status: '퇴직', mobile: '010-2000-1022', hireDate: '2016-08-30' }
+    { name: '홍길동 (Gildong Hong)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2019-03-04' },
+    { name: '홍길동 (Gildong Hong)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2020-07-13' },
+    { name:'홍길동', position: 'POLY MAP교사', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2022-01-10' },
+    { name:'홍길동', position: '기타', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2007-11-11' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2012-04-09' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2014-07-21' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2016-04-19' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '대리', status: '재직', mobile: '010-1234-1234', hireDate: '2016-07-07' },
+    { name:'홍길동', position: '유치부교사', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2022-02-28' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2018-05-16' },
+    { name:'홍길동', position: '사서', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2018-07-16' },
+    { name:'홍길동', position: 'POLY안전요원', rank: '대리', status: '재직', mobile: '010-1234-1234', hireDate: '2018-11-19' },
+    { name:'홍길동', position: '초등부교사', rank: '과장', status: '재직', mobile: '010-1234-1234', hireDate: '2015-09-02' },
+    { name:'홍길동', position: '중등부교사', rank: '대리', status: '재직', mobile: '010-1234-1234', hireDate: '2019-10-21' },
+    { name:'홍길동', position: '행정직', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2021-03-15' },
+    { name:'홍길동', position: '행정직', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2017-06-01' },
+    { name:'홍길동', position: '원장', rank: '원장', status: '재직', mobile: '010-1234-1234', hireDate: '2010-01-05' },
+    { name:'홍길동', position: 'POLY MAP교사', rank: '대리', status: '재직', mobile: '010-1234-1234', hireDate: '2020-02-17' },
+    { name:'홍길동', position: '초등부교사', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2023-03-06' },
+    { name:'홍길동', position: '유치부교사', rank: '사원', status: '재직', mobile: '010-1234-1234', hireDate: '2023-09-11' },
+    { name:'홍길동', position: '중등부교사', rank: '과장', status: '퇴직', mobile: '010-1234-1234', hireDate: '2013-04-08' },
+    { name:'홍길동', position: '행정직', rank: '사원', status: '퇴직', mobile: '010-1234-1234', hireDate: '2016-08-30' }
   ];
 
   var STAFF_PICK_COLS = [
