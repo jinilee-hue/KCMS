@@ -3,6 +3,7 @@
    --------------------------------------------------------------------------
    크롬이 overflow:overlay 를 없애 네이티브 막대는 늘 8px 자리를 차지한다.
    네이티브 막대를 감추고, 표 데이터 영역(td) 위에 떠 있는 막대를 직접 그린다.
+   · 세로만 떠 있는 막대로 그린다. 가로는 브라우저 기본 막대를 표 아래에 그대로 둔다
    · 막대는 헤더(th) 아래에서 시작한다 — th 는 sticky 로 고정돼 있으므로 가리지 않는다
    · 스크롤·마우스오버 때 나타나고 잠시 뒤 사라진다
    ========================================================================== */
@@ -17,16 +18,22 @@
   var css = document.createElement('style');
   css.id = 'pcmsOverlayScrollStyles';
   css.textContent =
-    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar'; }).join(',') +
-      '{width:0 !important;height:0 !important;}' +
+    /* 세로 막대만 감춘다 — 가로 막대는 표 아래에 그대로 둔다 */
+    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar:vertical'; }).join(',') +
+      '{width:0 !important;}' +
+    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar:horizontal'; }).join(',') +
+      '{height:8px !important;}' +
+    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar-thumb'; }).join(',') +
+      '{background:rgba(44,62,90,.28) !important;border-radius:4px !important;}' +
+    SEL.split(',').map(function (s) { return s + '::-webkit-scrollbar-track'; }).join(',') +
+      '{background:transparent !important;}' +
+    /* scrollbar-width 가 지정돼 있으면 크롬이 ::-webkit-scrollbar 규칙을 무시한다 — 되돌린다 */
     SEL.split(',').map(function (s) { return s; }).join(',') +
-      '{scrollbar-width:none !important;position:relative;}' +
+      '{position:relative;scrollbar-width:auto !important;scrollbar-color:auto !important;}' +
     '.ovbar{position:absolute;right:2px;width:6px;border-radius:3px;background:transparent;' +
       'pointer-events:none;opacity:0;transition:opacity .18s ease;z-index:5;}' +
     '.ovbar.show{opacity:1;}' +
-    '.ovbar > i{display:block;width:100%;border-radius:3px;background:rgba(44,62,90,.28);}' +
-    '.ovbar.x{right:auto;left:0;height:6px;width:auto;}' +
-    '.ovbar.x > i{height:100%;width:0;}';
+    '.ovbar > i{display:block;width:100%;border-radius:3px;background:rgba(44,62,90,.28);}';
   document.head.appendChild(css);
 
   function headH(wrap) {
@@ -40,13 +47,11 @@
     if (wrap.__ovbar) return;
     wrap.__ovbar = true;
     var y = document.createElement('div'); y.className = 'ovbar'; y.appendChild(document.createElement('i'));
-    var x = document.createElement('div'); x.className = 'ovbar x'; x.appendChild(document.createElement('i'));
-    wrap.appendChild(y); wrap.appendChild(x);
+    wrap.appendChild(y);
     var hideT;
 
     function paint() {
       var ch = wrap.clientHeight, sh = wrap.scrollHeight;
-      var cw = wrap.clientWidth, sw = wrap.scrollWidth;
       var top = headH(wrap);                 /* 헤더 아래에서 시작 */
       var trackH = Math.max(0, ch - top - 4);
       if (sh > ch + 2 && trackH > 20) {
@@ -59,23 +64,13 @@
         y.firstChild.style.transform = 'translateY(' + ty + 'px)';
       } else { y.style.display = 'none'; }
 
-      if (sw > cw + 2) {
-        x.style.display = 'block';
-        x.style.left = wrap.scrollLeft + 'px';
-        x.style.width = cw + 'px';
-        x.style.top = (wrap.scrollTop + ch - 8) + 'px';
-        var tw = Math.max(24, Math.round(cw * (cw / sw)));
-        var tx = Math.round((cw - tw) * (wrap.scrollLeft / (sw - cw)));
-        x.firstChild.style.width = tw + 'px';
-        x.firstChild.style.transform = 'translateX(' + tx + 'px)';
-      } else { x.style.display = 'none'; }
     }
 
     function show() {
       paint();
-      y.classList.add('show'); x.classList.add('show');
+      y.classList.add('show');
       clearTimeout(hideT);
-      hideT = setTimeout(function () { y.classList.remove('show'); x.classList.remove('show'); }, 900);
+      hideT = setTimeout(function () { y.classList.remove('show'); }, 900);
     }
 
     wrap.addEventListener('scroll', show, { passive: true });
