@@ -213,3 +213,23 @@ table.grid .csel-box, .csel.h22 .csel-box,
 /* 기간 탭(주/월/분기)도 24px — 컨트롤 높이 한 값으로 (2026-08-28 요청) */
 .period-tab{height:24px !important;}
 .period-tabs{height:24px;}
+
+/* ==========================================================================
+   모달 안 표 스크롤 막대 — 공통 규칙에서 빠져 있던 래퍼들 (2026-08-28)
+   --------------------------------------------------------------------------
+   .modal-ov .tblwrap 에만 반투명 막대(rgba(44,62,90,.28))가 걸려 있어서
+   래퍼 이름이 다른 표(.imptbl-wrap · .schtbl-wrap · .stu-tblwrap · .shTableWrap ·
+   .mcTableWrap · .eduTblWrap)는 브라우저 기본 회색 막대가 그대로 보였다.
+   같은 규칙으로 묶는다.
+   ========================================================================== */
+.modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap, .modal-ov .stu-tblwrap,
+.modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap{scrollbar-width:thin;scrollbar-color:rgba(44,62,90,.28) transparent;}
+.modal-ov .imptbl-wrap::-webkit-scrollbar, .modal-ov .schtbl-wrap::-webkit-scrollbar,
+.modal-ov .stu-tblwrap::-webkit-scrollbar, .modal-ov .shTableWrap::-webkit-scrollbar,
+.modal-ov .mcTableWrap::-webkit-scrollbar, .modal-ov .eduTblWrap::-webkit-scrollbar{width:8px;height:8px;}
+.modal-ov .imptbl-wrap::-webkit-scrollbar-thumb, .modal-ov .schtbl-wrap::-webkit-scrollbar-thumb,
+.modal-ov .stu-tblwrap::-webkit-scrollbar-thumb, .modal-ov .shTableWrap::-webkit-scrollbar-thumb,
+.modal-ov .mcTableWrap::-webkit-scrollbar-thumb, .modal-ov .eduTblWrap::-webkit-scrollbar-thumb{background:rgba(44,62,90,.28) !important;border-radius:4px !important;}
+.modal-ov .imptbl-wrap::-webkit-scrollbar-track, .modal-ov .schtbl-wrap::-webkit-scrollbar-track,
+.modal-ov .stu-tblwrap::-webkit-scrollbar-track, .modal-ov .shTableWrap::-webkit-scrollbar-track,
+.modal-ov .mcTableWrap::-webkit-scrollbar-track, .modal-ov .eduTblWrap::-webkit-scrollbar-track{background:transparent;}
