@@ -87,7 +87,26 @@
     wrap.addEventListener('scroll', show, { passive: true });
     wrap.addEventListener('mouseenter', show);
     wrap.addEventListener('mousemove', show);
-    if (global.ResizeObserver) new ResizeObserver(paint).observe(wrap);
+    if (global.ResizeObserver) {
+      var ro = new ResizeObserver(paint);
+      ro.observe(wrap);
+      /* 래퍼 크기는 그대로인 채 안의 표만 길어지는 경우가 있다(대상 추가 등) —
+         그때도 막대를 다시 계산해야 한다. 표 자체의 크기 변화도 함께 본다. */
+      var tbl = wrap.querySelector('table');
+      if (tbl) ro.observe(tbl);
+    }
+    /* 표를 통째로 다시 그리는 화면도 있어(innerHTML 교체) 자식 변화도 지켜본다 */
+    if (global.MutationObserver) {
+      var mt;
+      new MutationObserver(function () {
+        clearTimeout(mt);
+        mt = setTimeout(function () {
+          var t2 = wrap.querySelector('table');
+          if (t2 && global.ResizeObserver && !t2.__ovObserved) { t2.__ovObserved = true; }
+          paint();
+        }, 60);
+      }).observe(wrap, { childList: true, subtree: true });
+    }
     paint();
   }
 
