@@ -107,6 +107,10 @@
       '#staffPickModal #spmPaging{margin:0;}' +
       /* 검색줄 바로 아래 붙인다 — SMS 발송 모달도 본문 위 여백이 0 이다 */
       '#staffPickModal .modal-body{margin-top:0;}' +
+      /* 셀렉트가 커스텀(.csel)으로 바뀌면 .csel{width:100%} 때문에 폭이 모달 전체로 퍼진다.
+         그러면 검색줄이 네 줄로 늘어난다(화면 실측 206px). 원래 폭으로 묶는다. */
+      '#staffPickModal .spmRow .fselect,#staffPickModal .spmRow .csel{width:130px;flex:0 0 130px;}' +
+      '#staffPickModal .spmRow .csel .csel-box{width:100%;}' +
       '#staffPickModal .spmPg{display:inline-flex;align-items:center;gap:2px;}' +
       '#staffPickModal .spmPg button{height:22px;min-width:22px;padding:0 4px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line,#cfd6e0);border-radius:3px;background:#fff;color:var(--txt-mut,#5b6776);cursor:not-allowed;opacity:.4;font-size:11px;}' +
       '#staffPickModal .spmJump{display:inline-flex;align-items:center;gap:4px;margin-left:6px;font-size:11px;color:var(--txt-mut,#5b6776);}' +
@@ -271,6 +275,11 @@
     _state.onApply = typeof opts.onApply === 'function' ? opts.onApply : null;
     _state.list = null;
     _state.selectedName = null;
+    /* 화면과 같이 셀렉트를 커스텀으로 바꾼다(Kit 은 initCsel 이 초기 1회만 돌아 모달을 놓친다) */
+    /* Kit 은 KCMS.initCsel, 화면은 자체 빌더가 한다 — 있는 쪽을 부른다 */
+    var _mo = document.getElementById('staffPickModal');
+    if (typeof initCsel === 'function') initCsel(_mo);
+    else if (window.KCMS && typeof KCMS.initCsel === 'function') KCMS.initCsel(_mo);
     document.getElementById('spmFRank').value = '';
     document.getElementById('spmFPosition').value = '';
     document.getElementById('spmFStatus').value = '재직';
