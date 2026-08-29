@@ -337,3 +337,9 @@ table.testinfo-tbl > * > tr > th, table.testinfo-tbl > * > tr > td,
 table.notetbl > * > tr > th, table.notetbl > * > tr > td{padding:4px 8px !important;}
 /* "등록된 …가 없습니다" 안내 행은 넉넉한 여백을 그대로 둔다 */
 table.board td[colspan], table.cntbl td[colspan], table.reslist td[colspan], table.stattbl td[colspan], table.to2 td[colspan], table.sumtbl td[colspan], table.testinfo-tbl td[colspan], table.notetbl td[colspan]{padding:14px 8px !important;}
+
+/* 모달 표(th)도 본문 텍스트 표와 같은 4px 8px 로 — 높이는 규칙(33px)이 잡고 있어
+   보이는 높이는 그대로다(2026-08-29 요청). */
+table.shTable > * > tr > th, table.mcTable > * > tr > th,
+table.stathisttbl > * > tr > th, table.staytbl > * > tr > th,
+table.edutbl > * > tr > th, table.spmTbl > * > tr > th{padding:4px 8px !important;}
