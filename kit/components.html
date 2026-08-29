@@ -26,6 +26,9 @@
 
   /* 화면 폭을 그대로 쓴다 — 표·그리드 데모가 실제 화면만큼 넓게 보이도록 */
   .doc{flex:1;min-width:0;max-width:1680px;padding:28px 40px 90px;}
+  /* 화면에서 검색 필터 아래 굵은 회색 선은 필터와 목록을 가르는 구분이다.
+     데모 카드 안에는 가를 것이 없어 지운다. */
+  .doc .filters{border-bottom:0 !important;}
   .doc *{box-sizing:border-box;}
   .doc h1,.doc h2,.doc h3,.doc h4,.doc p{margin:0;}
   .doc-hd{margin-bottom:8px;}
