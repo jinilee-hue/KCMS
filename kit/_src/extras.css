@@ -600,3 +600,9 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 
 /* 중복체크 모달은 폭을 고정한다 — .wide 의 fit-content 규칙에 걸리면 내용만큼만 줄어든다(화면과 같은 처리). */
 .modal-ov#dupModal > .modal-box{width:900px !important;min-width:0 !important;max-width:min(94vw,900px) !important;}
+
+/* 화면에서 가져온 모달들이 기대는 규칙 (2026-08-29) */
+tent = whoLabel ? ('— ' + whoLabel) : ''; // 검색 조건은 매번 비운 상태(=전체 조회)로 시작 — 이력이 통상 수 건이라 기본값을 좁히면 오히려 누락으로 보인다 document.getElementById('shFrom').value = ''; document.getElementById('shTo').value = ''; document.getElementById('shSeminarName').value = ''; document.querySelectorAll('#semHistModal .dateshadow').forEach(function(sh){sh.value = '';}
+document.getElementById('shFrom').value = ''; document.getElementById('shTo').value = ''; document.getElementById('shSeminarName').value = ''; document.querySelectorAll('#semHistModal .dateshadow').forEach(function(sh){sh.value = '';}
+); // 날짜 입력/설명회명 키워드에서 Enter는 Search와 동일하게 동작(이 화면 검색바의 enterFieldMap과 같은 관례) document.querySelectorAll('#semHistModal .dateinput, #semHistModal #shSeminarName').forEach(function(inp){inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); renderSemHist();}
+); // 데이트피커(섀도우 input)로 값을 고르면 즉시 재조회 — 버튼을 한 번 더 누르지 않아도 되게 document.querySelectorAll('#semHistModal .dateshadow').forEach(function(sh){sh.addEventListener('change', function(){ setTimeout(renderSemHist, 0);}
