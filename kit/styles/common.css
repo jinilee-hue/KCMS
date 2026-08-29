@@ -374,3 +374,6 @@ tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !imp
    눌려 여백을 줘도 그대로였다. 행 높이를 풀고 위아래 22px 을 준다(2026-08-29 요청). */
 table > tbody > tr:only-child > td[colspan]{
   height:60px !important;padding:8px !important;vertical-align:middle !important;}
+
+/* 표 헤더 정렬 화살표(▾)가 9px 이라 눈에 잘 띄지 않았다 — 12px 로 키운다(2026-08-29 요청) */
+.tharrow{width:16px !important;height:16px !important;font-size:13px !important;}
