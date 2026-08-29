@@ -368,7 +368,6 @@
 <div class="demo row">
   <input class="finput" value="홍길동" style="width:150px;">
   <input class="finput" placeholder="이름 입력" style="width:150px;">
-  <input class="finput roflat" value="한국 (여) 20260804" readonly style="width:180px;">
   <input class="finput" value="수정 불가" disabled style="width:120px;">
   <textarea class="ftextarea" rows="2" style="width:220px;" placeholder="상담 메모"></textarea>
 </div>
@@ -386,58 +385,13 @@
   <span class="flabel">현재 레벨</span>
   <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
     <ul>
-      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP6m</li><li>ECP7</li><li>ECP7m</li><li>ECP7i</li></ul></li>
-      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
-      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li><li>MGT4</li></ul></li>
-      <li data-label="S"><ul><li>S1</li><li>S2</li><li>S3</li><li>S4</li></ul></li>
-      <li data-label="MAG"><ul><li>MAG1</li><li>MAG2</li><li>MAG3</li><li>MAG4</li></ul></li>
-      <li data-label="LX"><ul><li>LX A</li><li>LX B</li><li>LX C</li><li>LX D</li><li>LX E</li><li>LX F</li></ul></li>
-      <li data-label="Honors"><ul><li>Honors 1</li><li>Honors 2</li><li>Honors 3</li></ul></li>
-      <li data-label="Leaders"><ul><li>Leaders 1</li><li>Leaders 2</li><li>Leaders 3</li></ul></li>
-      <li data-label="Masters"><ul><li>Masters 1</li><li>Masters 2</li><li>Masters 3</li></ul></li>
-      <li data-label="Elites"><ul><li>Elites 1</li><li>Elites 2</li><li>Elites 3</li></ul></li>
+      <li data-label="ECP"><ul><li data-count="5">ECP5</li><li data-count="8">ECP6</li><li data-count="12">ECP6m</li><li data-count="9">ECP7</li></ul></li>
+      <li data-label="GT"><ul><li data-count="6">GT1</li><li data-count="4">GT2</li><li data-count="7">GT3</li><li data-count="3">GT4</li></ul></li>
+      <li data-label="MGT"><ul><li data-count="5">MGT1</li><li data-count="2">MGT2</li><li data-count="6">MGT3</li></ul></li>
+      <li data-label="Leaders"><ul><li data-count="4">Leaders 1</li><li data-count="3">Leaders 2</li></ul></li>
     </ul>
   </span>
   <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
-</div>
-<div class="demo row">
-  <span class="flabel">진학 레벨</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul><li>ECP5</li><li>ECP6</li><li>ECP7</li></ul></li>
-      <li data-label="GT"><ul><li>GT1</li><li>GT2</li><li>GT3</li><li>GT4</li></ul></li>
-      <li data-label="MGT"><ul><li>MGT1</li><li>MGT2</li><li>MGT3</li></ul></li>
-    </ul>
-  </span>
-  <span style="font-size:11.5px;color:var(--txt-mut);">검색 · 전체펼치기 · 전체해제가 목록 위에 붙는다</span>
-</div>
-<div class="demo row">
-  <span class="flabel">현재 학급</span>
-  <span class="ctree" data-ctree data-all data-placeholder="전체 학급" style="width:190px;">
-    <ul>
-      <li data-label="ECP"><ul>
-        <li data-count="0/12">ECP5-A</li><li data-count="0/12">ECP5-B</li>
-        <li data-count="3/12">ECP6-A</li><li data-count="1/12">ECP6-B</li>
-        <li data-count="3/12">ECP6m-A</li><li data-count="1/12">ECP6m-B</li></ul></li>
-      <li data-label="GT"><ul>
-        <li data-count="2/12">GT1-A</li><li data-count="1/12">GT1-B</li>
-        <li data-count="0/12">GT2-A</li><li data-count="2/12">GT2-B</li></ul></li>
-    </ul>
-  </span>
-  <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count</code> → 묶음은 합계</span>
-</div>
-
-<h4 class="sub">라벨 · 필수 · 도움말</h4>
-<div class="demo">
-  <table class="infotbl" style="max-width:620px;">
-    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="홍길동"></td>
-        <th>학부모 연락처<span class="req">*</span></th><td><input class="finput" value="010-1234-1234"></td></tr>
-  </table>
-</div>
-<div class="demo row" style="align-items:center;gap:10px;">
-  <span class="flabel">정렬</span>
-  <span style="width:150px;display:inline-block;"><select><option>최신순</option><option>이름순</option></select></span>
-  <span class="hint">시간순</span>
 </div>
 
 </div></div></section>
@@ -478,8 +432,13 @@
     <span class="flabel">캠퍼스</span><select class="fselect"><option>시범캠퍼스</option></select>
     <span class="flabel">학생명</span><input class="finput" placeholder="이름">
     <span class="flabel">상태</span><select class="fselect"><option>전체</option><option>재원</option><option>대기</option></select>
-    <span class="fbtns"><button class="btn">검색</button><button class="btn g">초기화</button></span>
+    <span class="fbtns"><button class="btn s">검색</button><button class="btn g">초기화</button></span>
   </div>
+</div>
+<div class="demo row" style="align-items:center;gap:10px;">
+  <span class="flabel">정렬</span>
+  <span style="width:150px;display:inline-block;"><select><option>최신순</option><option>이름순</option></select></span>
+  <span class="hint">시간순</span>
 </div>
 </div></div></section>
 
