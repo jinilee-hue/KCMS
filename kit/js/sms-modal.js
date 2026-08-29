@@ -192,7 +192,9 @@
       '.sms-comp-tools .smsfoot-note{margin-left:auto;}' +
       /* 셀 위에 떠 있는 스크롤 표시 — 네이티브 스크롤바는 레이아웃 폭을 8px 먹어
          표가 파란 상단선까지 닿지 못하므로 숨기고, 이 썸을 절대배치로 얹는다. */
-      '.ovscroll{position:absolute;top:0;right:1px;width:6px;pointer-events:none;z-index:4;}' +
+      /* 공통 오버레이 막대(overlay-scroll.js 의 .ovbar)와 겹쳐 막대가 두 개로 보였다 —
+   이 모달 자체 막대는 감추고 공통 막대 하나만 쓴다(2026-08-29). */
+      '.ovscroll{display:none !important;position:absolute;top:0;right:1px;width:6px;pointer-events:none;z-index:4;}' +
       '.ovscroll .ovthumb{position:absolute;left:0;width:6px;border-radius:3px;\n         background:rgba(44,62,90,.32);opacity:0;transition:opacity .18s;}' +
       '.ovscroll.on .ovthumb{opacity:1;}' +
       // 2026-07-28: 좌/우 컬럼 드래그로 리사이즈해도 문구 표출 폭이 같이 변해 실제 수신 화면(폰) 대비
