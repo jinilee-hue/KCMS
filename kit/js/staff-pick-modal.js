@@ -104,7 +104,7 @@
       '#staffPickModal table.spmTbl tbody tr:hover{background:var(--pb-a08,rgba(0,102,255,.08));}' +
       '#staffPickModal table.spmTbl tbody tr.spmRowSel{background:var(--pb-a15,rgba(0,102,255,.15));box-shadow:inset 3px 0 0 var(--pb,#0066FF);font-weight:700;}' +
       '#staffPickModal .spmEmpty{text-align:center;color:var(--txt-mut,#5b6776);padding:20px 0;}' +
-      '#staffPickModal #spmPaging{margin:0;border-top:1px solid var(--line-soft,#e3e8ef);}' +
+      '#staffPickModal #spmPaging{margin:0;}' +
       '#staffPickModal .spmPg{display:inline-flex;align-items:center;gap:2px;}' +
       '#staffPickModal .spmPg button{height:22px;min-width:22px;padding:0 4px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line,#cfd6e0);border-radius:3px;background:#fff;color:var(--txt-mut,#5b6776);cursor:not-allowed;opacity:.4;font-size:11px;}' +
       '#staffPickModal .spmJump{display:inline-flex;align-items:center;gap:4px;margin-left:6px;font-size:11px;color:var(--txt-mut,#5b6776);}' +
