@@ -92,7 +92,7 @@
  * 없는 SMS 모달 전용 클래스만): .seg, .smsfoot-note, .smsQuota, .smsTypeChk, .smsModalWide,
  * .sms-layout, .sms-left, .sms-right, .sms-resizer, .colResizer, .sms-composebox, .sms-comp-tools, .sms-tplsectit,
  * .sms-overlay, .sms-symbolgrid, .sms-fieldlist, .splitbtn, .splitdd, .smsExcelBtn, .smsDangerBtn,
- * .smsTplListWrap, .smsTplTypeCell, .smsTplTextCell, .sortArrow,
+ * .smsTplListWrap, .smsTplTypeCell, .smsTplTextCell, .tharrow,
  * .smsPhoneWrap, .smsPhoneFrame, .smsPhoneNotch, .smsPhoneScreen,
  * .addtabs, .addfilterrow, .addpageRow, .smsAddWide
  */
@@ -242,8 +242,8 @@
       '.smsDangerBtn:hover{border-color:var(--danger);color:var(--danger);}' +
       '#smsRecipTbl th[data-sort]{cursor:pointer;user-select:none;}' +
       '#smsRecipTbl th[data-sort]:hover{color:var(--pb);}' +
-      '.sortArrow{display:inline-block;margin-left:2px;font-size:8px;color:#b8c2d6;}' +
-      '.sortArrow.on{color:var(--pb);}' +
+      /* 정렬 화살표는 공통 .tharrow 규칙(16×16, 13px)이 정한다 — 여기선 여백만 */
+      '#smsRecipTbl thead th .tharrow{margin-left:2px;}' +
       '';
     document.head.appendChild(style);
   }
@@ -278,11 +278,11 @@
                     '<thead><tr>' +
                       '<th style="width:26px;"><input type="checkbox" class="rowchk" id="smsRecipChkAll"></th>' +
                       '<th style="width:26px;">No</th>' +
-                      '<th style="width:160px;" data-sort="name">이름<span class="sortArrow">▴</span><span class="colResizer"></span></th>' +
-                      '<th style="width:70px;" data-sort="studentNo">학번<span class="sortArrow">▴</span><span class="colResizer"></span></th>' +
-                      '<th style="width:100px;" data-sort="phone">전화번호<span class="sortArrow">▴</span><span class="colResizer"></span></th>' +
-                      '<th style="width:106px;" data-sort="parentPhone">학부모 전화번호<span class="sortArrow">▴</span><span class="colResizer"></span></th>' +
-                      '<th style="width:100px;" data-sort="optOut">광고수신거부<span class="sortArrow">▴</span><span class="colResizer"></span></th>' +
+                      '<th style="width:160px;" data-sort="name">이름<span class="tharrow">▾</span><span class="colResizer"></span></th>' +
+                      '<th style="width:70px;" data-sort="studentNo">학번<span class="tharrow">▾</span><span class="colResizer"></span></th>' +
+                      '<th style="width:100px;" data-sort="phone">전화번호<span class="tharrow">▾</span><span class="colResizer"></span></th>' +
+                      '<th style="width:106px;" data-sort="parentPhone">학부모 전화번호<span class="tharrow">▾</span><span class="colResizer"></span></th>' +
+                      '<th style="width:100px;" data-sort="optOut">광고수신거부<span class="tharrow">▾</span><span class="colResizer"></span></th>' +
                     '</tr></thead>' +
                     '<tbody id="smsRecipBody"></tbody>' +
                   '</table>' +
@@ -536,15 +536,12 @@
 
   function renderSmsSortArrows() {
     document.querySelectorAll('#smsRecipTbl th[data-sort]').forEach(function (th) {
-      var arrow = th.querySelector('.sortArrow');
+      var arrow = th.querySelector('.tharrow');
       var field = th.dataset.sort;
-      if (_state.sortCol === field) {
-        arrow.textContent = _state.sortDir === 1 ? '▲' : '▼';
-        arrow.classList.add('on');
-      } else {
-        arrow.textContent = '▴';
-        arrow.classList.remove('on');
-      }
+      var on = (_state.sortCol === field);
+      arrow.textContent = '▾';                       // 글리프는 하나 — 방향은 .up 회전으로
+      arrow.classList.toggle('on', on);
+      arrow.classList.toggle('up', on && _state.sortDir === 1);
     });
   }
   function sortSmsRecipients(field) {
