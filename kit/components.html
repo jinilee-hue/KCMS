@@ -143,7 +143,6 @@
 <a href="#modal">모달</a>
 <a href="#toast">토스트</a>
 <a href="#help">도움말 팝오버</a>
-<a href="#metric">지표 · 상태 표시</a>
 <a href="#state">상태</a>
 <a href="#sec">섹션 · 패널</a>
 <a href="#gnb">GNB 메뉴</a>
@@ -221,6 +220,11 @@
 <h4 class="sub">알약 탭 · 24PX</h4>
 <div class="demo row">
   <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
+</div>
+
+<h4 class="sub">기간 탭 · 24PX</h4>
+<div class="demo row">
+  <span class="period-tabs"><button class="period-tab on">1일</button><button class="period-tab">1주</button><button class="period-tab">1개월</button></span>
 </div>
 
 <h4 class="sub">토글 · 붙은 라운드 박스</h4>
@@ -431,18 +435,26 @@
 </div></div></section>
 
 <section id="choice"><div class="card"><div class="card-header"><div class="card-title">체크 · 라디오 · 토글</div></div><div class="card-body">
-<h4 class="sub">체크박스 · 라디오 · 14PX</h4>
-<div class="demo row">
-  <label class="chk"><input type="checkbox" checked> 재원생만</label>
-  <label class="chk"><input type="checkbox"> 대기 포함</label>
-  <label class="chk"><input type="radio" name="gg" checked> 남</label>
-  <label class="chk"><input type="radio" name="gg"> 여</label>
+<h4 class="sub">체크박스 · 표 행 선택 · 14PX</h4>
+<div class="demo flush">
+  <div class="tblwrap">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th>
+        <th class="sortable">이름<span class="tharrow">▾</span></th><th>학년</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍길동</td><td>초3</td><td>재원</td></tr>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초4</td><td>재원</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-<h4 class="sub">토글 스위치 · 18PX</h4>
-<div class="demo row">
-  <label class="toggle"><input type="checkbox" checked><span class="toggle-slider"></span>충원율 반영</label>
-  <label class="toggle"><input type="checkbox"><span class="toggle-slider"></span>대기 포함</label>
+<h4 class="sub">토글 스위치 · 34×18PX</h4>
+<div class="demo row" style="align-items:center;">
+  <label class="switch"><input type="checkbox" checked><span class="slider"></span></label>
+  <span class="switch-label">충원율 반영</span>
+  <label class="switch" style="margin-left:18px;"><input type="checkbox"><span class="slider"></span></label>
+  <span class="switch-label">대기 포함</span>
 </div>
 
 <h4 class="sub">세그먼트</h4>
@@ -563,32 +575,6 @@
       </div>
     </div>
   </span>
-</div>
-</div></div></section>
-
-<section id="metric"><div class="card"><div class="card-header"><div class="card-title">지표 · 상태 표시</div></div><div class="card-body">
-<h4 class="sub">진행바</h4>
-<div class="demo row">
-  <div class="progress-track" style="width:200px;"><i class="progress-fill ok" style="display:block;width:78%"></i></div>
-  <div class="progress-track" style="width:200px;"><i class="progress-fill low" style="display:block;width:42%"></i></div>
-</div>
-
-<h4 class="sub">아바타</h4>
-<div class="demo row">
-  <span class="avatar">최</span><span class="avatar">김</span><span class="avatar lg">박</span>
-</div>
-
-<h4 class="sub">기간 탭 · 24PX</h4>
-<div class="demo row">
-  <span class="period-tabs"><button class="period-tab on">주</button><button class="period-tab">월</button><button class="period-tab">분기</button></span>
-</div>
-
-<h4 class="sub">빈 상태</h4>
-<div class="demo">
-  <div class="empty-state" style="padding:18px 0;">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg>
-    <div class="es-title">조회 결과가 없습니다</div>
-  </div>
 </div>
 </div></div></section>
 
