@@ -356,16 +356,17 @@ table.dupform td:has(textarea), table.staytbl td:has(textarea), table.edutbl td:
 .modal-ov .schtbl-wrap, .modal-ov .imptbl-wrap, .modal-ov .stu-tblwrap,
 .modal-ov .to2-wrap, .modal-ov .smsTplListWrap{
   width:100%;box-sizing:border-box;}
-/* .modaltbl-wrap 은 margin:12px 을 갖는 패널이라 width:100% 를 주면 그만큼 모달 밖으로 넘친다
-   (실측 -11px — 표 오른쪽이 흰 박스에 붙고, 표 위에 떠 있는 스크롤 막대까지 잘려 나갔다). */
-.modal-ov .modaltbl-wrap{width:auto;box-sizing:border-box;}
-/* sticky thead 는 패널의 padding(14px) 아래에 붙는다 — 그 틈으로 스크롤되는 td 가 헤더 위를
-   지나갔다. 다른 표 래퍼(.tblwrap 등)처럼 상하 padding 을 두지 않아 헤더가 패널 맨 위에 붙게 한다. */
-/* 패널의 상하 여백(14px)은 흰 박스 안쪽 여백이라 그대로 둔다. 대신 sticky 헤더는
-   그 여백 위(패널 맨 위)에 붙도록 top 을 여백만큼 당긴다 — top:0 이면 헤더가 여백 아래에
-   서고 그 틈으로 스크롤되는 td 가 헤더 위를 지나간다(2026-08-29 실측). */
-.modal-ov .modaltbl-wrap.modaltbl-wrap > table > thead > tr > th{top:-14px !important;}
+/* 표 패널은 두 겹이다 — 바깥 .modaltbl-box 가 흰 박스와 여백(스크롤과 무관하게 고정),
+   안쪽 .modaltbl-wrap 이 스크롤을 맡는다. 한 겹으로 두면 여백이 콘텐츠와 함께 스크롤돼
+   표가 흰 바탕에 딱 붙어 지나간다(2026-08-29 요청). */
+.modal-ov .modaltbl-box{display:flex;flex-direction:column;min-height:0;overflow:hidden;
+  width:auto;box-sizing:border-box;}
+.modal-ov .modaltbl-wrap{flex:1;min-height:0;overflow:auto;width:auto;
+  padding:0 !important;margin:0 !important;border:0 !important;background:transparent !important;}
 .modal-ov .modaltbl-wrap > .shcount{padding:0 0 8px !important;}
+/* 두 겹이 되면서 "모달 박스의 직계 패널" 선택자로 걸려 있던 sticky 지정이 빗나갔다 — 다시 건다 */
+.modal-ov .modaltbl-wrap > table > thead > tr > th{
+  position:sticky !important;top:0 !important;z-index:2 !important;background:#F4F7FD !important;}
 
 /* ==========================================================================
    특이사항 textarea (2026-08-28 요청)
