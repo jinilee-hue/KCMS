@@ -104,7 +104,7 @@
       '#staffPickModal table.spmTbl tbody tr:hover{background:var(--pb-a08,rgba(0,102,255,.08));}' +
       '#staffPickModal table.spmTbl tbody tr.spmRowSel{background:var(--pb-a15,rgba(0,102,255,.15));box-shadow:inset 3px 0 0 var(--pb,#0066FF);font-weight:700;}' +
       '#staffPickModal .spmEmpty{text-align:center;color:var(--txt-mut,#5b6776);padding:20px 0;}' +
-      '#staffPickModal #spmPaging{margin:0 12px;}' +   /* 표와 같은 좌우 여백으로 줄을 맞춘다 */
+      '#staffPickModal #spmPaging{margin:0;border-top:1px solid var(--line-soft,#e3e8ef);}' +
       '#staffPickModal .spmPg{display:inline-flex;align-items:center;gap:2px;}' +
       '#staffPickModal .spmPg button{height:22px;min-width:22px;padding:0 4px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line,#cfd6e0);border-radius:3px;background:#fff;color:var(--txt-mut,#5b6776);cursor:not-allowed;opacity:.4;font-size:11px;}' +
       '#staffPickModal .spmJump{display:inline-flex;align-items:center;gap:4px;margin-left:6px;font-size:11px;color:var(--txt-mut,#5b6776);}' +
@@ -133,10 +133,13 @@
             '<span class="spmLbl">직원명</span><input class="finput" id="spmFName" placeholder="직원명 입력">' +
             '<button type="button" class="btn s" id="spmSearchBtn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>검색</button>' +
           '</div>' +
-          '<div style="flex:1;min-height:0;overflow:auto;">' +
-            '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
+          /* 표와 페이징은 한 흰 박스(.modal-body) 안에 둔다 — SMS 발송 모달과 같은 구조 */
+          '<div class="modal-body" style="display:flex;flex-direction:column;padding:0;overflow:hidden;">' +
+            '<div style="flex:1;min-height:0;overflow:auto;">' +
+              '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
+            '</div>' +
+            '<div class="paging" id="spmPaging"></div>' +
           '</div>' +
-          '<div class="paging" id="spmPaging"></div>' +
           '<div class="modal-foot">' +
             '<button class="btn" id="spmApplyBtn">✔ 적용</button>' +
           '</div>' +
