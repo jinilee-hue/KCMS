@@ -233,7 +233,7 @@
     <table class="grid" style="table-layout:auto;">
       <thead><tr>
         <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th>
+        <th class="sortable">이름<span class="tharrow"></span></th><th class="sortable">학년<span class="tharrow"></span></th><th class="sortable">응시일<span class="tharrow"></span></th><th class="sortable">점수<span class="tharrow"></span></th><th>상태</th>
       </tr></thead>
       <tbody>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
@@ -260,7 +260,7 @@
 <h4 class="sub">세로 스크롤 · 표 안에서 · 헤더 고정</h4>
 <div class="demo flush">
   <div class="tblwrap" style="max-height:132px;">
-    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="sarrow"></span></th><th class="sortable">학년<span class="sarrow"></span></th><th class="sortable">응시일<span class="sarrow"></span></th><th class="sortable">점수<span class="sarrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="tharrow"></span></th><th class="sortable">학년<span class="tharrow"></span></th><th class="sortable">응시일<span class="tharrow"></span></th><th class="sortable">점수<span class="tharrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
@@ -873,11 +873,11 @@
       var tbl=th.closest('table'), idx=[].indexOf.call(th.parentElement.children, th);
       var asc=!th.classList.contains('asc');
       tbl.querySelectorAll('th.sortable').forEach(function(x){
-        x.classList.remove('asc'); var a=x.querySelector('.sarrow'); if(a) a.classList.remove('on'); });
+        x.classList.remove('asc'); var a=x.querySelector('.tharrow'); if(a) a.classList.remove('on'); });
       th.classList.toggle('asc', asc);
       /* 화면과 같은 규칙 — 정렬 중인 열에만 화살표를 보이고 파랑(.on), ▲ 오름 / ▼ 내림 */
-      tbl.querySelectorAll('.sarrow').forEach(function(a){ a.textContent=''; a.classList.remove('on'); });
-      var ar=th.querySelector('.sarrow'); if(ar){ ar.classList.add('on'); ar.textContent = asc ? '▲' : '▼'; }
+      tbl.querySelectorAll('.tharrow').forEach(function(a){ a.textContent=''; a.classList.remove('on'); });
+      var ar=th.querySelector('.tharrow'); if(ar){ ar.classList.add('on'); ar.textContent = asc ? '▲' : '▼'; }
       var body=tbl.tBodies[0], rows=[].slice.call(body.rows);
       rows.sort(function(a,b){
         var x=(a.cells[idx]||{}).textContent||'', y=(b.cells[idx]||{}).textContent||'';

@@ -181,7 +181,7 @@
 .mapbadge.muted, .ddbadge.muted{background:#EEF1F5 !important;color:var(--txt-mut) !important;}
 
 /* 정렬 중인 열의 화살표만 파랑 — 화면과 같은 규칙(▲ 오름 / ▼ 내림) */
-.sarrow.on{color:var(--pb);}
+.tharrow.on{color:var(--pb);}
 /* 아이콘 전용 버튼도 다른 컨트롤과 같은 24px (입력창 안 .ibtn 은 18px 유지) */
 .icon-btn{width:24px;height:24px;}
 .ibtn{width:24px;height:24px;}
@@ -512,9 +512,9 @@ table.grid > * > tr > th, table.grid > * > tr > td{padding:4px 8px !important;}
 table.grid thead tr th{padding-top:4px !important;padding-bottom:4px !important;padding-left:8px !important;padding-right:8px !important;}
 table.grid > tbody > tr > td{height:33px !important;}
 
-/* 불러오기 표의 정렬 화살표(.sarrow)도 다른 화면(.tharrow)과 같은 크기로 —
+/* 불러오기 표의 정렬 화살표(.tharrow)도 다른 화면(.tharrow)과 같은 크기로 —
    9px 이라 혼자 작았다. 늘 보이고 정렬 중인 열만 파랑(2026-08-29 요청). */
-table thead th .sarrow{font-size:13px !important;width:16px;height:16px;
+table thead th .tharrow{font-size:13px !important;width:16px;height:16px;
   display:inline-flex !important;align-items:center;justify-content:center;
   visibility:visible !important;color:#2C3E5A;}
-table thead th .sarrow.on{color:var(--pb) !important;}
+table thead th .tharrow.on{color:var(--pb) !important;}
