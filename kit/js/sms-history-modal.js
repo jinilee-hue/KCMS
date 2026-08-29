@@ -290,6 +290,8 @@
     html += '<b class="' + (_state.page >= totalPages ? 'dis' : '') + '" data-pg="next">&rsaquo;</b>';
     html += '<b class="' + (_state.page >= totalPages ? 'dis' : '') + '" data-pg="last">&raquo;</b>';
     html += '</span>';
+    /* 본문 목록 페이징과 같은 구성 — 번호 다음에 페이지 직접입력(2026-08-29 요청) */
+    html += '<span class="shJump pgjump">페이지 <input type="number" class="shPageInput" min="1" max="' + totalPages + '" value="' + _state.page + '"> / ' + totalPages + '</span>';
     html += '<button type="button" class="shRefresh" title="새로고침"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>';
     html += '<span class="shSize">페이지당 <select class="shSizeSel">' + [30, 50, 100].map(function (n) { return '<option value="' + n + '"' + (n === _state.pageSize ? ' selected' : '') + '>' + n + '</option>'; }).join('') + '</select></span>';
     html += '<span class="shTotal">' + fromNo + ' - ' + toNo + '</span>';
@@ -358,6 +360,13 @@
       renderList();
     });
     document.getElementById('shPaging').addEventListener('change', function (e) {
+      /* 페이지 직접입력 — 본문 목록 페이징과 같은 동작(2026-08-29) */
+      if (e.target.classList.contains('shPageInput')) {
+        var max = parseInt(e.target.getAttribute('max'), 10) || 1;
+        _state.page = Math.min(max, Math.max(1, parseInt(e.target.value, 10) || 1));
+        renderList();
+        return;
+      }
       if (!e.target.classList.contains('shSizeSel')) return;
       _state.pageSize = parseInt(e.target.value, 10) || 30;
       _state.page = 1;

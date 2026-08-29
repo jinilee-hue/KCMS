@@ -359,3 +359,13 @@ tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !imp
 /* .paging 하단의 6px 구분선은 본문 목록에서 아래 영역과 나누는 선이다 —
    팝업 안에서는 페이징 밑에 회색 띠로만 보이므로 없앤다(2026-08-29 요청). */
 .modal-ov .paging{border-bottom:0 !important;}
+
+/* 팝업 페이징도 본문 목록 페이징과 같은 규격으로 — 버튼 24px · 라운드 3px · 글자 12px,
+   페이지 입력 24px(2026-08-29 요청). 구성은 «‹번호›» 페이지 N/M ⟳ 페이지당 순서다. */
+#shPaging .pg b,
+#shPaging .shRefresh,
+#staffPickModal .spmPg button{
+  height:24px !important;min-width:24px !important;border-radius:3px !important;font-size:12px !important;}
+#shPaging .shSize select, #shPaging .shSizeSel,
+#staffPickModal .spmJump input, #shPaging .shJump input{height:24px !important;}
+#staffPickModal .spmJump input{width:38px !important;}

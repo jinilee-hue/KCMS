@@ -617,7 +617,14 @@
       nums +
       '<button type="button" class="pgnav" data-go="next" title="다음"' + (page >= totalPages ? ' disabled' : '') + '>&rsaquo;</button>' +
       '<button type="button" class="pgnav" data-go="last" title="끝"' + (page >= totalPages ? ' disabled' : '') + '>&raquo;</button>' +
-      '<span class="pgtotal">' + (total ? (start + '-' + end) : '0-0') + '</span>';
+      /* 본문 목록 페이징과 같은 구성으로 — 페이지 직접입력 · 새로고침 · 페이지당(2026-08-29 요청) */
+      '<span class="pgjump">페이지 <input type="number" class="pgpage" min="1" max="' + totalPages + '" value="' + page + '"> / ' + totalPages + '</span>' +
+      '<button type="button" class="pgnav" data-go="refresh" title="새로고침">' +
+        '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>' +
+      '<span class="pgsize">페이지당 <select class="pgsizesel" aria-label="페이지당 표시 개수">' +
+        [30, 50, 100].map(function (n) { return '<option value="' + n + '"' + (n === ADD_PAGE_SIZE ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
+      '</select></span>';
     var cnt = document.getElementById('smsAddTotalCount');
     if (cnt) cnt.innerHTML = '전체 <b>' + total.toLocaleString() + '</b>건';
     el.querySelectorAll('.pgnum').forEach(function (b) {
@@ -626,12 +633,28 @@
     el.querySelectorAll('.pgnav').forEach(function (b) {
       b.addEventListener('click', function () {
         var g = b.dataset.go;
+        if (g === 'refresh') { renderSmsAddList(); return; }
         if (g === 'first') _state.addPage = 1;
         else if (g === 'prev') _state.addPage = Math.max(1, _state.addPage - 1);
         else if (g === 'next') _state.addPage = Math.min(totalPages, _state.addPage + 1);
         else _state.addPage = totalPages;
         renderSmsAddList();
       });
+    });
+    var jump = el.querySelector('.pgpage');
+    if (jump) {
+      var go = function () {
+        var p = Math.min(totalPages, Math.max(1, Number(jump.value) || 1));
+        _state.addPage = p; renderSmsAddList();
+      };
+      jump.addEventListener('change', go);
+      jump.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); go(); } });
+    }
+    var sizeSel = el.querySelector('.pgsizesel');
+    if (sizeSel) sizeSel.addEventListener('change', function () {
+      ADD_PAGE_SIZE = Number(sizeSel.value) || 100;
+      _state.addPage = 1;
+      renderSmsAddList();
     });
   }
 
