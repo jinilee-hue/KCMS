@@ -497,3 +497,8 @@ table.grid td:has(.btn), table.grid td:has(button), table.grid td:has(a){text-ov
    헤더 글자를 밀어냈다. 자리는 늘 차지하고 보이기(visibility)만 토글한다(2026-08-29 요청). */
 .tharrow{display:inline-flex !important;align-items:center;justify-content:center;
   visibility:visible !important;box-sizing:border-box;}
+
+/* 시간 입력은 키보드로 직접 입력할 수 있어야 한다 — readonly 를 쓰지 않는 대신
+   브라우저 기본 시간 위젯의 진입점(시계 아이콘)만 감춘다. 패널은 옆의 시계 버튼으로 연다. */
+input[type="time"]::-webkit-calendar-picker-indicator{display:none !important;}
+input[type="time"]{padding-right:22px;}
