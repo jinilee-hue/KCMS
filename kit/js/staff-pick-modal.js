@@ -132,7 +132,7 @@
             '<span class="spmLbl">직원명</span><input class="finput" id="spmFName" placeholder="직원명 입력">' +
             '<button type="button" class="btn sm" id="spmSearchBtn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>검색</button>' +
           '</div>' +
-          '<div class="tblwrap" style="flex:1;min-height:0;overflow:auto;">' +
+          '<div style="flex:1;min-height:0;overflow:auto;">' +
             '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
           '</div>' +
           '<div class="modal-foot" style="justify-content:space-between;align-items:center;">' +
