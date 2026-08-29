@@ -15,7 +15,7 @@
   var SEL = '.tblwrap,.stu-tblwrap,.reslist-wrap,.notetbl-wrap,.stattbl-wrap,.matwrap,' +
             '.imptbl-wrap,.schtbl-wrap,.shTableWrap,.mcTableWrap,.eduTblWrap,' +
             /* 클래스 없이 인라인 style 로만 스크롤을 주던 모달 표 패널에 붙인 공통 클래스 */
-            '.modaltbl-wrap,.ovscroll';
+            '.modaltbl-wrap,.pcms-ovscroll';
 
   var css = document.createElement('style');
   css.id = 'pcmsOverlayScrollStyles';
@@ -120,7 +120,7 @@
       while (p && !p.classList.contains('modal-ov')) {
         if (p.classList.contains('modal-body') || p.classList.contains('modal-box')) break;
         var s = getComputedStyle(p);
-        if (/(auto|scroll)/.test(s.overflowY)) { p.classList.add('ovscroll'); attach(p); break; }
+        if (/(auto|scroll)/.test(s.overflowY)) { p.classList.add('pcms-ovscroll'); attach(p); break; }
         p = p.parentElement;
       }
     });
