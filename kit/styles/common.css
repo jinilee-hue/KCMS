@@ -355,3 +355,7 @@ tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !imp
    표를 패널 폭에 맞춰 가로 스크롤 자체를 없앤다(2026-08-29 요청). */
 #smsAddModal .tblwrap{overflow-x:hidden !important;}
 #smsAddModal table#smsAddTbl{table-layout:fixed !important;width:100% !important;min-width:0 !important;}
+
+/* .paging 하단의 6px 구분선은 본문 목록에서 아래 영역과 나누는 선이다 —
+   팝업 안에서는 페이징 밑에 회색 띠로만 보이므로 없앤다(2026-08-29 요청). */
+.modal-ov .paging{border-bottom:0 !important;}
