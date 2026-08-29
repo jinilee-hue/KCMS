@@ -31,6 +31,9 @@
   #pcmsFrameOv{position:fixed;inset:0;z-index:5000;background:rgba(15,30,60,.28);}
   #pcmsFrameOv[hidden]{display:none;}
   #pcmsFrame{width:100%;height:100%;border:0;background:transparent;}
+  #pcmsFrameWait{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;
+    z-index:5002;color:#fff;font-size:12.5px;letter-spacing:-.2px;pointer-events:none;}
+  #pcmsFrameWait[hidden]{display:none;}
   #pcmsFrameClose{position:fixed;top:14px;right:18px;z-index:5001;width:28px;height:28px;
     border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);
     font-size:14px;line-height:1;cursor:pointer;}
@@ -840,6 +843,7 @@
 <!-- 팝업 미리보기 — 체험판 화면을 그대로 띄워 그 팝업만 보여준다(복사본을 두지 않기 위한 장치) -->
 <div id="pcmsFrameOv" hidden>
   <iframe id="pcmsFrame" title="팝업 미리보기" allowtransparency="true"></iframe>
+  <div id="pcmsFrameWait" hidden>팝업을 불러오는 중…</div>
   <button type="button" id="pcmsFrameClose" aria-label="닫기">✕</button>
 </div>
 <script>
@@ -848,9 +852,20 @@
 (function(){
   var ov=document.getElementById('pcmsFrameOv'), fr=document.getElementById('pcmsFrame');
   var closeBtn=document.getElementById('pcmsFrameClose');
+  var wait=document.getElementById('pcmsFrameWait');
   if(!ov||!fr) return;
-  function open(url){ fr.src=url; ov.hidden=false; document.body.style.overflow='hidden'; }
-  function close(){ ov.hidden=true; fr.src='about:blank'; document.body.style.overflow=''; }
+  function open(url){
+    /* 같은 주소를 다시 누르면 해시만 바뀌어 재로드가 안 된다 — 매번 새로 띄운다 */
+    fr.src='about:blank';
+    if(wait) wait.hidden=false;
+    setTimeout(function(){ fr.src=url; }, 30);
+    ov.hidden=false; document.body.style.overflow='hidden';
+  }
+  function close(){ ov.hidden=true; fr.src='about:blank'; document.body.style.overflow=''; if(wait) wait.hidden=true; }
+  fr.addEventListener('load', function(){
+    /* 체험판이 화면을 그리고 팝업을 띄울 때까지 잠깐 기다린다 */
+    setTimeout(function(){ if(wait) wait.hidden=true; }, 900);
+  });
   document.addEventListener('click', function(e){
     var b=e.target.closest && e.target.closest('[data-pcms-modal]');
     if(b){ e.preventDefault(); open(b.getAttribute('data-pcms-modal')); return; }
