@@ -299,3 +299,9 @@ table.staytbl > tbody > tr:first-child > *, table.edutbl > tbody > tr:first-chil
 .modal-ov .modaltbl-wrap, .modal-ov .eduTblWrap{overflow-x:hidden !important;}
 table.edutbl{min-width:0 !important;}
 table.staytbl, table.edutbl{width:100% !important;table-layout:fixed !important;}
+
+/* 체류 정보 표만 옛 방식(표 자체 ::before 오버레이 + margin-top 1px)이 남아 있어
+   새로 그린 th::before 라인과 겹쳐 파란 라인이 2px 로 보였다 —
+   교육정보·설명회 내역 표와 같이 표 오버레이는 끄고 여백도 0 으로(2026-08-29). */
+table.staytbl:has(thead)::before{display:none !important;}
+table.staytbl:has(thead){margin-top:0 !important;}
