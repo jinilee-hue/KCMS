@@ -343,8 +343,15 @@ table.dupform td:has(textarea), table.staytbl td:has(textarea), table.edutbl td:
    폭이 무너진다(레이아웃이 다시 계산되는 순간 6px 로 접혔다). 래퍼 폭을 명시해 끊는다. */
 .modal-ov .tblwrap, .modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap,
 .modal-ov .schtbl-wrap, .modal-ov .imptbl-wrap, .modal-ov .stu-tblwrap,
-.modal-ov .modaltbl-wrap, .modal-ov .to2-wrap, .modal-ov .smsTplListWrap{
+.modal-ov .to2-wrap, .modal-ov .smsTplListWrap{
   width:100%;box-sizing:border-box;}
+/* .modaltbl-wrap 은 margin:12px 을 갖는 패널이라 width:100% 를 주면 그만큼 모달 밖으로 넘친다
+   (실측 -11px — 표 오른쪽이 흰 박스에 붙고, 표 위에 떠 있는 스크롤 막대까지 잘려 나갔다). */
+.modal-ov .modaltbl-wrap{width:auto;box-sizing:border-box;}
+/* sticky thead 는 패널의 padding(14px) 아래에 붙는다 — 그 틈으로 스크롤되는 td 가 헤더 위를
+   지나갔다. 다른 표 래퍼(.tblwrap 등)처럼 상하 padding 을 두지 않아 헤더가 패널 맨 위에 붙게 한다. */
+.modal-ov > .modal-box > .modaltbl-wrap.modaltbl-wrap{padding-top:0 !important;padding-bottom:0 !important;}
+.modal-ov .modaltbl-wrap > .shcount{padding:10px 0 8px !important;}
 
 /* ==========================================================================
    특이사항 textarea (2026-08-28 요청)
