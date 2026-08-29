@@ -488,3 +488,7 @@ table > tbody > tr:only-child > td[colspan]{
 
 /* 표 헤더 정렬 화살표(▾)가 9px 이라 눈에 잘 띄지 않았다 — 12px 로 키운다(2026-08-29 요청) */
 .tharrow{width:16px !important;height:16px !important;font-size:13px !important;}
+
+/* table.grid td 는 글자가 넘칠 때를 위해 text-overflow:ellipsis 를 쓴다.
+   버튼만 든 칸(SMS내역·상담 등)에서는 버튼 옆에 점 세 개가 찍혀 보이므로 말줄임을 끈다(2026-08-29 요청). */
+table.grid td:has(.btn), table.grid td:has(button), table.grid td:has(a){text-overflow:clip !important;}
