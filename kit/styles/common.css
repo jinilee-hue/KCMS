@@ -266,3 +266,30 @@ table.infotbl td textarea, table.dupform td textarea,
 table.staytbl td textarea, table.edutbl td textarea{
   display:block !important;vertical-align:top;width:100%;box-sizing:border-box;}
 table.infotbl td textarea{height:88px !important;}
+
+/* ==========================================================================
+   체류 정보 · 과거교육정보 표 (2026-08-29 요청)
+   --------------------------------------------------------------------------
+   기준은 입학 설명회 내역 표(table.stathisttbl)다.
+   · thead 를 sticky 로 고정 — .staytbl 은 position:relative 라 스크롤에 헤더가 밀려 사라졌다
+   · 상단 파란 라인은 th 의 ::before 오버레이로 그린다. 셀 보더나 안쪽 그림자로 그리면
+     th 세로 보더가 라인 위로 1px 올라와 눈금처럼 보인다(좌우로 1px 씩 넘겨 덮는다)
+   · 가로 스크롤은 만들지 않는다 — 표는 패널 폭에 맞춘다
+   ========================================================================== */
+table.staytbl thead th, table.edutbl thead th{
+  position:sticky !important;top:0 !important;z-index:2 !important;
+  background:#F4F7FD !important;border-top:0 !important;border-bottom:0 !important;}
+table.staytbl thead th::before, table.edutbl thead th::before{
+  content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);top:0;
+  height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;z-index:2;}
+table.staytbl thead th::after, table.edutbl thead th::after{
+  content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);bottom:0;
+  height:1px;background:#C8D5EB;pointer-events:none;z-index:2;}
+table.staytbl > tbody > tr:first-child > *, table.edutbl > tbody > tr:first-child > *{border-top:0 !important;}
+/* 래퍼가 파란 라인을 한 번 더 그리면 2px 이 된다 — 라인은 위 오버레이 하나로만 */
+.modal-ov .eduTblWrap{border-top:0 !important;}
+.modal-ov .eduTblWrap > table > thead > tr:first-child > *{box-shadow:none !important;}
+/* 가로 스크롤 없이 패널 폭에 맞춘다 */
+.modal-ov .modaltbl-wrap, .modal-ov .eduTblWrap{overflow-x:hidden !important;}
+table.edutbl{min-width:0 !important;}
+table.staytbl, table.edutbl{width:100% !important;table-layout:fixed !important;}
