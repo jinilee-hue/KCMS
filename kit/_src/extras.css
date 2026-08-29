@@ -549,3 +549,9 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 .switch input:checked + .slider{background:var(--pb);}
 .switch input:checked + .slider::before{transform:translateX(16px);}
 .switch-label{font-size:11.5px;color:var(--txt-mut);margin-left:6px;white-space:nowrap;}
+
+/* 검색 필터 표의 값 칸 — 화면은 라벨 칸과 같은 격자로 보이도록 옅은 선이 둘러 있다
+   (실측: border 1px #E3E8EF, 라벨 칸은 #C8D5EB). Kit 에는 이 규칙이 없어
+   값 칸만 선이 빠져 표가 끊겨 보였다. */
+.filters table.fbox td{border:1px solid var(--line-soft);}
+.filters table.fbox td.flabel{border-color:#C8D5EB;}
