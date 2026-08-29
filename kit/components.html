@@ -300,9 +300,6 @@
   </div>
 </div>
 
-<p class="note">세로 막대는 <b>표 안에 떠 있습니다</b> — 자리를 차지하지 않아 열 너비가 밀리지 않고,
-헤더(<code>th</code>) 아래에서 시작해 고정된 헤더를 가리지 않습니다.
-스크롤하거나 표 위에 마우스를 올리면 나타났다가 잠시 뒤 사라집니다.</p>
 
 <h4 class="sub">가로 스크롤 · 열이 넓을 때</h4>
 <div class="demo flush">
@@ -313,20 +310,16 @@
 <tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>홍길동</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>홍길동</td><td>2026-08-23</td></tr></tbody></table>
   </div>
 </div>
-<p class="note">가로 막대는 반대로 <b>표 아래 기본 막대</b>를 그대로 씁니다(8px).
-가로는 어디까지 밀렸는지 늘 보여야 하고, 아래쪽은 가릴 내용이 없기 때문입니다.</p>
 
 <h4 class="sub">표가 아닌 영역 · <code>.pcms-ovscroll</code></h4>
 <div class="demo">
   <div class="pcms-ovscroll" style="max-height:120px;overflow:auto;border:1px solid var(--line);padding:8px 10px;">
-    <p style="margin:0 0 8px;font-size:12px;">모달 본문이나 패널처럼 표가 아닌 영역에도 같은 막대를 쓰려면
-      <code>.pcms-ovscroll</code> 을 붙입니다.</p>
-    <p style="margin:0 0 8px;font-size:12px;">클래스 이름에 <code>pcms-</code> 를 붙인 이유가 있습니다 —
-      <code>.ovscroll</code> 은 SMS 발송 모달이 이미 다른 뜻으로 쓰고 있어서, 그대로 쓰면
-      그쪽 <code>pointer-events:none</code> 이 함께 걸려 표의 휠·클릭이 막힙니다.</p>
-    <p style="margin:0 0 8px;font-size:12px;">스크롤되는 조상이 있으면 <code>overlay-scroll.js</code> 가
-      알아서 이 클래스를 붙이므로, 직접 적을 일은 드뭅니다.</p>
-    <p style="margin:0;font-size:12px;">막대는 6px 폭에 <code>rgba(44,62,90,.28)</code> 입니다.</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (1)</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (2)</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (3)</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (4)</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (5)</p>
+    <p style="margin:0 0 8px;font-size:12px;">표가 아닌 영역에도 같은 막대를 씁니다. (6)</p>
   </div>
 </div>
 </div></div></section>
@@ -445,12 +438,6 @@
 <div class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
-<p class="note">순서는 <b>« ‹ [번호] › » · 페이지 [입력] / N · 새로고침 · 페이지당 [30·50·100]</b> 으로 고정입니다.
-컨트롤 높이는 모두 <b>24px</b>, 페이지당 개수는 네이티브 <code>select</code> 가 아니라
-화면과 같은 커스텀 셀렉트(<code>.csel.h24</code>)로 바뀝니다.</p>
-<p class="note">총 건수(<code>.pgtotal</code>)는 기본으로 두지 않습니다 — 필요하면 <code>{showTotal:true}</code>.
-페이징 아래에는 <b>구분선을 두지 않습니다</b>(모달 안에서 회색 줄로 보였던 문제).
-행 수는 페이징으로 끊고 무한 스크롤은 쓰지 않습니다.</p>
 </div></div></section>
 
 <section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
