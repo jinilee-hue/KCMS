@@ -136,7 +136,7 @@
             '<button type="button" class="btn s" id="spmSearchBtn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>검색</button>' +
           '</div>' +
           /* 표와 페이징은 한 흰 박스(.modal-body) 안에 둔다 — SMS 발송 모달과 같은 구조 */
-          '<div class="modal-body" style="display:flex;flex-direction:column;padding:0;overflow:hidden;">' +
+          '<div class="modal-body" style="display:flex;flex-direction:column;overflow:hidden;">' +
             '<div style="flex:1;min-height:0;overflow:auto;">' +
               '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
             '</div>' +
