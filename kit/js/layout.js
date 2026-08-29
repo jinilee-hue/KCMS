@@ -169,7 +169,9 @@ function makeDraggable(box,handle){
 function initCsel(root){
   (root||document).querySelectorAll('select:not([data-nocsel]):not([multiple])').forEach(function(sel){
     if(sel.__csel) return; sel.__csel=true;
-    var wrap=document.createElement('span'); wrap.className='csel';
+    /* 표 안 인라인 편집은 22px, 그 밖은 24px — 화면과 같은 규칙 */
+    var wrap=document.createElement('span');
+    wrap.className='csel ' + (sel.closest('table.grid') ? 'h22' : 'h24');
     var box=document.createElement('div'); box.className='csel-box'; box.tabIndex=0;
     var menu=document.createElement('div'); menu.className='csel-menu';
     sel.parentNode.insertBefore(wrap, sel);
@@ -306,6 +308,9 @@ function renderPaging(el, opt){
   el.querySelectorAll('.pgnum').forEach(function(b){
     b.addEventListener('click',function(){ if(opt.onPage) opt.onPage(Number(b.dataset.p)); });
   });
+  /* 페이지당 개수는 화면과 같이 커스텀 셀렉트로 바꾼다 — 페이징은 나중에 그려지므로
+     초기 initCsel() 한 번으로는 잡히지 않는다. */
+  initCsel(el);
 }
 function KCMSnum(v){ return String(v).replace(/\B(?=(\d{3})+(?!\d))/g,','); }
 

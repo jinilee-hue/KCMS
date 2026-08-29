@@ -47,7 +47,7 @@
 
 (function (global) {
   // 전부 가상 더미(실제 KCMS 직원정보 아님). 다른 화면 mock에서 이미 담당교사/접수자로 쓰이는
-  // 이름(홍길동/최연지/홍길동)은 재직·POLY MAP교사로 포함시켜 이름 일관성 유지
+  // 이름(모두 홍길동)은 재직·POLY MAP교사로 포함시켜 이름 일관성 유지
   var STAFF_DIRECTORY = [
     { name: '홍길동 (Gildong Hong)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2019-03-04' },
     { name: '홍길동 (Gildong Hong)', position: 'POLY MAP교사', rank: '주임', status: '재직', mobile: '010-1234-1234', hireDate: '2020-07-13' },

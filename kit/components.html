@@ -138,7 +138,7 @@
 <a href="#input">입력 · 셀렉트</a>
 <a href="#choice">체크 · 라디오 · 토글</a>
 <a href="#filter">검색 필터</a>
-<a href="#date">날짜 피커</a>
+<a href="#date">날짜 · 시간 피커</a>
 <a href="#paging">페이징</a>
 <a href="#modal">모달</a>
 <a href="#toast">토스트</a>
@@ -233,7 +233,7 @@
     <table class="grid" style="table-layout:auto;">
       <thead><tr>
         <th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th class="sortable">이름<span class="tharrow"></span></th><th class="sortable">학년<span class="tharrow"></span></th><th class="sortable">응시일<span class="tharrow"></span></th><th class="sortable">점수<span class="tharrow"></span></th><th>상태</th>
+        <th class="sortable">이름<span class="tharrow">▾</span></th><th class="sortable">학년<span class="tharrow">▾</span></th><th class="sortable">응시일<span class="tharrow">▾</span></th><th class="sortable">점수<span class="tharrow">▾</span></th><th>상태</th>
       </tr></thead>
       <tbody>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-12</td><td>218</td><td><span class="statuspill">재원</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-14</td><td>231</td><td><span class="statuspill">재원</span></td></tr><tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍○○</td><td>초3</td><td>2026-08-14</td><td>205</td><td><span class="to-badge now">바로 입학</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-18</td><td>243</td><td><span class="to-badge mar">신학년</span></td></tr><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
@@ -241,6 +241,33 @@
     </table>
   </div>
 </div>
+<h4 class="sub">정렬 화살표 · 16×16 · 13PX · 정렬 열만 파랑</h4>
+<div class="demo row" style="align-items:center;gap:18px;">
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;">
+    <span class="tharrow">▾</span> 기본</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;">
+    <span class="tharrow on">▾</span> 내림차순</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;">
+    <span class="tharrow on up">▾</span> 오름차순</span>
+</div>
+<p class="note">글리프는 <b>▾ 하나</b>다. 오름차순은 <code>.up</code> 의 <code>rotate(180deg)</code> 로 뒤집는다 —
+<code>▴</code>·<code>▲</code> 는 본문 폰트에 없어 다른 폰트로 폴백되면서 더 크게 그려진다.
+정렬 가능한 열이면 hover 여부와 무관하게 <b>늘 보인다</b>.</p>
+
+<h4 class="sub">목록이 비었을 때 · 안내 행</h4>
+<div class="demo flush">
+  <div class="tblwrap">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th>
+        <th class="sortable">이름<span class="tharrow">▾</span></th>
+        <th class="sortable">학년<span class="tharrow">▾</span></th>
+        <th class="sortable">응시일<span class="tharrow">▾</span></th>
+        <th>상태</th></tr></thead>
+      <tbody><tr class="empty"><td colspan="5"><span class="emptymsg">검색 결과가 없습니다. 조건을 바꿔 다시 검색해 주세요.</span></td></tr></tbody>
+    </table>
+  </div>
+</div>
+
 <h4 class="sub">세로형 · 상세 · 라벨 - 값</h4>
 <div class="demo">
   <table class="infotbl">
@@ -260,7 +287,7 @@
 <h4 class="sub">세로 스크롤 · 표 안에서 · 헤더 고정</h4>
 <div class="demo flush">
   <div class="tblwrap" style="max-height:132px;">
-    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="tharrow"></span></th><th class="sortable">학년<span class="tharrow"></span></th><th class="sortable">응시일<span class="tharrow"></span></th><th class="sortable">점수<span class="tharrow"></span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
+    <table class="grid" style="table-layout:auto;"><thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th class="sortable">이름<span class="tharrow">▾</span></th><th class="sortable">학년<span class="tharrow">▾</span></th><th class="sortable">응시일<span class="tharrow">▾</span></th><th class="sortable">점수<span class="tharrow">▾</span></th><th>상태</th></tr></thead><tbody><tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-10</td><td>200</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초4</td><td>2026-08-11</td><td>207</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초5</td><td>2026-08-12</td><td>214</td><td><span class="statuspill">재원</span></td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>홍○○</td><td>초3</td><td>2026-08-13</td><td>221</td><td><span class="statuspill">재원</span></td></tr>
@@ -275,6 +302,10 @@
   </div>
 </div>
 
+<p class="note">세로 막대는 <b>표 안에 떠 있습니다</b> — 자리를 차지하지 않아 열 너비가 밀리지 않고,
+헤더(<code>th</code>) 아래에서 시작해 고정된 헤더를 가리지 않습니다.
+스크롤하거나 표 위에 마우스를 올리면 나타났다가 잠시 뒤 사라집니다.</p>
+
 <h4 class="sub">가로 스크롤 · 열이 넓을 때</h4>
 <div class="demo flush">
   <div class="tblwrap">
@@ -282,6 +313,22 @@
 <tr><td><input type="checkbox" class="rowchk"></td><td>06100001</td><td>홍○○</td><td>남</td><td>초4</td><td>ECP6</td><td>ECP6-A</td><td>2026-08-11</td><td>216</td><td>진학확정</td><td>ECP7</td><td>ECP7-B</td><td>홍길동</td><td>2026-08-21</td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>06100002</td><td>홍○○</td><td>여</td><td>초5</td><td>ECP7</td><td>ECP7-A</td><td>2026-08-12</td><td>222</td><td>진학확정</td><td>ECP8</td><td>ECP8-B</td><td>홍길동</td><td>2026-08-22</td></tr>
 <tr><td><input type="checkbox" class="rowchk"></td><td>06100003</td><td>홍○○</td><td>남</td><td>초3</td><td>ECP5</td><td>ECP5-A</td><td>2026-08-13</td><td>228</td><td>진학확정</td><td>ECP6</td><td>ECP6-B</td><td>홍길동</td><td>2026-08-23</td></tr></tbody></table>
+  </div>
+</div>
+<p class="note">가로 막대는 반대로 <b>표 아래 기본 막대</b>를 그대로 씁니다(8px).
+가로는 어디까지 밀렸는지 늘 보여야 하고, 아래쪽은 가릴 내용이 없기 때문입니다.</p>
+
+<h4 class="sub">표가 아닌 영역 · <code>.pcms-ovscroll</code></h4>
+<div class="demo">
+  <div class="pcms-ovscroll" style="max-height:120px;overflow:auto;border:1px solid var(--line);padding:8px 10px;">
+    <p style="margin:0 0 8px;font-size:12px;">모달 본문이나 패널처럼 표가 아닌 영역에도 같은 막대를 쓰려면
+      <code>.pcms-ovscroll</code> 을 붙입니다.</p>
+    <p style="margin:0 0 8px;font-size:12px;">클래스 이름에 <code>pcms-</code> 를 붙인 이유가 있습니다 —
+      <code>.ovscroll</code> 은 SMS 발송 모달이 이미 다른 뜻으로 쓰고 있어서, 그대로 쓰면
+      그쪽 <code>pointer-events:none</code> 이 함께 걸려 표의 휠·클릭이 막힙니다.</p>
+    <p style="margin:0 0 8px;font-size:12px;">스크롤되는 조상이 있으면 <code>overlay-scroll.js</code> 가
+      알아서 이 클래스를 붙이므로, 직접 적을 일은 드뭅니다.</p>
+    <p style="margin:0;font-size:12px;">막대는 6px 폭에 <code>rgba(44,62,90,.28)</code> 입니다.</p>
   </div>
 </div>
 </div></div></section>
@@ -419,7 +466,7 @@
 </div>
 </div></div></section>
 
-<section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 피커</div></div><div class="card-body">
+<section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 · 시간 피커</div></div><div class="card-body">
 <h4 class="sub">날짜 필드 · 검색 상자</h4>
 <div class="demo row">
   <span class="iwrap" style="width:130px;">
@@ -443,12 +490,31 @@
     년 · 월 버튼을 누르면 목록에서 고를 수 있습니다.
   </span>
 </div>
+<h4 class="sub">시간 필드 · 날짜와 같은 방식</h4>
+<div class="demo row" style="align-items:flex-start;gap:22px;">
+  <input class="finput" type="time" id="tpDemo" value="11:00" style="width:130px;">
+  <span style="font-size:11.5px;color:var(--txt-mut);line-height:1.9;">
+    칸을 누르면 <b>오전 · 오후 → 시 → 분</b> 패널이 뜹니다.<br>
+    <b>키보드로 직접 입력</b>해도 됩니다 — 고르는 것만 강요하지 않습니다.<br>
+    브라우저 기본 시계 아이콘은 감춥니다(페이지 CSS 로 모양을 못 바꿉니다).
+  </span>
+</div>
+<p class="note">날짜 피커와 같은 방침입니다 — 바깥선 없이 그림자로 띄우고, 라운드 3px,
+고른 값만 파란 배경. 값은 <code>HH:MM</code>(24시간)으로 쓰고 <code>input</code>·<code>change</code> 를
+발생시키므로, 섀도우 입력을 함께 쓰는 폼에서도 그대로 동작합니다.
+분은 <b>5분 단위</b>입니다.</p>
 </div></div></section>
 
 <section id="paging"><div class="card"><div class="card-header"><div class="card-title">페이징</div></div><div class="card-body">
 <div class="demo flush">
   <div class="pagingbar"><div class="paging" id="pagingDemo"></div></div>
 </div>
+<p class="note">순서는 <b>« ‹ [번호] › » · 페이지 [입력] / N · 새로고침 · 페이지당 [30·50·100]</b> 으로 고정입니다.
+컨트롤 높이는 모두 <b>24px</b>, 페이지당 개수는 네이티브 <code>select</code> 가 아니라
+화면과 같은 커스텀 셀렉트(<code>.csel.h24</code>)로 바뀝니다.</p>
+<p class="note">총 건수(<code>.pgtotal</code>)는 기본으로 두지 않습니다 — 필요하면 <code>{showTotal:true}</code>.
+페이징 아래에는 <b>구분선을 두지 않습니다</b>(모달 안에서 회색 줄로 보였던 문제).
+행 수는 페이징으로 끊고 무한 스크롤은 쓰지 않습니다.</p>
 </div></div></section>
 
 <section id="modal"><div class="card"><div class="card-header"><div class="card-title">모달</div></div><div class="card-body">
@@ -790,7 +856,7 @@
     </div>
   </div>
 </div>
-<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/modal-drag.js"></script><script src="js/overlay-scroll.js"></script>
+<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/time-picker.js"></script><script src="js/modal-drag.js"></script><script src="js/overlay-scroll.js"></script>
 <script src="js/staff-pick-modal.js"></script>
 <script src="js/memo-modal.js"></script>
 <script src="js/sms-modal.js"></script>
@@ -875,9 +941,13 @@
       tbl.querySelectorAll('th.sortable').forEach(function(x){
         x.classList.remove('asc'); var a=x.querySelector('.tharrow'); if(a) a.classList.remove('on'); });
       th.classList.toggle('asc', asc);
-      /* 화면과 같은 규칙 — 정렬 중인 열에만 화살표를 보이고 파랑(.on), ▲ 오름 / ▼ 내림 */
-      tbl.querySelectorAll('.tharrow').forEach(function(a){ a.textContent=''; a.classList.remove('on'); });
-      var ar=th.querySelector('.tharrow'); if(ar){ ar.classList.add('on'); ar.textContent = asc ? '▲' : '▼'; }
+      /* 화면과 같은 규칙 — 화살표는 모든 정렬 열에 늘 ▾ 로 떠 있고,
+         정렬 중인 열만 파랑(.on)이 되며 오름차순이면 .up 으로 뒤집는다.
+         글리프를 ▴/▲ 로 바꾸지 않는 이유: 그 문자는 본문 폰트에 없어 더 크게 그려진다. */
+      tbl.querySelectorAll('.tharrow').forEach(function(a){
+        a.textContent='▾'; a.classList.remove('on','up'); });
+      var ar=th.querySelector('.tharrow');
+      if(ar){ ar.classList.add('on'); ar.classList.toggle('up', asc); }
       var body=tbl.tBodies[0], rows=[].slice.call(body.rows);
       rows.sort(function(a,b){
         var x=(a.cells[idx]||{}).textContent||'', y=(b.cells[idx]||{}).textContent||'';
