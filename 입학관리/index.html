@@ -203,21 +203,30 @@ function tabList(cur){
     return {key:k,label:(t?t.label:k),cur:(k===cur)};
   });
 }
-var WANT_MODAL='';
+var WANT_MODAL='', ONLY_MODAL=false;
 function splitHash(){
   var raw=decodeURIComponent(location.hash.slice(1));
   var i=raw.indexOf('!');
-  if(i<0){ WANT_MODAL=''; return raw; }
-  WANT_MODAL=raw.slice(i+1);
+  if(i<0){ WANT_MODAL=''; ONLY_MODAL=false; return raw; }
+  ONLY_MODAL = raw.charAt(i+1)==='!';          /* #화면id!!호출 → 팝업만 */
+  WANT_MODAL = raw.slice(i + (ONLY_MODAL?2:1));
   return raw.slice(0,i);
 }
 function tabScript(cur){
   /* 주소가 #화면키!모달호출 이면 화면이 뜬 뒤 그 모달을 연다 —
      Kit 데모가 마크업을 복사하지 않고 실제 팝업을 그대로 보여주기 위한 통로다. */
   var call = String(WANT_MODAL||'').replace(/[^A-Za-z0-9_.(){}'",:\[\] -]/g,'');
+  var onlyCss = ONLY_MODAL
+    ? '<style>body>*:not(.modal-ov):not(script):not(style){display:none !important;}'
+      + 'body{background:#eef1f5 !important;}'
+      + '.modal-ov{position:fixed;inset:0;display:flex !important;align-items:center;justify-content:center;'
+      + 'background:rgba(15,30,60,.28);}'
+      + '.modal-ov:not(.open){display:none !important;}</style>'
+    : '';
   var openJs = call
     ? '<scr'+'ipt>window.addEventListener("load",function(){setTimeout(function(){try{'+call+'}catch(e){console.warn(e)}},350)});<\/scr'+'ipt>'
     : '';
+  openJs = onlyCss + openJs;
   return '<scr'+'ipt>window.__PCMS_TABS='+
     JSON.stringify(tabList(cur)).replace(/</g,'\\u003c')+';<\/scr'+'ipt>' + openJs;
 }
