@@ -457,3 +457,16 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 .paging .pgsize select{font-size:11.5px;}
 .filters .drange .iwrap input{font-size:11.5px;}
 #importModalOv table.fbox td.flabel{font-size:11.5px;}
+
+/* 섹션 제목 옆 보조 문구 — 화면은 본문 회색보다 한 단계 옅다(#8b95a5). */
+.sectit .hint{color:#8b95a5;}
+
+/* 화면과 글자 크기·여백 맞추기 (2026-08-30 자동 대조) — 데모에서 기본 12px 로 나오던 것들 */
+.ctree, .csel.csel-disabled, .helpwrap, .namelink, .ovbar, .seg, .seg button{font-size:11.5px;}
+.iwrap .finput{padding-right:24px;}
+
+/* 목록 표 래퍼 — 화면은 좌우 10px 안쪽 여백이 있다(모달 안에서는 0). */
+.tblwrap{padding:0 10px;}
+.modal-ov .tblwrap{padding-left:0 !important;padding-right:0 !important;}
+/* 정렬 화살표는 굵게 쓰지 않는다 — 화면 실측 400 */
+.tharrow{font-weight:400;}
