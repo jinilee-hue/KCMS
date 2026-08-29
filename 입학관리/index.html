@@ -219,7 +219,7 @@ function tabScript(cur){
   /* 팝업만 모드 — 화면 자체 모달은 .app 안에 있어서 .app 을 숨기면 팝업까지 같이 숨는다.
      열린 모달을 body 로 끌어올린 뒤 나머지를 감춘다. */
   var onlyCss = ONLY_MODAL
-    ? '<style>html,body{background:#eef1f5 !important;}'
+    ? '<style>html,body{background:transparent !important;}'
       + '.modal-ov.open{position:fixed !important;inset:0 !important;display:flex !important;'
       + 'align-items:center;justify-content:center;background:rgba(15,30,60,.28);z-index:9999;}</style>'
       + '<scr'+'ipt>(function(){function only(){'
@@ -257,7 +257,19 @@ function openFile(file,silent){
   if(!it){ if(!silent) toast('"'+file.replace(/_ui\.html$/,'')+'" 화면은 이번 공유본에 포함되지 않았습니다.'); return false }
   openItem(it); return true;
 }
-function openItem(it){
+function applyOnlyModalShell(){
+    /* 팝업만 모드에서는 셸(상단바·목차 버튼)도 숨기고 배경을 비워
+       다른 페이지 위에 그대로 얹을 수 있게 한다. */
+    if(!ONLY_MODAL) return;
+    document.documentElement.style.background='transparent';
+    document.body.style.background='transparent';
+    ['#fab','#bootst','#boot'].forEach(function(sel){
+      var e=document.querySelector(sel); if(e) e.style.display='none';
+    });
+    var st=document.querySelector('#stage');
+    if(st){ st.style.background='transparent'; st.style.padding='0'; st.style.border='0'; }
+  }
+  function openItem(it){
   if(OPEN_TABS.indexOf(it.key)<0) OPEN_TABS.push(it.key);   /* 이동할 때마다 탭이 하나씩 쌓인다 */
   var doc=buildDoc(it.file,tabScript(it.key)); if(!doc) return;
   var stage=$('#stage'); stage.innerHTML='';
@@ -271,6 +283,7 @@ function openItem(it){
   if(it.id){ fid.hidden=false; fid.textContent=it.id } else { fid.hidden=true }
   document.title=(it.id?it.id+' · ':'')+it.label+' · PCMS 화면 체험판';
   closeOv(true);
+  applyOnlyModalShell();
 }
 
 /* ---------- index overlay ---------- */
