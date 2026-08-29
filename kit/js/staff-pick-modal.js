@@ -104,7 +104,7 @@
       '#staffPickModal table.spmTbl tbody tr:hover{background:var(--pb-a08,rgba(0,102,255,.08));}' +
       '#staffPickModal table.spmTbl tbody tr.spmRowSel{background:var(--pb-a15,rgba(0,102,255,.15));box-shadow:inset 3px 0 0 var(--pb,#0066FF);font-weight:700;}' +
       '#staffPickModal .spmEmpty{text-align:center;color:var(--txt-mut,#5b6776);padding:20px 0;}' +
-      '#staffPickModal #spmPaging{margin:0;}' +
+      '#staffPickModal #spmPaging{margin:0;padding-left:0;padding-right:0;}' +   /* 좌우 여백은 본문(.modal-body)이 준다 — SMS 발송 모달과 같게 */
       /* 검색줄 바로 아래 붙인다 — SMS 발송 모달도 본문 위 여백이 0 이다 */
       '#staffPickModal .modal-body{margin-top:0;}' +
       /* 셀렉트가 커스텀(.csel)으로 바뀌면 .csel{width:100%} 때문에 폭이 모달 전체로 퍼진다.
