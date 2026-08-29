@@ -529,3 +529,14 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 
 /* 남은 자리(TO) 배지 — 규격은 알약 통합 규칙이 주고, 색만 여기서 정한다. */
 .tobadge.open{background:var(--danger-bg);color:var(--danger);}
+
+/* 이름 링크 — 화면은 본문색으로 덮어쓴다. 표 안에서 파랑이 줄줄이 늘어서면
+   어디가 강조인지 알 수 없어서다. 구분은 hover 밑줄이 한다. */
+.namelink{color:var(--txt) !important;}
+
+/* 페이지 탭(.ptab) — Kit 에는 감싸는 .pagetabs 만 있고 탭 자체 정의가 없어
+   데모에서 글자만 나왔다. 화면 정의를 그대로 올린다(크기는 위의 12px 규칙이 정한다). */
+.ptab{padding:10px 16px;font-weight:700;color:var(--txt-mut);cursor:pointer;
+  border-bottom:3px solid transparent;text-decoration:none;}
+.ptab:hover{color:var(--pb);}
+.ptab.on{color:var(--pb-deeper);border-bottom-color:var(--pb);}

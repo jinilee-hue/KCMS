@@ -164,48 +164,68 @@
 </header>
 
 <section id="btn"><div class="card"><div class="card-header"><div class="card-title">버튼</div></div><div class="card-body">
-<h4 class="sub">기본 · 높이 24PX · 최소 폭 56PX</h4>
+<h4 class="sub">기본 · 높이 24PX</h4>
 <div class="demo row items">
   <span class="item"><button class="btn">검색</button></span>
   <span class="item"><button class="btn g">초기화</button></span>
-  <span class="item"><button class="btn s">엑셀</button></span>
-  <span class="item"><button class="btn danger">영구 삭제</button></span>
+  <span class="item"><button class="btn s">조회</button></span>
   <span class="item"><button class="btn" disabled>저장</button></span>
 </div>
 
-<h4 class="sub">아이콘 포함</h4>
+<h4 class="sub">작은 보조 · 표 안 · 툴바</h4>
 <div class="demo row">
-  <button class="btn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg> 등록</button>
-  <button class="btn g"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4v16h16v-7"/><path d="M18.5 2.5a2.1 2.1 0 0 1 3 3L12 15l-4 1 1-4z"/></svg> 수정</button>
-  <button class="btn s"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> 다운로드</button>
+  <button class="btn g sm">대상추가</button>
+  <button class="btn g sm">상담이력</button>
+  <button class="btn g xls"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg> Excel</button>
 </div>
 
-<h4 class="sub">아이콘 전용 · 24PX</h4>
-<div class="demo row">
-  <button class="icon-btn" title="달력" aria-label="달력"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
-  <button class="icon-btn" aria-label="추가"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-  <button class="icon-btn" aria-label="새로고침"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
-  <button class="icon-btn" aria-label="닫기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+<h4 class="sub">아이콘 전용</h4>
+<div class="demo row" style="align-items:center;gap:14px;">
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--txt-mut);">
+    <button class="bcic" title="새로고침" aria-label="새로고침"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
+    <button class="bcic" title="닫기" aria-label="닫기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    브레드크럼 도구 · 20px</span>
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--txt-mut);">
+    <span class="iwrap" style="width:130px;">
+      <input type="text" class="finput dateinput" value="2026-08-30" maxlength="10" style="width:100%;">
+      <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
+      <button type="button" class="ibtn" title="날짜" aria-label="날짜 선택"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
+    </span>
+    입력 안 아이콘 · 18px</span>
 </div>
 
+<h4 class="sub">이름 링크</h4>
+<div class="demo row" style="align-items:center;gap:10px;">
+  <button class="namelink">홍길동</button>
+  <span style="font-size:11.5px;color:var(--txt-mut);">표 안에서 상세로 넘어가는 이름 — 본문색 그대로 두고, 마우스를 올리면 밑줄</span>
+</div>
 </div></div></section>
 
 <section id="tab"><div class="card"><div class="card-header"><div class="card-title">탭</div></div><div class="card-body">
-<h4 class="sub">상위 탭 · 밑줄형</h4>
+<h4 class="sub">페이지 탭 · 밑줄형 · 브레드크럼 아래</h4>
+<div class="demo flush">
+  <div class="pagetabs" style="margin:0;">
+    <div class="ptab on">설명회 예약자 현황</div><div class="ptab">설명회 캘린더</div>
+  </div>
+</div>
+
+<h4 class="sub">카드 안 탭 · 밑줄형</h4>
 <div class="demo flush">
   <div class="dtabs" style="margin:0;">
-    <div class="dtab on">예비생정보</div><div class="dtab">MAP 예약</div>
-    <div class="dtab">채점</div><div class="dtab">MAP 결과</div>
+    <div class="dtab on">상담(MAP)예약</div><div class="dtab">설명회예약</div>
+    <div class="dtab">채점</div><div class="dtab">상담(MAP)결과</div>
   </div>
-  <div data-pane style="padding:14px;font-size:11.5px;color:var(--txt-mut);">예비생정보 탭의 내용 영역</div>
+  <div data-pane style="padding:14px;font-size:11.5px;color:var(--txt-mut);">상담(MAP)예약 탭의 내용 영역</div>
 </div>
-<h4 class="sub">하위 탭 · 알약형 · 24PX</h4>
+
+<h4 class="sub">알약 탭 · 24PX</h4>
 <div class="demo row">
   <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
 </div>
+
 <h4 class="sub">토글 · 붙은 라운드 박스</h4>
 <div class="demo row">
-  <span class="seg" style="width:190px;"><button class="on">전체</button><button>재원</button><button>대기</button></span>
+  <span class="seg" style="width:190px;"><button class="on">단문</button><button>장문</button></span>
 </div>
 </div></div></section>
 
