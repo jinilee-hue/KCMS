@@ -141,8 +141,8 @@
           '</div>' +
           /* 표와 페이징은 한 흰 박스(.modal-body) 안에 둔다 — SMS 발송 모달과 같은 구조 */
           '<div class="modal-body" style="display:flex;flex-direction:column;overflow:hidden;">' +
-            '<div style="flex:1;min-height:0;overflow:auto;">' +
-              '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
+            '<div class="tblwrap" style="flex:1;min-height:0;overflow:auto;width:auto;">' +
+              '<table class="spmTbl recordtbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
             '</div>' +
             '<div class="paging" id="spmPaging"></div>' +
           '</div>' +
