@@ -151,7 +151,7 @@
       '.smsfoot-note{font-size:11px;color:var(--txt-mut);}' +
       '.smsQuota{display:inline-flex;align-items:center;height:19px;padding:0 8px;border-radius:999px;font-size:10px;font-weight:700;margin-left:8px;white-space:nowrap;}' +
       '.smsQuota.sms{background:#ff3b8d;color:#fff;}' +
-      '.smsQuota.lms{background:#e5484d;color:#fff;}' +
+      '.smsQuota.lms{background:#e6483c;color:#fff;}' +
       '.smsTypeChk{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--txt);margin-right:10px;cursor:pointer;user-select:none;}' +
       '.smsTypeChk input{width:14px;height:14px;cursor:pointer;}' +
       // 2026-07-28: "크기 확대"를 고정폭 확장(1020→1220px 등)으로만 처리했다가, 사용자가 직접
