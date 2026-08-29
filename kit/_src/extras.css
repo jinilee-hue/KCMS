@@ -511,3 +511,10 @@ input[type="time"]{padding-right:22px;}
 table.grid > * > tr > th, table.grid > * > tr > td{padding:4px 8px !important;}
 table.grid thead tr th{padding-top:4px !important;padding-bottom:4px !important;padding-left:8px !important;padding-right:8px !important;}
 table.grid > tbody > tr > td{height:33px !important;}
+
+/* 불러오기 표의 정렬 화살표(.sarrow)도 다른 화면(.tharrow)과 같은 크기로 —
+   9px 이라 혼자 작았다. 늘 보이고 정렬 중인 열만 파랑(2026-08-29 요청). */
+table thead th .sarrow{font-size:13px !important;width:16px;height:16px;
+  display:inline-flex !important;align-items:center;justify-content:center;
+  visibility:visible !important;color:#2C3E5A;}
+table thead th .sarrow.on{color:var(--pb) !important;}
