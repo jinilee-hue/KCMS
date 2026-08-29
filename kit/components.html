@@ -28,10 +28,6 @@
   .kitver{margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14);
     font-size:10.5px;color:rgba(255,255,255,.42);letter-spacing:.2px;}
   .doc{flex:1;min-width:0;max-width:1680px;padding:28px 40px 90px;}
-
-    z-index:5002;color:#fff;font-size:12.5px;letter-spacing:-.2px;pointer-events:none;}
-    border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);
-    font-size:14px;line-height:1;cursor:pointer;}
   /* 화면에서 검색 필터·페이징 아래 굵은 회색 선은 영역을 가르는 구분이다.
      데모 카드 안에는 가를 것이 없어 지운다. */
   .doc .filters, .doc .pagingbar, .doc .paging{border-bottom:0 !important;}
@@ -160,7 +156,7 @@
 <a href="#type">타이포</a>
 <a href="#token">간격 · 라운드 · 그림자 · 아이콘</a>
 <div class="nav-foot"><a href="rules.md">규칙 · 계약 (md)</a><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a>
-<div class="kitver" title="이 값이 최신 커밋과 다르면 브라우저가 옛 파일을 들고 있는 것입니다">08-30 01:10 · aa290ab</div></div></aside><main class="doc"><header class="doc-hd">
+<div class="kitver" title="이 값이 최신 커밋과 다르면 브라우저가 옛 파일을 들고 있는 것입니다">08-30 01:15 · e855b76</div></div></aside><main class="doc"><header class="doc-hd">
   <h1>컴포넌트 가이드</h1>
   <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다.<br>
   불러오기 · API 계약 · 금지 규칙 · 접근성은 <a href="rules.md">rules.md</a> 에 있습니다.</p>
@@ -454,7 +450,7 @@
 <div class="tile"><div class="tile-hd"><b>상담이력</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span></div><p>목록과 상세를 오가는 모달. 안에서 등록·수정합니다.</p><button type="button" class="btn" onclick="openMemoModal({studentNo:'06100000',name:'홍길동',ename:'Gildong Hong',classNm:'ECP6-A',motherPhone:'010-1234-1234',studentType:'예비생',records:[]})">열기</button></div>
 <div class="tile"><div class="tile-hd"><b>SMS 발송</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><p>가장 큰 모달(1220px). 좌우 두 칸 + 미리보기.</p><button type="button" class="btn" onclick="openSmsModal({senderOptions:[{value:'031-000-7800',label:'분당캠퍼스 (031-000-7800)'}],remainingSms:299984,remainingLms:913169,recipients:[{no:'06100000',name:'홍길동',studentNo:'06100000',phone:'010-1234-1234',parentPhone:'010-1234-1234'}]})">열기</button></div>
 <div class="tile"><div class="tile-hd"><b>SMS 발송이력</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><p>기간 필터 + 목록. 담당자 찾기와 같은 목록형입니다.</p><button type="button" class="btn" onclick="openSmsHistoryModal({student:{name:'홍길동',ename:'Gildong Hong',studentNo:'06100000',phone:'010-1234-1234'},records:[]})">열기</button></div>
-<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span></div><p>모달이 아니라 새 창으로 엽니다.</p><button type="button" class="btn" onclick="openMapReportCard({studentName:'홍길동',subjects:[]})">열기</button></div>
+<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span></div><p>모달이 아니라 <b>새 창</b>으로 엽니다 — 브라우저가 팝업을 막으면 열리지 않으니 주소창의 팝업 차단을 허용해 주세요.</p><button type="button" class="btn" onclick="openMapReportCard({studentName:'홍길동',subjects:[]})">열기</button></div>
 </div>
 </div></div></section>
 

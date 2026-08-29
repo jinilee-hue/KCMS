@@ -184,3 +184,8 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .modal-ov .shTableWrap > table > thead > tr:first-child > *::before{
   content:'' !important;display:block !important;position:absolute;left:0;right:0;top:0;
   height:1px;background:var(--pb,#0066FF);z-index:2;}
+
+/* 팝업 안 검색 버튼도 본문 [검색]과 같은 남색(.btn.s) — 같은 동작인데 색이 갈려 있었다.
+   화면 규칙을 그대로 옮긴다(2026-08-30). */
+.btn#shSearchBtn, .btn#mcSearchBtn, .btn#addrSearchBtn, .btn#campusSearchBtn, .btn#schSearchBtn, .btn#spmSearchBtn, .btn#mddTeacherSearchBtn, .btn#csSearchBtn, .btn#edTeacherSearchBtn, .btn#mrManagerSearchBtn, .btn#smsAddSearchBtn, .btn#stuSearchBtn, .btn#attSearchBtn, .btn#mapRegManagerSearchBtn, .btn#rsIvManagerSearchBtn, .btn#mapFormDtSearchBtn, .btn#mapFormManagerSearchBtn{background:var(--gnb,#2C3E5A) !important;border-color:var(--gnb-deep,#1B2536) !important;color:#fff !important;}
+.btn#shSearchBtn:hover, .btn#mcSearchBtn:hover, .btn#addrSearchBtn:hover, .btn#campusSearchBtn:hover, .btn#schSearchBtn:hover, .btn#spmSearchBtn:hover, .btn#mddTeacherSearchBtn:hover, .btn#csSearchBtn:hover, .btn#edTeacherSearchBtn:hover, .btn#mrManagerSearchBtn:hover, .btn#smsAddSearchBtn:hover, .btn#stuSearchBtn:hover, .btn#attSearchBtn:hover, .btn#mapRegManagerSearchBtn:hover, .btn#rsIvManagerSearchBtn:hover, .btn#mapFormDtSearchBtn:hover, .btn#mapFormManagerSearchBtn:hover{background:var(--gnb-deep,#1B2536) !important;}
