@@ -581,3 +581,22 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 .modal-ov .tblwrap{padding-left:0 !important;padding-right:0 !important;}
 /* 정렬 화살표는 굵게 쓰지 않는다 — 화면 실측 400 */
 .tharrow{font-weight:400;}
+
+/* 학생중복체크 모달 — 화면 정의를 Kit 으로 (데모에서 표가 안 늘어나 폭이 481px 로 줄었다) */
+#dupModal table.dupform th{width:118px;background:#F4F7FD;color:#2C3E5A;font-weight:700; border:1px solid #C8D5EB;text-align:center;padding:5px 6px;vertical-align:middle;white-space:nowrap;}
+#dupModal table.dupform td{border:1px solid #C8D5EB;padding:5px 8px;vertical-align:middle;}
+#dupModal .dupcell{display:flex;align-items:center;gap:var(--dup-gap);}
+#dupModal table.dupform #dupParentPhone{width:var(--dup-fw);}
+#dupModal table.dupform .csel:has(#dupNationality){width:var(--dup-fw) !important;flex:0 0 var(--dup-fw) !important;}
+#dupModal table.dupform #dupName{width:calc(var(--dup-fw) - var(--dup-seg) - var(--dup-gap)); flex:0 0 calc(var(--dup-fw) - var(--dup-seg) - var(--dup-gap));}
+#dupModal table.dupform .seg{width:var(--dup-seg);flex:0 0 var(--dup-seg);}
+#dupModal table.dupform .iwrap{width:150px;flex:0 0 150px;}
+#dupModal .finput,#dupModal .fselect{height:26px;font-size:12px;}
+#dupModal .seg button{height:26px;}
+#dupModal .agebadge{font-size:10.5px;}
+.seg:not(.gender) button,#dupModal .seg:not(.gender) button, .score-subtabs button{height:20px !important;}
+
+#dupModal table.dupform{width:100%;border-collapse:collapse;font-size:11.5px;}
+
+/* 중복체크 모달은 폭을 고정한다 — .wide 의 fit-content 규칙에 걸리면 내용만큼만 줄어든다(화면과 같은 처리). */
+.modal-ov#dupModal > .modal-box{width:900px !important;min-width:0 !important;max-width:min(94vw,900px) !important;}
