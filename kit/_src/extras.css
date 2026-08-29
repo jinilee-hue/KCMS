@@ -522,3 +522,10 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 /* 정렬 화살표 오름차순 — 글리프는 항상 ▾ 이고 방향만 뒤집는다.
    ▴/▲ 는 폰트 폴백 때문에 ▾ 보다 크게 그려져 크기가 어긋났다(2026-08-29 요청). */
 .tharrow.up{transform:rotate(180deg);}
+
+/* 고르는 칩(.tag2) — 화면 정의를 Kit 으로 올린다. 높이·라운드만 있고 색이 없어
+   데모에서 배경이 비어 보였다. 배지(읽는 것)와 달리 누르는 것이라 24px·라운드 3px. */
+.tag2{padding:6px 12px;border:1px solid var(--line);background:#fff;font-size:12px;
+  font-weight:500;color:#666;cursor:pointer;}
+.tag2.on{background:#111;color:#fff;border-color:#111;}
+.tag2grp{display:flex;flex-wrap:wrap;gap:6px;}
