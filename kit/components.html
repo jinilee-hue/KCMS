@@ -380,30 +380,24 @@
       <li data-label="Leaders"><ul><li data-count="4">Leaders 1</li><li data-count="3">Leaders 2</li></ul></li>
     </ul>
   </span>
-  <span id="ctreeOut" style="font-size:11.5px;color:var(--txt-mut);">선택값 — 전체</span>
 </div>
 
 </div></div></section>
 
 <section id="choice"><div class="card"><div class="card-header"><div class="card-title">체크 · 라디오 · 토글</div></div><div class="card-body">
-<h4 class="sub">체크박스 · 표 행 선택 · 14PX</h4>
-<div class="demo flush">
-  <div class="tblwrap">
-    <table class="grid" style="table-layout:auto;">
-      <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th>
-        <th>이름</th><th>학년</th><th>상태</th></tr></thead>
-      <tbody>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍길동</td><td>초3</td><td>재원</td></tr>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초4</td><td>재원</td></tr>
-      </tbody>
-    </table>
-  </div>
+<h4 class="sub">체크박스 · 14PX</h4>
+<div class="demo row" style="align-items:center;gap:18px;">
+  <input type="checkbox" class="rowchk">
+  <input type="checkbox" class="rowchk" checked>
+  <input type="checkbox" class="rowchk" disabled>
+  <input type="checkbox" class="rowchk" checked disabled>
 </div>
 
-<h4 class="sub">라디오 · 라벨과 나란히</h4>
-<div class="demo row" style="align-items:center;">
-  <label style="display:inline-flex;align-items:center;gap:4px;margin-right:16px;"><input type="radio" name="demoGender" value="남" checked> 남</label>
-  <label style="display:inline-flex;align-items:center;gap:4px;"><input type="radio" name="demoGender" value="여"> 여</label>
+<h4 class="sub">라디오 · 14PX</h4>
+<div class="demo row" style="align-items:center;gap:18px;">
+  <input type="radio" name="demoR" checked>
+  <input type="radio" name="demoR">
+  <input type="radio" name="demoR2" disabled>
 </div>
 
 <h4 class="sub">토글 스위치 · 34×18PX</h4>
@@ -977,12 +971,6 @@
   })();
 
 
-  /* 체크박스 트리 — 선택 결과를 옆에 보여 준다 */
-  var ct=document.querySelector('.ctree[data-ctree]');
-  if(ct) ct.addEventListener('change', function(){
-    var v=ct.__ctree.values();
-    document.getElementById('ctreeOut').textContent='선택값 — '+(v?v.join(', '):'전체');
-  });
 </script><script>
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
