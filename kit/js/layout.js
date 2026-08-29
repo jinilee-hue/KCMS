@@ -198,7 +198,11 @@ function initCsel(root){
     }
     function open(){ wrap.classList.add('open'); place(); }
     function close(){ wrap.classList.remove('open'); }
-    box.addEventListener('click',function(){ wrap.classList.contains('open')?close():open(); });
+    /* 비활성 셀렉트 — 화면과 같이 wrap 에 표시를 남기고 열리지 않게 한다 */
+    wrap.classList.toggle('csel-disabled', !!sel.disabled);
+    box.addEventListener('click',function(){
+      if(sel.disabled) return;
+      wrap.classList.contains('open')?close():open(); });
     box.addEventListener('keydown',function(e){
       if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(); }
       if(e.key==='Escape') close();
