@@ -461,3 +461,8 @@ table.notetbl > * > tr > th{height:33px !important;}
 /* 데이터가 없을 때 뜨는 안내 칸("… 없습니다")은 여백을 넉넉히 준다 —
    본문 여백(4px)을 그대로 쓰면 문구가 답답해 보인다. 학생 메모 표에서 쓰던 14px 로 통일(2026-08-29 요청). */
 tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !important;}
+
+/* [발송 대상 추가] 표가 패널보다 넓어 페이징 아래에 가로 스크롤 막대(회색 바)가 생겼다 —
+   표를 패널 폭에 맞춰 가로 스크롤 자체를 없앤다(2026-08-29 요청). */
+#smsAddModal .tblwrap{overflow-x:hidden !important;}
+#smsAddModal table#smsAddTbl{table-layout:fixed !important;width:100% !important;min-width:0 !important;}
