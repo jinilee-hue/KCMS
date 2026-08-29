@@ -444,3 +444,7 @@ table thead th .tharrow.on{color:var(--pb) !important;}
    값 칸만 선이 빠져 표가 끊겨 보였다. */
 .filters table.fbox td{border:1px solid var(--line-soft);}
 .filters table.fbox td.flabel{border-color:#C8D5EB;}
+
+/* 검색줄 바로 아래 오는 표 패널은 위 여백을 붙인다 — 줄 사이가 두 번 벌어져 보였다.
+   SMS 발송내역(.shfilter)에 이미 같은 처리가 있고, 담당자 찾기(.spmRow)도 같은 구조다. */
+.modal-ov > .modal-box > .spmRow + [style*="flex:1"]{margin-top:0 !important;}
