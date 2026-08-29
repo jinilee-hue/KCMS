@@ -222,11 +222,6 @@
   <div class="quickpill"><button class="on">전체</button><button>바로 입학</button><button>신학년 입학</button></div>
 </div>
 
-<h4 class="sub">기간 탭 · 24PX</h4>
-<div class="demo row">
-  <span class="period-tabs"><button class="period-tab on">1일</button><button class="period-tab">1주</button><button class="period-tab">1개월</button></span>
-</div>
-
 <h4 class="sub">토글 · 붙은 라운드 박스</h4>
 <div class="demo row">
   <span class="seg" style="width:190px;"><button class="on">단문</button><button>장문</button></span>
@@ -417,20 +412,22 @@
   <span style="font-size:11.5px;color:var(--txt-mut);">잎에 <code>data-count</code> → 묶음은 합계</span>
 </div>
 
-<h4 class="sub">라벨 · 도움말 · 오류</h4>
+<h4 class="sub">라벨 · 필수 · 도움말</h4>
 <div class="demo">
-  <div class="form-grid-2">
-    <div class="form-group">
-      <label class="form-label">학생명<span class="req">*</span></label>
-      <input class="finput" value="홍길동">
-      <span class="form-hint">동명이인은 생년월일로 구분합니다.</span>
-    </div>
-    <div class="form-group">
-      <label class="form-label">학부모 연락처<span class="req">*</span></label>
-      <input class="finput" value="010-0000">
-      <span class="form-error">형식을 확인해 주세요.</span>
-    </div>
-  </div>
+  <table class="infotbl" style="max-width:620px;">
+    <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="홍길동"></td>
+        <th>학부모 연락처<span class="req">*</span></th><td><input class="finput" value="010-1234-1234"></td></tr>
+  </table>
+</div>
+<div class="demo row" style="align-items:center;gap:10px;">
+  <span class="flabel">정렬</span>
+  <span style="width:150px;display:inline-block;"><select><option>최신순</option><option>이름순</option></select></span>
+  <span class="hint">시간순</span>
+</div>
+
+<h4 class="sub">알림 배너</h4>
+<div class="demo">
+  <div class="msgbanner">입력한 연락처와 같은 예비생이 이미 있습니다. 중복 검사를 눌러 확인해 주세요.</div>
 </div>
 </div></div></section>
 
@@ -476,14 +473,13 @@
 </div></div></section>
 
 <section id="date"><div class="card"><div class="card-header"><div class="card-title">날짜 · 시간 피커</div></div><div class="card-body">
-<h4 class="sub">날짜 필드 · 검색 상자</h4>
+<h4 class="sub">날짜 필드</h4>
 <div class="demo row">
   <span class="iwrap" style="width:130px;">
     <input type="text" class="finput dateinput" value="2017-06-30" placeholder="연도-월-일" maxlength="10" style="width:100%;">
     <input type="date" class="dateshadow" tabindex="-1" aria-hidden="true">
     <button type="button" class="ibtn" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button>
   </span>
-  <span class="search-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><input placeholder="학생 검색"></span>
 </div>
 <h4 class="sub">달력 팝업 · 화면에서 쓰는 그대로</h4>
 <div class="demo row" style="align-items:flex-start;gap:22px;">
@@ -624,13 +620,13 @@
 <h4 class="sub">패널 · 액션바</h4>
 <div class="demo row" style="align-items:flex-start;">
   <div class="panel" style="width:260px;">내용이 들어가는 상자</div>
-  <div class="actions" style="width:280px;"><button class="btn g">가져오기</button><button class="btn">신규 등록</button></div>
+  <div style="width:280px;display:flex;gap:6px;justify-content:flex-end;"><button class="btn g">가져오기</button><button class="btn">신규 등록</button></div>
 </div>
 
 <h4 class="sub">실제 화면 한 조각</h4>
 <div class="demo">
   <div class="sectit">예비생 목록<span class="hint">최근 등록순</span></div>
-  <div class="actions" style="margin-bottom:6px;">
+  <div style="margin-bottom:6px;display:flex;gap:6px;align-items:center;justify-content:flex-end;">
     <span class="badge">전체 1,284명</span>
     <button class="btn g">엑셀</button><button class="btn">신규 등록</button>
   </div>
@@ -692,9 +688,8 @@
 
 <h4 class="sub">숫자 표기</h4>
 <div class="demo row">
-  <span class="num">1,284</span>
   <span style="font-size:20px;font-weight:800;color:var(--pb);">78.0<span class="pcts">%</span></span>
-  <span class="num-positive">+12</span><span class="num-negative">-4</span>
+  <span style="font-size:12px;">1,284</span>
 </div>
 </div></div></section>
 
@@ -884,7 +879,7 @@
 
     /* 상위 탭 · 하위 탭 · 토글 · 기간 탭 — 형제 중 하나만 활성 */
     doc.addEventListener('click', function(e){
-      var t=e.target.closest('.dtab, .quickpill > button, .seg > button, .period-tab, .ptab');
+      var t=e.target.closest('.dtab, .quickpill > button, .seg > button, .ptab');
       if(!t) return;
       var box=t.parentElement;
       [].forEach.call(box.children, function(c){ c.classList.remove('on'); });
