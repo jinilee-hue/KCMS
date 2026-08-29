@@ -430,3 +430,21 @@ table.staytbl:has(thead){margin-top:0 !important;}
    요약표(table.sumtbl)와 같이 th 보더를 끄고 오버레이 하나로 그린다(2026-08-29). */
 table.cal > thead > tr:first-child > *,
 table.rcal > thead > tr:first-child > *{border-top:0 !important;}
+
+/* ==========================================================================
+   텍스트 표 여백 통일 — th·td 4px 8px (2026-08-29 요청)
+   --------------------------------------------------------------------------
+   셀 안에 컨트롤이 들어가는 표(grid · fbox · score · matrix · infotbl · dupform)와
+   달력(cal · rcal · calTbl)은 제외한다 — 컨트롤 자체 margin/날짜 중앙 정렬이
+   여백을 담당하고 있어 패딩을 더하면 배치가 밀린다.
+   ========================================================================== */
+table.board > * > tr > th, table.board > * > tr > td,
+table.cntbl > * > tr > th, table.cntbl > * > tr > td,
+table.reslist > * > tr > th, table.reslist > * > tr > td,
+table.stattbl > * > tr > th, table.stattbl > * > tr > td,
+table.to2 > * > tr > th, table.to2 > * > tr > td,
+table.sumtbl > * > tr > th, table.sumtbl > * > tr > td,
+table.testinfo-tbl > * > tr > th, table.testinfo-tbl > * > tr > td,
+table.notetbl > * > tr > th, table.notetbl > * > tr > td{padding:4px 8px !important;}
+/* "등록된 …가 없습니다" 안내 행은 넉넉한 여백을 그대로 둔다 */
+table.board td[colspan], table.cntbl td[colspan], table.reslist td[colspan], table.stattbl td[colspan], table.to2 td[colspan], table.sumtbl td[colspan], table.testinfo-tbl td[colspan], table.notetbl td[colspan]{padding:14px 8px !important;}
