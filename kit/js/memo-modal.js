@@ -251,7 +251,7 @@
           '<div class="modal-body" style="display:flex;flex-direction:column;">' +
             '<div class="mcResultRow">' +
               '<span class="cnt">조회 결과 : 총 <b id="mcResultCount">0</b>건 (최신 상담 이력 순 정렬)</span>' +
-              '<button class="btn" id="mcRegisterBtn">+ 상담 등록</button>' +
+              '<button class="btn" id="mcRegisterBtn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>상담 등록</button>' +
             '</div>' +
             '<div class="mcTableWrap">' +
               '<table class="mcTable">' +
