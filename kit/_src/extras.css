@@ -361,8 +361,11 @@ table.dupform td:has(textarea), table.staytbl td:has(textarea), table.edutbl td:
 .modal-ov .modaltbl-wrap{width:auto;box-sizing:border-box;}
 /* sticky thead 는 패널의 padding(14px) 아래에 붙는다 — 그 틈으로 스크롤되는 td 가 헤더 위를
    지나갔다. 다른 표 래퍼(.tblwrap 등)처럼 상하 padding 을 두지 않아 헤더가 패널 맨 위에 붙게 한다. */
-.modal-ov > .modal-box > .modaltbl-wrap.modaltbl-wrap{padding-top:0 !important;padding-bottom:0 !important;}
-.modal-ov .modaltbl-wrap > .shcount{padding:10px 0 8px !important;}
+/* 패널의 상하 여백(14px)은 흰 박스 안쪽 여백이라 그대로 둔다. 대신 sticky 헤더는
+   그 여백 위(패널 맨 위)에 붙도록 top 을 여백만큼 당긴다 — top:0 이면 헤더가 여백 아래에
+   서고 그 틈으로 스크롤되는 td 가 헤더 위를 지나간다(2026-08-29 실측). */
+.modal-ov .modaltbl-wrap.modaltbl-wrap > table > thead > tr > th{top:-14px !important;}
+.modal-ov .modaltbl-wrap > .shcount{padding:0 0 8px !important;}
 
 /* ==========================================================================
    특이사항 textarea (2026-08-28 요청)

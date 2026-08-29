@@ -59,7 +59,10 @@
       var top = headH(wrap);                 /* 헤더 아래에서 시작 */
       /* 스크롤 컨테이너 안의 absolute 는 내용과 함께 움직인다 —
          가로로 밀어도 막대가 오른쪽 끝에 붙어 있도록 scrollLeft 를 더해 준다 */
-      var right = wrap.scrollLeft + wrap.clientWidth - 8;
+      /* clientWidth 는 padding 을 포함한다 — 패널에 좌우 여백이 있으면 막대가 표 밖(여백 위)에
+         그려진다. 오른쪽 여백만큼 안으로 당겨 데이터(td) 위에 뜨게 한다. */
+      var pr = parseFloat(getComputedStyle(wrap).paddingRight) || 0;
+      var right = wrap.scrollLeft + wrap.clientWidth - pr - 8;
       var trackH = Math.max(0, ch - top - 4);
       if (sh > ch + 2 && trackH > 20) {
         y.style.display = 'block';
