@@ -492,3 +492,26 @@ tent = whoLabel ? ('— ' + whoLabel) : ''; // 검색 조건은 매번 비운 �
 document.getElementById('shFrom').value = ''; document.getElementById('shTo').value = ''; document.getElementById('shSeminarName').value = ''; document.querySelectorAll('#semHistModal .dateshadow').forEach(function(sh){sh.value = '';}
 ); // 날짜 입력/설명회명 키워드에서 Enter는 Search와 동일하게 동작(이 화면 검색바의 enterFieldMap과 같은 관례) document.querySelectorAll('#semHistModal .dateinput, #semHistModal #shSeminarName').forEach(function(inp){inp.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); renderSemHist();}
 ); // 데이트피커(섀도우 input)로 값을 고르면 즉시 재조회 — 버튼을 한 번 더 누르지 않아도 되게 document.querySelectorAll('#semHistModal .dateshadow').forEach(function(sh){sh.addEventListener('change', function(){ setTimeout(renderSemHist, 0);}
+
+/* 모달 안 표의 상단 파란 라인 — 래퍼와 셀이 각각 그리면 2px 로 겹친다.
+   화면과 같이 한 겹만 남긴다(2026-08-30). */
+.modal-ov .tblwrap > table::before{display:none !important;}
+.modal-ov .tblwrap > table > thead > tr:first-child > *{border-top:0 !important;}
+-------------------------------------------------------------- · 표 상단 파란 선은 감싼 박스의 border-top 으로 그려 스크롤해도 남는다 (표 자신의 ::before 로 그리면 td 와 함께 위로 밀려 사라진다) · th 는 sticky 로 고정, 아래 td 만 스크롤 · 막대는 얇고 반투명(rgba(44,62,90,.28)) — 트랙은 투명이라 표 위에 얹힌 것처럼 보인다 ========================================================================== */ .modal-ov .tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap, .modal-ov .stu-tblwrap, .modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap{border-top:1px solid var(--pb,#0066FF) !important;}
+.modal-ov .imptbl-wrap > table::before, .modal-ov .schtbl-wrap > table::before, .modal-ov .stu-tblwrap > table::before, .modal-ov .shTableWrap > table::before, .modal-ov .mcTableWrap > table::before, .modal-ov .eduTblWrap > table::before{display:none !important;}
+.modal-ov .imptbl-wrap > table > thead > tr:first-child > *, .modal-ov .schtbl-wrap > table > thead > tr:first-child > *, .modal-ov .stu-tblwrap > table > thead > tr:first-child > *, .modal-ov .shTableWrap > table > thead > tr:first-child > *, .modal-ov .mcTableWrap > table > thead > tr:first-child > *, .modal-ov .eduTblWrap > table > thead > tr:first-child > *{border-top:0 !important;}
+그리면 th 세로 보더가 라인 위로 1px 올라와 눈금처럼 보인다(좌우로 1px 씩 넘겨 그 틱을 덮는다, 2026-08-29). */ .modal-ov .tblwrap > table > thead > tr:first-child > *, .modal-ov .imptbl-wrap > table > thead > tr:first-child > *, .modal-ov .schtbl-wrap > table > thead > tr:first-child > *, .modal-ov .stu-tblwrap > table > thead > tr:first-child > *, .modal-ov .shTableWrap > table > thead > tr:first-child > *, .modal-ov .mcTableWrap > table > thead > tr:first-child > *, .modal-ov .eduTblWrap > table > thead > tr:first-child > *{box-shadow:none !important;position:sticky;top:0;z-index:2;}
+.modal-ov .tblwrap > table > thead > tr:first-child > *::before, .modal-ov .imptbl-wrap > table > thead > tr:first-child > *::before, .modal-ov .schtbl-wrap > table > thead > tr:first-child > *::before, .modal-ov .stu-tblwrap > table > thead > tr:first-child > *::before, .modal-ov .shTableWrap > table > thead > tr:first-child > *::before, .modal-ov .mcTableWrap > table > thead > tr:first-child > *::before, .modal-ov .eduTblWrap > table > thead > tr:first-child > *::before{content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);top:0; height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;z-index:2;}
+.modal-ov .eduTblWrap > table > thead > tr:first-child > *{box-shadow:none !important;}
+
+/* 파란 라인은 한 겹 — 래퍼와 셀 오버레이가 같이 그리면 2px 이 된다(화면 실측은 1px).
+   라인은 셀 오버레이(::before)가 그리고, 래퍼 쪽 위선은 끈다. */
+.modal-ov .tblwrap, .modal-ov .stu-tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap,
+.modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap, .modal-ov .notetbl-wrap,
+.modal-ov .stattbl-wrap{border-top:0 !important;}
+/* 오버레이가 없던 표에도 같은 라인을 준다 */
+.modal-ov .mcTableWrap > table > thead > tr:first-child > *::before,
+.modal-ov .shTableWrap > table > thead > tr:first-child > *::before,
+.modal-ov .tblwrap > table > thead > tr:first-child > *::before{
+  content:'';position:absolute;left:0;right:0;top:0;height:1px;background:var(--pb);z-index:2;}
+.modal-ov table > thead > tr:first-child > *{position:relative;}

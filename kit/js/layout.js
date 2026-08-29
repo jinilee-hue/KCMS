@@ -541,3 +541,26 @@ global.KCMS=Object.assign(global.KCMS||{},{
 });
 global.initLayout=initLayout;
 })(window);
+
+/* 모달은 나중에 만들어져 초기 initCsel() 한 번으로는 잡히지 않는다.
+   .modal-ov 가 열릴 때마다 그 안의 select 를 커스텀 셀렉트로 바꾼다(화면과 같은 상태). */
+(function(){
+  function convert(root){
+    if(!root) return;
+    if(typeof initCsel === 'function') initCsel(root);
+    else if(window.KCMS && typeof KCMS.initCsel === 'function') KCMS.initCsel(root);
+  }
+  function scanOpen(){
+    document.querySelectorAll('.modal-ov').forEach(function(m){
+      if(m.__cselDone) return;
+      var vis = m.classList.contains('open') || getComputedStyle(m).display !== 'none';
+      if(!vis) return;
+      m.__cselDone = true;
+      convert(m);
+    });
+  }
+  new MutationObserver(scanOpen).observe(document.documentElement,
+    {childList:true, subtree:true, attributes:true, attributeFilter:['class','style']});
+  document.addEventListener('click', function(){ setTimeout(scanOpen, 120); });
+  setTimeout(scanOpen, 400);
+})();

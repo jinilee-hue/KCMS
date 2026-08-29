@@ -276,10 +276,6 @@
     _state.list = null;
     _state.selectedName = null;
     /* 화면과 같이 셀렉트를 커스텀으로 바꾼다(Kit 은 initCsel 이 초기 1회만 돌아 모달을 놓친다) */
-    /* Kit 은 KCMS.initCsel, 화면은 자체 빌더가 한다 — 있는 쪽을 부른다 */
-    var _mo = document.getElementById('staffPickModal');
-    if (typeof initCsel === 'function') initCsel(_mo);
-    else if (window.KCMS && typeof KCMS.initCsel === 'function') KCMS.initCsel(_mo);
     document.getElementById('spmFRank').value = '';
     document.getElementById('spmFPosition').value = '';
     document.getElementById('spmFStatus').value = '재직';
