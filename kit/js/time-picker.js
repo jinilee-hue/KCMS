@@ -170,6 +170,17 @@
   window.addEventListener('scroll', function () { if (target) place(); }, true);
   window.addEventListener('resize', function () { if (target) place(); });
 
+
+  /* 시계 버튼이 없는 자리도 있어, 시간 입력을 눌러도 패널이 열리게 한다.
+     입력은 readonly 라 브라우저 기본 위젯은 뜨지 않는다. */
+  document.addEventListener('click', function (ev) {
+    var el = ev.target;
+    if (!el || el.tagName !== 'INPUT' || el.type !== 'time') return;
+    ev.preventDefault();
+    if (lastTarget === el && (Date.now() - lastCloseAt) < 350) { lastTarget = null; return; }
+    open(el);
+  });
+
   var nativeShowPicker = window.HTMLInputElement ? HTMLInputElement.prototype.showPicker : null;
   try {
     HTMLInputElement.prototype.showPicker = function () {

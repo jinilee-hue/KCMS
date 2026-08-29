@@ -497,7 +497,7 @@ function buildCTree(host, groups, opt){
 document.addEventListener('click', function(e){
   var btn = e.target.closest && e.target.closest('.iwrap .ibtn, .drange .ibtn, .dwrap .ibtn');
   if(!btn) return;
-  var shadow = btn.parentElement.querySelector('input[type=date]');
+  var shadow = btn.parentElement.querySelector('input[type=date], input[type=time]');
   if(shadow && typeof shadow.showPicker === 'function'){ e.preventDefault(); shadow.showPicker(); }
 });
 

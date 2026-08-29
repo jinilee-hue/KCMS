@@ -496,7 +496,4 @@ table.grid td:has(.btn), table.grid td:has(button), table.grid td:has(a){text-ov
 /* 정렬 화살표는 hover 때 display:none → inline-flex 로 바뀌어, 없다가 생기면서
    헤더 글자를 밀어냈다. 자리는 늘 차지하고 보이기(visibility)만 토글한다(2026-08-29 요청). */
 .tharrow{display:inline-flex !important;align-items:center;justify-content:center;
-  visibility:hidden;box-sizing:border-box;}
-table.grid thead th:hover .tharrow, table.stathisttbl thead th:hover .tharrow,
-table.staytbl thead th:hover .tharrow, table.reslist thead th:hover .tharrow,
-table.schtbl thead th:hover .tharrow, .tharrow.active{visibility:visible !important;}
+  visibility:visible !important;box-sizing:border-box;}

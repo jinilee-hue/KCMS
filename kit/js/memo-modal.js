@@ -552,7 +552,7 @@
                 '<td><div class="mddDateTimeWrap">' +
                   /* 브라우저 기본 달력·시계 아이콘 대신 다른 화면과 같은 .iwrap + .ibtn 조합 사용 */
                   '<span class="iwrap mddIw mddIwDate"><input type="date" class="finput mddDateInput" id="mddDate"><button type="button" class="ibtn" data-for="mddDate" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
-                  '<span class="iwrap mddIw mddIwTime"><input type="time" class="finput mddTimeInput" id="mddTime"><button type="button" class="ibtn" data-for="mddTime" title="시간"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button></span>' +
+                  '<span class="iwrap mddIw mddIwTime"><input type="time" class="finput mddTimeInput" id="mddTime" readonly><button type="button" class="ibtn" data-for="mddTime" title="시간"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button></span>' +
                 '</div></td>' +
                 '<th>상담방법</th>' +
                 '<td><select class="fselect" id="mddMethod"></select></td>' +
