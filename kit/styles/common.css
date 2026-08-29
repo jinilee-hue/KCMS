@@ -391,3 +391,10 @@ table.grid td:has(.btn), table.grid td:has(button), table.grid td:has(a){text-ov
    브라우저 기본 시간 위젯의 진입점(시계 아이콘)만 감춘다. 패널은 옆의 시계 버튼으로 연다. */
 input[type="time"]::-webkit-calendar-picker-indicator{display:none !important;}
 input[type="time"]{padding-right:22px;}
+
+/* 목록 그리드(table.grid)만 셀 여백이 0 8px · 행 29px 이었다 —
+   다른 표와 같은 4px 8px · 33px 로 맞춘다(2026-08-29 요청).
+   셀 안 컨트롤(24px)은 위아래 4px 여백 안에서 세로 중앙에 놓인다. */
+table.grid > * > tr > th, table.grid > * > tr > td{padding:4px 8px !important;}
+table.grid thead tr th{padding-top:4px !important;padding-bottom:4px !important;padding-left:8px !important;padding-right:8px !important;}
+table.grid > tbody > tr > td{height:33px !important;}
