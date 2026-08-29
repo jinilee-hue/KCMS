@@ -457,3 +457,7 @@ table.edutbl > * > tr > th, table.spmTbl > * > tr > th{padding:4px 8px !importan
 
 /* 학생 메모 표만 th 26px 이라 다른 표(33px)보다 좁아 보였다 — 같은 값으로(2026-08-29 요청) */
 table.notetbl > * > tr > th{height:33px !important;}
+
+/* 데이터가 없을 때 뜨는 안내 칸("… 없습니다")은 여백을 넉넉히 준다 —
+   본문 여백(4px)을 그대로 쓰면 문구가 답답해 보인다. 학생 메모 표에서 쓰던 14px 로 통일(2026-08-29 요청). */
+tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !important;}
