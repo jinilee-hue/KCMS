@@ -142,7 +142,9 @@
 .ctnode{display:flex;align-items:center;gap:6px;height:26px;padding:0 10px;font-size:11.5px;color:var(--txt);cursor:pointer;}
 .ctnode:hover{background:#F4F7FD;}
 .ctnode.hide{display:none;}
-.ctnode[data-depth="1"]{padding-left:34px;}   /* 잎(끝 항목) 표시 — 폴더와 짝 */
+/* 하위 항목의 체크박스를 상위 폴더명 첫 글자 위치(67px)에 맞춘다 —
+   34px 이면 상위 체크박스와도, 글자와도 어긋난다(2026-08-29 요청) */
+.ctnode[data-depth="1"]{padding-left:49px;}   /* 잎(끝 항목) 표시 — 폴더와 짝 */
 .ctnode[data-depth="1"].hide2{display:none;}
 .ctchev{flex:0 0 12px;width:12px;height:12px;display:inline-flex;align-items:center;justify-content:center;
   color:#8a97a8;transition:transform .12s;}
