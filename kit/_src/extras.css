@@ -480,3 +480,8 @@ tbody > tr:only-child > td[colspan]{padding:14px 8px !important;height:auto !imp
 #shPaging .shSize select, #shPaging .shSizeSel,
 #staffPickModal .spmJump input, #shPaging .shJump input{height:24px !important;}
 #staffPickModal .spmJump input{width:38px !important;}
+
+/* 데이터가 없을 때 뜨는 안내 칸은 높이를 넉넉히 — 표마다 걸린 행 높이(예: table.grid td 29px)에
+   눌려 여백을 줘도 그대로였다. 행 높이를 풀고 위아래 22px 을 준다(2026-08-29 요청). */
+table > tbody > tr:only-child > td[colspan]{
+  height:60px !important;padding:8px !important;vertical-align:middle !important;}
