@@ -313,9 +313,18 @@ table.grid .csel-box, .csel.h22 .csel-box,
 .tblwrap::-webkit-scrollbar-track, .stu-tblwrap::-webkit-scrollbar-track, .matwrap::-webkit-scrollbar-track,
 .imptbl-wrap::-webkit-scrollbar-track, .schtbl-wrap::-webkit-scrollbar-track,
 .shTableWrap::-webkit-scrollbar-track, .mcTableWrap::-webkit-scrollbar-track{background:transparent !important;}
+/* 상단 파란 라인은 셀 오버레이(::before)로 — 안쪽 그림자로 그리면 th 세로 보더가
+   라인 위로 1px 올라와 눈금처럼 보인다. 팝업 표와 같은 방식으로 통일(2026-08-29). */
 .tblwrap > table > thead > tr:first-child > *, .stu-tblwrap > table > thead > tr:first-child > *,
 .reslist-wrap > table > thead > tr:first-child > *, .notetbl-wrap > table > thead > tr:first-child > *,
-.stattbl-wrap > table > thead > tr:first-child > *{box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
+.stattbl-wrap > table > thead > tr:first-child > *{box-shadow:none !important;}
+.tblwrap > table > thead > tr:first-child > *::before,
+.stu-tblwrap > table > thead > tr:first-child > *::before,
+.reslist-wrap > table > thead > tr:first-child > *::before,
+.notetbl-wrap > table > thead > tr:first-child > *::before,
+.stattbl-wrap > table > thead > tr:first-child > *::before{
+  content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);top:0;
+  height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;z-index:2;}
 .tblwrap > table::before, .stu-tblwrap > table::before, .reslist-wrap > table::before,
 .notetbl-wrap > table::before, .stattbl-wrap > table::before{display:none !important;}
 
@@ -416,3 +425,8 @@ table.staytbl:has(thead){margin-top:0 !important;}
    교육정보·설명회 내역 표와 같이 표 오버레이는 끄고 여백도 0 으로(2026-08-29). */
 table.staytbl:has(thead)::before{display:none !important;}
 table.staytbl:has(thead){margin-top:0 !important;}
+
+/* 달력 표만 표 오버레이(::before 1px)와 th 상단 보더(1px)가 겹쳐 파란 라인이 2px 이었다 —
+   요약표(table.sumtbl)와 같이 th 보더를 끄고 오버레이 하나로 그린다(2026-08-29). */
+table.cal > thead > tr:first-child > *,
+table.rcal > thead > tr:first-child > *{border-top:0 !important;}
