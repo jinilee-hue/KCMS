@@ -559,3 +559,12 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 /* 검색줄 바로 아래 오는 표 패널은 위 여백을 붙인다 — 줄 사이가 두 번 벌어져 보였다.
    SMS 발송내역(.shfilter)에 이미 같은 처리가 있고, 담당자 찾기(.spmRow)도 같은 구조다. */
 .modal-ov > .modal-box > .spmRow + [style*="flex:1"]{margin-top:0 !important;}
+
+/* 글자 크기 11.5px — 화면은 컴포넌트마다 개별 규칙으로 주는데 Kit 에 빠진 것들이다.
+   데모에서 이 컨트롤들이 기본 12px 로 나와 화면보다 커 보였다(2026-08-30 대조). */
+.bcbar .meta{font-size:11.5px;}
+.paging .pgsize,#paging .pgsize,.pgsize{font-size:11.5px;}
+#dupModal table.dupform{font-size:11.5px;}
+.paging .pgsize select{font-size:11.5px;}
+.filters .drange .iwrap input{font-size:11.5px;}
+#importModalOv table.fbox td.flabel{font-size:11.5px;}
