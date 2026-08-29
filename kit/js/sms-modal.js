@@ -224,9 +224,12 @@
       '.splitdd button{display:block;width:100%;text-align:left;padding:7px 10px;border:none;background:#fff;font-size:11.5px;color:var(--txt);cursor:pointer;}' +
       '.splitdd button:hover{background:var(--pb-light);color:var(--pb-deeper);}' +
       '.smsAddWide{width:820px;max-width:94vw;}' +
-      '.addtabs{display:flex;gap:4px;margin-bottom:8px;}' +
-      '.addtabs button{height:26px;padding:0 14px;border:1px solid var(--line);border-radius:3px;background:#fff;font-size:11.5px;color:var(--txt-mut);cursor:pointer;}' +
-      '.addtabs button.on{background:var(--pb);border-color:var(--pb-dark);color:#fff;font-weight:700;}' +
+      '.addtabs{display:flex;align-items:center;gap:6px;margin-bottom:8px;}' +
+      /* 하위탭(.quickpill)과 같은 알약 버튼으로 통일(2026-08-29 요청) */
+      '.addtabs button{height:24px;padding:0 12px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:11px;color:var(--txt-mut);cursor:pointer;white-space:nowrap;}' +
+      '.addtabs button:hover{border-color:var(--pb);color:var(--pb);}' +
+      '.addtabs button.on{background:var(--pb);border-color:var(--pb);color:#fff;font-weight:700;}' +
+      '.addtabs button.on:hover{color:#fff;}' +
       '.addfilterrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}' +
       '.addfilterrow select,.addfilterrow input{width:auto;}' +
       '.addpageRow{display:flex;align-items:center;justify-content:space-between;margin-top:8px;font-size:11px;color:var(--txt-mut);}' +
