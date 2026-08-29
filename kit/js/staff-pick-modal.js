@@ -132,15 +132,11 @@
             '<span class="spmLbl">직원명</span><input class="finput" id="spmFName" placeholder="직원명 입력">' +
             '<button type="button" class="btn sm" id="spmSearchBtn"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>검색</button>' +
           '</div>' +
-          '<div style="flex:1;min-height:0;overflow:auto;margin:12px;border:1px solid #bcc6d1;border-radius:3px;">' +
+          '<div class="tblwrap" style="flex:1;min-height:0;overflow:auto;">' +
             '<table class="spmTbl"><thead><tr>' + headHtml + '</tr></thead><tbody id="spmBody"></tbody></table>' +
           '</div>' +
           '<div class="modal-foot" style="justify-content:space-between;align-items:center;">' +
-            '<span class="spmPg">' +
-              '<button type="button" disabled title="처음">«</button><button type="button" disabled title="이전">‹</button>' +
-              '<span class="spmJump">페이지 <input type="text" value="1" readonly> / 1</span>' +
-              '<button type="button" disabled title="다음">›</button><button type="button" disabled title="끝">»</button>' +
-            '</span>' +
+                        '<span class="paging" id="spmPaging"></span>' +
             '<button class="btn" id="spmApplyBtn">✔ 적용</button>' +
           '</div>' +
         '</div>' +
@@ -169,15 +165,72 @@
     if (m) m.classList.remove('open');
   }
 
+  var SPM_PAGE_SIZE = 30;
+
+  /* 페이징은 SMS 발송 모달의 대상추가 목록과 같은 구성이다 —
+     « ‹ [번호] › » · 페이지 [입력] / N · 새로고침 · 페이지당 */
+  function renderSpmPaging(total) {
+    var el = document.getElementById('spmPaging');
+    if (!el) return;
+    var pages = Math.max(1, Math.ceil(total / SPM_PAGE_SIZE));
+    var page = Math.min(Math.max(1, _state.page || 1), pages);
+    _state.page = page;
+    var end = Math.min(pages, Math.max(5, page + 2)), start = Math.max(1, end - 4);
+    var nums = '';
+    for (var p = start; p <= end; p++) {
+      nums += '<button type="button" class="pgnum' + (p === page ? ' on' : '') + '" data-p="' + p + '">' + p + '</button>';
+    }
+    el.innerHTML =
+      '<button type="button" class="pgnav" data-go="first" title="처음"' + (page <= 1 ? ' disabled' : '') + '>&laquo;</button>' +
+      '<button type="button" class="pgnav" data-go="prev" title="이전"' + (page <= 1 ? ' disabled' : '') + '>&lsaquo;</button>' +
+      nums +
+      '<button type="button" class="pgnav" data-go="next" title="다음"' + (page >= pages ? ' disabled' : '') + '>&rsaquo;</button>' +
+      '<button type="button" class="pgnav" data-go="last" title="끝"' + (page >= pages ? ' disabled' : '') + '>&raquo;</button>' +
+      '<span class="pgjump">페이지 <input type="number" class="pgpage" min="1" max="' + pages + '" value="' + page + '"> / ' + pages + '</span>' +
+      '<button type="button" class="pgnav" data-go="refresh" title="새로고침">' +
+        '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+        '<path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>' +
+      '<span class="pgsize">페이지당 <select class="pgsizesel" aria-label="페이지당 표시 개수">' +
+        [30, 50, 100].map(function (n) { return '<option value="' + n + '"' + (n === SPM_PAGE_SIZE ? ' selected' : '') + '>' + n + '</option>'; }).join('') +
+      '</select></span>';
+    el.querySelectorAll('.pgnum').forEach(function (b) {
+      b.addEventListener('click', function () { _state.page = Number(b.dataset.p); renderBody(); });
+    });
+    el.querySelectorAll('.pgnav').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var g = b.dataset.go;
+        if (g === 'refresh') { renderBody(); return; }
+        if (g === 'first') _state.page = 1;
+        else if (g === 'prev') _state.page = Math.max(1, page - 1);
+        else if (g === 'next') _state.page = Math.min(pages, page + 1);
+        else _state.page = pages;
+        renderBody();
+      });
+    });
+    var jump = el.querySelector('.pgpage');
+    if (jump) jump.addEventListener('change', function () {
+      var v = Math.min(pages, Math.max(1, Number(jump.value) || 1));
+      _state.page = v; renderBody();
+    });
+    var sel = el.querySelector('.pgsizesel');
+    if (sel) sel.addEventListener('change', function () {
+      SPM_PAGE_SIZE = Number(sel.value) || 30; _state.page = 1; renderBody();
+    });
+  }
+
   function renderBody() {
     var tbody = document.getElementById('spmBody');
-    var list = _state.list;
+    var all = _state.list;
+    var total = all ? all.length : 0;
+    renderSpmPaging(total);
+    var from = ((_state.page || 1) - 1) * SPM_PAGE_SIZE;
+    var list = all ? all.slice(from, from + SPM_PAGE_SIZE) : all;
     if (!list || !list.length) {
       tbody.innerHTML = '<tr><td class="spmEmpty" colspan="' + (1 + STAFF_PICK_COLS.length) + '">표시할 데이터가 없습니다.</td></tr>';
       return;
     }
     tbody.innerHTML = list.map(function (st, i) {
-      var cells = '<td>' + (i + 1) + '</td>' + STAFF_PICK_COLS.map(function (c) { return '<td>' + esc(st[c.key]) + '</td>'; }).join('');
+      var cells = '<td>' + (from + i + 1) + '</td>' + STAFF_PICK_COLS.map(function (c) { return '<td>' + esc(st[c.key]) + '</td>'; }).join('');
       return '<tr class="' + (_state.selectedName === st.name ? 'spmRowSel' : '') + '" data-name="' + escAttr(st.name) + '">' + cells + '</tr>';
     }).join('');
     Array.prototype.forEach.call(tbody.querySelectorAll('tr[data-name]'), function (tr) {
@@ -201,6 +254,7 @@
       return true;
     });
     _state.selectedName = null;
+    _state.page = 1;
     renderBody();
   }
 
