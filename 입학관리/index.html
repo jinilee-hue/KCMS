@@ -216,12 +216,20 @@ function tabScript(cur){
   /* 주소가 #화면키!모달호출 이면 화면이 뜬 뒤 그 모달을 연다 —
      Kit 데모가 마크업을 복사하지 않고 실제 팝업을 그대로 보여주기 위한 통로다. */
   var call = String(WANT_MODAL||'').replace(/[^A-Za-z0-9_.(){}'",:\[\] -]/g,'');
+  /* 팝업만 모드 — 화면 자체 모달은 .app 안에 있어서 .app 을 숨기면 팝업까지 같이 숨는다.
+     열린 모달을 body 로 끌어올린 뒤 나머지를 감춘다. */
   var onlyCss = ONLY_MODAL
-    ? '<style>body>*:not(.modal-ov):not(script):not(style){display:none !important;}'
-      + 'body{background:#eef1f5 !important;}'
-      + '.modal-ov{position:fixed;inset:0;display:flex !important;align-items:center;justify-content:center;'
-      + 'background:rgba(15,30,60,.28);}'
-      + '.modal-ov:not(.open){display:none !important;}</style>'
+    ? '<style>html,body{background:#eef1f5 !important;}'
+      + '.modal-ov.open{position:fixed !important;inset:0 !important;display:flex !important;'
+      + 'align-items:center;justify-content:center;background:rgba(15,30,60,.28);z-index:9999;}</style>'
+      + '<scr'+'ipt>(function(){function only(){'
+      + 'var mo=document.querySelector(".modal-ov.open"); if(!mo) return false;'
+      + 'if(mo.parentElement!==document.body) document.body.appendChild(mo);'
+      + 'Array.prototype.forEach.call(document.body.children,function(e){'
+      + 'if(e===mo||e.tagName==="SCRIPT"||e.tagName==="STYLE") return; e.style.display="none";});'
+      + 'return true;}'
+      + 'var t=setInterval(function(){ if(only()) clearInterval(t); },120);'
+      + 'setTimeout(function(){clearInterval(t);},8000);})();<\/scr'+'ipt>'
     : '';
   var openJs = call
     ? '<scr'+'ipt>window.addEventListener("load",function(){setTimeout(function(){try{'+call+'}catch(e){console.warn(e)}},350)});<\/scr'+'ipt>'
