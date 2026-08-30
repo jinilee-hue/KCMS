@@ -324,17 +324,20 @@
          쓴다 — 같은 성적표를 두 화면이 다른 색으로 보여주면 안 된다(2026-08-24 요청).
          --pb-light(#EAF1FB) = Total, --pb-light2(#DCE7F7) = StarReading(같은 hue 에서 명도만
          95%→92%), --danger-bg/--danger-txt = Result. */
-      '--pb-light2:#DCE7F7;--danger-bg:#fdecec;--danger-txt:#b42318;}' +
+      '--pb-light2:#DCE7F7;--danger-bg:#fdecec;--danger-txt:#b42318;'+
+      /* 인쇄 문서에도 hex 를 남기지 않으려고 나머지 값도 토큰으로 올린다(2026-08-30).
+         --bg 는 거의 같던 두 회색(var(--bg)·var(--bg))을 하나로 합친 것이다. */
+      '--bg:#f7f9fc;--tbl-head:#F4F7FD;--tbl-bd:#c3ccd9;}' +
       'body{margin:0;font-family:Pretendard,Pretendard Variable,Malgun Gothic,맑은 고딕,Dotum,돋움,sans-serif;background:#fff;color:var(--txt);}' +
-      '.rpt-topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--tbl-bd-soft);background:#f7f9fc;position:sticky;top:0;}' +
+      '.rpt-topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--tbl-bd-soft);background:var(--bg);position:sticky;top:0;}' +
       '.rpt-topbar .rpt-date{font-size:11px;color:var(--txt-mut);margin-right:auto;}' +
       '.rpt-printbtn{height:26px;padding:0 12px;border:1px solid var(--tbl-bd-soft);border-radius:3px;background:#fff;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}' +
-      '.rpt-printbtn:hover{background:#eef1f5;}' +
+      '.rpt-printbtn:hover{background:var(--bg);}' +
       '.rpt-body{padding:22px 26px;max-width:640px;margin:0 auto;}' +
-      '.rpt-title{text-align:center;font-size:21px;font-weight:700;letter-spacing:.5px;color:#1f2937;margin-bottom:18px;}' +
+      '.rpt-title{text-align:center;font-size:21px;font-weight:700;letter-spacing:.5px;color:var(--txt);margin-bottom:18px;}' +
       '.rpt-sect{font-size:12px;font-weight:700;color:var(--txt);margin:16px 0 8px;}' +
       '.rpt-infobox{display:flex;gap:16px;align-items:center;border:1px solid var(--tbl-bd-soft);border-radius:6px;padding:12px 16px;}' +
-      '.rpt-avatar{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:#eef1f5;color:var(--txt-mut);display:flex;align-items:center;justify-content:center;}' +
+      '.rpt-avatar{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:var(--bg);color:var(--txt-mut);display:flex;align-items:center;justify-content:center;}' +
       '.rpt-infogrid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}' +
       '.rpt-infogrid .row{display:flex;justify-content:space-between;font-size:12px;gap:8px;}' +
       '.rpt-infogrid .k{color:var(--txt-mut);white-space:nowrap;}' +
@@ -376,7 +379,7 @@
       'table.rpt-table th,table.rpt-table td{border:1px solid var(--tbl-bd-soft);padding:5px 6px;text-align:center;}' +
       'table.rpt-table > thead > tr:first-child > th{border-top:0;}' +
       'table.rpt-table::before{content:\'\';position:absolute;top:0;left:0;right:0;height:1px;background:var(--pb);pointer-events:none;z-index:2;}' +
-      'table.rpt-table thead th{background:#F4F7FD;color:#2C3E5A;font-weight:700;}' +
+      'table.rpt-table thead th{background:var(--tbl-head);color:var(--gnb);font-weight:700;}' +
       '#rptSubjTbody td{border-bottom:0;}' +
       '#rptSubjTbody tr:first-child td{border-top:0;}' +
       '#rptSubjTbody tr:last-child td{border-bottom:1px solid var(--tbl-bd-soft);}' +
@@ -399,10 +402,10 @@
          최소폭으로 무너지고 BA/50%/AA 가 겹쳐 찍힌다(실측 확인). 종전 트랙 폭(89px)보다
          조금 넉넉히 잡아 라벨이 서로 닿지 않게 한다. */
       'th.rankhead .rankbandwrap{position:relative;height:12px;margin:0 2px;min-width:104px;}' +
-      'th.rankhead .rankband{position:absolute;top:0;line-height:12px;text-align:center;font-size:10px;font-weight:700;color:#2C3E5A;}' +
+      'th.rankhead .rankband{position:absolute;top:0;line-height:12px;text-align:center;font-size:10px;font-weight:700;color:var(--gnb);}' +
       '.ranktrack{position:relative;height:14px;margin:0 2px;}' +
-      '.ranktrack::before{content:\'\';position:absolute;left:0;right:0;top:50%;height:1px;background:#c3ccd9;transform:translateY(-50%);}' +
-      '.ranktrack .ranktick{position:absolute;top:50%;width:1px;height:9px;background:#c3ccd9;transform:translate(-50%,-50%);}' +
+      '.ranktrack::before{content:\'\';position:absolute;left:0;right:0;top:50%;height:1px;background:var(--tbl-bd);transform:translateY(-50%);}' +
+      '.ranktrack .ranktick{position:absolute;top:50%;width:1px;height:9px;background:var(--tbl-bd);transform:translate(-50%,-50%);}' +
       /* 구간 바 폭 22px → 8px. 트랙이 89px 뿐이라 22px 은 ±12%p 를 덮어 55 와 60 이 사실상
          같은 위치로 보였다(2026-08-24 실측). 8px 이면 5%p 차이(≈4.5px)가 눈에 들어온다. */
       '.ranktrack .rankseg{position:absolute;top:50%;width:8px;height:12px;background:var(--pb-soft);border-radius:2px;transform:translate(-50%,-50%);}' +
@@ -427,7 +430,7 @@
       '.rpt-chart .bar{width:16px;border-radius:8px 8px 0 0;position:relative;}' +
       '.rpt-chart .bar.student{background:var(--pb);}' +
       '.rpt-chart .bar.poly{background:var(--gnb);}' +
-      '.rpt-chart .bar .val{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:#333;white-space:nowrap;}' +
+      '.rpt-chart .bar .val{position:absolute;top:-15px;left:50%;transform:translateX(-50%);font-size:10px;font-weight:700;color:var(--txt);white-space:nowrap;}' +
       '.rpt-chart .bar-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:10.5px;color:var(--txt-mut);white-space:nowrap;}' +
       /* ── 그래프 인터랙션(2026-08-24 요청) ─────────────────────────────────────────
          · hover: 해당 막대를 밝게 + 값 라벨을 키우고 진하게, 나머지 과목 그룹은 살짝 디밍
@@ -457,7 +460,7 @@
       '.rpt-legend .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}' +
       '.rpt-legend .dot.student{background:var(--pb);}' +
       '.rpt-legend .dot.poly{background:var(--gnb);}' +
-      '.rpt-comment{font-size:12px;line-height:1.6;color:var(--txt);background:#f7f9fc;border-radius:6px;padding:12px 14px;}' +
+      '.rpt-comment{font-size:12px;line-height:1.6;color:var(--txt);background:var(--bg);border-radius:6px;padding:12px 14px;}' +
       '.rpt-printhead,.rpt-printfoot{display:none;}' +
       /* G. 인쇄 대응(2026-08-24 요청) — 학부모 배부용 인쇄물이므로:
          · 표/차트/코멘트가 페이지 경계에서 잘리지 않게 break-inside:avoid
@@ -468,9 +471,9 @@
         ' .rpt-topbar{display:none;}' +
         ' body{print-color-adjust:exact;-webkit-print-color-adjust:exact;}' +
         ' .rpt-body{max-width:none;padding:0;}' +
-        ' .rpt-printhead{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;margin-bottom:12px;border-bottom:1px solid #c3ccd9;font-size:10px;color:#5b6776;letter-spacing:.4px;}' +
-        ' .rpt-printhead b{margin-left:auto;font-size:12px;color:#1f2937;}' +
-        ' .rpt-printfoot{display:flex;align-items:baseline;gap:10px;margin-top:14px;padding-top:6px;border-top:1px solid #c3ccd9;font-size:9.5px;color:#5b6776;}' +
+        ' .rpt-printhead{display:flex;align-items:baseline;gap:10px;padding-bottom:6px;margin-bottom:12px;border-bottom:1px solid var(--tbl-bd);font-size:10px;color:var(--txt-mut);letter-spacing:.4px;}' +
+        ' .rpt-printhead b{margin-left:auto;font-size:12px;color:var(--txt);}' +
+        ' .rpt-printfoot{display:flex;align-items:baseline;gap:10px;margin-top:14px;padding-top:6px;border-top:1px solid var(--tbl-bd);font-size:9.5px;color:var(--txt-mut);}' +
         ' .rpt-printfoot b{margin-left:auto;font-weight:400;}' +
         ' .rpt-infobox,.rpt-verdict,.rpt-comment{break-inside:avoid;}' +
         ' table.rpt-table{break-inside:auto;} table.rpt-table tr{break-inside:avoid;}' +
