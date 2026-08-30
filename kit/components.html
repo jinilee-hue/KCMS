@@ -2,6 +2,11 @@
 <html lang="ko">
 <head>
 <meta charset="utf-8">
+<!-- 공통 서체 Pretendard — 한글·영문·숫자를 한 가족으로 (라틴은 Inter 기반).
+     페이징의 « ‹ › » 글리프도 이 서체로 그려진다 — 없으면 시스템 기본 서체로 떨어져
+     실제 화면(입학관리)과 모양이 달라진다(2026-08-30 요청). -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>KCMS 입학관리 Kit — 컴포넌트 가이드</title>
 <link rel="stylesheet" href="styles/tokens.css">
@@ -148,8 +153,7 @@
 <a href="#modal">모달</a>
 <a href="#toast">토스트</a>
 <a href="#help">도움말 팝오버</a>
-<a href="#state">상태</a>
-<a href="#sec">섹션 · 패널</a>
+<a href="#sec">섹션 제목</a>
 <a href="#gnb">GNB 메뉴</a>
 <a href="#shell">화면 골격</a>
 <a href="#color">색</a>
@@ -206,6 +210,12 @@
 <div class="demo row" style="align-items:center;gap:10px;">
   <button class="namelink">홍길동</button>
   <span style="font-size:11.5px;color:var(--txt-mut);">표 안에서 상세로 넘어가는 이름 — 본문색 그대로 두고, 마우스를 올리면 밑줄</span>
+</div>
+<h4 class="sub">상태 · 기본 / hover / 비활성</h4>
+<div class="demo row">
+  <button class="btn">기본</button>
+  <button class="btn" style="background:var(--pb-dark);border-color:var(--pb-dark);">hover</button>
+  <button class="btn" disabled>비활성</button>
 </div>
 </div></div></section>
 
@@ -273,7 +283,7 @@
 <h4 class="sub">세로형 · 상세 · 라벨 - 값</h4>
 <div class="demo">
   <table class="infotbl">
-    <tr><th>국적</th><td><input class="finput roflat" readonly></td>
+    <tr><th>국적</th><td><input class="finput roflat" value="대한민국" readonly></td>
         <th>학부모핸드폰<span class="req">*</span></th><td><input class="finput" value="010-1234-1234"></td></tr>
     <tr><th>학생명<span class="req">*</span></th><td><input class="finput" value="홍길동"></td>
         <th>전화번호</th><td><input class="finput" placeholder="선택 입력"></td></tr>
@@ -281,6 +291,19 @@
         <td><span class="iwrap" style="width:130px;"><input type="text" class="finput dateinput" value="2017-06-30" maxlength="10" style="width:100%;"><input type="date" class="dateshadow" tabindex="-1" aria-hidden="true"><button type="button" class="ibtn" title="날짜" aria-label="날짜 선택"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span></td>
         <th>학교/학년</th><td><input class="finput" placeholder="예: 없음"></td></tr>
   </table>
+</div>
+<h4 class="sub">행 상태 · 기본 / hover / 선택</h4>
+<div class="demo flush">
+  <div class="tblwrap">
+    <table class="grid" style="table-layout:auto;">
+      <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th>이름</th><th>학년</th><th>상태</th></tr></thead>
+      <tbody>
+        <tr><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초3</td><td>기본</td></tr>
+        <tr style="background:var(--pb-a08);"><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초4</td><td>hover</td></tr>
+        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍길동</td><td>초3</td><td>선택</td></tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 </div></div></section>
 
@@ -355,6 +378,12 @@
   </span>
 </div>
 
+<h4 class="sub">상태 · 기본 / 포커스 / 비활성</h4>
+<div class="demo row">
+  <input class="finput" value="기본" style="width:120px;">
+  <input class="finput" value="포커스" style="width:120px;border-color:var(--pb);">
+  <input class="finput" value="비활성" disabled style="width:120px;">
+</div>
 </div></div></section>
 
 <section id="choice"><div class="card"><div class="card-header"><div class="card-title">체크 · 라디오 · 토글</div></div><div class="card-body">
@@ -450,7 +479,7 @@
 <div class="tile"><div class="tile-hd"><b>상담이력</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H8l-4 4V5a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2z"/></svg></span></div><p>목록과 상세를 오가는 모달. 안에서 등록·수정합니다.</p><button type="button" class="btn" onclick="openMemoModal({studentNo:'06100000',name:'홍길동',ename:'Gildong Hong',classNm:'ECP6-A',motherPhone:'010-1234-1234',studentType:'예비생',records:[]})">열기</button></div>
 <div class="tile"><div class="tile-hd"><b>SMS 발송</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span></div><p>가장 큰 모달(1220px). 좌우 두 칸 + 미리보기.</p><button type="button" class="btn" onclick="openSmsModal({senderOptions:[{value:'031-000-7800',label:'분당캠퍼스 (031-000-7800)'}],remainingSms:299984,remainingLms:913169,recipients:[{no:'06100000',name:'홍길동',studentNo:'06100000',phone:'010-1234-1234',parentPhone:'010-1234-1234'}]})">열기</button></div>
 <div class="tile"><div class="tile-hd"><b>SMS 발송이력</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span></div><p>기간 필터 + 목록. 담당자 찾기와 같은 목록형입니다.</p><button type="button" class="btn" onclick="openSmsHistoryModal({student:{name:'홍길동',ename:'Gildong Hong',studentNo:'06100000',phone:'010-1234-1234'},records:[]})">열기</button></div>
-<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span></div><p>모달이 아니라 <b>새 창</b>으로 엽니다 — 브라우저가 팝업을 막으면 열리지 않으니 주소창의 팝업 차단을 허용해 주세요.</p><button type="button" class="btn" onclick="openMapReportCard({studentName:'홍길동',subjects:[]})">열기</button></div>
+<div class="tile"><div class="tile-hd"><b>MAP 성적표</b><span class="tile-ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg></span></div><p>모달이 아니라 <b>새 창</b>으로 엽니다 — 브라우저가 팝업을 막으면 열리지 않으니 주소창의 팝업 차단을 허용해 주세요.</p><button type="button" class="btn" onclick="openMapReportCard(KCMS_DEMO_RPT('campus'))">캠퍼스용</button> <button type="button" class="btn g" onclick="openMapReportCard(KCMS_DEMO_RPT('parent'))">학부모용</button></div>
 </div>
 </div></div></section>
 
@@ -463,6 +492,13 @@
 <div class="tile"><div class="tile-hd"><b>Neutral</b><span class="tile-ic neutral"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg></span></div><p>단순 안내. <b>타입을 생략하면 기본값</b>입니다.</p><button class="btn g" onclick="KCMS.toast('조회 결과가 12건입니다.')">neutral 토스트</button></div>
 </div>
 
+<h4 class="sub">알림 배너 · 폼 안에 남는 인라인 메시지 · 4색</h4>
+<div class="demo">
+  <div class="msgbanner ok" style="display:flex;margin-top:0;">전학 처리가 접수되었습니다.</div>
+  <div class="msgbanner err" style="display:flex;">이름, 생년월일, 학부모핸드폰은 필수값입니다.</div>
+  <div class="msgbanner danger" style="display:flex;">이미 배정된 학생이라 삭제할 수 없습니다.</div>
+  <div class="msgbanner neutral" style="display:flex;">예약은 수업 시작 3일 전까지 변경할 수 있습니다.</div>
+</div>
 </div></div></section>
 
 <section id="help"><div class="card"><div class="card-header"><div class="card-title">도움말 팝오버</div></div><div class="card-body">
@@ -470,7 +506,7 @@
   <span style="font-size:11.5px;">입학구분(현재 결정)</span>
   <span class="helpwrap" style="position:relative;">
     <button type="button" class="helpbtn" aria-haspopup="true">?</button>
-    <div class="helppop" role="tooltip" style="display:block;position:static;margin-top:8px;max-width:420px;">
+    <div class="helppop" role="tooltip">
       <div class="hp-sec">
         <div class="hp-tit">입학구분이란?</div>
         <b>바로 입학</b>(당해 즉시 입학)과 <b>신학년 입학</b>(다음 해 3월 입학) 중 현재 결정된 값입니다.
@@ -480,50 +516,7 @@
 </div>
 </div></div></section>
 
-<section id="state"><div class="card"><div class="card-header"><div class="card-title">상태</div></div><div class="card-body">
-<h4 class="sub">버튼</h4>
-<div class="demo row">
-  <button class="btn">기본</button>
-  <button class="btn" style="background:var(--pb-dark);border-color:var(--pb-dark);">hover</button>
-  <button class="btn" disabled>비활성</button>
-</div>
-
-<h4 class="sub">입력</h4>
-<div class="demo row">
-  <input class="finput" value="기본" style="width:120px;">
-  <input class="finput" value="포커스" style="width:120px;border-color:var(--pb);">
-  <input class="finput roflat" value="읽기 전용" readonly style="width:120px;">
-  <input class="finput" value="비활성" disabled style="width:120px;">
-</div>
-
-<h4 class="sub">알림 배너</h4>
-<div class="demo">
-  <div class="msgbanner">입력한 연락처와 같은 예비생이 이미 있습니다. 중복 검사를 눌러 확인해 주세요.</div>
-</div>
-
-<h4 class="sub">표 행</h4>
-<div class="demo flush">
-  <div class="tblwrap">
-    <table class="grid" style="table-layout:auto;">
-      <thead><tr><th style="width:34px;"><input type="checkbox" class="rowchk"></th><th>이름</th><th>학년</th><th>상태</th></tr></thead>
-      <tbody>
-        <tr><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초3</td><td>기본</td></tr>
-        <tr style="background:var(--pb-a08);"><td><input type="checkbox" class="rowchk"></td><td>홍길동</td><td>초4</td><td>hover</td></tr>
-        <tr class="sel"><td><input type="checkbox" class="rowchk" checked></td><td>홍길동</td><td>초3</td><td>선택</td></tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-
-<h4 class="sub">탭 · 메뉴 항목</h4>
-<div class="demo row">
-  <div class="dtabs" style="margin:0;"><div class="dtab on">활성</div><div class="dtab">기본</div></div>
-  <span class="quickpill" style="display:inline-flex;"><button class="on">활성</button><button>기본</button></span>
-</div>
-</div></div></section>
-
-<section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 · 패널</div></div><div class="card-body">
-<h4 class="sub">섹션 제목</h4>
+<section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 제목</div></div><div class="card-body">
 <div class="demo">
   <div class="sectit" style="margin:0;">학급별 충원 현황<span class="hint">Grid · 정렬 가능</span></div>
 </div>
@@ -633,6 +626,30 @@
   var RAIL=PCMS_LEFT_RAIL_ITEMS;
   initLayout({menu:MENU, current:'입학관리', badges:PCMS_GNB_TAB_BADGES,
               railItems:RAIL, railCurrent:'HOME'});
+  /* MAP 성적표 데모 데이터 — openMapReportCard() 는 subjects 외에 totalRow·standardLevels 까지
+     받아야 표를 그린다. 예전엔 {studentName, subjects:[]} 만 넘겨 totalRow 가 undefined 라
+     본문을 만드는 도중 예외가 나고 창이 아예 열리지 않았다(2026-08-30 수정). */
+  var KCMS_RPT_LEVELS=['MAG3','S3','MGT3','GT3'];
+  var KCMS_RPT_SUBJECTS=[
+    {name:'Speaking',          time:'05:00', total:20, score:11, standardValues:[17,15,13,7], pctStudent:55.0, pctPoly:75.0, rank:'AA'},
+    {name:'Speech Building',   time:'05:14', total:20, score:11, standardValues:[17,15,13,7], pctStudent:55.0, pctPoly:75.0, rank:'AA'},
+    {name:'Listening',         time:'05:48', total:10, score:3,  standardValues:[8,7,6,3],    pctStudent:30.0, pctPoly:75.0, rank:'AA'},
+    {name:'English',           time:'10:30', total:20, score:9,  standardValues:[17,15,13,9], pctStudent:45.0, pctPoly:75.0, rank:'AA'},
+    {name:'Eng. Foundations',  time:'00:15', total:10, score:3,  standardValues:[9,8,6,4],    pctStudent:30.0, pctPoly:75.0, rank:'AA'}
+  ];
+  function KCMS_DEMO_RPT(variant){
+    return {
+      variant: variant,
+      studentName:'홍길동', studentEname:'Gildong Hong',
+      gradeLevel:'ELE', testDateLong:'June 30, 2026', testedLevel:'ELE',
+      standardLevels: KCMS_RPT_LEVELS.slice(),
+      subjects: JSON.parse(JSON.stringify(KCMS_RPT_SUBJECTS)),
+      totalRow:{name:'Total', total:80, score:37, standardValues:[68,60,51,30], pctStudent:46.3, pctPoly:75.0, rank:'AA'},
+      starReading:'2.0', starReadingStandardValues:[4.8,4.2,3.7,null],
+      resultLabel:'GT3',
+      comment:'For the Entrance Test taken on June 30, 2026, 홍길동 (Gildong Hong) received the scores shown above. He/she appears to have weaknesses in Listening and Eng. Foundations. More effort is needed in this area. For more information, please see above for the subject-based analysis graph.'
+    };
+  }
   KCMS.renderPaging('#pagingFirst', {page:1, total:24, size:30});
   KCMS.renderPaging('#pagingSample', {page:1, total:1284, size:30});
   KCMS.renderPaging('#pagingDemo', {page:3, total:1284, size:30,
@@ -787,20 +804,8 @@
       }
     });
 
-    /* 도움말 — 버튼을 누르면 열고 닫는다(화면과 동일) */
-    doc.querySelectorAll('.helpwrap').forEach(function(w){
-      var btn=w.querySelector('.helpbtn'), pop=w.querySelector('.helppop');
-      if(!btn||!pop) return;
-      pop.style.display='none';
-      btn.addEventListener('click', function(e){
-        e.stopPropagation();
-        var open=pop.style.display!=='none';
-        pop.style.display= open ? 'none' : 'block';
-        btn.setAttribute('aria-expanded', String(!open));
-      });
-      doc.addEventListener('click', function(){ pop.style.display='none'; });
-      pop.addEventListener('click', function(e){ e.stopPropagation(); });
-    });
+    /* 도움말 팝오버는 KCMS.initHelpPop() 이 배선한다(initLayout 이 이미 호출) —
+       버튼 아래 6px, 왼쪽으로 10px 밀어 띄우는 화면과 같은 위치 계산이다. */
 
     /* 아이콘 전용 버튼 — 눌리면 무엇을 하는 자리인지 알려 준다 */
     doc.addEventListener('click', function(e){

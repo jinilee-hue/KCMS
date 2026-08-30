@@ -22,14 +22,17 @@ table.mcTable > thead > tr > th{background:#F4F7FD !important;color:#2C3E5A !imp
   border:1px solid #C8D5EB !important;box-shadow:none !important;}
 .shTableWrap,.mcTableWrap{border-top:var(--tbl-w) solid var(--tbl-line) !important;}
 .shTableWrap,.mcTableWrap{border-radius:0 !important;}
+/* 기준 표(table.stathisttbl · staytbl · edutbl)의 th 는 33px 이다 — 이 둘만 26px 이라
+   좁아 보였다(화면 2026-08-29 수정분 반영). */
 table.shTable > thead > tr > th,
-table.mcTable > thead > tr > th{height:26px !important;}
+table.mcTable > thead > tr > th{height:33px !important;}
 table.shTable > thead > tr > th,
 table.mcTable > thead > tr > th{white-space:nowrap !important;}
 #mcModal table.mcTable > thead > tr > th:first-child,
 #mcModal table.mcTable > tbody > tr > td:first-child{width:52px !important;}
+/* 기준 표의 td 는 33px · 4px 8px 이다 — 이 둘만 22px · 2px 이었다(화면 2026-08-29 수정분 반영). */
 table.shTable > tbody > tr > td,
-table.mcTable > tbody > tr > td{height:22px !important;padding-top:2px !important;padding-bottom:2px !important;}
+table.mcTable > tbody > tr > td{height:33px !important;padding:4px 8px !important;}
 table.shTable > tbody > tr:nth-child(even),
 table.mcTable > tbody > tr:nth-child(even){background:#f6f8fa !important;}
 table.shTable,table.mcTable{margin-top:0 !important;}
@@ -162,9 +165,9 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .modal-ov .stu-tblwrap > table > thead > tr:first-child > *, .modal-ov .shTableWrap > table > thead > tr:first-child > *,
 .modal-ov .mcTableWrap > table > thead > tr:first-child > *, .modal-ov .eduTblWrap > table > thead > tr:first-child > *{border-top:0 !important;}
 
-/* 표 상단 파란 선을 고정 헤더(th)에 얹는다 (2026-08-28)
-   감싼 박스의 border-top 은 모달마다 id 로 막아 둔 곳이 있어(예: #importModalOv .imptbl-wrap{border:0})
-   선을 th 안쪽 그림자로 그린다 — th 가 sticky 라 스크롤해도 선이 함께 남는다. */
+/* 표 상단 파란 선은 th 안쪽 그림자가 아니라 셀 오버레이(::before)가 그린다 —
+   안쪽 그림자로 그리면 th 세로 보더 1px 이 라인 위로 올라와 눈금처럼 보인다
+   (화면 2026-08-29 수정분). th 는 sticky 로 두어 스크롤해도 선이 함께 남는다. */
 .modal-ov .tblwrap > table > thead > tr:first-child > *,
 .modal-ov .imptbl-wrap > table > thead > tr:first-child > *,
 .modal-ov .schtbl-wrap > table > thead > tr:first-child > *,
@@ -172,20 +175,30 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .modal-ov .shTableWrap > table > thead > tr:first-child > *,
 .modal-ov .mcTableWrap > table > thead > tr:first-child > *,
 .modal-ov .eduTblWrap > table > thead > tr:first-child > *{
-  box-shadow:inset 0 1px 0 0 var(--pb,#0066FF) !important;}
+  box-shadow:none !important;position:sticky;top:0;z-index:2;}
 
 /* 파란 라인은 한 겹 — 라인은 셀 오버레이가 그리고 래퍼 위선은 끈다(화면 실측 1px). */
 .modal-ov .tblwrap, .modal-ov .stu-tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap,
 .modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap, .modal-ov .notetbl-wrap,
 .modal-ov .stattbl-wrap{border-top:0 !important;}
 .modal-ov table > thead > tr:first-child > *{position:relative;}
+/* 좌우로 셀 보더(--tbl-w)만큼 넘겨 그린다 — left/right:0 이면 th 세로 보더가
+   라인 위로 1px 삐져나와 눈금처럼 보인다(화면 2026-08-29 수정분). */
 .modal-ov .tblwrap > table > thead > tr:first-child > *::before,
+.modal-ov .imptbl-wrap > table > thead > tr:first-child > *::before,
+.modal-ov .schtbl-wrap > table > thead > tr:first-child > *::before,
+.modal-ov .stu-tblwrap > table > thead > tr:first-child > *::before,
+.modal-ov .shTableWrap > table > thead > tr:first-child > *::before,
 .modal-ov .mcTableWrap > table > thead > tr:first-child > *::before,
-.modal-ov .shTableWrap > table > thead > tr:first-child > *::before{
-  content:'' !important;display:block !important;position:absolute;left:0;right:0;top:0;
-  height:1px;background:var(--pb,#0066FF);z-index:2;}
+.modal-ov .eduTblWrap > table > thead > tr:first-child > *::before{
+  content:'';position:absolute;left:calc(var(--tbl-w) * -1);right:calc(var(--tbl-w) * -1);top:0;
+  height:var(--tbl-w);background:var(--tbl-line);pointer-events:none;z-index:2;}
 
 /* 팝업 안 검색 버튼도 본문 [검색]과 같은 남색(.btn.s) — 같은 동작인데 색이 갈려 있었다.
    화면 규칙을 그대로 옮긴다(2026-08-30). */
 .btn#shSearchBtn, .btn#mcSearchBtn, .btn#addrSearchBtn, .btn#campusSearchBtn, .btn#schSearchBtn, .btn#spmSearchBtn, .btn#mddTeacherSearchBtn, .btn#csSearchBtn, .btn#edTeacherSearchBtn, .btn#mrManagerSearchBtn, .btn#smsAddSearchBtn, .btn#stuSearchBtn, .btn#attSearchBtn, .btn#mapRegManagerSearchBtn, .btn#rsIvManagerSearchBtn, .btn#mapFormDtSearchBtn, .btn#mapFormManagerSearchBtn{background:var(--gnb,#2C3E5A) !important;border-color:var(--gnb-deep,#1B2536) !important;color:#fff !important;}
 .btn#shSearchBtn:hover, .btn#mcSearchBtn:hover, .btn#addrSearchBtn:hover, .btn#campusSearchBtn:hover, .btn#schSearchBtn:hover, .btn#spmSearchBtn:hover, .btn#mddTeacherSearchBtn:hover, .btn#csSearchBtn:hover, .btn#edTeacherSearchBtn:hover, .btn#mrManagerSearchBtn:hover, .btn#smsAddSearchBtn:hover, .btn#stuSearchBtn:hover, .btn#attSearchBtn:hover, .btn#mapRegManagerSearchBtn:hover, .btn#rsIvManagerSearchBtn:hover, .btn#mapFormDtSearchBtn:hover, .btn#mapFormManagerSearchBtn:hover{background:var(--gnb-deep,#1B2536) !important;}
+
+/* SMS 발송창 미리보기 말풍선 — 파란 배경은 두고 테두리선만 없앤다(화면 2026-08-25 규칙).
+   sms-modal.js 가 주입하는 .smsPhoneScreen textarea{border:1px solid var(--pb-a15)} 를 끈다. */
+#smsBody{border:0 !important;}

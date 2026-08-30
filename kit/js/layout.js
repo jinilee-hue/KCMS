@@ -172,6 +172,12 @@ function initCsel(root){
     /* 표 안 인라인 편집은 22px, 그 밖은 24px — 화면과 같은 규칙 */
     var wrap=document.createElement('span');
     wrap.className='csel ' + (sel.closest('table.grid') ? 'h22' : 'h24');
+    /* select 에 인라인으로 걸어 둔 폭 지정은 wrap 으로 옮긴다 — .csel 기본이 width:100% 라
+       옮기지 않으면 style="width:104px" 처럼 좁게 잡아 둔 셀렉트가 줄 전체를 먹고,
+       모달 검색줄(.shFilterRow2 등)이 라벨만 남기고 줄바꿈된다(2026-08-30 수정). */
+    ['width','minWidth','maxWidth','flex'].forEach(function(k){
+      if(sel.style[k]){ wrap.style[k]=sel.style[k]; sel.style[k]=''; }
+    });
     var box=document.createElement('div'); box.className='csel-box'; box.tabIndex=0;
     var menu=document.createElement('div'); menu.className='csel-menu';
     sel.parentNode.insertBefore(wrap, sel);
@@ -527,6 +533,7 @@ function initLayout(opt){
     renderWorkTabs($(opt.workTabs||'#worktabs'),opt.openTabs,opt.onTabOpen,opt.onTabClose);
   syncSelectWidths();
   initCsel();
+  initHelpPop();
   initTreeSelect();
   initCTree();
   document.querySelectorAll('.modal-box').forEach(function(b){ makeDraggable(b); });
@@ -534,10 +541,52 @@ function initLayout(opt){
   return {renderTabs:renderTabs,renderRail:renderRail,renderWorkTabs:renderWorkTabs};
 }
 
+/* ---------- 도움말(?) 팝오버 ----------
+   상세 패널(.rbody)처럼 overflow:auto 인 곳에서도 잘리지 않게 position:fixed + 좌표 계산으로
+   띄운다. 화면(예비생 등록·관리)의 wireHelpPop 과 같은 값이다 —
+     · 가로: 버튼 왼쪽 끝에서 10px 왼쪽(창 오른쪽 끝을 넘지 않게 보정)
+     · 세로: 버튼 아래 6px, 아래 공간이 모자라면 버튼 위 6px 로 뒤집는다
+   버튼에는 .on 을 걸어 눌린 상태를 남긴다. 바깥 클릭·ESC·조상 스크롤 시 닫힌다. */
+function wireHelpPop(btn, pop){
+  btn = typeof btn==='string' ? document.querySelector(btn) : btn;
+  pop = typeof pop==='string' ? document.querySelector(pop) : pop;
+  if(!btn||!pop||btn.__helpDone) return;
+  btn.__helpDone = true;
+  function close(){
+    pop.classList.remove('open');
+    btn.classList.remove('on');
+    btn.setAttribute('aria-expanded','false');
+  }
+  function open(){
+    var r = btn.getBoundingClientRect();
+    pop.classList.add('open');            /* 폭·높이를 재려면 먼저 표시해야 한다 */
+    var pw = pop.offsetWidth, ph = pop.offsetHeight;
+    pop.style.left = Math.max(6, Math.min(r.left - 10, window.innerWidth - pw - 6)) + 'px';
+    pop.style.top  = (r.bottom + 6 + ph > window.innerHeight ? Math.max(6, r.top - 6 - ph) : r.bottom + 6) + 'px';
+    btn.classList.add('on');
+    btn.setAttribute('aria-expanded','true');
+  }
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    if(pop.classList.contains('open')) close(); else open();
+  });
+  pop.addEventListener('click', function(e){ e.stopPropagation(); });
+  document.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') close(); });
+  document.addEventListener('scroll', close, true);
+}
+/* .helpwrap 안의 (.helpbtn, .helppop) 쌍을 자동으로 배선한다 */
+function initHelpPop(root){
+  (root||document).querySelectorAll('.helpwrap').forEach(function(w){
+    wireHelpPop(w.querySelector('.helpbtn'), w.querySelector('.helppop'));
+  });
+}
+
 global.KCMS=Object.assign(global.KCMS||{},{
   initLayout:initLayout, renderTabs:renderTabs, renderRail:renderRail,
   renderWorkTabs:renderWorkTabs, syncSelectWidths:syncSelectWidths,
-  initCsel:initCsel, initTreeSelect:initTreeSelect, initCTree:initCTree, buildCTree:buildCTree, renderPaging:renderPaging, makeDraggable:makeDraggable, SVG:SVG
+  initCsel:initCsel, initTreeSelect:initTreeSelect, initCTree:initCTree, buildCTree:buildCTree, renderPaging:renderPaging, makeDraggable:makeDraggable,
+  wireHelpPop:wireHelpPop, initHelpPop:initHelpPop, SVG:SVG
 });
 global.initLayout=initLayout;
 })(window);
