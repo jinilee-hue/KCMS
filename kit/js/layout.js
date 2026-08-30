@@ -97,7 +97,14 @@ function renderWorkTabs(el, tabs, onOpen, onClose){
     scroll.appendChild(d);
   });
   bindNav(scroll,prev,next,140);
-  var on=scroll.querySelector('.wtab.on'); if(on) on.scrollIntoView({block:'nearest',inline:'nearest'});
+  // 선택된 탭을 보이게 — scrollIntoView 는 바깥(문서) 스크롤까지 건드려서
+  // 가이드 문서처럼 탭 바가 화면 밖에 있으면 페이지가 통째로 튄다. 가로만 직접 계산한다.
+  var on=scroll.querySelector('.wtab.on');
+  if(on){
+    var l=on.offsetLeft, r=l+on.offsetWidth;
+    if(l<scroll.scrollLeft) scroll.scrollLeft=l;
+    else if(r>scroll.scrollLeft+scroll.clientWidth) scroll.scrollLeft=r-scroll.clientWidth;
+  }
 }
 function navBtn(cls,label,svg){
   var b=document.createElement('button'); b.type='button'; b.className=cls;

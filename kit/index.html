@@ -58,12 +58,12 @@
     <h1>KCMS 입학관리 Kit</h1>
     <p>
       PCMS 입학관리 화면에서 확정된 규격을 그대로 옮긴 디자인 Kit 입니다.
-      빌드 도구·패키지 설치 없이 파일 4개만 불러오면 같은 화면이 나옵니다.
+      빌드 도구·패키지 설치 없이 토큰·공통 CSS 와 필요한 JS 만 불러오면 같은 화면이 나옵니다.
       표·모달·토스트·GNB·작업 탭까지 업무 화면에 필요한 컴포넌트가 모두 들어 있습니다.
     </p>
     <div class="cta">
       <a class="primary" href="kcms-admissions-kit.zip" download>Kit 내려받기 (.zip)</a>
-      <a class="ghost" href="components.html">컴포넌트 가이드 보기</a>
+      <a class="ghost" href="components.html">디자인 시스템 보기</a>
       <a class="ghost" href="../입학관리/">입학관리 체험판</a>
     </div>
   </div>
@@ -72,14 +72,14 @@
 <div class="sec">
   <div class="wrap">
     <h2>패키지 구성</h2>
-    <p class="sub">화면에서 추출한 CSS + 유틸리티 — 컴포넌트 67개 실측 대조 완료</p>
+    <p class="sub">화면에서 추출한 CSS + 유틸리티 — 실제 화면 CSS 에서 추출 · 실측 대조</p>
     <div class="files">
       <div class="file"><div class="nm">kcms-admissions.md</div><div class="ti">AI Agent 프롬프트</div>
         <p>Cursor · VS Code · Claude Code 등 개발 Agent에 그대로 붙여넣는 UI 규약입니다. 규칙 설명 없이 바로 개발을 시작합니다.</p></div>
       <div class="file"><div class="nm">styles/tokens.css</div><div class="ti">디자인 토큰</div>
         <p>색·간격·타이포·컴포넌트 높이를 CSS 변수로 정의합니다. 값 하드코딩을 막는 단일 출처입니다.</p></div>
       <div class="file"><div class="nm">styles/common.css</div><div class="ti">컴포넌트 스타일</div>
-        <p>실제 화면(PCMS-SCR-ET-02-012)의 CSS 에서 컴포넌트 규칙 1,300여 개를 <b>원본 순서 그대로</b> 추출했습니다. 대시보드의 지표·차트 컴포넌트와 커스텀 셀렉트도 함께 담았습니다.
+        <p>실제 화면(PCMS-SCR-ET-02-012)의 CSS 에서 컴포넌트 규칙 1,551개를 <b>원본 순서 그대로</b> 추출했습니다. 대시보드의 지표·차트 컴포넌트와 커스텀 셀렉트도 함께 담았습니다.
         손으로 다시 쓰지 않았기 때문에 화면과 결과가 어긋나지 않습니다.</p></div>
       <div class="file"><div class="nm">js/utils.js</div><div class="ti">유틸리티</div>
         <p>날짜·숫자·전화 포맷, 개인정보 마스킹, 4색 토스트, 모달 제어, Chart.js 프리셋이 들어 있습니다.</p></div>
@@ -90,7 +90,7 @@
       <div class="file"><div class="nm">js/modal-drag.js</div><div class="ti">모달 드래그</div>
         <p>모달 헤더를 잡아 옮기는 동작. 화면 밖으로 나가지 않도록 위치를 보정합니다.</p></div>
       <div class="file"><div class="nm">js/menu.sample.js</div><div class="ti">메뉴 샘플 데이터</div>
-        <p>GNB 1뎁스 11개 · 하위 106개 항목과 좌측 레일 13개. 실제 화면 구조 그대로라 항목만 갈아끼우면 됩니다.</p></div>
+        <p>GNB 1뎁스 11개 · 2뎁스 53개 · 말단 106개 항목과 좌측 레일 13개. 실제 화면 구조 그대로라 항목만 갈아끼우면 됩니다.</p></div>
       <div class="file"><div class="nm">js/overlay-scroll.js</div><div class="ti">떠 있는 스크롤 막대</div>
         <p>브라우저 기본 막대(8px 자리 차지)를 감추고 표 데이터 영역 위에 6px 반투명 막대를 그립니다.
         헤더 아래에서 시작하고 스크롤·마우스오버 때만 보입니다.</p></div>
@@ -100,13 +100,20 @@
       <div class="file"><div class="nm">공통 모달 5종 (js/)</div><div class="ti">화면이 함께 쓰는 모달</div>
         <p><code>staff-pick-modal.js</code>(담당자 찾기) · <code>memo-modal.js</code>(상담이력) · <code>sms-modal.js</code>(SMS 발송) ·
         <code>sms-history-modal.js</code>(발송이력) · <code>map-report-modal.js</code>(MAP 성적표 — 새 창).
-        체험판 화면이 쓰는 파일 그대로라 컴포넌트 가이드에서도 실제 모달이 열립니다.</p></div>
-      <div class="file"><div class="nm">build-css.py</div><div class="ti">CSS 추출 스크립트</div>
-        <p>화면이 바뀌면 이 스크립트를 다시 돌려 <code>common.css</code> 를 갱신합니다. Kit 을 손으로 고치지 않습니다.</p></div>
+        체험판 화면이 쓰는 파일 그대로라 디자인 시스템 문서에서도 실제 모달이 열립니다.</p></div>
+      <div class="file"><div class="nm">styles/screen-specific.css</div><div class="ti">화면 전용 규칙 (참고용)</div>
+        <p>한 화면에서만 쓰는 256개 규칙입니다. 기본으로 넣지 말고, 체험판의 특정 화면을 그대로 재현할 때만
+        <code>common.css</code> 뒤에 덧붙이세요.</p></div>
+      <div class="file"><div class="nm">js/time-picker.js</div><div class="ti">시간 선택기</div>
+        <p>시·분 드롭다운. 날짜 선택기와 같은 폼·같은 높이(24px)로 맞춰져 있습니다.</p></div>
+      <div class="file"><div class="nm">build-css.py</div><div class="ti">최초 추출에 쓴 스크립트</div>
+        <p>화면 CSS 에서 <code>common.css</code> 를 처음 뽑을 때 쓴 기록용 스크립트입니다.
+        <b>지금 그대로 다시 돌리면 안 됩니다</b> — 추출 이후 손으로 반영한 것(글자 크기 12px 통일, 토스트·알림 배너,
+        색 토큰화, 작업 탭 좌우 버튼)이 모두 지워집니다. 화면이 바뀌면 바뀐 부분만 <code>common.css</code> 에 옮기세요.</p></div>
       <div class="file"><div class="nm">design-system.md</div><div class="ti">디자인 시스템 문서</div>
-        <p>색 스케일, 컴포넌트 스펙, 모달 인벤토리(44종), 반응형 브레이크포인트, 의도된 예외까지 담은 레퍼런스입니다.</p></div>
+        <p>색 스케일, 컴포넌트 스펙, 모달 인벤토리(실측 33개), 반응형 브레이크포인트, 의도된 예외까지 담은 레퍼런스입니다.</p></div>
       <div class="file"><div class="nm">rules.md</div><div class="ti">규칙 · 계약</div>
-        <p>Do/Don&rsquo;t, 컴포넌트별 금지 사항, 접근성·키보드, 불러오기와 API 계약. 가이드 화면에는 컴포넌트만 두고 규칙은 이 문서에 모았습니다.</p></div>
+        <p>Do/Don&rsquo;t, 컴포넌트별 금지 사항, 접근성·키보드, 불러오기와 API 계약. 디자인 시스템 화면에는 <b>보이는 것</b>만 두고 규칙은 이 문서에 모았습니다.</p></div>
     </div>
   </div>
 </div>
@@ -124,10 +131,10 @@
         <p>충원율 70% · 가동률 30% 같은 기준을 넘었는지를 두 색으로만 표시합니다. 면적에 따라 톤다운/원색을 나눠 씁니다.</p></div>
       <div class="feat"><h3>쌓이는 작업 탭</h3>
         <p>메뉴에서 화면을 열면 하단에 탭이 쌓이고, 넘치면 좌우 이동 버튼이 나타납니다. KCMS 사용 흐름 그대로입니다.</p></div>
-      <div class="feat"><h3>44종 모달 규격</h3>
-        <p>공통 26종 · 화면 전용 18종을 한 셸(<code>.modal-box</code>)로 통일했습니다. 드래그 이동과 Esc 닫기가 기본입니다.</p></div>
+      <div class="feat"><h3>33개 모달 규격</h3>
+        <p>화면 안 25개 · 공통 스크립트 8개를 한 셸(<code>.modal-box</code>)로 통일했습니다. 드래그 이동과 Esc 닫기가 기본입니다.</p></div>
       <div class="feat"><h3>화면에서 추출한 CSS</h3>
-        <p>규격을 문서만 보고 다시 구현하지 않습니다. 실제 화면의 CSS 를 그대로 옮겨 왔고, <b>컴포넌트 67개</b>를 실측 대조해 값이 모두 같은 것을 확인했습니다.</p></div>
+        <p>규격을 문서만 보고 다시 구현하지 않습니다. 실제 화면의 CSS 를 그대로 옮겨 왔고, headless 브라우저로 <b>같은 컴포넌트를 양쪽에서 렌더해 계산값을 대조</b>했습니다.</p></div>
       <div class="feat"><h3>Vanilla JS · 빌드 불필요</h3>
         <p>Node·번들러 없이 브라우저에서 바로 실행됩니다. 차트가 필요하면 Chart.js CDN 한 줄만 추가합니다.</p></div>
     </div>
@@ -162,8 +169,8 @@
     <h2>실제 제작 사례</h2>
     <p class="sub">이 Kit 의 규격이 나온 화면들입니다</p>
     <div class="cases">
-      <a class="case" href="../입학관리/"><b>입학관리 화면 체험판</b><span>16개 화면 · GNB·작업 탭·모달까지 실제 동작</span></a>
-      <a class="case" href="components.html"><b>컴포넌트 가이드</b><span>버튼·배지·표·폼·모달·토스트 라이브 데모</span></a>
+      <a class="case" href="../입학관리/"><b>입학관리 화면 체험판</b><span>업무 화면 6개 + 공통 모달 4개 · GNB·작업 탭까지 실제 동작</span></a>
+      <a class="case" href="components.html"><b>디자인 시스템</b><span>컴포넌트 · 화면 골격 · 색/타이포 라이브 데모</span></a>
       <a class="case" href="design-system.md"><b>디자인 시스템 문서</b><span>색 스케일 · 컴포넌트 스펙 · 예외 규정</span></a>
       <a class="case" href="rules.md"><b>규칙 · 계약</b><span>Do/Don&rsquo;t · 금지 사항 · 접근성 · API</span></a>
     </div>
