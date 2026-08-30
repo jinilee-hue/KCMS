@@ -107,7 +107,7 @@
  *  리스트 모달: .mcHead, .mcHeadTop, .mcFilterRow, .mcSeg, .mcDrange, .mcIwrap, .mcIbtn,
  *   .mcRst, .mcResultRow, .mcTableWrap, .mcTable, .mcBadge, .mcEmpty, .mcEmptyRow, .mcTitleCell, .mcContentCell
  *  상세 모달(2026-07-19 추가): .mddBox, .mddBody, .mddCard, .mddAvatar*, .mddInfoTable,
- *   .mddSectionTitle, .mddFormTable, .mddReq, .mddDateTimeWrap, .mddDateInput, .mddTimeInput,
+ *   .mddSectionTitle, .mddFormTable, .mddReq, .mddDateTimeWrap, .mddDateInput, .mddDateSh, .mddTimeInput,
  *   .mddTeacherWrap, .mddTeacherList, .mddPlainText, .mddNameCellKr, .mddContent, .mddFoot, .mddDelBtn, .mddSaveBtn
  *   (헤더는 리스트 모달과 동일한 .mcHead/.mcHeadTop을 재사용한다)
  */
@@ -482,8 +482,10 @@
       '.mddIw input::-webkit-calendar-picker-indicator{display:none;}' +
       '.mddIwDate{flex:0 0 120px;width:120px;}' +
       '.mddIwTime{flex:0 0 110px;width:110px;}' +
-      '.mddDateInput{width:100%;font-family:Consolas,monospace;}' +
-      '.mddTimeInput{width:100%;font-family:Consolas,monospace;}' +
+      /* 서체는 Pretendard 하나 — 이 두 칸만 Consolas 였다. 네이티브 date/time 입력의
+         모양을 흉내내려던 잔재인데, 날짜는 이제 text 칸이라 다른 입력과 같아야 한다. */
+      '.mddDateInput{width:100%;}' +
+      '.mddTimeInput{width:100%;}' +
       '.mddTeacherWrap{display:flex;gap:5px;position:relative;}' +
       '.mddTeacherWrap input{flex:1;width:auto;}' +
       '.mddTeacherList{position:absolute;top:28px;left:0;right:0;background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 6px 16px rgba(15,40,90,.14);z-index:5;max-height:140px;overflow:auto;display:none;}' +
@@ -551,7 +553,10 @@
                 '<th>상담일시</th>' +
                 '<td><div class="mddDateTimeWrap">' +
                   /* 브라우저 기본 달력·시계 아이콘 대신 다른 화면과 같은 .iwrap + .ibtn 조합 사용 */
-                  '<span class="iwrap mddIw mddIwDate"><input type="date" class="finput mddDateInput" id="mddDate"><button type="button" class="ibtn" data-for="mddDate" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
+                  /* 보이는 칸은 text — input[type=date] 를 그대로 노출하면 브라우저가
+                     한국 로캘로 "2026. 07. 21." 처럼 점으로 그린다. 날짜는 하이픈이 규칙이라
+                     상담이력 기간 필터(#mcStart)와 같은 "text + 숨은 date 섀도우" 구조로 둔다. */
+                  '<span class="iwrap mddIw mddIwDate"><input type="text" class="finput mddDateInput" id="mddDate" placeholder="연도-월-일" maxlength="10" inputmode="numeric" autocomplete="off"><input type="date" class="mddDateSh dateshadow" id="mddDateSh" tabindex="-1" aria-hidden="true"><button type="button" class="ibtn" data-for="mddDateSh" title="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>' +
                   '<span class="iwrap mddIw mddIwTime"><input type="time" class="finput mddTimeInput" id="mddTime"><button type="button" class="ibtn" data-for="mddTime" title="시간"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></button></span>' +
                 '</div></td>' +
                 '<th>상담방법</th>' +
@@ -639,6 +644,7 @@
       document.getElementById('mddTarget').value = rec.target || TARGET_OPTIONS[0];
       document.getElementById('mddTeacher').value = rec.teacher || '';
       document.getElementById('mddDate').value = rec.date || now.date;
+      document.getElementById('mddDateSh').value = rec.date || now.date;
       document.getElementById('mddTime').value = rec.time || now.time;
       document.getElementById('mddMethod').value = rec.method || METHOD_OPTIONS[0];
       document.getElementById('mddTopic').value = rec.topic || TOPIC_OPTIONS[0];
@@ -653,6 +659,7 @@
       document.getElementById('mddTarget').value = TARGET_OPTIONS[0];
       document.getElementById('mddTeacher').value = CURRENT_USER;
       document.getElementById('mddDate').value = now.date;
+      document.getElementById('mddDateSh').value = now.date;
       document.getElementById('mddTime').value = now.time;
       document.getElementById('mddMethod').value = METHOD_OPTIONS[0];
       document.getElementById('mddTopic').value = _detailState.defaultTopic || TOPIC_OPTIONS[0];
@@ -736,6 +743,23 @@
         if (typeof el.showPicker === 'function') el.showPicker(); else el.focus();
       });
     });
+    /* 상담일시 날짜 — 섀도우에서 고른 값을 보이는 칸으로, 직접 타이핑은 YYYY-MM-DD 로 */
+    (function () {
+      var input = document.getElementById('mddDate');
+      var shadow = document.getElementById('mddDateSh');
+      if (!input || !shadow) return;
+      shadow.addEventListener('change', function () {
+        input.value = shadow.value;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      });
+      input.addEventListener('input', function () {
+        var v = input.value.replace(/[^0-9]/g, '').slice(0, 8);
+        input.value = v.length > 6 ? v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6)
+                    : v.length > 4 ? v.slice(0,4)+'-'+v.slice(4)
+                    : v;
+        shadow.value = /^\d{4}-\d{2}-\d{2}$/.test(input.value) ? input.value : '';
+      });
+    })();
     document.getElementById('mddClose').addEventListener('click', closeDetailModal);
     document.getElementById('mddCloseBtn').addEventListener('click', closeDetailModal);
     document.getElementById('mddTeacherSearchBtn').addEventListener('click', function () {
