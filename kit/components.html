@@ -578,9 +578,9 @@
 </div></div></section>
 
 <section id="color"><div class="card"><div class="card-header"><div class="card-title">색</div></div><div class="card-body">
-<h4 class="sub">기본색 14종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
+<h4 class="sub">기본색 7종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
 <div class="demo sws" id="sw-base"></div>
-</div></div>
+</div></div></section>
 
 <section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
 <h4 class="sub">타입별 크기 · 굵기 · 색</h4>
@@ -589,7 +589,7 @@
     <colgroup><col style="width:31%"><col style="width:13%"><col style="width:26%"><col></colgroup>
     <thead><tr><th>쓰는 곳</th><th>크기 · 굵기</th><th>색</th><th>보기</th></tr></thead>
     <tbody>
-      <tr><td class="k">모달 제목 <code>.modal-hd</code></td><td>13 · 700</td><td>흰색 <span class="cnote">(남색 바 위)</span></td>
+      <tr><td class="k">모달 제목 <code>.modal-hd</code></td><td>13 · 700</td><td>흰색</td>
         <td><span style="display:inline-block;background:var(--gnb);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:3px;">담당자 찾기</span></td></tr>
       <tr><td class="k">섹션 제목 <code>.sectit</code></td><td>13 · 700</td><td><code>#000</code></td>
         <td><span style="font-size:13px;font-weight:700;color:#000;">학급별 충원 현황</span></td></tr>
@@ -605,27 +605,20 @@
         <td><span style="font-size:12px;color:var(--txt);">예비생 등록·관리</span></td></tr>
       <tr><td class="k">페이징 <code>.pgnum</code> <code>.pgnav</code></td><td>12 · 400</td><td><code>--txt-mut</code> · 활성 흰색 700</td>
         <td><button class="pgnum on">1</button> <button class="pgnum">2</button></td></tr>
-      <tr><td class="k">표 헤더 · 필터 라벨 · 세로형 표 라벨<br><code>th</code> <code>.flabel</code></td><td>12 · 700</td><td><code>--gnb</code> <span class="cnote">#2C3E5A</span></td>
+      <tr><td class="k">표 헤더 · 필터 라벨 · 세로형 표 라벨<br><code>th</code> <code>.flabel</code></td><td>12 · 700</td><td><code>--gnb</code></td>
         <td><span style="font-size:12px;font-weight:700;color:var(--gnb);">학생명</span></td></tr>
       <tr><td class="k">표 셀 · 입력 · 알림 배너<br><code>td</code> <code>.finput</code> <code>.msgbanner</code></td><td>12 · 400</td><td><code>--txt</code></td>
         <td><span style="font-size:12px;color:var(--txt);">홍길동 · 초3 · 2026-08-12</span></td></tr>
       <tr><td class="k">알약 탭 <code>.quickpill button</code></td><td>11 · 400</td><td><code>--txt-mut</code> · 활성 흰색 700</td>
         <td><span class="quickpill" style="display:inline-flex;"><button class="on">전체</button><button>바로 입학</button></span></td></tr>
-      <tr><td class="k">섹션 보조설명 <code>.hint</code></td><td>11 · 400</td><td><code>#8b95a5</code> <span class="cnote">본문 회색보다 한 단계 옅다</span></td>
+      <tr><td class="k">섹션 보조설명 <code>.hint</code></td><td>11 · 400</td><td><code>#8b95a5</code></td>
         <td><span style="font-size:11px;color:#8b95a5;">Grid · 정렬 가능</span></td></tr>
       <tr><td class="k">배지 <code>.badge</code> <code>.agebadge</code></td><td>10.5 · 500</td><td><code>--txt-mut</code> · 상태 배지 <code>--pb-dark</code></td>
         <td><span class="badge">대기</span> <span class="agebadge cur">초3</span></td></tr>
     </tbody>
   </table>
 </div>
-<p class="note">위 값은 kit CSS 에서 실측한 것입니다. 대시보드(01-001)만 지표 화면이라 자체 스케일을 씁니다 — 아래 큰 수치가 그 예외입니다.</p>
-
-<h4 class="sub">숫자 표기</h4>
-<div class="demo row">
-  <span style="font-size:23px;font-weight:800;color:var(--txt);">78.0<span class="pcts">%</span></span>
-  <span style="font-size:12px;">1,284</span>
-</div>
-</div></div></section>
+</section>
 
 <section id="token"><div class="card"><div class="card-header"><div class="card-title">간격 · 라운드 · 그림자 · 아이콘</div></div><div class="card-body">
 <h4 class="sub">간격</h4>
@@ -712,11 +705,9 @@
   /* 색 견본 — 기본색만 보여준다. --line·--bg·--pb-light 처럼 이름이 따로 붙은 것들은
      전부 아래 색을 흰 바탕 위에서 흐리게 쓴 값이라(예: --line = --gnb 21%) 견본에 넣지 않는다. */
   document.getElementById('sw-base').innerHTML=[
-    ['--pb','브랜드'],['--pb-deepest','브랜드 최심'],['--gnb','GNB'],['--txt','글자'],
-    ['--danger','위험'],['--badge-danger','배지 빨강'],['--danger-txt','위험 글자'],
-    ['--warn','경고'],['--warn-light','경고 옅게'],
-    ['--ok','완료'],['--ok-deep','완료 진하게'],
-    ['--accent-pink','핑크'],['--chart-ok','차트 상'],['--chart-low','차트 하']
+    ['--pb','브랜드'],['--gnb','GNB'],['--txt','글자'],
+    ['--danger-root','위험'],['--warn-root','주의'],['--ok-root','정상'],
+    ['--accent-pink','핑크']
   ].map(function(s){
     return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';
   }).join('');

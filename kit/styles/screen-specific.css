@@ -48,7 +48,7 @@ table.sp-sched .kind.iv{background:var(--pb-light);color:var(--pb-deepest);}
 .colresize{position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;z-index:6;touch-action:none;}
 .colresize:hover, .colresize.dragging{background:rgba(255,255,255,.45);}
 .testinfo-card{margin-bottom:12px;}
-.testinfo-hd{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:700;color:#111;margin-bottom:8px;flex-wrap:wrap;gap:6px;}
+.testinfo-hd{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:700;color:var(--txt);margin-bottom:8px;flex-wrap:wrap;gap:6px;}
 table.testinfo-tbl{width:100%;border-collapse:collapse;font-size:11px;background:#fff;}
 table.testinfo-tbl th{background:var(--tbl-head);color:var(--gnb);font-weight:700;height:26px;border:1px solid var(--tbl-bd);white-space:nowrap;}
 table.testinfo-tbl td{border:1px solid var(--tbl-bd-soft);height:30px;text-align:center;}
@@ -139,7 +139,7 @@ table.testinfo-tbl td{border:1px solid var(--tbl-bd-soft);height:30px;text-align
 .l2-left{flex:1 1 60%;min-width:420px;padding-right:6px;}
 .l2-right{flex:0 0 40%;min-width:300px;padding-left:6px;}
 .student-idbar{position:sticky;top:0;z-index:10;display:flex;align-items:center;gap:8px;height:36px;margin:-16px -16px 14px;padding:0 16px;background:#fff;border-bottom:1px solid var(--line);box-shadow:0 1px 0 rgba(15,40,90,.04);}
-.student-idbar .sib-name{font-size:13px;font-weight:700;color:#111;white-space:nowrap;}
+.student-idbar .sib-name{font-size:13px;font-weight:700;color:var(--txt);white-space:nowrap;}
 .student-idbar .sib-ename{font-size:12px;color:var(--txt-mut);white-space:nowrap;}
 .student-idbar .sib-age{font-size:11px;font-weight:700;color:var(--pb-deeper);background:var(--tbl-head);border-radius:10px;padding:2px 8px;white-space:nowrap;}
 .student-idbar .sib-adm{font-size:11px;font-weight:700;border-radius:10px;padding:2px 8px;white-space:nowrap;}

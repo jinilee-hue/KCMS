@@ -11,8 +11,6 @@
   --pb-a08:rgba(0,102,255,.08); --pb-a15:rgba(0,102,255,.15);
   --line:color-mix(in srgb, var(--gnb) 21%, #fff); --label-bd:color-mix(in srgb, var(--pb) 20%, #fff);
   --txt:#1f2937; --txt-mut:color-mix(in srgb, var(--txt) 71%, #fff); --bg:color-mix(in srgb, var(--gnb) 7%, #fff);
-  --warn:#f97316;
-  --danger:#e5484d; --danger-bg:color-mix(in srgb, var(--danger) 10%, #fff);
 }
 
 :root{
@@ -44,17 +42,13 @@
   --fs-sec:13px;        /* 섹션 제목 */
   --fs-base:12px;       /* 표·폼 본문 */
   --fs-sm:11px;         /* 배지·캡션 */
-  --chart-ok:#5E93EE;   /* 그래프 기준 이상 */
-  --chart-low:#E58388;  /* 그래프 기준 미만(경고) */
+  --chart-ok:color-mix(in srgb, var(--pb) 66%, #fff);   /* 그래프 기준 이상 */
+  --chart-low:color-mix(in srgb, var(--danger) 68%, #fff);  /* 그래프 기준 미만(경고) */
   --font:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Malgun Gothic','맑은 고딕',sans-serif;
 
   /* 유사색을 묶어 신설 (2026-08-30) — 표·선·상태 계열 */
   --accent-pink:#ff3b8d;
-  --badge-danger:#e6483c;
   --chart-axis:color-mix(in srgb, var(--pb-deepest) 54%, #fff);
-  --danger-deep:color-mix(in srgb, var(--badge-danger) 91%, #000);
-  --danger-tint:color-mix(in srgb, var(--danger) 17%, #fff);
-  --danger-txt:#b42318;
   --gnb-dark:color-mix(in srgb, var(--txt) 93%, #fff);
   --gnb-mid:color-mix(in srgb, var(--txt) 84%, #fff);
   --gnb-soft:color-mix(in srgb, var(--pb-deepest) 63%, #fff);
@@ -62,17 +56,31 @@
   --line-mid:color-mix(in srgb, var(--gnb) 39%, #fff);
   --line-modal:color-mix(in srgb, var(--gnb) 51%, #fff);
   --line-strong:color-mix(in srgb, var(--gnb) 30%, #fff);
-  --ok:#52a863;
-  --ok-deep:#1a7a3c;
-  --ok-deeper:color-mix(in srgb, var(--ok-deep) 80%, #000);
-  --ok-light:color-mix(in srgb, var(--ok) 13%, #fff);
   --pb-bright:color-mix(in srgb, var(--pb) 87%, #fff);
-  --pb-deepest:#0c447c;
+  --pb-deepest:color-mix(in srgb, var(--pb) 52%, #000);
   --pb-tint-3:color-mix(in srgb, var(--pb) 27%, #fff);
   --pb-tint-4:color-mix(in srgb, var(--pb) 14%, #fff);
   --tbl-bd:color-mix(in srgb, var(--pb-deepest) 22%, #fff);
   --tbl-bd-soft:color-mix(in srgb, var(--gnb) 14%, #fff);
   --tbl-head:color-mix(in srgb, var(--pb) 5%, #fff);
-  --txt-faint:color-mix(in srgb, var(--gnb) 46%, #fff);
-  --warn-light:#fffde7;   /* 짝수 행 줄무늬 — #f6f8fa 와 통합 */
+  --txt-faint:color-mix(in srgb, var(--gnb) 46%, #fff);   /* 짝수 행 줄무늬 — #f6f8fa 와 통합 */
+
+  /* ── 상태색: 계열마다 뿌리 하나 + 농도 단계 ──
+     위험은 쨍한 빨강, 정상은 진한 초록, 주의는 쨍한 주황이 뿌리다.
+     진한 단계는 검정을, 옅은 단계는 흰색을 섞는다. */
+  --danger-root:#e5484d;
+  --danger:var(--danger-root);
+  --badge-danger:var(--danger-root);
+  --danger-deep:color-mix(in srgb, var(--danger-root) 90%, #000);
+  --danger-txt:color-mix(in srgb, var(--danger-root) 72%, #000);
+  --danger-tint:color-mix(in srgb, var(--danger-root) 17%, #fff);
+  --danger-bg:color-mix(in srgb, var(--danger-root) 10%, #fff);
+  --ok-root:#1a7a3c;
+  --ok-deep:var(--ok-root);
+  --ok-deeper:color-mix(in srgb, var(--ok-root) 80%, #000);
+  --ok:color-mix(in srgb, var(--ok-root) 74%, #fff);
+  --ok-light:color-mix(in srgb, var(--ok-root) 9%, #fff);
+  --warn-root:#f97316;
+  --warn:var(--warn-root);
+  --warn-light:color-mix(in srgb, var(--warn-root) 8%, #fff);
 }

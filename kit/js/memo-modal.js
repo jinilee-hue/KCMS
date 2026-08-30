@@ -644,7 +644,7 @@
       document.getElementById('mddTopic').value = rec.topic || TOPIC_OPTIONS[0];
       document.getElementById('mddStatus').value = rec.status || STATUS_OPTIONS[0];
       document.getElementById('mddRegistrant').textContent = rec.registrant || '';
-      document.getElementById('mddRegisteredAt').textContent = (rec.registeredAt || '').replace(/-/g, '/');
+      document.getElementById('mddRegisteredAt').textContent = (rec.registeredAt || '');
       document.getElementById('mddTitle').value = rec.title || '';
       document.getElementById('mddContent').value = rec.content || '';
       document.getElementById('mddResult').value = rec.result || '';
@@ -661,7 +661,7 @@
       // syncResultEnabled()가 연쇄적으로 상담결과까지 "만족"으로 미리 채워버리는 오류가 있었다.
       document.getElementById('mddStatus').value = '예정';
       document.getElementById('mddRegistrant').textContent = CURRENT_USER;
-      document.getElementById('mddRegisteredAt').textContent = now.display.replace(/-/g, '/');
+      document.getElementById('mddRegisteredAt').textContent = now.display;
       document.getElementById('mddTitle').value = '';
       document.getElementById('mddContent').value = '';
       document.getElementById('mddResult').value = '';
