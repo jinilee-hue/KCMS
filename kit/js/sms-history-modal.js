@@ -117,10 +117,10 @@
       '.shIbtn{position:absolute;right:2px;top:50%;transform:translateY(-50%);width:18px;height:18px;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--pb-deeper);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;}' +
       '.shIbtn:hover{border-color:var(--pb);color:var(--pb);}' +
       '.shSep{color:var(--txt-mut);font-size:11px;flex:0 0 auto;}' +
-      '.shTableWrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--line-soft);border-radius:3px;}' +
+      '.shTableWrap{flex:1;min-height:0;overflow:auto;border:1px solid var(--tbl-bd-soft);border-radius:3px;}' +
       'table.shTable{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed;}' +
       'table.shTable thead th{position:sticky;top:0;z-index:2;background:#F4F7FD;color:#2C3E5A;font-weight:700;height:26px;border-bottom:1px solid #C8D5EB;padding:0 6px;text-align:center;box-shadow:0 1px 0 #C8D5EB;}' +
-      'table.shTable tbody td{border-bottom:1px solid var(--line-soft);padding:6px 7px;text-align:center;vertical-align:top;white-space:nowrap;}' +
+      'table.shTable tbody td{border-bottom:1px solid var(--tbl-bd-soft);padding:6px 7px;text-align:center;vertical-align:top;white-space:nowrap;}' +
       'table.shTable tbody tr:nth-child(even){background:#f7f9fc;}' +
       'table.shTable tbody tr:hover{background:#f2f6fc;}' +
       'table.shTable tbody td.shContentCell{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}' +
@@ -135,7 +135,7 @@
       '.shPaging .shRefresh:hover{border-color:var(--pb);color:var(--pb);}' +
       '.shPaging .shSize{display:flex;align-items:center;gap:6px;margin-left:auto;}' +
       '.shPaging .shSize select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 6px;font-size:12px;background:#fff;color:var(--txt);}' +
-      '.shPaging .shTotal{padding-left:10px;border-left:1px solid var(--line-soft);text-align:right;}';
+      '.shPaging .shTotal{padding-left:10px;border-left:1px solid var(--tbl-bd-soft);text-align:right;}';
     document.head.appendChild(style);
   }
 

@@ -192,10 +192,10 @@
       '.mcResultRow{display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex:0 0 auto;}' +
       '.mcResultRow .cnt{font-size:12px;color:var(--txt);}' +
       '.mcResultRow .cnt b{color:var(--pb-deeper);}' +
-      '.mcTableWrap{height:280px;overflow:auto;border:1px solid var(--line-soft);border-radius:3px;margin-top:8px;flex:0 0 auto;}' +
+      '.mcTableWrap{height:280px;overflow:auto;border:1px solid var(--tbl-bd-soft);border-radius:3px;margin-top:8px;flex:0 0 auto;}' +
       'table.mcTable{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed;}' +
       'table.mcTable thead th{position:sticky;top:0;z-index:2;background:#F4F7FD;color:#2C3E5A;font-weight:700;height:26px;border-bottom:1px solid #C8D5EB;padding:0 6px;text-align:center;box-shadow:0 1px 0 #C8D5EB;}' +
-      'table.mcTable tbody td{border-bottom:1px solid var(--line-soft);padding:6px 7px;text-align:left;vertical-align:top;}' +
+      'table.mcTable tbody td{border-bottom:1px solid var(--tbl-bd-soft);padding:6px 7px;text-align:left;vertical-align:top;}' +
       'table.mcTable tbody tr{cursor:pointer;height:42px;}' +
       'table.mcTable tbody tr:hover{background:#f2f6fc;}' +
       'table.mcTable td.wr{white-space:nowrap;text-align:center;}' +
@@ -462,18 +462,18 @@
     style.textContent =
       '.mddBox{width:900px;max-width:94vw;max-height:90vh;}' +
       '.mddBody{padding:14px 14px 4px;overflow:auto;flex:1;min-height:0;}' +
-      '.mddCard{display:flex;gap:14px;border:1px solid var(--line-soft);border-radius:6px;padding:12px;margin-bottom:14px;background:#fff;}' +
+      '.mddCard{display:flex;gap:14px;border:1px solid var(--tbl-bd-soft);border-radius:6px;padding:12px;margin-bottom:14px;background:#fff;}' +
       '.mddAvatar{flex:0 0 96px;display:flex;flex-direction:column;align-items:center;gap:5px;padding-top:4px;}' +
       '.mddAvatarCircle{width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#eaf1ff,#cfe0ff);color:var(--pb-deeper);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}' +
       '.mddInfoTable{flex:1;border-collapse:collapse;font-size:12px;align-self:center;}' +
-      '.mddInfoTable th{width:130px;white-space:nowrap;background:#F4F7FD;color:#2C3E5A;font-weight:700;text-align:left;padding:6px 8px;border:1px solid var(--line-soft);}' +
-      '.mddInfoTable td{padding:6px 8px;border:1px solid var(--line-soft);color:var(--txt);white-space:nowrap;}' +
+      '.mddInfoTable th{width:130px;white-space:nowrap;background:#F4F7FD;color:#2C3E5A;font-weight:700;text-align:left;padding:6px 8px;border:1px solid var(--tbl-bd-soft);}' +
+      '.mddInfoTable td{padding:6px 8px;border:1px solid var(--tbl-bd-soft);color:var(--txt);white-space:nowrap;}' +
       '.mddInfoTable td:nth-child(2){min-width:280px;}' +
       '.mddInfoTable td:nth-child(4){min-width:120px;}' +
       '.mddSectionTitle{font-size:12px;font-weight:700;color:var(--pb-deeper);margin:2px 0 6px;}' +
-      '.mddFormTable{width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;margin-bottom:12px;}' +
-      '.mddFormTable th{width:88px;background:#F8FAFC;color:#2C3E5A;font-weight:700;text-align:left;padding:7px 9px;border:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap;}' +
-      '.mddFormTable td{padding:6px 9px;border:1px solid var(--line-soft);background:#fff;}' +
+      '.mddFormTable{width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--tbl-bd-soft);border-radius:6px;overflow:hidden;margin-bottom:12px;}' +
+      '.mddFormTable th{width:88px;background:#F8FAFC;color:#2C3E5A;font-weight:700;text-align:left;padding:7px 9px;border:1px solid var(--tbl-bd-soft);vertical-align:middle;white-space:nowrap;}' +
+      '.mddFormTable td{padding:6px 9px;border:1px solid var(--tbl-bd-soft);background:#fff;}' +
       '.mddReq{color:var(--danger);margin-right:2px;}' +
       '.mddFormTable select,.mddFormTable > tr > td > input{width:100%;}' +
       '.mddDateTimeWrap{display:flex;gap:6px;}' +

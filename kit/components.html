@@ -45,7 +45,7 @@
 
   /* 컴포넌트 = 카드 */
   section{counter-increment:sec;display:block;margin-bottom:14px;}
-  section > .card{background:#fff;border:1px solid var(--line-soft);border-radius:10px;overflow:hidden;}
+  section > .card{background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:10px;overflow:hidden;}
   section > .card > .card-header{padding:18px 22px 0;background:#fff;}
   section > .card > .card-header .card-title{font-size:14px;font-weight:700;letter-spacing:-.2px;}
   section > .card > .card-body{padding:16px 22px 22px;}
@@ -84,7 +84,7 @@
   .demo{position:relative;padding:0;margin:0 0 10px;}
   /* 변형이 여러 개인 컴포넌트(모달·토스트)는 타일로 늘어놓는다 */
   .tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:12px;margin:0 0 6px;}
-  .tile{border:1px solid var(--line-soft);border-radius:8px;padding:14px;background:#fff;
+  .tile{border:1px solid var(--tbl-bd-soft);border-radius:8px;padding:14px;background:#fff;
     display:flex;flex-direction:column;gap:9px;}
   .tile-hd{display:flex;align-items:flex-start;justify-content:space-between;gap:8px;}
   .tile-hd b{font-size:12px;font-weight:700;color:var(--txt);letter-spacing:-.2px;}
@@ -136,14 +136,14 @@
   .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:12px 16px;font-size:12px;line-height:1.85;margin:12px 0 0;border-radius:0 8px 8px 0;}
 
   /* 견본은 한 줄에 모두 — 개수가 늘어도 자동으로 한 행에 나눠 담는다 */
-  #sws{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;}
+  .sws{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;}
   .sw{margin:0;}
   .sw i{display:block;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.07);}
   .sw b{display:block;font-size:10.5px;margin-top:6px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
   .sw span{display:block;font-size:10px;color:var(--txt-mut);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 4px;}
-  .fact{background:#fff;border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;}
+  .fact{background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:10px;padding:12px 14px;}
   .fact b{display:block;font-size:10px;font-weight:800;color:var(--pb);letter-spacing:.5px;margin-bottom:4px;}
   .fact span{font-size:12px;color:var(--txt);line-height:1.5;}
 
@@ -577,8 +577,9 @@
 </div></div></section>
 
 <section id="color"><div class="card"><div class="card-header"><div class="card-title">색</div></div><div class="card-body">
-<div class="demo" id="sws"></div>
-</div></div></section>
+<h4 class="sub">기본색 9종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
+<div class="demo sws" id="sw-base"></div>
+</div></div>
 
 <section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
 <h4 class="sub">타입별 크기 · 굵기 · 색</h4>
@@ -646,9 +647,9 @@
 
 <h4 class="sub">그림자</h4>
 <div class="demo row">
-  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--line-soft);border-radius:5px;box-shadow:0 1px 2px rgba(16,24,40,.06);"></span>
-  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--line-soft);border-radius:5px;box-shadow:0 4px 10px rgba(16,24,40,.10);"></span>
-  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--line-soft);border-radius:5px;box-shadow:0 8px 24px rgba(16,24,40,.14);"></span>
+  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:5px;box-shadow:0 1px 2px rgba(16,24,40,.06);"></span>
+  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:5px;box-shadow:0 4px 10px rgba(16,24,40,.10);"></span>
+  <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:5px;box-shadow:0 8px 24px rgba(16,24,40,.14);"></span>
 </div>
 
 <h4 class="sub">아이콘</h4>
@@ -707,11 +708,15 @@
   KCMS.renderPaging('#pagingSample', {page:1, total:1284, size:30});
   KCMS.renderPaging('#pagingDemo', {page:3, total:1284, size:30,
     onPage:function(p){ KCMS.renderPaging('#pagingDemo', {page:p, total:1284, size:30, onPage:arguments.callee}); }});
-  document.getElementById('sws').innerHTML=[
-    ['--pb','브랜드'],['--pb-light','틴트'],['--pb-dark','호버'],['--pb-deeper','최심'],
-    ['--gnb','GNB'],['--txt','본문'],['--txt-mut','보조'],['--line','테두리'],['--bg','바탕'],
-    ['--warn','경고'],['--danger','위험'],['--chart-ok','기준 이상'],['--chart-low','기준 미만']
-  ].map(function(s){return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';}).join('');
+  /* 색 견본 — 기본색만 보여준다. --line·--bg·--pb-light 처럼 이름이 따로 붙은 것들은
+     전부 아래 색을 흰 바탕 위에서 흐리게 쓴 값이라(예: --line = --gnb 21%) 견본에 넣지 않는다. */
+  document.getElementById('sw-base').innerHTML=[
+    ['--pb','브랜드'],['--gnb','GNB'],['--txt','글자'],
+    ['--danger','위험'],['--warn','경고'],['--ok','완료'],
+    ['--accent-pink','핑크'],['--chart-ok','차트 상'],['--chart-low','차트 하']
+  ].map(function(s){
+    return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';
+  }).join('');
   document.addEventListener('keydown',function(e){
     if(e.key==='Escape') document.querySelectorAll('.modal-ov.open').forEach(function(m){m.classList.remove('open');});
   });

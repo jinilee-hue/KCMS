@@ -10,16 +10,16 @@
 
 table.stathisttbl th,table.reslist th,table.schtbl th,table.testinfo-tbl th,
 table.staytbl th,table.edutbl th,
-#staffPickModal table.spmTbl th{background:#F4F7FD !important;color:#2C3E5A !important;border-color:#C8D5EB !important;}
+#staffPickModal table.spmTbl th{background:var(--tbl-head) !important;color:var(--gnb) !important;border-color:var(--tbl-bd) !important;}
 table.mddFormTable,table.mddInfoTable{border:0 !important;border-radius:0 !important;}
 table.mddFormTable > * > tr > th,
-table.mddInfoTable > * > tr > th{background:#F4F7FD !important;color:#2C3E5A !important;
-  border:1px solid #C8D5EB !important;text-align:center !important;}
+table.mddInfoTable > * > tr > th{background:var(--tbl-head) !important;color:var(--gnb) !important;
+  border:1px solid var(--tbl-bd) !important;text-align:center !important;}
 table.mddFormTable > * > tr > td,
-table.mddInfoTable > * > tr > td{border:1px solid #C8D5EB !important;}
+table.mddInfoTable > * > tr > td{border:1px solid var(--tbl-bd) !important;}
 table.shTable > thead > tr > th,
-table.mcTable > thead > tr > th{background:#F4F7FD !important;color:#2C3E5A !important;
-  border:1px solid #C8D5EB !important;box-shadow:none !important;}
+table.mcTable > thead > tr > th{background:var(--tbl-head) !important;color:var(--gnb) !important;
+  border:1px solid var(--tbl-bd) !important;box-shadow:none !important;}
 .shTableWrap,.mcTableWrap{border-top:var(--tbl-w) solid var(--tbl-line) !important;}
 .shTableWrap,.mcTableWrap{border-radius:0 !important;}
 /* 기준 표(table.stathisttbl · staytbl · edutbl)의 th 는 33px 이다 — 이 둘만 26px 이라
@@ -34,16 +34,16 @@ table.mcTable > thead > tr > th{white-space:nowrap !important;}
 table.shTable > tbody > tr > td,
 table.mcTable > tbody > tr > td{height:33px !important;padding:4px 8px !important;}
 table.shTable > tbody > tr:nth-child(even),
-table.mcTable > tbody > tr:nth-child(even){background:#f6f8fa !important;}
+table.mcTable > tbody > tr:nth-child(even){background:var(--tbl-head) !important;}
 table.shTable,table.mcTable{margin-top:0 !important;}
 table.shTable::before,table.mcTable::before{display:none !important;}
 table.shTable > thead > tr:first-child > th,
 table.mcTable > thead > tr:first-child > th{border-top:0 !important;}
 table.shTable > tbody > tr > td,
-table.mcTable > tbody > tr > td{border-bottom:1px solid #dfe4e9 !important;border-right:1px solid #dfe4e9 !important;
+table.mcTable > tbody > tr > td{border-bottom:1px solid var(--tbl-bd-soft) !important;border-right:1px solid var(--tbl-bd-soft) !important;
   vertical-align:middle !important;}
 table.shTable > tbody > tr > td:first-child,
-table.mcTable > tbody > tr > td:first-child{border-left:1px solid #dfe4e9 !important;}
+table.mcTable > tbody > tr > td:first-child{border-left:1px solid var(--tbl-bd-soft) !important;}
 table.shTable > tbody > tr:hover,
 table.mcTable > tbody > tr:hover{background:var(--pb-a08,rgba(0,102,255,.08)) !important;}
 #smsModal .smsPhoneScreen{background:#fff !important;}
@@ -59,7 +59,7 @@ table.mcTable > tbody > tr:hover{background:var(--pb-a08,rgba(0,102,255,.08)) !i
 .modal-ov .mcTableWrap > table > thead > tr > th,
 .modal-ov .eduTblWrap > table > thead > tr > th,
 .modal-ov .schtbl-wrap > table > thead > tr > th,
-.modal-ov > .modal-box > [style*="flex:1"] > table > thead > tr > th{position:sticky !important;top:0 !important;z-index:2 !important;background:#F4F7FD !important;}
+.modal-ov > .modal-box > [style*="flex:1"] > table > thead > tr > th{position:sticky !important;top:0 !important;z-index:2 !important;background:var(--tbl-head) !important;}
 #smsAddModal > .modal-box > .modal-body > .paging{padding-left:0 !important;padding-right:0 !important;}
 #mcModal > .modal-box > .mcFilterRow,
 #shModal > .modal-box > .shFilterRow,
@@ -143,7 +143,7 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 .modal-ov .imptbl-wrap > table > thead > tr > th,
 .modal-ov .stu-tblwrap > table > thead > tr > th,
 .modal-ov .eduTblWrap > table > thead > tr > th{position:sticky !important;top:0 !important;z-index:2 !important;
-  background:#F4F7FD !important;}
+  background:var(--tbl-head) !important;}
 
 /* ==========================================================================
    세로 스크롤 정책 통일 (2026-08-28 요청)
@@ -155,7 +155,7 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
    ========================================================================== */
 .modal-ov .tblwrap, .modal-ov .imptbl-wrap, .modal-ov .schtbl-wrap, .modal-ov .stu-tblwrap,
 .modal-ov .shTableWrap, .modal-ov .mcTableWrap, .modal-ov .eduTblWrap{
-  border-top:1px solid var(--pb,#0066FF) !important;}
+  border-top:1px solid var(--pb,var(--pb)) !important;}
 .modal-ov .imptbl-wrap > table::before, .modal-ov .schtbl-wrap > table::before,
 .modal-ov .stu-tblwrap > table::before, .modal-ov .shTableWrap > table::before,
 .modal-ov .mcTableWrap > table::before, .modal-ov .eduTblWrap > table::before{display:none !important;}
@@ -196,8 +196,8 @@ table.mddInfoTable:not(:has(thead)) > tbody > tr:first-child > *{border-top:0 !i
 
 /* 팝업 안 검색 버튼도 본문 [검색]과 같은 남색(.btn.s) — 같은 동작인데 색이 갈려 있었다.
    화면 규칙을 그대로 옮긴다(2026-08-30). */
-.btn#shSearchBtn, .btn#mcSearchBtn, .btn#addrSearchBtn, .btn#campusSearchBtn, .btn#schSearchBtn, .btn#spmSearchBtn, .btn#mddTeacherSearchBtn, .btn#csSearchBtn, .btn#edTeacherSearchBtn, .btn#mrManagerSearchBtn, .btn#smsAddSearchBtn, .btn#stuSearchBtn, .btn#attSearchBtn, .btn#mapRegManagerSearchBtn, .btn#rsIvManagerSearchBtn, .btn#mapFormDtSearchBtn, .btn#mapFormManagerSearchBtn{background:var(--gnb,#2C3E5A) !important;border-color:var(--gnb-deep,#1B2536) !important;color:#fff !important;}
-.btn#shSearchBtn:hover, .btn#mcSearchBtn:hover, .btn#addrSearchBtn:hover, .btn#campusSearchBtn:hover, .btn#schSearchBtn:hover, .btn#spmSearchBtn:hover, .btn#mddTeacherSearchBtn:hover, .btn#csSearchBtn:hover, .btn#edTeacherSearchBtn:hover, .btn#mrManagerSearchBtn:hover, .btn#smsAddSearchBtn:hover, .btn#stuSearchBtn:hover, .btn#attSearchBtn:hover, .btn#mapRegManagerSearchBtn:hover, .btn#rsIvManagerSearchBtn:hover, .btn#mapFormDtSearchBtn:hover, .btn#mapFormManagerSearchBtn:hover{background:var(--gnb-deep,#1B2536) !important;}
+.btn#shSearchBtn, .btn#mcSearchBtn, .btn#addrSearchBtn, .btn#campusSearchBtn, .btn#schSearchBtn, .btn#spmSearchBtn, .btn#mddTeacherSearchBtn, .btn#csSearchBtn, .btn#edTeacherSearchBtn, .btn#mrManagerSearchBtn, .btn#smsAddSearchBtn, .btn#stuSearchBtn, .btn#attSearchBtn, .btn#mapRegManagerSearchBtn, .btn#rsIvManagerSearchBtn, .btn#mapFormDtSearchBtn, .btn#mapFormManagerSearchBtn{background:var(--gnb,var(--gnb)) !important;border-color:var(--txt,var(--txt)) !important;color:#fff !important;}
+.btn#shSearchBtn:hover, .btn#mcSearchBtn:hover, .btn#addrSearchBtn:hover, .btn#campusSearchBtn:hover, .btn#schSearchBtn:hover, .btn#spmSearchBtn:hover, .btn#mddTeacherSearchBtn:hover, .btn#csSearchBtn:hover, .btn#edTeacherSearchBtn:hover, .btn#mrManagerSearchBtn:hover, .btn#smsAddSearchBtn:hover, .btn#stuSearchBtn:hover, .btn#attSearchBtn:hover, .btn#mapRegManagerSearchBtn:hover, .btn#rsIvManagerSearchBtn:hover, .btn#mapFormDtSearchBtn:hover, .btn#mapFormManagerSearchBtn:hover{background:var(--txt,var(--txt)) !important;}
 
 /* SMS 발송창 미리보기 말풍선 — 파란 배경은 두고 테두리선만 없앤다(화면 2026-08-25 규칙).
    sms-modal.js 가 주입하는 .smsPhoneScreen textarea{border:1px solid var(--pb-a15)} 를 끈다. */

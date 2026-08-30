@@ -214,7 +214,7 @@
       '.sms-overlay{display:none;margin-top:6px;border:1px solid var(--line);border-radius:5px;background:#fff;padding:8px;box-shadow:0 4px 14px rgba(0,40,100,.12);flex:0 0 auto;}' +
       '.sms-overlay.open{display:block;}' +
       '.sms-symbolgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;}' +
-      '.sms-symbolgrid button{height:24px;border:1px solid var(--line-soft);border-radius:3px;background:#fff;cursor:pointer;font-size:13px;line-height:1;}' +
+      '.sms-symbolgrid button{height:24px;border:1px solid var(--tbl-bd-soft);border-radius:3px;background:#fff;cursor:pointer;font-size:13px;line-height:1;}' +
       '.sms-symbolgrid button:hover{background:var(--pb-light);}' +
       '.sms-fieldlist button{display:block;width:100%;text-align:left;padding:6px 8px;border:none;background:none;cursor:pointer;font-size:12px;border-radius:3px;}' +
       '.sms-fieldlist button:hover{background:var(--pb-light);}' +

@@ -313,7 +313,7 @@
 
   function documentHtml(title, printedAt, bodyHtml, subjectNames, studentName) {
     return '<!DOCTYPE html><html lang="ko"><head><meta charset="UTF-8"><title>' + title + '</title><style>' +
-      ':root{--line:#cfd6e0;--line-soft:#e3e8ef;--txt:#1f2937;--txt-mut:#5b6776;'+
+      ':root{--line:#cfd6e0;--tbl-bd-soft:#e3e8ef;--txt:#1f2937;--txt-mut:#5b6776;'+
       /* 전체 컬러톤을 파란색 계열로 통일(2026-08-24 요청). 이 컴포넌트는 window.open 으로 띄운
          새 창이라 호출 화면의 토큰을 물려받지 못하므로 필요한 값을 여기서 정의한다.
          --gnb 는 본문 화면의 [검색] 버튼(.btn.s)과 같은 네이비 — 폴리 그래프에 쓴다. */
@@ -326,14 +326,14 @@
          95%→92%), --danger-bg/--danger-txt = Result. */
       '--pb-light2:#DCE7F7;--danger-bg:#fdecec;--danger-txt:#b42318;}' +
       'body{margin:0;font-family:Pretendard,Pretendard Variable,Malgun Gothic,맑은 고딕,Dotum,돋움,sans-serif;background:#fff;color:var(--txt);}' +
-      '.rpt-topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-soft);background:#f7f9fc;position:sticky;top:0;}' +
+      '.rpt-topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--tbl-bd-soft);background:#f7f9fc;position:sticky;top:0;}' +
       '.rpt-topbar .rpt-date{font-size:11px;color:var(--txt-mut);margin-right:auto;}' +
-      '.rpt-printbtn{height:26px;padding:0 12px;border:1px solid var(--line-soft);border-radius:3px;background:#fff;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}' +
+      '.rpt-printbtn{height:26px;padding:0 12px;border:1px solid var(--tbl-bd-soft);border-radius:3px;background:#fff;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}' +
       '.rpt-printbtn:hover{background:#eef1f5;}' +
       '.rpt-body{padding:22px 26px;max-width:640px;margin:0 auto;}' +
       '.rpt-title{text-align:center;font-size:21px;font-weight:700;letter-spacing:.5px;color:#1f2937;margin-bottom:18px;}' +
       '.rpt-sect{font-size:12px;font-weight:700;color:var(--txt);margin:16px 0 8px;}' +
-      '.rpt-infobox{display:flex;gap:16px;align-items:center;border:1px solid var(--line-soft);border-radius:6px;padding:12px 16px;}' +
+      '.rpt-infobox{display:flex;gap:16px;align-items:center;border:1px solid var(--tbl-bd-soft);border-radius:6px;padding:12px 16px;}' +
       '.rpt-avatar{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:#eef1f5;color:var(--txt-mut);display:flex;align-items:center;justify-content:center;}' +
       '.rpt-infogrid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}' +
       '.rpt-infogrid .row{display:flex;justify-content:space-between;font-size:12px;gap:8px;}' +
@@ -347,7 +347,7 @@
          갈라 놓았다. ::before 세로선으로 바꿔 위아래를 22% 씩 비우고, Result 다음 칸 앞 선은
          지운다 — Result 칸은 옅은 파랑 배경이라 색만으로 이미 경계가 읽힌다. */
       '.rpt-verdict .v-item{position:relative;flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:10px 12px;}' +
-      '.rpt-verdict .v-item + .v-item::before{content:\'\';position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--line-soft);}' +
+      '.rpt-verdict .v-item + .v-item::before{content:\'\';position:absolute;left:0;top:22%;bottom:22%;width:1px;background:var(--tbl-bd-soft);}' +
       '.rpt-verdict .v-main + .v-item::before{display:none;}' +
       '.rpt-verdict .k{font-size:10px;letter-spacing:.4px;text-transform:uppercase;color:var(--txt-mut);}' +
       '.rpt-verdict .v{font-size:18px;font-weight:700;color:var(--txt);line-height:1.15;}' +
@@ -373,13 +373,13 @@
          table.grid 가 쓰는 방식과 같다(th border-top:0 + 오버레이 하나). collapse 표라 보더를
          그대로 두면 파란 선 아래 회색 선이 겹쳐 2px 로 보인다. */
       'table.rpt-table{width:100%;border-collapse:collapse;font-size:10.8px;position:relative;}' +
-      'table.rpt-table th,table.rpt-table td{border:1px solid var(--line-soft);padding:5px 6px;text-align:center;}' +
+      'table.rpt-table th,table.rpt-table td{border:1px solid var(--tbl-bd-soft);padding:5px 6px;text-align:center;}' +
       'table.rpt-table > thead > tr:first-child > th{border-top:0;}' +
       'table.rpt-table::before{content:\'\';position:absolute;top:0;left:0;right:0;height:1px;background:var(--pb);pointer-events:none;z-index:2;}' +
       'table.rpt-table thead th{background:#F4F7FD;color:#2C3E5A;font-weight:700;}' +
       '#rptSubjTbody td{border-bottom:0;}' +
       '#rptSubjTbody tr:first-child td{border-top:0;}' +
-      '#rptSubjTbody tr:last-child td{border-bottom:1px solid var(--line-soft);}' +
+      '#rptSubjTbody tr:last-child td{border-bottom:1px solid var(--tbl-bd-soft);}' +
       'table.rpt-table td.l{text-align:left;font-weight:700;}' +
       'table.rpt-table td.scorecell{font-weight:700;}' +
       'table.rpt-table tr.totalrow td{background:var(--pb-light);font-weight:700;}' +
@@ -409,7 +409,7 @@
       /* Result 줄을 General Analysis 표에 붙인다(2026-08-24 요청) — 표와 판정 결과는 한 덩어리로
          읽혀야 하는데 10px 떠 있어 별개 배너처럼 보였다. 위쪽 margin/라운드를 없애고 표 테두리와
          같은 색 1px 로 이어 붙인다. */
-      '.rpt-resultline{text-align:center;background:var(--danger-bg);color:var(--danger-txt);font-weight:700;padding:6px;border:1px solid var(--line-soft);border-top:0;border-radius:0;margin:0 0 20px;font-size:12px;}' +
+      '.rpt-resultline{text-align:center;background:var(--danger-bg);color:var(--danger-txt);font-weight:700;padding:6px;border:1px solid var(--tbl-bd-soft);border-top:0;border-radius:0;margin:0 0 20px;font-size:12px;}' +
       /* 세로축 라인(border-left) 제거 — 눈금·축 라벨이 없는 그래프라 왼쪽 선이 축으로 읽히지
          않고 장식으로만 남아 있었다(2026-08-24 요청). 바닥선(border-bottom)은 막대가 서는
          기준선이라 유지한다. */
@@ -417,7 +417,7 @@
          빈 띠(선 위쪽)에 들어가 있었다(2026-08-24 요청). padding-bottom 을 0 으로 만들어
          막대를 선에 붙이고, 과목명은 .bar-label 의 bottom 음수값으로 선 아래에 놓는다.
          선 아래 글자 자리는 margin-bottom 26px 으로 확보한다. */
-      '.rpt-chart{height:150px;padding:22px 6px 0;border-bottom:1px solid var(--line-soft);position:relative;margin-bottom:26px;}' +
+      '.rpt-chart{height:150px;padding:22px 6px 0;border-bottom:1px solid var(--tbl-bd-soft);position:relative;margin-bottom:26px;}' +
       /* 막대가 바닥에 정렬되는 플롯 영역(.rpt-chart 의 content box 와 같은 좌표계). */
       '.rpt-plot{position:relative;height:100%;display:flex;align-items:flex-end;justify-content:space-around;gap:10px;}' +
       '.rpt-chart .bargrp{display:flex;align-items:flex-end;gap:3px;height:100%;position:relative;flex:1;justify-content:center;}' +

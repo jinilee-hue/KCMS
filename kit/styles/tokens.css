@@ -7,24 +7,21 @@
    ============================================================ */
 
 :root{
-  --pb:#0066FF; --pb-light:#E8F0FF; --pb-dark:#0052CC; --pb-deeper:#003D99;
+  --pb:#0066FF; --pb-light:color-mix(in srgb, var(--pb) 9%, #fff); --pb-dark:color-mix(in srgb, var(--pb) 80%, #000); --pb-deeper:color-mix(in srgb, var(--pb) 60%, #000);
   --pb-a08:rgba(0,102,255,.08); --pb-a15:rgba(0,102,255,.15);
-  --line:#cfd6e0; --line-soft:#e3e8ef; --label-bd:#cdddff;
-  --txt:#1f2937; --txt-mut:#5b6776; --bg:#eef1f5;
-  --warn:#f97316; --warn-bg:#EDF1F6;
-  --danger:#e5484d; --danger-bg:#fdecec;
-  --ok-bg:#EDF1F6;
+  --line:color-mix(in srgb, var(--gnb) 21%, #fff); --label-bd:color-mix(in srgb, var(--pb) 20%, #fff);
+  --txt:#1f2937; --txt-mut:#5b6776; --bg:color-mix(in srgb, var(--gnb) 7%, #fff);
+  --warn:#f97316;
+  --danger:#e5484d; --danger-bg:color-mix(in srgb, var(--danger) 10%, #fff);
 }
 
 :root{
   /* 상단바(GNB) 전용 — 네이비. 본문 강조색(--pb)과 역할을 분리한다. */
-  --gnb:#2C3E5A; --gnb-top:#3a5170; --gnb-txt:#dbe2ee;
-  --gnb-deep:#1B2536; --gnb-bd:#D2D9E4;
+  --gnb:#2C3E5A; --gnb-top:#3a5170;
   /* --gnb 를 반투명으로 쓴 값 — 토스트 배경(2026-08-24 요청). rgba() 는 var(--gnb) 를
   직접 받을 수 없어 같은 색(44,62,90)을 알파만 달리해 토큰으로 둔다. */
   --gnb-a92:rgba(44,62,90,.92);
   /* 좌측 퀵메뉴 레일 배경 — 본문(흰색)과 분리 */
-  --lnb-bg:#f4f6f9;
   /* 모든 테이블 상단 공통 라인 */
   --tbl-line:var(--pb); --tbl-w:1px;
   /* 섹션 구분선 — D타입 규칙 */
@@ -50,4 +47,32 @@
   --chart-ok:#5E93EE;   /* 그래프 기준 이상 */
   --chart-low:#E58388;  /* 그래프 기준 미만(경고) */
   --font:'Pretendard','Apple SD Gothic Neo',-apple-system,BlinkMacSystemFont,'Malgun Gothic','맑은 고딕',sans-serif;
+
+  /* 유사색을 묶어 신설 (2026-08-30) — 표·선·상태 계열 */
+  --accent-pink:#ff3b8d;
+  --badge-danger:#e6483c;
+  --chart-axis:#7b9bb7;
+  --danger-deep:#d23b3b;
+  --danger-tint:color-mix(in srgb, var(--danger) 17%, #fff);
+  --danger-txt:#b42318;
+  --gnb-dark:#2d3748;
+  --gnb-mid:#3f4c5a;
+  --gnb-soft:#6a89a5;
+  --line-gray:color-mix(in srgb, var(--gnb) 17%, #fff);
+  --line-mid:color-mix(in srgb, var(--gnb) 39%, #fff);
+  --line-modal:color-mix(in srgb, var(--gnb) 51%, #fff);
+  --line-strong:color-mix(in srgb, var(--gnb) 30%, #fff);
+  --ok:#52a863;
+  --ok-deep:#1a7a3c;
+  --ok-deeper:#146130;
+  --ok-light:color-mix(in srgb, var(--ok) 13%, #fff);
+  --pb-bright:color-mix(in srgb, var(--pb) 87%, #fff);
+  --pb-deepest:#0c447c;
+  --pb-tint-3:color-mix(in srgb, var(--pb) 27%, #fff);
+  --pb-tint-4:color-mix(in srgb, var(--pb) 14%, #fff);
+  --tbl-bd:#c8d5eb;
+  --tbl-bd-soft:color-mix(in srgb, var(--gnb) 14%, #fff);
+  --tbl-head:color-mix(in srgb, var(--pb) 5%, #fff);
+  --txt-faint:color-mix(in srgb, var(--gnb) 46%, #fff);
+  --warn-light:#fffde7;   /* 짝수 행 줄무늬 — #f6f8fa 와 통합 */
 }

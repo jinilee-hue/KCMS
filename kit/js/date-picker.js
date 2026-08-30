@@ -75,7 +75,7 @@
     '.pcmsdp-d.sel:hover{background:var(--pb-a08,rgba(0,102,255,.08));}',
     '.pcmsdp-d.sel.today{background:var(--pb,#0066FF);color:#fff;box-shadow:none;}',
     '.pcmsdp-ft{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding-top:8px;',
-    '  border-top:1px solid var(--line-soft,#e3e8ef);}',
+    '  border-top:1px solid var(--tbl-bd-soft,#e3e8ef);}',
     /* [삭제]/[오늘] 을 텍스트 링크 → 화면 기본 버튼(.btn.g.sm)과 같은 모양으로(2026-08-25 요청).
        이 컴포넌트는 어느 화면에나 주입되므로 .btn 클래스에 기대지 않고 같은 값을 직접 쓴다:
        높이 24 / 좌우 8 / 1px var(--line) / radius 3 / 12px / weight 500. */
