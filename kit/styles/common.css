@@ -532,3 +532,4 @@ table thead th .tharrow.on{color:var(--pb) !important;}
 .modal-ov .tblwrap > table > thead > tr:first-child > *::before{
   content:'';position:absolute;left:0;right:0;top:0;height:1px;background:var(--pb);z-index:2;}
 .modal-ov table > thead > tr:first-child > *{position:relative;}
+/* 목록 래퍼의 좌우 여백을 padding → margin 으로 (2026-08-30 요청) — 가로 스크롤이 생기면 내용이 오른쪽 padding 위까지 그려져 위 검색표보다 10px 더 나가 보였다. margin 으로 두면 스크롤 상자 자체가 검색표와 같은 폭이 된다. */.lpane > .tblwrap, .content > .tblwrap{padding-left:0 !important;padding-right:0 !important;margin-left:10px !important;margin-right:10px !important;}
