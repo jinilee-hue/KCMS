@@ -1,4 +1,4 @@
-/* KCMS 입학관리 Kit — 표 도구 (table-tools.js)
+/* KCMS Design Kit — 표 도구 (table-tools.js)
 
    목록 화면이 거의 항상 쓰는 두 가지를 한 곳에 모은 것입니다.
      · 정렬        th.sortable 을 눌러 그 열로 정렬 (▾ 화살표 · 다시 누르면 방향 반전)

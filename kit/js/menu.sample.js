@@ -1,4 +1,4 @@
-/* KCMS 입학관리 Kit — GNB 메뉴 · 좌측 레일 샘플 데이터
+/* KCMS Design Kit — GNB 메뉴 · 좌측 레일 샘플 데이터
    실제 화면(PCMS)에서 쓰는 구조 그대로입니다. 프로젝트에 맞게 항목만 바꿔 쓰세요.
    href 가 있는 항목은 링크(<a>), 없으면 <div> 로 렌더링됩니다. */
 var PCMS_GNB_MENU = {

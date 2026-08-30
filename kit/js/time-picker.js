@@ -1,4 +1,4 @@
-/* KCMS 입학관리 Kit — 공용 시간 선택기
+/* KCMS Design Kit — 공용 시간 선택기
    input[type=time] 의 showPicker() 를 가로채 공통 패널을 띄운다.
    날짜 피커(date-picker.js)와 같은 방침 — 바깥선 없이 그림자로 띄우고, 라운드 3px,
    선택된 값만 파란 배경(#0066FF). 브라우저 기본 시간 위젯은 페이지 CSS 로 손댈 수 없어

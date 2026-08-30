@@ -1,4 +1,4 @@
-# KCMS 입학관리 Kit — 규칙 · 계약
+# KCMS Design Kit — 규칙 · 계약
 
 디자인 시스템(`components.html`)은 **보이는 것**만 두고, 지켜야 할 규칙과 API 계약은 이 문서에 모읍니다.
 관련 문서: `design-system.md`(구성·제작 방식) · `kcms-admissions.md`(AI 에이전트용 규약)

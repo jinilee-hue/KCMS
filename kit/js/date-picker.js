@@ -1,4 +1,4 @@
-/* KCMS 입학관리 Kit — 공용 날짜 선택기
+/* KCMS Design Kit — 공용 날짜 선택기
    input[type=date] 의 showPicker() 를 가로채 공통 달력을 띄운다.
    오늘 = 파란 원 채움 + 흰 글자 / 선택일 = 파란 테두리 링 (파랑은 #0066FF 한 가지)
    실제 화면(PCMS)에서 쓰는 구현 그대로. */
