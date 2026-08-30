@@ -546,3 +546,6 @@ table.grid thead th.sortable:hover, table.histtbl thead th.sortable:hover, table
 .colresize{position:absolute;top:0;right:-3px;width:6px;height:100%;cursor:col-resize;z-index:6;touch-action:none;}
 .colresize:hover, .colresize.dragging{background:rgba(255,255,255,.45);}
 .colresizable th{position:relative;overflow:hidden;}
+
+/* 데이터 없음 패널 — 파란 틴트 상자. 표 본문의 빈 행(td.reslist-empty)은 제외한다. */
+div.emptynote{background:var(--pb-light);border:1px solid var(--label-bd);border-radius:3px;}
