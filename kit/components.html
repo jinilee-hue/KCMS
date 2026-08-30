@@ -259,6 +259,7 @@
   <span class="ddaybadge">회색 채움</span>
   <span class="cntbadge">파랑 틴트</span>
   <span class="tobadge open">레드 틴트</span>
+  <span class="mapbadge brand">파랑 채움</span>
   <span class="tabbadge">레드 채움</span>
 </div>
 </div></div></section>
@@ -577,7 +578,7 @@
 </div></div></section>
 
 <section id="color"><div class="card"><div class="card-header"><div class="card-title">색</div></div><div class="card-body">
-<h4 class="sub">기본색 9종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
+<h4 class="sub">기본색 14종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
 <div class="demo sws" id="sw-base"></div>
 </div></div>
 
@@ -711,8 +712,10 @@
   /* 색 견본 — 기본색만 보여준다. --line·--bg·--pb-light 처럼 이름이 따로 붙은 것들은
      전부 아래 색을 흰 바탕 위에서 흐리게 쓴 값이라(예: --line = --gnb 21%) 견본에 넣지 않는다. */
   document.getElementById('sw-base').innerHTML=[
-    ['--pb','브랜드'],['--gnb','GNB'],['--txt','글자'],
-    ['--danger','위험'],['--warn','경고'],['--ok','완료'],
+    ['--pb','브랜드'],['--pb-deepest','브랜드 최심'],['--gnb','GNB'],['--txt','글자'],
+    ['--danger','위험'],['--badge-danger','배지 빨강'],['--danger-txt','위험 글자'],
+    ['--warn','경고'],['--warn-light','경고 옅게'],
+    ['--ok','완료'],['--ok-deep','완료 진하게'],
     ['--accent-pink','핑크'],['--chart-ok','차트 상'],['--chart-low','차트 하']
   ].map(function(s){
     return '<span class="sw"><i style="background:var('+s[0]+')"></i><b>'+s[1]+'</b><span>'+s[0]+'</span></span>';

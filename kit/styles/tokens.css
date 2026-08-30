@@ -10,14 +10,14 @@
   --pb:#0066FF; --pb-light:color-mix(in srgb, var(--pb) 9%, #fff); --pb-dark:color-mix(in srgb, var(--pb) 80%, #000); --pb-deeper:color-mix(in srgb, var(--pb) 60%, #000);
   --pb-a08:rgba(0,102,255,.08); --pb-a15:rgba(0,102,255,.15);
   --line:color-mix(in srgb, var(--gnb) 21%, #fff); --label-bd:color-mix(in srgb, var(--pb) 20%, #fff);
-  --txt:#1f2937; --txt-mut:#5b6776; --bg:color-mix(in srgb, var(--gnb) 7%, #fff);
+  --txt:#1f2937; --txt-mut:color-mix(in srgb, var(--txt) 71%, #fff); --bg:color-mix(in srgb, var(--gnb) 7%, #fff);
   --warn:#f97316;
   --danger:#e5484d; --danger-bg:color-mix(in srgb, var(--danger) 10%, #fff);
 }
 
 :root{
   /* 상단바(GNB) 전용 — 네이비. 본문 강조색(--pb)과 역할을 분리한다. */
-  --gnb:#2C3E5A; --gnb-top:#3a5170;
+  --gnb:#2C3E5A; --gnb-top:color-mix(in srgb, var(--gnb) 90%, #fff);
   /* --gnb 를 반투명으로 쓴 값 — 토스트 배경(2026-08-24 요청). rgba() 는 var(--gnb) 를
   직접 받을 수 없어 같은 색(44,62,90)을 알파만 달리해 토큰으로 둔다. */
   --gnb-a92:rgba(44,62,90,.92);
@@ -51,26 +51,26 @@
   /* 유사색을 묶어 신설 (2026-08-30) — 표·선·상태 계열 */
   --accent-pink:#ff3b8d;
   --badge-danger:#e6483c;
-  --chart-axis:#7b9bb7;
-  --danger-deep:#d23b3b;
+  --chart-axis:color-mix(in srgb, var(--pb-deepest) 54%, #fff);
+  --danger-deep:color-mix(in srgb, var(--badge-danger) 91%, #000);
   --danger-tint:color-mix(in srgb, var(--danger) 17%, #fff);
   --danger-txt:#b42318;
-  --gnb-dark:#2d3748;
-  --gnb-mid:#3f4c5a;
-  --gnb-soft:#6a89a5;
+  --gnb-dark:color-mix(in srgb, var(--txt) 93%, #fff);
+  --gnb-mid:color-mix(in srgb, var(--txt) 84%, #fff);
+  --gnb-soft:color-mix(in srgb, var(--pb-deepest) 63%, #fff);
   --line-gray:color-mix(in srgb, var(--gnb) 17%, #fff);
   --line-mid:color-mix(in srgb, var(--gnb) 39%, #fff);
   --line-modal:color-mix(in srgb, var(--gnb) 51%, #fff);
   --line-strong:color-mix(in srgb, var(--gnb) 30%, #fff);
   --ok:#52a863;
   --ok-deep:#1a7a3c;
-  --ok-deeper:#146130;
+  --ok-deeper:color-mix(in srgb, var(--ok-deep) 80%, #000);
   --ok-light:color-mix(in srgb, var(--ok) 13%, #fff);
   --pb-bright:color-mix(in srgb, var(--pb) 87%, #fff);
   --pb-deepest:#0c447c;
   --pb-tint-3:color-mix(in srgb, var(--pb) 27%, #fff);
   --pb-tint-4:color-mix(in srgb, var(--pb) 14%, #fff);
-  --tbl-bd:#c8d5eb;
+  --tbl-bd:color-mix(in srgb, var(--pb-deepest) 22%, #fff);
   --tbl-bd-soft:color-mix(in srgb, var(--gnb) 14%, #fff);
   --tbl-head:color-mix(in srgb, var(--pb) 5%, #fff);
   --txt-faint:color-mix(in srgb, var(--gnb) 46%, #fff);
