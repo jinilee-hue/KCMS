@@ -328,11 +328,11 @@
       'body{margin:0;font-family:Pretendard,Pretendard Variable,Malgun Gothic,맑은 고딕,Dotum,돋움,sans-serif;background:#fff;color:var(--txt);}' +
       '.rpt-topbar{display:flex;align-items:center;gap:8px;padding:10px 16px;border-bottom:1px solid var(--line-soft);background:#f7f9fc;position:sticky;top:0;}' +
       '.rpt-topbar .rpt-date{font-size:11px;color:var(--txt-mut);margin-right:auto;}' +
-      '.rpt-printbtn{height:26px;padding:0 12px;border:1px solid var(--line-soft);border-radius:3px;background:#fff;color:var(--txt);font-size:11.5px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}' +
+      '.rpt-printbtn{height:26px;padding:0 12px;border:1px solid var(--line-soft);border-radius:3px;background:#fff;color:var(--txt);font-size:12px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}' +
       '.rpt-printbtn:hover{background:#eef1f5;}' +
       '.rpt-body{padding:22px 26px;max-width:640px;margin:0 auto;}' +
       '.rpt-title{text-align:center;font-size:21px;font-weight:700;letter-spacing:.5px;color:#1f2937;margin-bottom:18px;}' +
-      '.rpt-sect{font-size:12.5px;font-weight:700;color:var(--txt);margin:16px 0 8px;}' +
+      '.rpt-sect{font-size:12px;font-weight:700;color:var(--txt);margin:16px 0 8px;}' +
       '.rpt-infobox{display:flex;gap:16px;align-items:center;border:1px solid var(--line-soft);border-radius:6px;padding:12px 16px;}' +
       '.rpt-avatar{flex:0 0 auto;width:42px;height:42px;border-radius:50%;background:#eef1f5;color:var(--txt-mut);display:flex;align-items:center;justify-content:center;}' +
       '.rpt-infogrid{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;}' +
@@ -457,7 +457,7 @@
       '.rpt-legend .dot{width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:4px;}' +
       '.rpt-legend .dot.student{background:var(--pb);}' +
       '.rpt-legend .dot.poly{background:var(--gnb);}' +
-      '.rpt-comment{font-size:11.5px;line-height:1.6;color:var(--txt);background:#f7f9fc;border-radius:6px;padding:12px 14px;}' +
+      '.rpt-comment{font-size:12px;line-height:1.6;color:var(--txt);background:#f7f9fc;border-radius:6px;padding:12px 14px;}' +
       '.rpt-printhead,.rpt-printfoot{display:none;}' +
       /* G. 인쇄 대응(2026-08-24 요청) — 학부모 배부용 인쇄물이므로:
          · 표/차트/코멘트가 페이지 경계에서 잘리지 않게 break-inside:avoid

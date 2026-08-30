@@ -27,7 +27,7 @@
   .nav a:hover{background:rgba(255,255,255,.07);color:#fff;}
   .nav a.on{border-left-color:#fff;background:rgba(255,255,255,.10);color:#fff;font-weight:700;}
   .nav-foot{margin:20px 20px 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.14);display:flex;flex-direction:column;gap:8px;}
-  .nav-foot a{padding:0;font-size:11.5px;color:#9fb4d1;}
+  .nav-foot a{padding:0;font-size:12px;color:#9fb4d1;}
 
   /* 화면 폭을 그대로 쓴다 — 표·그리드 데모가 실제 화면만큼 넓게 보이도록 */
   .kitver{margin-top:14px;padding-top:10px;border-top:1px solid rgba(255,255,255,.14);
@@ -40,7 +40,7 @@
   .doc h1,.doc h2,.doc h3,.doc h4,.doc p{margin:0;}
   .doc-hd{margin-bottom:8px;}
   .doc-hd h1{font-size:22px;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;}
-  .doc-hd p{font-size:12.5px;color:var(--txt-mut);line-height:1.8;}
+  .doc-hd p{font-size:12px;color:var(--txt-mut);line-height:1.8;}
   h2.grp{font-size:10px;font-weight:800;color:var(--txt-mut);letter-spacing:1.2px;margin:30px 0 10px;}
 
   /* 컴포넌트 = 카드 */
@@ -68,6 +68,18 @@
   .chips b.no::before{content:'\2715';font-size:9px;font-weight:800;}
   .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.8;margin:10px 0 0;}
 
+  /* 타입 스펙 표 — code 는 선택자, cnote 는 값 주석 */
+  .type-spec code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;
+    background:#F4F7FD;color:#2C3E5A;padding:1px 4px;border-radius:3px;}
+  .type-spec .cnote{color:#8794a8;font-size:10.5px;}
+  .type-spec tbody tr + tr td{border-top:1px solid #EDF1F6;}
+  /* 화면 골격 데모 — .content 의 진짜 범위(경고색 10%)와, 안쪽 블록이 만드는 여백을 보이게 */
+  .gutbox{height:100%;display:flex;align-items:center;justify-content:center;gap:5px;
+    font-size:11px;line-height:1.5;color:var(--txt);text-align:center;white-space:nowrap;
+    overflow:hidden;text-overflow:ellipsis;
+    background:color-mix(in srgb, var(--danger) 22%, transparent);}
+  .gutbox b{font-weight:700;}
+  .gutbox span{color:var(--txt-mut);font-size:10.5px;}
   /* 예시 — 카드 안이므로 테두리 없이 옅은 배경 */
   .demo{position:relative;padding:0;margin:0 0 10px;}
   /* 변형이 여러 개인 컴포넌트(모달·토스트)는 타일로 늘어놓는다 */
@@ -81,7 +93,7 @@
   .tile-ic.warn{background:#FEF3E6;color:var(--warn);}
   .tile-ic.danger{background:#FDECEC;color:var(--danger);}
   .tile-ic.neutral{background:#EEF1F6;color:var(--txt-mut);}
-  .tile p{margin:0;font-size:11.5px;line-height:1.65;color:var(--txt-mut);flex:1;}
+  .tile p{margin:0;font-size:12px;line-height:1.65;color:var(--txt-mut);flex:1;}
   .tile p code{font-size:10.5px;}
   .tile .btn{align-self:stretch;justify-content:center;}
   .demo[data-cls]::after{content:attr(data-cls);display:block;margin-top:8px;
@@ -100,14 +112,14 @@
   .demo.dark{background:var(--gnb);border-color:var(--gnb);padding:0;overflow:hidden;}
   .demo.flush{padding:0;overflow:hidden;background:#fff;}
   /* 가로형(.tblwrap 안)과 세로형 표의 좌우 기준선을 같게 — wrap 의 좌우 패딩 제거 */
-  .demo .tblwrap{padding-left:0 !important;padding-right:0 !important;}
+  .demo:not(.shellgrid) .tblwrap{padding-left:0 !important;padding-right:0 !important;}
   .demo + h4.sub{margin-top:30px;}
 
   /* 라벨 열을 190px 로 못 박아 카드마다 예시 시작선이 같은 자리에 오게 한다 */
   table.spec,table.type-spec{width:100%;border-collapse:collapse;table-layout:fixed;}
   table.type-spec th{background:none;color:#8794a8;font-weight:800;font-size:10px;text-align:left;
     letter-spacing:.6px;padding:0 14px 8px 0;border:0;}
-  table.spec td,table.type-spec td{padding:13px 14px 13px 0;border:0;vertical-align:middle;font-size:11.5px;}
+  table.spec td,table.type-spec td{padding:13px 14px 13px 0;border:0;vertical-align:middle;font-size:12px;}
   table.spec tr:last-child td,table.type-spec tbody tr:last-child td{border-bottom:0;}
   table.spec td.k,table.type-spec td.k,
   table.spec th:first-child,table.type-spec th:first-child{width:220px;}
@@ -116,23 +128,24 @@
   td.k .cls{display:block;margin-top:3px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
     font-size:10px;font-weight:500;color:#aab5c4;letter-spacing:0;word-break:break-word;line-height:1.5;}
   table.spec td.c,table.type-spec td.c{width:36%;color:var(--txt-mut);line-height:1.7;}
-  label.chk{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;margin-right:14px;}
+  label.chk{display:inline-flex;align-items:center;gap:5px;font-size:12px;margin-right:14px;}
 
-  pre{background:#1B2536;color:#DBE2EE;font-size:11.5px;line-height:1.7;padding:14px 16px;border-radius:8px;overflow:auto;margin:12px 0 0;}
+  pre{background:#1B2536;color:#DBE2EE;font-size:12px;line-height:1.7;padding:14px 16px;border-radius:8px;overflow:auto;margin:12px 0 0;}
   .doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#EEF2F8;color:#31415c;padding:1px 5px;border-radius:3px;}
-  pre code{background:none;color:inherit;padding:0;font-size:11.5px;}
+  pre code{background:none;color:inherit;padding:0;font-size:12px;}
   .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:12px 16px;font-size:12px;line-height:1.85;margin:12px 0 0;border-radius:0 8px 8px 0;}
 
-  #sws{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;}
+  /* 견본은 한 줄에 모두 — 개수가 늘어도 자동으로 한 행에 나눠 담는다 */
+  #sws{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr);gap:8px;}
   .sw{margin:0;}
   .sw i{display:block;height:44px;border-radius:6px;border:1px solid rgba(0,0,0,.07);}
-  .sw b{display:block;font-size:10.5px;margin-top:6px;font-weight:700;}
-  .sw span{display:block;font-size:10px;color:var(--txt-mut);margin-top:1px;}
+  .sw b{display:block;font-size:10.5px;margin-top:6px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .sw span{display:block;font-size:10px;color:var(--txt-mut);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 
   .facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:16px 0 4px;}
   .fact{background:#fff;border:1px solid var(--line-soft);border-radius:10px;padding:12px 14px;}
   .fact b{display:block;font-size:10px;font-weight:800;color:var(--pb);letter-spacing:.5px;margin-bottom:4px;}
-  .fact span{font-size:11.5px;color:var(--txt);line-height:1.5;}
+  .fact span{font-size:12px;color:var(--txt);line-height:1.5;}
 
   @media (max-width:960px){ .nav{display:none;} .doc{padding:22px 16px 80px;} }
 </style>
@@ -200,7 +213,7 @@
 
 <h4 class="sub">아이콘 전용</h4>
 <div class="demo row" style="align-items:center;gap:14px;">
-  <span style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--txt-mut);">
+  <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--txt-mut);">
     <button class="bcic" title="새로고침" aria-label="새로고침"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
     <button class="bcic" title="닫기" aria-label="닫기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     브레드크럼 도구 · 20px · 입력 안 아이콘(.ibtn 18px)은 날짜 피커에서</span>
@@ -209,7 +222,7 @@
 <h4 class="sub">이름 링크</h4>
 <div class="demo row" style="align-items:center;gap:10px;">
   <button class="namelink">홍길동</button>
-  <span style="font-size:11.5px;color:var(--txt-mut);">표 안에서 상세로 넘어가는 이름 — 본문색 그대로 두고, 마우스를 올리면 밑줄</span>
+  <span style="font-size:12px;color:var(--txt-mut);">표 안에서 상세로 넘어가는 이름 — 본문색 그대로 두고, 마우스를 올리면 밑줄</span>
 </div>
 <h4 class="sub">상태 · 기본 / hover / 비활성</h4>
 <div class="demo row">
@@ -226,7 +239,7 @@
     <div class="dtab on">상담(MAP)예약</div><div class="dtab">설명회예약</div>
     <div class="dtab">채점</div><div class="dtab">상담(MAP)결과</div>
   </div>
-  <div data-pane style="padding:14px;font-size:11.5px;color:var(--txt-mut);">상담(MAP)예약 탭의 내용 영역</div>
+  <div data-pane style="padding:14px;font-size:12px;color:var(--txt-mut);">상담(MAP)예약 탭의 내용 영역</div>
 </div>
 
 <h4 class="sub">알약 탭 · 24PX</h4>
@@ -503,7 +516,7 @@
 
 <section id="help"><div class="card"><div class="card-header"><div class="card-title">도움말 팝오버</div></div><div class="card-body">
 <div class="demo row">
-  <span style="font-size:11.5px;">입학구분(현재 결정)</span>
+  <span style="font-size:12px;">입학구분(현재 결정)</span>
   <span class="helpwrap" style="position:relative;">
     <button type="button" class="helpbtn" aria-haspopup="true">?</button>
     <div class="helppop" role="tooltip">
@@ -533,13 +546,28 @@
 </div></div></section>
 
 <section id="shell"><div class="card"><div class="card-header"><div class="card-title">화면 골격</div></div><div class="card-body">
-<div class="demo flush">
+<div class="demo flush shellgrid">
   <div style="display:flex;height:150px;">
     <div class="rail" id="rail" style="flex:0 0 58px;"></div>
     <div class="main" style="flex:1;">
       <div class="bcbar"><span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span> 입학관리 › <b>예비생 등록·관리</b>
         <span class="meta">최종 갱신: 2026-08-27 09:00</span></div>
-      <div class="content" style="background:#fff;">본문 영역 — 좌우 여백 14px</div>
+      <div class="content" style="background:color-mix(in srgb, var(--danger) 10%, transparent);outline:1px solid color-mix(in srgb, var(--danger) 30%, transparent);outline-offset:-1px;">
+        <div class="split">
+          <div class="lpane">
+            <div class="tblwrap" style="overflow:hidden;">
+              <div class="gutbox">목록 <b>좌우 10px</b> <span>.filters · .tblwrap · .paging</span></div>
+            </div>
+          </div>
+          <div class="resizer"></div>
+          <div class="rpane">
+            <div class="rbody">
+              <div class="gutbox">상세 <b>사방 14px</b> <span>.rbody</span></div>
+            </div>
+            <div class="rpane-lock-overlay"></div>
+          </div>
+        </div>
+      </div>
       <div class="worktabs"><div class="wtscroll">
         <div class="wtab">HOME</div><div class="wtab on">예비생 등록·관리<span class="x">✕</span></div>
       </div></div>
@@ -553,17 +581,42 @@
 </div></div></section>
 
 <section id="type"><div class="card"><div class="card-header"><div class="card-title">타이포</div></div><div class="card-body">
-<h4 class="sub">크기 단계</h4>
-<div class="demo" style="display:flex;flex-direction:column;gap:14px;">
-  <span style="font-size:26px;font-weight:800;color:var(--pb);letter-spacing:-.4px;">348<span style="font-size:12px;font-weight:400;color:var(--txt-mut);"> / 446명</span></span>
-  <span style="font-size:16px;font-weight:700;">예비생 등록·관리</span>
-  <span class="sectit" style="margin:0;padding:0;">학급별 충원 현황</span>
-  <span style="font-size:12.5px;font-weight:700;">예비생정보</span>
-  <span style="font-size:11.5px;">홍길동 · 초3 · 2026-08-12</span>
-  <span style="font-size:11.5px;font-weight:700;color:var(--gnb);">학생명</span>
-  <span><span style="font-size:11px;color:var(--txt-mut);">최종 갱신 09:00</span></span>
-  <span style="font-size:10.5px;color:var(--txt-mut);">(직전 학기)</span>
+<h4 class="sub">타입별 크기 · 굵기 · 색</h4>
+<div class="demo">
+  <table class="type-spec">
+    <colgroup><col style="width:31%"><col style="width:13%"><col style="width:26%"><col></colgroup>
+    <thead><tr><th>쓰는 곳</th><th>크기 · 굵기</th><th>색</th><th>보기</th></tr></thead>
+    <tbody>
+      <tr><td class="k">모달 제목 <code>.modal-hd</code></td><td>13 · 700</td><td>흰색 <span class="cnote">(남색 바 위)</span></td>
+        <td><span style="display:inline-block;background:var(--gnb);color:#fff;font-size:13px;font-weight:700;padding:3px 10px;border-radius:3px;">담당자 찾기</span></td></tr>
+      <tr><td class="k">섹션 제목 <code>.sectit</code></td><td>13 · 700</td><td><code>#000</code></td>
+        <td><span style="font-size:13px;font-weight:700;color:#000;">학급별 충원 현황</span></td></tr>
+      <tr><td class="k">빈 상태 안내 <code>.noselect</code></td><td>12 · 400</td><td><code>--pb-deeper</code></td>
+        <td><span style="font-size:12px;color:var(--pb-deeper);">선택된 항목이 없습니다</span></td></tr>
+      <tr><td class="k">버튼 <code>.btn</code></td><td>12 · 500</td><td>주 버튼 흰색 · 보조 <code>--txt</code></td>
+        <td><button class="btn">확인</button> <button class="btn g">닫기</button></td></tr>
+      <tr><td class="k">상세 탭 <code>.dtab</code></td><td>12 · 700</td><td><code>--txt-mut</code> · 활성 <code>--pb-deeper</code></td>
+        <td><span class="dtabs" style="display:inline-flex;border:0;"><span class="dtab on">예비생정보</span><span class="dtab">MAP 예약</span></span></td></tr>
+      <tr><td class="k">경로바 <code>.bcbar</code></td><td>12 · 400</td><td><code>--txt-mut</code> · 현재 <code>--txt</code> 700</td>
+        <td><span style="font-size:12px;color:var(--txt-mut);">입학관리 › <b style="color:var(--txt);">예비생 등록·관리</b></span></td></tr>
+      <tr><td class="k">작업 탭 <code>.wtab</code></td><td>12 · 400</td><td><code>--txt</code></td>
+        <td><span style="font-size:12px;color:var(--txt);">예비생 등록·관리</span></td></tr>
+      <tr><td class="k">페이징 <code>.pgnum</code> <code>.pgnav</code></td><td>12 · 400</td><td><code>--txt-mut</code> · 활성 흰색 700</td>
+        <td><button class="pgnum on">1</button> <button class="pgnum">2</button></td></tr>
+      <tr><td class="k">표 헤더 · 필터 라벨 · 세로형 표 라벨<br><code>th</code> <code>.flabel</code></td><td>12 · 700</td><td><code>--gnb</code> <span class="cnote">#2C3E5A</span></td>
+        <td><span style="font-size:12px;font-weight:700;color:var(--gnb);">학생명</span></td></tr>
+      <tr><td class="k">표 셀 · 입력 · 알림 배너<br><code>td</code> <code>.finput</code> <code>.msgbanner</code></td><td>12 · 400</td><td><code>--txt</code></td>
+        <td><span style="font-size:12px;color:var(--txt);">홍길동 · 초3 · 2026-08-12</span></td></tr>
+      <tr><td class="k">알약 탭 <code>.quickpill button</code></td><td>11 · 400</td><td><code>--txt-mut</code> · 활성 흰색 700</td>
+        <td><span class="quickpill" style="display:inline-flex;"><button class="on">전체</button><button>바로 입학</button></span></td></tr>
+      <tr><td class="k">섹션 보조설명 <code>.hint</code></td><td>11 · 400</td><td><code>#8b95a5</code> <span class="cnote">본문 회색보다 한 단계 옅다</span></td>
+        <td><span style="font-size:11px;color:#8b95a5;">Grid · 정렬 가능</span></td></tr>
+      <tr><td class="k">배지 <code>.badge</code> <code>.agebadge</code></td><td>10.5 · 500</td><td><code>--txt-mut</code> · 상태 배지 <code>--pb-dark</code></td>
+        <td><span class="badge">대기</span> <span class="agebadge cur">초3</span></td></tr>
+    </tbody>
+  </table>
 </div>
+<p class="note">위 값은 kit CSS 에서 실측한 것입니다. 대시보드(01-001)만 지표 화면이라 자체 스케일을 씁니다 — 아래 큰 수치가 그 예외입니다.</p>
 
 <h4 class="sub">숫자 표기</h4>
 <div class="demo row">

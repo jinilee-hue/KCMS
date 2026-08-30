@@ -166,7 +166,7 @@
     style.textContent =
       '.mcModalWide{width:1080px;max-width:97vw;}' +
       '.mcHead{background:linear-gradient(180deg,#5d6b7c,#3f4c5a);color:#fff;padding:8px 12px 7px;flex:0 0 auto;}' +
-      '.mcHeadTop{display:flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;}' +
+      '.mcHeadTop{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;}' +
       '.mcHeadTop svg{flex:0 0 auto;}' +
       '.mcHeadTop .modal-x{margin-left:auto;background:none;border:none;color:#fff;font-size:14px;cursor:pointer;}' +
       '.mcFilterRow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;flex:0 0 auto;}' +
@@ -177,7 +177,7 @@
       '.mcSeg button.on{background:var(--pb);border-color:var(--pb);color:#fff;font-weight:700;}' +
       '.mcDrange{display:flex;align-items:center;gap:5px;flex:0 0 auto;}' +
       '.mcIwrap{position:relative;width:118px;height:24px;}' +
-      '.mcIwrap input{width:100%;height:100%;border:1px solid var(--line);border-radius:3px;padding:0 22px 0 8px;font-size:11.5px;background:#fff;color:var(--txt);}' +
+      '.mcIwrap input{width:100%;height:100%;border:1px solid var(--line);border-radius:3px;padding:0 22px 0 8px;font-size:12px;background:#fff;color:var(--txt);}' +
       '.mcIwrap input::-webkit-calendar-picker-indicator{display:none;}' +
       /* 네이티브 date 입력은 브라우저가 "2026. 08. 25." 로 그린다 — 다른 화면의 날짜 표기
          (YYYY-MM-DD)와 어긋나 보이는 텍스트 입력 + 숨은 date 섀도우 구조로 바꿨다(2026-08-25 요청).
@@ -190,7 +190,7 @@
       '.mcRst:hover{border-color:var(--pb);color:var(--pb);}' +
       '.mcKeyword{flex:1 1 150px;min-width:150px;}' +
       '.mcResultRow{display:flex;align-items:center;justify-content:space-between;margin-top:10px;flex:0 0 auto;}' +
-      '.mcResultRow .cnt{font-size:11.5px;color:var(--txt);}' +
+      '.mcResultRow .cnt{font-size:12px;color:var(--txt);}' +
       '.mcResultRow .cnt b{color:var(--pb-deeper);}' +
       '.mcTableWrap{height:280px;overflow:auto;border:1px solid var(--line-soft);border-radius:3px;margin-top:8px;flex:0 0 auto;}' +
       'table.mcTable{width:100%;border-collapse:collapse;font-size:11px;table-layout:fixed;}' +
@@ -207,7 +207,7 @@
       'td.mcContentCell > .mcClamp{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-all;line-height:1.45;}' +
       '.mcBadge{display:inline-block;border-radius:3px;padding:2px 7px;font-size:10.5px;font-weight:700;white-space:nowrap;}' +
       '.mcTopic{color:var(--pb-deeper);font-weight:700;}' +
-      '.mcEmpty{text-align:center;padding:60px 10px;color:var(--txt-mut);font-size:11.5px;line-height:1.8;}' +
+      '.mcEmpty{text-align:center;padding:60px 10px;color:var(--txt-mut);font-size:12px;line-height:1.8;}' +
       'table.mcTable tbody tr.mcEmptyRow{height:auto;}' +
       'table.mcTable tbody tr.mcEmptyRow td{border-bottom:none;}' +
       '';
@@ -465,13 +465,13 @@
       '.mddCard{display:flex;gap:14px;border:1px solid var(--line-soft);border-radius:6px;padding:12px;margin-bottom:14px;background:#fff;}' +
       '.mddAvatar{flex:0 0 96px;display:flex;flex-direction:column;align-items:center;gap:5px;padding-top:4px;}' +
       '.mddAvatarCircle{width:56px;height:56px;border-radius:50%;background:linear-gradient(180deg,#eaf1ff,#cfe0ff);color:var(--pb-deeper);display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;}' +
-      '.mddInfoTable{flex:1;border-collapse:collapse;font-size:11.5px;align-self:center;}' +
+      '.mddInfoTable{flex:1;border-collapse:collapse;font-size:12px;align-self:center;}' +
       '.mddInfoTable th{width:130px;white-space:nowrap;background:#F4F7FD;color:#2C3E5A;font-weight:700;text-align:left;padding:6px 8px;border:1px solid var(--line-soft);}' +
       '.mddInfoTable td{padding:6px 8px;border:1px solid var(--line-soft);color:var(--txt);white-space:nowrap;}' +
       '.mddInfoTable td:nth-child(2){min-width:280px;}' +
       '.mddInfoTable td:nth-child(4){min-width:120px;}' +
-      '.mddSectionTitle{font-size:12.5px;font-weight:700;color:var(--pb-deeper);margin:2px 0 6px;}' +
-      '.mddFormTable{width:100%;border-collapse:collapse;font-size:11.5px;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;margin-bottom:12px;}' +
+      '.mddSectionTitle{font-size:12px;font-weight:700;color:var(--pb-deeper);margin:2px 0 6px;}' +
+      '.mddFormTable{width:100%;border-collapse:collapse;font-size:12px;border:1px solid var(--line-soft);border-radius:6px;overflow:hidden;margin-bottom:12px;}' +
       '.mddFormTable th{width:88px;background:#F8FAFC;color:#2C3E5A;font-weight:700;text-align:left;padding:7px 9px;border:1px solid var(--line-soft);vertical-align:middle;white-space:nowrap;}' +
       '.mddFormTable td{padding:6px 9px;border:1px solid var(--line-soft);background:#fff;}' +
       '.mddReq{color:var(--danger);margin-right:2px;}' +
@@ -492,7 +492,7 @@
       '.mddTeacherList div:hover{background:var(--pb-light);}' +
       '.mddPlainText{display:inline-block;padding:1px 0;color:var(--txt);}' +
       '.mddNameCellKr{font-weight:700;}' +
-      '.mddContent{width:100%;min-height:70px;resize:vertical;font-family:inherit;font-size:11.5px;line-height:1.6;padding:6px 8px;border:1px solid var(--line);border-radius:3px;color:var(--txt);}' +
+      '.mddContent{width:100%;min-height:70px;resize:vertical;font-family:inherit;font-size:12px;line-height:1.6;padding:6px 8px;border:1px solid var(--line);border-radius:3px;color:var(--txt);}' +
       '#mddResult:disabled{background:#F4F7FC;color:var(--txt-mut);cursor:not-allowed;}' +
       '.mddFoot{display:flex;align-items:center;gap:6px;}' +
       '.mddDelBtn{border-color:var(--danger);color:var(--danger);background:#fff;}' +

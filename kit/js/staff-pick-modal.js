@@ -94,7 +94,7 @@
     style.id = 'staffPickModalStyles';
     style.textContent =
       '#staffPickModal .spmRow{display:flex;align-items:center;gap:8px;padding:10px 12px;background:#eef1f5;border-bottom:1px solid #bcc6d1;flex-wrap:wrap;flex:0 0 auto;}' +
-      '#staffPickModal .spmLbl{background:none;color:var(--gnb,#2C3E5A);font-size:11.5px;font-weight:700;padding:0;white-space:nowrap;}' +
+      '#staffPickModal .spmLbl{background:none;color:var(--gnb,#2C3E5A);font-size:12px;font-weight:700;padding:0;white-space:nowrap;}' +
       '#staffPickModal .spmRow select,#staffPickModal .spmRow input{height:24px;width:130px;}' +
       '#staffPickModal table.spmTbl{border-collapse:collapse;width:100%;font-size:12px;}' +
       '#staffPickModal table.spmTbl th{position:sticky;top:0;background:#7B9BB7;color:#fff;font-weight:700;height:26px;border:1px solid #6a89a5;text-align:center;}' +

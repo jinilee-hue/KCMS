@@ -145,14 +145,14 @@
     style.id = 'smsModalStyles';
     style.textContent =
       '.seg{display:inline-flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;width:100%;}' +
-      '.seg button{flex:1;height:26px;border:none;background:#fff;font-size:11.5px;color:var(--txt-mut);cursor:pointer;border-right:1px solid var(--line);}' +
+      '.seg button{flex:1;height:26px;border:none;background:#fff;font-size:12px;color:var(--txt-mut);cursor:pointer;border-right:1px solid var(--line);}' +
       '.seg button:last-child{border-right:none;}' +
       '.seg button.on{background:var(--pb);color:#fff;font-weight:700;}' +
       '.smsfoot-note{font-size:11px;color:var(--txt-mut);}' +
       '.smsQuota{display:inline-flex;align-items:center;height:19px;padding:0 8px;border-radius:999px;font-size:10px;font-weight:700;margin-left:8px;white-space:nowrap;}' +
       '.smsQuota.sms{background:#ff3b8d;color:#fff;}' +
       '.smsQuota.lms{background:#e6483c;color:#fff;}' +
-      '.smsTypeChk{display:inline-flex;align-items:center;gap:4px;font-size:11.5px;color:var(--txt);margin-right:10px;cursor:pointer;user-select:none;}' +
+      '.smsTypeChk{display:inline-flex;align-items:center;gap:4px;font-size:12px;color:var(--txt);margin-right:10px;cursor:pointer;user-select:none;}' +
       '.smsTypeChk input{width:14px;height:14px;cursor:pointer;}' +
       // 2026-07-28: "크기 확대"를 고정폭 확장(1020→1220px 등)으로만 처리했다가, 사용자가 직접
       // 가로/세로로 드래그해 크기를 조절하고 싶어한다는 피드백에 따라 네이티브 CSS resize를 추가.
@@ -216,12 +216,12 @@
       '.sms-symbolgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:4px;}' +
       '.sms-symbolgrid button{height:24px;border:1px solid var(--line-soft);border-radius:3px;background:#fff;cursor:pointer;font-size:13px;line-height:1;}' +
       '.sms-symbolgrid button:hover{background:var(--pb-light);}' +
-      '.sms-fieldlist button{display:block;width:100%;text-align:left;padding:6px 8px;border:none;background:none;cursor:pointer;font-size:11.5px;border-radius:3px;}' +
+      '.sms-fieldlist button{display:block;width:100%;text-align:left;padding:6px 8px;border:none;background:none;cursor:pointer;font-size:12px;border-radius:3px;}' +
       '.sms-fieldlist button:hover{background:var(--pb-light);}' +
       '.splitbtn{position:relative;display:inline-block;}' +
       '.splitdd{display:none;position:absolute;bottom:100%;left:0;margin-bottom:4px;background:#fff;border:1px solid var(--line);border-radius:3px;box-shadow:0 4px 14px rgba(0,40,100,.16);min-width:120px;overflow:hidden;z-index:5;}' +
       '.splitdd.open{display:block;}' +
-      '.splitdd button{display:block;width:100%;text-align:left;padding:7px 10px;border:none;background:#fff;font-size:11.5px;color:var(--txt);cursor:pointer;}' +
+      '.splitdd button{display:block;width:100%;text-align:left;padding:7px 10px;border:none;background:#fff;font-size:12px;color:var(--txt);cursor:pointer;}' +
       '.splitdd button:hover{background:var(--pb-light);color:var(--pb-deeper);}' +
       '.smsAddWide{width:820px;max-width:94vw;}' +
       '.addtabs{display:flex;align-items:center;gap:6px;margin-bottom:8px;}' +

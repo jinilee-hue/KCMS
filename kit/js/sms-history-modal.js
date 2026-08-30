@@ -98,7 +98,7 @@
       // 공간을 아래 "SMS 발송 내용" 표 영역(.shTableWrap)이 flex:1로 채우도록 이 섹션 전체를 세로 flex로 구성.
       '.shSection{display:flex;flex-direction:column;flex:1;min-height:0;}' +
       '.shSecHead{display:flex;align-items:center;gap:6px;padding:8px 10px;background:#F4F7FD;border-radius:3px;margin-bottom:10px;flex:0 0 auto;}' +
-      '.shSecTitle{font-size:12.5px;font-weight:700;color:#2C3E5A;display:inline-flex;align-items:center;gap:5px;}' +
+      '.shSecTitle{font-size:12px;font-weight:700;color:#2C3E5A;display:inline-flex;align-items:center;gap:5px;}' +
       '.shInfoIcon{color:var(--txt-mut);font-size:11px;cursor:help;}' +
       '.shFilterRow{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:8px;flex:0 0 auto;}' +
       '.shFilterRow2{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;flex:0 0 auto;}' +
@@ -108,7 +108,7 @@
       '.shSeg button:hover{border-color:var(--pb);color:var(--pb);}' +
       '.shSeg button.on{background:var(--pb);border-color:var(--pb);color:#fff;font-weight:700;}' +
       '.shIwrap{position:relative;width:120px;height:24px;flex:0 0 auto;}' +
-      '.shIwrap input{width:100%;height:100%;border:1px solid var(--line);border-radius:3px;padding:0 22px 0 8px;font-size:11.5px;background:#fff;color:var(--txt);}' +
+      '.shIwrap input{width:100%;height:100%;border:1px solid var(--line);border-radius:3px;padding:0 22px 0 8px;font-size:12px;background:#fff;color:var(--txt);}' +
       '.shIwrap input::-webkit-calendar-picker-indicator{display:none;}' +
       /* 네이티브 date 입력은 브라우저가 "2026. 08. 25." 로 그린다 — 다른 화면의 날짜 표기
          (YYYY-MM-DD)와 어긋나 보이는 텍스트 입력 + 숨은 date 섀도우 구조로 바꿨다(2026-08-25 요청).
@@ -125,8 +125,8 @@
       'table.shTable tbody tr:hover{background:#f2f6fc;}' +
       'table.shTable tbody td.shContentCell{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:left;}' +
       '.shBadge{display:inline-block;border-radius:3px;padding:2px 8px;font-size:10.5px;font-weight:700;white-space:nowrap;}' +
-      '.shEmpty{text-align:center;padding:50px 10px;color:var(--txt-mut);font-size:11.5px;}' +
-      '.shPaging{display:flex;align-items:center;gap:8px;padding:8px 2px 0;font-size:11.5px;color:var(--txt-mut);flex:0 0 auto;}' +
+      '.shEmpty{text-align:center;padding:50px 10px;color:var(--txt-mut);font-size:12px;}' +
+      '.shPaging{display:flex;align-items:center;gap:8px;padding:8px 2px 0;font-size:12px;color:var(--txt-mut);flex:0 0 auto;}' +
       '.shPaging .pg{display:flex;gap:2px;}' +
       '.shPaging .pg b{min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;cursor:pointer;font-weight:400;background:#fff;}' +
       '.shPaging .pg b.on{background:var(--pb);color:#fff;border-color:var(--pb-dark);font-weight:700;}' +
@@ -134,7 +134,7 @@
       '.shPaging .shRefresh{width:22px;height:20px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:3px;background:#fff;color:var(--txt-mut);cursor:pointer;padding:0;}' +
       '.shPaging .shRefresh:hover{border-color:var(--pb);color:var(--pb);}' +
       '.shPaging .shSize{display:flex;align-items:center;gap:6px;margin-left:auto;}' +
-      '.shPaging .shSize select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 6px;font-size:11.5px;background:#fff;color:var(--txt);}' +
+      '.shPaging .shSize select{height:22px;border:1px solid var(--line);border-radius:3px;padding:0 6px;font-size:12px;background:#fff;color:var(--txt);}' +
       '.shPaging .shTotal{padding-left:10px;border-left:1px solid var(--line-soft);text-align:right;}';
     document.head.appendChild(style);
   }

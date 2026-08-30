@@ -33,7 +33,7 @@
   var CSS = [
     '.pcmsdp{position:fixed;z-index:4000;display:none;box-sizing:border-box;width:236px;padding:8px;',
     '  background:#fff;border:0;border-radius:3px;box-shadow:0 10px 28px rgba(0,40,100,.20);',
-    '  font-family:inherit;font-size:11.5px;color:var(--txt,#1f2937);',
+    '  font-family:inherit;font-size:12px;color:var(--txt,#1f2937);',
     '  -webkit-user-select:none;user-select:none;}',
     '.pcmsdp.open{display:block;}',
     '.pcmsdp *{box-sizing:border-box;}',
@@ -60,7 +60,7 @@
     /* 날짜 칸 표시는 원(2026-08-25 요청) — 26x26 정사각을 칸 가운데 두고 radius 50%.
        칸 폭(1fr≈30px)에 그대로 radius 를 주면 타원이 되므로 폭을 높이에 맞춰 고정한다. */
     '.pcmsdp-d{width:26px;height:26px;margin:0 auto;padding:0;border:1px solid transparent;border-radius:50%;background:none;',
-    '  font-family:inherit;font-size:11.5px;color:var(--txt,#1f2937);cursor:pointer;}',
+    '  font-family:inherit;font-size:12px;color:var(--txt,#1f2937);cursor:pointer;}',
     '.pcmsdp-d:hover{background:var(--pb-a08,rgba(0,102,255,.08));}',
     '.pcmsdp-d.out{color:#c3c9d2;}',
     '.pcmsdp-d.off{color:#c3c9d2;cursor:not-allowed;}',
@@ -78,10 +78,10 @@
     '  border-top:1px solid var(--line-soft,#e3e8ef);}',
     /* [삭제]/[오늘] 을 텍스트 링크 → 화면 기본 버튼(.btn.g.sm)과 같은 모양으로(2026-08-25 요청).
        이 컴포넌트는 어느 화면에나 주입되므로 .btn 클래스에 기대지 않고 같은 값을 직접 쓴다:
-       높이 24 / 좌우 8 / 1px var(--line) / radius 3 / 11.5px / weight 500. */
+       높이 24 / 좌우 8 / 1px var(--line) / radius 3 / 12px / weight 500. */
     '.pcmsdp-lnk{display:inline-flex;align-items:center;height:24px;padding:0 8px;',
     '  border:1px solid var(--line,#cfd6e0);border-radius:3px;background:#fff;',
-    '  font-family:inherit;font-size:11.5px;font-weight:500;color:var(--txt,#1f2937);cursor:pointer;}',
+    '  font-family:inherit;font-size:12px;font-weight:500;color:var(--txt,#1f2937);cursor:pointer;}',
     '.pcmsdp-lnk:hover{border-color:var(--pb,#0066FF);color:var(--pb,#0066FF);}'
   ].join('');
 

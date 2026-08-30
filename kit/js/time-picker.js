@@ -14,7 +14,7 @@
   var CSS = [
     '.pcmstp{position:fixed;z-index:4000;display:none;box-sizing:border-box;width:232px;padding:8px;',
     '  background:#fff;border:0;border-radius:3px;box-shadow:0 10px 28px rgba(0,40,100,.20);',
-    '  font-family:inherit;font-size:11.5px;color:var(--txt,#1f2937);',
+    '  font-family:inherit;font-size:12px;color:var(--txt,#1f2937);',
     '  -webkit-user-select:none;user-select:none;}',
     '.pcmstp.open{display:block;}',
     '.pcmstp *{box-sizing:border-box;}',
