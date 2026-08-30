@@ -68,6 +68,12 @@
   .chips b.no::before{content:'\2715';font-size:9px;font-weight:800;}
   .doc p.note{font-size:12px;color:var(--txt-mut);line-height:1.8;margin:10px 0 0;}
 
+  /* 아이콘 격자 — 실제 화면에서 쓰는 것만, 사용 횟수와 함께 */
+  .icons{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:14px 8px;}
+  .icons .ic{display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;}
+  .icons .ic svg{color:var(--gnb);}
+  .icons .ic b{font-size:10.5px;font-weight:700;color:var(--txt);}
+  .icons .ic > span{font-size:10px;color:var(--txt-faint);}
   /* 타입 스펙 표 — code 는 선택자, cnote 는 값 주석 */
   .type-spec code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:10.5px;
     background:#F4F7FD;color:#2C3E5A;padding:1px 4px;border-radius:3px;}
@@ -153,6 +159,7 @@
 <body>
 <div class="wrap">
 <aside class="nav"><div class="nav-brand">KCMS 입학관리 Kit</div><div class="nav-sub">컴포넌트 가이드</div>
+<div class="nav-group">컴포넌트</div>
 <a href="#btn">버튼</a>
 <a href="#tab">탭</a>
 <a href="#badge">배지</a>
@@ -166,25 +173,30 @@
 <a href="#modal">모달</a>
 <a href="#toast">토스트</a>
 <a href="#help">도움말 팝오버</a>
+<div class="nav-group">화면 골격</div>
 <a href="#sec">섹션 제목</a>
 <a href="#gnb">GNB 메뉴</a>
 <a href="#shell">화면 골격</a>
+<div class="nav-group">디자인 가이드</div>
 <a href="#color">색</a>
 <a href="#type">타이포</a>
 <a href="#token">간격 · 라운드 · 그림자 · 아이콘</a>
 <div class="nav-foot"><a href="rules.md">규칙 · 계약 (md)</a><a href="index.html">← 다운로드 페이지</a><a href="../입학관리/">체험판 열기</a>
 <div class="kitver" title="이 값이 최신 커밋과 다르면 브라우저가 옛 파일을 들고 있는 것입니다">08-30 14:47 · b068c49</div></div></aside><main class="doc"><header class="doc-hd">
   <h1>컴포넌트 가이드</h1>
-  <p>업무 화면에 쓰는 컴포넌트를 한 곳에 모았습니다. 여기 보이는 모습이 곧 실제 화면입니다.<br>
+  <p><b>컴포넌트</b>는 집어다 쓰는 조각, <b>화면 골격</b>은 페이지에 한 번만 놓이는 뼈대,
+  <b>디자인 가이드</b>는 앞의 둘이 값을 가져다 쓰는 곳입니다.
+  여기 보이는 모습이 곧 실제 화면입니다 — 실제 화면 CSS 를 그대로 싣고 실측으로 대조했습니다.<br>
   불러오기 · API 계약 · 금지 규칙 · 접근성은 <a href="rules.md">rules.md</a> 에 있습니다.</p>
   <div class="facts">
-    <div class="fact"><b>기준 화면</b><span>PCMS-SCR-ET-02-012 예비생 등록·관리</span></div>
-    <div class="fact"><b>대상 범위</b><span>입학관리 11개 화면 · 클래스 커버리지 95%</span></div>
-    <div class="fact"><b>검증</b><span>컴포넌트 67개 실측 대조 · 규칙 29개 점검</span></div>
-    <div class="fact"><b>구성</b><span>common.css 1,413 규칙 · 화면 전용 256 규칙 분리</span></div>
+    <div class="fact"><b>기준 화면</b><span>PCMS-SCR-ET-02-012 예비생 등록·관리<br>화면 10개 · 공통 모달 10개 모듈</span></div>
+    <div class="fact"><b>구성</b><span>컴포넌트 13 · 화면 골격 3 · 가이드 3<br>예시 39개</span></div>
+    <div class="fact"><b>색</b><span>기본색 7종<br>나머지 토큰은 모두 농도 계산식</span></div>
+    <div class="fact"><b>CSS</b><span>공통 1,546 · 화면 전용 256 규칙<br>모달 보정 65 규칙 분리</span></div>
   </div>
 </header>
 
+<h2 class="grp">컴포넌트</h2>
 <section id="btn"><div class="card"><div class="card-header"><div class="card-title">버튼</div></div><div class="card-body">
 <h4 class="sub">아이콘 + 텍스트 · 높이 24PX</h4>
 <div class="demo row">
@@ -193,6 +205,8 @@
   <button class="btn"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>신규등록</button>
   <button class="btn g xls"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#2C3E5A" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg>Excel</button>
   <button class="btn sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>저장</button>
+  <button class="btn g"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>대상추가</button>
+  <button class="btn g sm"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>상태이력조회</button>
 </div>
 
 <h4 class="sub">텍스트만</h4>
@@ -212,23 +226,34 @@
 </div>
 
 <h4 class="sub">아이콘 전용</h4>
-<div class="demo row" style="align-items:center;gap:14px;">
-  <span style="display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--txt-mut);">
-    <button class="bcic" title="새로고침" aria-label="새로고침"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></button>
-    <button class="bcic" title="닫기" aria-label="닫기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-    브레드크럼 도구 · 20px · 입력 안 아이콘(.ibtn 18px)은 날짜 피커에서</span>
+<div class="demo row" style="align-items:center;gap:12px;">
+  <button class="bcic" title="새로고침" aria-label="새로고침"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>
+  <button class="bcic" title="닫기" aria-label="닫기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <button class="bcic star" title="즐겨찾기" aria-label="즐겨찾기"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg></button>
+  <span class="iwrap" style="width:23px;height:22px;display:inline-block;"><button type="button" class="ibtn" tabindex="-1" title="날짜" aria-label="날짜"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg></button></span>
+  <button class="pgnav" title="이전">‹</button>
+  <button class="pgnav" title="다음">›</button>
+  <button class="modal-x" title="닫기" aria-label="닫기">✕</button>
+  <button class="drangeclear" title="지우기" aria-label="지우기">✕</button>
 </div>
-
 <h4 class="sub">이름 링크</h4>
 <div class="demo row" style="align-items:center;gap:10px;">
   <button class="namelink">홍길동</button>
-  <span style="font-size:12px;color:var(--txt-mut);">표 안에서 상세로 넘어가는 이름 — 본문색 그대로 두고, 마우스를 올리면 밑줄</span>
 </div>
 <h4 class="sub">상태 · 기본 / hover / 비활성</h4>
-<div class="demo row">
-  <button class="btn">기본</button>
-  <button class="btn" style="background:var(--pb-dark);border-color:var(--pb-dark);">hover</button>
-  <button class="btn" disabled>비활성</button>
+<div class="demo">
+  <table class="type-spec">
+    <colgroup><col style="width:34%"><col><col><col></colgroup>
+    <thead><tr><th>변형</th><th>기본</th><th>hover</th><th>비활성</th></tr></thead>
+    <tbody>
+      <tr><td class="k">주 버튼<span class="cls">.btn</span></td><td><button class="btn">확인</button></td><td><button class="btn" style="background:var(--pb-dark);">확인</button></td><td><button class="btn" disabled>확인</button></td></tr>
+      <tr><td class="k">보조<span class="cls">.btn.g</span></td><td><button class="btn g">닫기</button></td><td><button class="btn g" style="border-color:var(--pb);color:var(--pb);">닫기</button></td><td><button class="btn g" disabled>닫기</button></td></tr>
+      <tr><td class="k">검색(남색)<span class="cls">.btn.s</span></td><td><button class="btn s">조회</button></td><td><button class="btn s" style="background:var(--txt);">조회</button></td><td><button class="btn s" disabled>조회</button></td></tr>
+      <tr><td class="k">초기화<span class="cls">.btn.g.reset-btn</span></td><td><button class="btn g reset-btn">초기화</button></td><td><button class="btn g reset-btn" style="border-color:var(--pb);color:var(--pb);">초기화</button></td><td><button class="btn g reset-btn" disabled>초기화</button></td></tr>
+      <tr><td class="k">Excel<span class="cls">.btn.g.xls</span></td><td><button class="btn g xls">Excel</button></td><td><button class="btn g xls" style="border-color:var(--gnb);color:var(--gnb);">Excel</button></td><td><button class="btn g xls" disabled>Excel</button></td></tr>
+      <tr><td class="k">삭제 · 액션<span class="cls">.btn.danger</span></td><td><button class="btn danger">삭제</button></td><td><button class="btn danger" style="background:var(--bg);border-color:var(--txt-faint);">삭제</button></td><td><button class="btn danger" disabled>삭제</button></td></tr>
+    </tbody>
+  </table>
 </div>
 </div></div></section>
 
@@ -530,6 +555,7 @@
 </div>
 </div></div></section>
 
+<h2 class="grp">화면 골격</h2>
 <section id="sec"><div class="card"><div class="card-header"><div class="card-title">섹션 제목</div></div><div class="card-body">
 <div class="demo">
   <div class="sectit" style="margin:0;">학급별 충원 현황<span class="hint">Grid · 정렬 가능</span></div>
@@ -538,10 +564,18 @@
 </div></div></section>
 
 <section id="gnb"><div class="card"><div class="card-header"><div class="card-title">GNB 메뉴</div></div><div class="card-body">
+<h4 class="sub">기본</h4>
 <div class="demo dark">
   <div class="topnav" style="position:relative;">
     <div class="brand">PCMS</div>
     <div class="tabs" id="tabs"></div>
+  </div>
+</div>
+<h4 class="sub">메뉴가 넘칠 때 · 좌우 ‹ › 로 밀어서 본다</h4>
+<div class="demo dark">
+  <div class="topnav" style="position:relative;">
+    <div class="brand">PCMS</div>
+    <div class="tabs" id="tabsMany"></div>
   </div>
 </div>
 </div></div></section>
@@ -575,8 +609,13 @@
     </div>
   </div>
 </div>
+<h4 class="sub">작업 탭이 많아질 때 · 좌우 ‹ › 로 밀어서 본다</h4>
+<div class="demo flush" style="max-width:720px;">
+  <div class="worktabs" id="worktabsMany"></div>
+</div>
 </div></div></section>
 
+<h2 class="grp">디자인 가이드</h2>
 <section id="color"><div class="card"><div class="card-header"><div class="card-title">색</div></div><div class="card-body">
 <h4 class="sub">기본색 7종 · 나머지 토큰은 모두 이 색의 농도 변형</h4>
 <div class="demo sws" id="sw-base"></div>
@@ -646,13 +685,27 @@
   <span style="display:inline-block;width:70px;height:34px;background:#fff;border:1px solid var(--tbl-bd-soft);border-radius:5px;box-shadow:0 8px 24px rgba(16,24,40,.14);"></span>
 </div>
 
-<h4 class="sub">아이콘</h4>
-<div class="demo row">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg>
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg>
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M4 21h16"/></svg>
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg>
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+<h4 class="sub">아이콘 · 24×24 그리드 · stroke 1.8 · 본문 16px / 버튼 안 13px</h4>
+<div class="demo icons">
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg><b>달력</b><span>31회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><b>검색</b><span>25회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg><b>새로고침</b><span>17회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><b>추가</b><span>14회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><b>문서</b><span>9회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg><b>다운로드</b><span>8회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><b>홈</b><span>8회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><b>저장</b><span>7회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>닫기</b><span>7회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg><b>표</b><span>6회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 20l1.4-4.2A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg><b>메시지</b><span>6회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><path d="M14 10l5.5-5.5M15 4h5v5"/></svg><b>상세보기</b><span>6회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg><b>학생</b><span>6회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b>체크</b><span>5회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg><b>즐겨찾기</b><span>5회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg><b>목록</b><span>5회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>시간</b><span>4회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><b>펼침</b><span>3회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg><b>복사</b><span>3회</span></span>
 </div>
 </div></div></section>
 
@@ -698,6 +751,24 @@
       comment:'For the Entrance Test taken on June 30, 2026, 홍길동 (Gildong Hong) received the scores shown above. He/she appears to have weaknesses in Listening and Eng. Foundations. More effort is needed in this area. For more information, please see above for the subject-based analysis graph.'
     };
   }
+  /* GNB — 메뉴가 많아지면 탭 줄이 넘치고 좌우 ‹ › 가 나타난다(addNav).
+     실제 메뉴에 가상의 1뎁스를 덧붙여 그 상태를 재현한다. */
+  var MANY = Object.assign({}, MENU);
+  ['학사관리','수납관리','교직원','학원운영','통계','상담','시설','알림','설정'].forEach(function(n){
+    MANY[n] = [{cat:n, items:['하위 메뉴 1','하위 메뉴 2']}];
+  });
+  KCMS.renderTabs(document.getElementById('tabsMany'), MANY, '입학관리', PCMS_GNB_TAB_BADGES);
+
+  /* 작업 탭 — 열어 둔 화면이 많아지면 줄이 넘치고 좌우 ‹ › 가 나타난다(renderWorkTabs → bindNav) */
+  KCMS.renderWorkTabs(document.getElementById('worktabsMany'), [
+    {key:'home', label:'HOME', closable:false},
+    {key:'a', label:'예비생 대시보드'},{key:'b', label:'예비생 등록·관리', cur:true},
+    {key:'c', label:'설명회 예약자 현황'},{key:'d', label:'진학생 관리'},
+    {key:'e', label:'신학기 학급 편성'},{key:'f', label:'상담 이력'},
+    {key:'g', label:'SMS 발송'},{key:'h', label:'응시료 납부 현황'},
+    {key:'i', label:'예약표'},{key:'j', label:'MAP 종합정보'}
+  ]);
+
   KCMS.renderPaging('#pagingFirst', {page:1, total:24, size:30});
   KCMS.renderPaging('#pagingSample', {page:1, total:1284, size:30});
   KCMS.renderPaging('#pagingDemo', {page:3, total:1284, size:30,
