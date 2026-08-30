@@ -57,6 +57,23 @@
     margin:40px 0 16px;padding-bottom:0;border:0;}
   section > .card > .card-body > h4.sub.part:first-child{margin-top:0;}
   section > .card > .card-body > h4.sub:first-child{margin-top:0;}
+
+  /* 데모 아래 접히는 마크업 — 개발자가 그대로 집어가는 자리 */
+  .demowrap{position:relative;}
+  .codebar{display:flex;align-items:center;gap:6px;margin:6px 0 0;}
+  .codebtn{height:22px;padding:0 9px;border:1px solid var(--tbl-bd-soft);border-radius:3px;
+    background:#fff;color:var(--txt-mut);font-size:11px;font-weight:700;cursor:pointer;
+    display:inline-flex;align-items:center;gap:4px;font-family:inherit;}
+  .codebtn:hover{border-color:var(--pb);color:var(--pb);}
+  .codebtn.on{border-color:var(--pb);color:var(--pb);background:var(--pb-light);}
+  .codebox{display:none;margin:6px 0 0;}
+  .codebox.open{display:block;}
+  /* 코드 블록은 이 문서에 이미 있던 어두운 pre 스타일을 그대로 쓴다 */
+  .codebox pre{margin:0;max-height:420px;font-size:11.5px;white-space:pre;
+    font-family:'SFMono-Regular',Menlo,Consolas,'D2Coding',monospace;}
+  .codenote{margin:6px 0 0;padding:8px 12px;border-radius:6px;font-size:11.5px;line-height:1.7;
+    color:var(--txt-mut);background:color-mix(in srgb, var(--gnb) 5%, #fff);
+    border:1px solid var(--tbl-bd-soft);}
   .chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0;}
   .chips b{display:inline-flex;align-items:center;gap:5px;height:23px;padding:0 10px;border-radius:999px;
     background:#EFF3F9;color:#5b6d85;font-size:11px;font-weight:600;letter-spacing:-.1px;}
@@ -136,7 +153,7 @@
   table.spec td.c,table.type-spec td.c{width:36%;color:var(--txt-mut);line-height:1.7;}
   label.chk{display:inline-flex;align-items:center;gap:5px;font-size:12px;margin-right:14px;}
 
-  pre{background:#1B2536;color:#DBE2EE;font-size:12px;line-height:1.7;padding:14px 16px;border-radius:8px;overflow:auto;margin:12px 0 0;}
+  pre{background:color-mix(in srgb, var(--gnb) 78%, #000);color:color-mix(in srgb, var(--gnb) 18%, #fff);font-size:12px;line-height:1.7;padding:14px 16px;border-radius:8px;overflow:auto;margin:12px 0 0;}
   .doc code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#EEF2F8;color:#31415c;padding:1px 5px;border-radius:3px;}
   pre code{background:none;color:inherit;padding:0;font-size:12px;}
   .rule{border-left:3px solid var(--pb);background:var(--pb-a08);padding:12px 16px;font-size:12px;line-height:1.85;margin:12px 0 0;border-radius:0 8px 8px 0;}
@@ -187,12 +204,13 @@
   <p><b>컴포넌트</b>는 집어다 쓰는 조각, <b>화면 골격</b>은 페이지에 한 번만 놓이는 뼈대,
   <b>디자인 가이드</b>는 앞의 둘이 값을 가져다 쓰는 곳입니다.
   여기 보이는 모습이 곧 실제 화면입니다 — 실제 화면 CSS 를 그대로 싣고 실측으로 대조했습니다.<br>
-  불러오기 · API 계약 · 금지 규칙 · 접근성은 <a href="rules.md">rules.md</a> 에 있습니다.</p>
+  불러오기 · API 계약 · 금지 규칙 · 접근성은 <a href="rules.md">rules.md</a> 에 있습니다.<br>
+  새 화면은 <a href="template.html">template.html</a> 을 복사해서 시작하세요.</p>
   <div class="facts">
     <div class="fact"><b>기준 화면</b><span>PCMS-SCR-ET-02-012 예비생 등록·관리<br>업무 화면 6개 · 공통 모달 4개</span></div>
-    <div class="fact"><b>구성</b><span>컴포넌트 13 · 화면 골격 3 · 가이드 3<br>예시 39개 · 데모 41개</span></div>
+    <div class="fact"><b>구성</b><span>컴포넌트 13 · 화면 골격 3 · 가이드 3<br>데모 42개 — 모두 코드 복사 가능</span></div>
     <div class="fact"><b>색</b><span>기본색 7종<br>나머지 토큰은 모두 농도 계산식</span></div>
-    <div class="fact"><b>CSS</b><span>공통 1,551 · 화면 전용 256 · 모달 보정 65 규칙<br>토큰 1 + CSS 3 + JS 12 파일</span></div>
+    <div class="fact"><b>CSS</b><span>공통 1,556 · 화면 전용 254 · 모달 보정 65 규칙<br>토큰 1 + CSS 3 + JS 13 파일</span></div>
   </div>
 </header>
 
@@ -344,6 +362,25 @@
     </table>
   </div>
 </div>
+
+<h4 class="sub">정렬 · 열 너비 조절 · <code>js/table-tools.js</code></h4>
+<div class="demo flush">
+  <div class="tblwrap">
+    <table class="grid" id="ttDemo">
+      <colgroup><col style="width:110px"><col style="width:90px"><col style="width:130px"><col></colgroup>
+      <thead>
+        <tr>
+          <th class="sortable" data-k="name">학생명<span class="colresize" data-k="name"></span></th>
+          <th class="sortable" data-k="grade">학년<span class="colresize" data-k="grade"></span></th>
+          <th class="sortable" data-k="date">등록일<span class="colresize" data-k="date"></span></th>
+          <th>비고</th>
+        </tr>
+      </thead>
+      <tbody id="ttBody"></tbody>
+    </table>
+  </div>
+</div>
+
 </div></div></section>
 
 <section id="scroll"><div class="card"><div class="card-header"><div class="card-title">스크롤</div></div><div class="card-body">
@@ -687,25 +724,25 @@
 
 <h4 class="sub">아이콘 · 24×24 그리드 · stroke 1.8 · 본문 16px / 버튼 안 13px</h4>
 <div class="demo icons">
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg><b>달력</b><span>31회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><b>검색</b><span>25회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg><b>새로고침</b><span>17회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><b>추가</b><span>14회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><b>문서</b><span>9회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg><b>다운로드</b><span>8회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><b>홈</b><span>8회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><b>저장</b><span>7회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>닫기</b><span>7회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg><b>표</b><span>6회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 20l1.4-4.2A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg><b>메시지</b><span>6회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><path d="M14 10l5.5-5.5M15 4h5v5"/></svg><b>상세보기</b><span>6회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg><b>학생</b><span>6회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b>체크</b><span>5회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg><b>즐겨찾기</b><span>5회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg><b>목록</b><span>5회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>시간</b><span>4회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><b>펼침</b><span>3회</span></span>
-  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg><b>복사</b><span>3회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></svg><b>달력</b><span>날짜 입력 · 기간 선택</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4-4"/></svg><b>검색</b><span>검색 · 조회 버튼</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg><b>새로고침</b><span>새로고침 · 초기화</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg><b>추가</b><span>신규등록 · 행 추가</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg><b>문서</b><span>담당자 찾기 · 정보 조회</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v3h16v-3"/></svg><b>다운로드</b><span>Excel 내려받기 · 양식</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg><b>홈</b><span>경로바 현재 위치 · 퀵메뉴</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg><b>저장</b><span>저장 · 변경사항 반영</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><b>닫기</b><span>모달 · 탭 닫기</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="9" x2="9" y2="20"/></svg><b>표</b><span>칼럼 목록 · 정보 변환</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-8.5 8.5 8.5 8.5 0 0 1-3.8-.9L3 20l1.4-4.2A8.5 8.5 0 0 1 12.5 3 8.38 8.38 0 0 1 21 11.5z"/></svg><b>메시지</b><span>SMS 발송 · 발송이력</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="14" r="5"/><path d="M14 10l5.5-5.5M15 4h5v5"/></svg><b>남학생</b><span>성별 표시 <code>.c-male</code></span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="9" r="5"/><path d="M12 14v7M9 18h6"/></svg><b>여학생</b><span>성별 표시 <code>.c-female</code></span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg><b>체크</b><span>참석 · 등록 완료 표시</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg><b>즐겨찾기</b><span>경로바 즐겨찾기</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1.5"/><path d="M4 9h16M4 15h16M10 3v18"/></svg><b>목록</b><span>선택·검색 정보 변환</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>시간</b><span>시간 입력</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><b>펼침</b><span>접기/펼치기 · 드롭다운</span></span>
+  <span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg><b>복사</b><span>상담 이력 등 복제</span></span>
 </div>
 </div></div></section>
 
@@ -716,7 +753,11 @@
 
 
 
-<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/time-picker.js"></script><script src="js/modal-drag.js"></script><script src="js/overlay-scroll.js"></script>
+<script>
+/* 데모의 '원본' 마크업을 JS 가 채우기 전에 붙잡아 둔다. 코드 보기가 이 값을 쓴다. */
+(function(){document.querySelectorAll('.demo').forEach(function(d){d.__src=d.innerHTML;});})();
+</script>
+<script src="js/utils.js"></script><script src="js/layout.js"></script><script src="js/menu.sample.js"></script><script src="js/date-picker.js"></script><script src="js/time-picker.js"></script><script src="js/modal-drag.js"></script><script src="js/overlay-scroll.js"></script><script src="js/table-tools.js"></script>
 <script src="js/staff-pick-modal.js"></script>
 <script src="js/memo-modal.js"></script>
 <script src="js/sms-modal.js"></script>
@@ -939,6 +980,24 @@
 
 
 </script><script>
+  /* 표 도구 데모 — 헤더를 눌러 정렬, 헤더 오른쪽 끝을 끌어 폭 조절 */
+  (function(){
+    var ROWS=[{name:'홍길동',grade:'초3',date:'2026-08-12',note:'형제 재원'},
+              {name:'홍길동',grade:'초5',date:'2026-08-10',note:''},
+              {name:'홍길동',grade:'초4',date:'2026-08-14',note:'셔틀 이용'}];
+    function draw(){
+      document.getElementById('ttBody').innerHTML=ROWS.map(function(r){
+        return '<tr><td>'+r.name+'</td><td>'+r.grade+'</td><td>'+r.date+'</td><td class="l">'+r.note+'</td></tr>';
+      }).join('');
+    }
+    draw();
+    KCMS.initTableTools('#ttDemo',{sort:{onSort:function(key,dir){
+      ROWS.sort(function(a,b){ var x=a[key]||'',y=b[key]||'';
+        return dir==='desc'?y.localeCompare(x):x.localeCompare(y); });
+      draw();
+    }}});
+  })();
+
   var links=[].slice.call(document.querySelectorAll('.nav a[href^="#"]'));
   var secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
   function spy(){ var y=window.scrollY+130, cur=0;
@@ -956,5 +1015,71 @@
 
 
 </div>
+<script>
+/* ── 데모 → 코드 보기 ─────────────────────────────────────────────
+   각 데모의 원본 마크업(__src)을 접히는 <pre> 로 붙인다. 실제로 그려진 것과
+   같은 마크업이라 문서와 화면이 어긋날 수 없다. JS 가 채우는 데모는
+   컨테이너만 두고 어떤 API 가 채우는지 알려 준다. */
+(function(){
+  var JSFILLED={
+    'rail':'KCMS.renderRail(el, PCMS_LEFT_RAIL_ITEMS, \'HOME\')',
+    'tabsMany':'KCMS.renderTabs(el, PCMS_GNB_MENU, current, badges)',
+    'worktabsMany':'KCMS.renderWorkTabs(el, tabs, onOpen, onClose)',
+    'demoPaging':'KCMS.renderPaging(el, {page, total, size, onPage})',
+    'sw-base':'문서 스크립트가 tokens.css 를 읽어 색 견본을 그립니다'
+  };
+  function dedent(t){
+    t=t.replace(/^\s*\n/,'').replace(/\s+$/,'');
+    var lines=t.split('\n'), min=null;
+    lines.forEach(function(l){ if(!l.trim()) return;
+      var n=l.match(/^ */)[0].length; if(min===null||n<min) min=n; });
+    if(min) lines=lines.map(function(l){ return l.slice(min); });
+    return lines.join('\n');
+  }
+  document.querySelectorAll('.demo').forEach(function(d,i){
+    var src=dedent(d.__src||d.innerHTML||'');
+    var wrap=document.createElement('div'); wrap.className='demowrap';
+    d.parentNode.insertBefore(wrap,d); wrap.appendChild(d);
+
+    var bar=document.createElement('div'); bar.className='codebar';
+    var toggle=document.createElement('button');
+    toggle.type='button'; toggle.className='codebtn'; toggle.textContent='코드';
+    toggle.setAttribute('aria-expanded','false');
+    var copy=document.createElement('button');
+    copy.type='button'; copy.className='codebtn'; copy.textContent='복사'; copy.style.display='none';
+    bar.appendChild(toggle); bar.appendChild(copy); wrap.appendChild(bar);
+
+    var box=document.createElement('div'); box.className='codebox'; wrap.appendChild(box);
+    var filled=null;
+    Object.keys(JSFILLED).forEach(function(id){ if(d.querySelector('#'+id)||d.id===id) filled=JSFILLED[id]; });
+    if(!src.trim()) src='<!-- 비어 있는 컨테이너 — 아래 API 가 채웁니다 -->';
+    var pre=document.createElement('pre'); pre.textContent=src; box.appendChild(pre);
+    if(filled){
+      var note=document.createElement('div'); note.className='codenote';
+      note.textContent='이 데모는 JS 가 채웁니다 — '+filled;
+      box.insertBefore(note,pre);
+    }
+    toggle.addEventListener('click',function(){
+      var on=box.classList.toggle('open');
+      toggle.classList.toggle('on',on);
+      toggle.setAttribute('aria-expanded',on?'true':'false');
+      copy.style.display=on?'inline-flex':'none';
+    });
+    copy.addEventListener('click',function(){
+      var t=src;
+      if(navigator.clipboard&&navigator.clipboard.writeText){
+        navigator.clipboard.writeText(t).then(ok,fail);
+      } else { fail(); }
+      function ok(){ copy.textContent='복사됨'; setTimeout(function(){copy.textContent='복사';},1400); }
+      function fail(){
+        var ta=document.createElement('textarea'); ta.value=t;
+        ta.style.cssText='position:fixed;left:-9999px'; document.body.appendChild(ta);
+        ta.select(); try{document.execCommand('copy'); ok();}catch(e){ copy.textContent='복사 실패'; }
+        document.body.removeChild(ta);
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>

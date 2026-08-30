@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>새 화면 — KCMS</title>
+
+<!-- ─────────────────────────────────────────────────────────────
+     1. 서체 — 빼면 안 됩니다.
+        없으면 한글이 시스템 서체로 떨어지고 페이징의 « ‹ › » 글리프
+        모양이 실제 화면과 달라집니다.
+     ───────────────────────────────────────────────────────────── -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
+
+<!-- ─────────────────────────────────────────────────────────────
+     2. 스타일 — 이 순서를 지켜야 합니다.
+        modal-overrides.css 는 반드시 common.css 다음.
+        screen-specific.css 는 기본으로 넣지 않습니다(한 화면 전용 모음).
+     ───────────────────────────────────────────────────────────── -->
+<link rel="stylesheet" href="styles/tokens.css">
+<link rel="stylesheet" href="styles/common.css">
+<link rel="stylesheet" href="styles/modal-overrides.css">
+
+<style>
+  /* 이 화면에서만 쓰는 규칙은 여기. 색은 반드시 토큰으로 — hex 를 새로 적지 않습니다.
+     예: color:var(--txt);  background:color-mix(in srgb, var(--pb) 8%, #fff); */
+</style>
+</head>
+
+<body>
+
+<!-- =========================================================================
+     화면 골격 — .app > .topnav + .lower(.rail + .main)
+     .app 을 닫을 때까지의 뼈대는 모든 화면이 같습니다. 그대로 두세요.
+     ========================================================================= -->
+<div class="app" id="PCMS-SCR-XX-000">
+
+  <!-- 상단 GNB — initLayout() 이 채웁니다 -->
+  <header class="topnav">
+    <div class="brand">PCMS</div>
+    <nav class="tabs" id="tabs"></nav>
+    <div class="contactwrap" id="contactwrap"></div>
+  </header>
+
+  <div class="lower">
+
+    <!-- 좌측 아이콘 레일 — initLayout() 이 채웁니다 -->
+    <aside class="rail" id="rail"></aside>
+
+    <main class="main">
+
+      <!-- ===== 경로바 — 여기부터 화면마다 다릅니다 ===== -->
+      <div class="bcbar">
+        <span class="home"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg></span>
+        학생관리 &rsaquo; 학생정보 &rsaquo; <b>학생 등록</b>
+        <span class="bctools">
+          <button type="button" class="bcic star" title="즐겨찾기" aria-label="즐겨찾기"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.8 5.9 21.4l1.4-6.8L2.2 9.9l6.9-.8z"/></svg></button>
+          <button type="button" class="bcic" title="새로고침" aria-label="새로고침"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg></button>
+          <button type="button" class="bcic" title="닫기" aria-label="닫기"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+        </span>
+      </div>
+
+      <!-- 화면 안에 큰 탭이 필요할 때만. 없으면 이 블록을 지우세요. -->
+      <div class="pagetabs">
+        <button type="button" class="ptab on">목록</button>
+        <button type="button" class="ptab">등록</button>
+      </div>
+
+      <!-- ===== 본문 ===== -->
+      <section class="content">
+        <div class="p4wrap">
+
+          <!-- 검색 필터 — 라벨은 .flabel, 값 칸은 그냥 td -->
+          <div class="filters">
+            <table class="fbox" role="presentation">
+              <tr>
+                <td class="flabel"><label for="fName">학생명</label></td>
+                <td><input class="finput" id="fName" placeholder="학생 이름"></td>
+
+                <td class="flabel"><label for="fNo">학번</label></td>
+                <td><input class="finput" id="fNo" placeholder="학번"></td>
+
+                <td class="flabel"><label for="fState">상태</label></td>
+                <td>
+                  <select class="fselect" id="fState">
+                    <option value="">전체</option>
+                    <option value="재원">재원</option>
+                    <option value="휴원">휴원</option>
+                  </select>
+                </td>
+
+                <td class="flabel"><label for="fDate">등록일</label></td>
+                <td><input class="finput dateinput" id="fDate" placeholder="YYYY-MM-DD"></td>
+              </tr>
+            </table>
+            <div class="ftools">
+              <button type="button" class="btn g" id="resetBtn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 3v6h-6"/></svg>초기화</button>
+              <button type="button" class="btn s" id="searchBtn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>검색</button>
+            </div>
+          </div>
+
+          <!-- 건수 + 그 줄의 동작 버튼. 주요 버튼 1개를 가장 오른쪽에 둡니다. -->
+          <div class="toolbar">
+            <div class="tcount">검색결과 <b id="totalCount">0</b>명</div>
+            <div class="tactions">
+              <button type="button" class="btn g xls" id="xlsBtn">Excel</button>
+              <button type="button" class="btn" id="addBtn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>신규등록</button>
+            </div>
+          </div>
+
+          <!-- 표. 가로 스크롤이 필요하면 .tblwrap 이 처리합니다. -->
+          <div class="tblwrap">
+            <table class="grid">
+              <!-- 폭을 정한 열 + 남는 폭을 먹는 열(폭 없는 col) 하나를 둡니다.
+                   전부 폭을 주면 표가 컨테이너를 넘쳐 가로 스크롤이 생깁니다. -->
+              <colgroup>
+                <col style="width:44px"><col style="width:100px"><col style="width:110px">
+                <col style="width:70px"><col style="width:140px"><col style="width:110px"><col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th><input type="checkbox" id="chkAll" aria-label="전체 선택"></th>
+                  <!-- 정렬시킬 열: class="sortable" + data-k
+                       너비를 끌 열: 안에 <span class="colresize" data-k="…"> -->
+                  <th class="sortable" data-k="no">학번<span class="colresize" data-k="no"></span></th>
+                  <th class="sortable" data-k="name">학생명<span class="colresize" data-k="name"></span></th>
+                  <th class="sortable" data-k="grade">학년<span class="colresize" data-k="grade"></span></th>
+                  <th>학부모 연락처<span class="colresize" data-k="phone"></span></th>
+                  <th class="sortable" data-k="date">등록일<span class="colresize" data-k="date"></span></th>
+                  <th>비고</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div>
+
+          <!-- 페이지네이션 — KCMS.renderPaging() 이 채웁니다 -->
+          <div class="paging" id="paging"></div>
+
+        </div>
+      </section>
+
+      <!-- 하단 작업 탭 — initLayout() 이 채웁니다 -->
+      <div class="worktabs" id="worktabs"></div>
+
+    </main>
+  </div>
+</div><!-- /.app -->
+
+
+<!-- =========================================================================
+     모달 — .modal-ov > .modal-box > (.modal-hd + .modal-body + .modal-foot)
+     KCMS.bindModals() 가 오버레이 클릭 · Esc · ✕ 를 한 번에 연결합니다.
+     ========================================================================= -->
+<div class="modal-ov" id="sampleModal">
+  <div class="modal-box">
+    <div class="modal-hd">
+      학생 등록
+      <button type="button" class="modal-x" data-close aria-label="닫기">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="msgbanner neutral">필수 항목을 모두 채워야 저장됩니다.</div>
+      <table class="vform">
+        <tr><th>학생명</th><td><input class="finput" style="width:180px;"></td></tr>
+        <tr><th>학년</th><td>
+          <select class="fselect" style="width:120px;">
+            <option>초1</option><option>초2</option><option>초3</option>
+          </select>
+        </td></tr>
+      </table>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn g" data-close>취소</button>
+      <button type="button" class="btn">저장</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- =========================================================================
+     스크립트 — 이 순서대로.
+     쓰지 않는 것은 지워도 됩니다(주석의 조건 참고).
+     ========================================================================= -->
+<script src="js/utils.js"></script>            <!-- 필수: 포맷·토스트·모달 -->
+<script src="js/layout.js"></script>           <!-- 필수: 셸·셀렉트·페이징 -->
+<script src="js/menu.sample.js"></script>      <!-- GNB·레일 데이터. 프로젝트 것으로 교체 -->
+<script src="js/date-picker.js"></script>      <!-- 날짜 입력이 있으면 -->
+<script src="js/time-picker.js"></script>      <!-- 시간 입력이 있으면 -->
+<script src="js/modal-drag.js"></script>       <!-- 모달을 쓰면 -->
+<script src="js/overlay-scroll.js"></script>   <!-- 표에 떠 있는 스크롤 막대를 쓰면 -->
+<script src="js/table-tools.js"></script>     <!-- 표 정렬 · 열 너비 조절을 쓰면 -->
+
+<script>
+(function(){
+  'use strict';
+
+  /* ── 1. 셸 한 줄 초기화 ───────────────────────────────────────
+     이 안에서 커스텀 셀렉트 · 트리 셀렉트 · 도움말 팝오버 ·
+     모달 드래그 · bindModals() 가 함께 켜집니다. */
+  initLayout({
+    menu:        PCMS_GNB_MENU,
+    current:     '학생관리',                 // 상단에서 켜둘 1뎁스
+    badges:      PCMS_GNB_TAB_BADGES,
+    railItems:   PCMS_LEFT_RAIL_ITEMS,
+    railCurrent: 'HOME',
+    openTabs: [
+      { key:'home',    label:'HOME', closable:false },
+      { key:'student', label:'학생 등록', cur:true }
+    ],
+    onTabOpen:  function(key){ /* 탭 클릭 */ },
+    onTabClose: function(key){ /* 탭 닫기 */ }
+  });
+
+  /* ── 2. 데이터 → 표 ─────────────────────────────────────────
+     KCMS.esc() 로 감싸 넣습니다. 날짜는 하이픈, 전화는 KCMS.phone(). */
+  var ROWS = [
+    { no:'20260001', name:'홍길동', grade:'초3', phone:'01012341234', date:'2026-08-12', note:'형제 재원' },
+    { no:'20260002', name:'홍길동', grade:'초4', phone:'01012341234', date:'2026-08-13', note:'' },
+    { no:'20260003', name:'홍길동', grade:'초5', phone:'01012341234', date:'2026-08-14', note:'셔틀 이용' }
+  ];
+  var PAGE = 1, SIZE = 30;
+
+  function renderRows(){
+    var s = (PAGE - 1) * SIZE, list = ROWS.slice(s, s + SIZE);
+    document.getElementById('tbody').innerHTML = list.map(function(r){
+      return '<tr>' +
+        '<td><input type="checkbox" aria-label="' + KCMS.esc(r.name) + ' 선택"></td>' +
+        '<td>' + KCMS.esc(r.no) + '</td>' +
+        '<td class="l">' + KCMS.esc(r.name) + '</td>' +
+        '<td>' + KCMS.esc(r.grade) + '</td>' +
+        '<td>' + KCMS.phone(r.phone) + '</td>' +
+        '<td>' + KCMS.esc(r.date) + '</td>' +
+        '<td class="l">' + KCMS.esc(r.note) + '</td>' +
+      '</tr>';
+    }).join('');
+    document.getElementById('totalCount').textContent = KCMS.num(ROWS.length);
+    KCMS.renderPaging('#paging', {
+      page: PAGE, total: ROWS.length, size: SIZE,
+      onPage: function(p){ PAGE = p; renderRows(); }
+    });
+  }
+  renderRows();
+
+  /* ── 3. 표 정렬 · 열 너비 조절 ────────────────────────────
+     정렬 자체는 이쪽에서 합니다. table-tools 는 화살표 상태와 방향만 관리합니다. */
+  KCMS.initTableTools('table.grid', {
+    sort: {
+      onSort: function(key, dir){
+        ROWS.sort(function(a, b){
+          var x = String(a[key] || ''), y = String(b[key] || '');
+          return dir === 'desc' ? y.localeCompare(x) : x.localeCompare(y);
+        });
+        PAGE = 1;
+        renderRows();
+      }
+    }
+  });
+
+  /* ── 4. 그 화면의 동작 ──────────────────────────────────── */
+  document.getElementById('searchBtn').addEventListener('click', function(){
+    KCMS.toast('검색했습니다.', 'success');
+  });
+  document.getElementById('resetBtn').addEventListener('click', function(){
+    document.querySelectorAll('.filters .finput').forEach(function(el){ el.value = ''; });
+    document.querySelectorAll('.filters select').forEach(function(el){ el.selectedIndex = 0; });
+    KCMS.syncSelectWidths();
+    KCMS.toast('검색 조건을 초기화했습니다.', 'neutral');
+  });
+  document.getElementById('addBtn').addEventListener('click', function(){
+    KCMS.openModal('sampleModal');
+  });
+  document.getElementById('chkAll').addEventListener('change', function(){
+    var on = this.checked;
+    document.querySelectorAll('#tbody input[type=checkbox]').forEach(function(c){ c.checked = on; });
+  });
+
+})();
+</script>
+</body>
+</html>

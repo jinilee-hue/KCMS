@@ -198,7 +198,7 @@
 
 | 상태 | 클래스 | 모양 |
 |---|---|---|
-| 기본 | `.tharrow` | ▾ · 진회색 `#2C3E5A` |
+| 기본 | `.tharrow` | ▾ · 진회색 `--gnb` |
 | 내림차순 | `.tharrow.on` | ▾ · 파랑 `--pb` |
 | 오름차순 | `.tharrow.on.up` | ▾ 를 `rotate(180deg)` · 파랑 |
 
@@ -208,6 +208,16 @@
 
 크기는 **16×16 박스 · `font-size:13px`** 로 목록·모달·불러오기 표가 모두 같습니다.
 표마다 다른 클래스(`.sarrow`·`.sortArrow`)를 만들지 말고 `.tharrow` 하나를 씁니다.
+
+정렬과 열 너비 조절은 `js/table-tools.js` 가 담당합니다. 화면마다 다시 짜지 않습니다.
+
+```html
+<th class="sortable" data-k="name">학생명<span class="colresize" data-k="name"></span></th>
+```
+
+`.sortable` 이 붙은 th 는 눌러서 정렬, 안에 든 `.colresize` 는 끌어서 폭 조절입니다.
+라벨을 `.thwrap`/`.thlabel` 로 감싸고 `▾` 버튼을 붙이는 것은 `initSort()` 가 합니다 —
+마크업에 직접 적지 않습니다. **정렬 비교는 화면이 합니다**(`onSort` 콜백).
 
 ### 표 — 스크롤 정책
 
@@ -404,10 +414,23 @@ kit 만 불러다 쓰면 `.g` 모양으로 떨어집니다.
 | 모달 | 파일 | 여는 함수 |
 |---|---|---|
 | 담당자 찾기 | `staff-pick-modal.js` | `openStaffPickModal({onApply})` |
-| 상담이력 | `memo-modal.js` | `openMemoModal({studentNo, name, records, …})` |
-| SMS 발송 | `sms-modal.js` | `openSmsModal({senderOptions, recipients, …})` |
+| 상담이력 | `memo-modal.js` | `openMemoModal({studentNo, name, records, onChange})` |
+| SMS 발송 | `sms-modal.js` | `openSmsModal({senderOptions, recipients, getAddCandidates, onSent})` |
 | SMS 발송이력 | `sms-history-modal.js` | `openSmsHistoryModal({student, records})` |
-| MAP 성적표 | `map-report-modal.js` | `openMapReportCard({studentName, subjects, …})` — 모달이 아니라 **새 창** |
+| MAP 성적표 | `map-report-modal.js` | `openMapReportCard({studentName, standardLevels, subjects, totalRow, variant})` — 모달이 아니라 **새 창** |
+
+DOM 은 처음 부를 때 한 번 만들어 두고 다시 씁니다. 화면에 미리 마크업을 넣지 않습니다.
+
+**옵션의 전체 스키마와 레코드 필드는 각 파일 머리말 주석에 있습니다** — 이 표는 무엇을 넘겨야
+하는지만 보여 줍니다. 아래 세 가지는 자주 걸리는 것이라 여기 적어 둡니다.
+
+- `openMapReportCard` 는 `subjects` 만 넘기면 안 됩니다. `totalRow` 와 `standardLevels` 가
+  없으면 표를 그리는 도중 예외가 나고 **창이 아예 열리지 않습니다**.
+- `openMemoModal({records})` 와 `openSmsHistoryModal({records})` 는 배열을 **레퍼런스로** 들고
+  있습니다. 모달 안에서 등록·수정하면 넘긴 배열이 그 자리에서 바뀝니다 — `onChange` 에서
+  화면의 건수 배지를 다시 그리면 됩니다.
+- `openSmsModal({getAddCandidates})` 는 "대상추가" 팝업이 부르는 **검색 함수**입니다.
+  질의 문자열을 받아 후보 배열을 돌려주면 됩니다.
 
 ### 도움말(?) 팝오버
 
@@ -506,7 +529,11 @@ kit 만 불러다 쓰면 `.g` 모양으로 떨어집니다.
 <script src="js/time-picker.js"></script>    <!-- 시간 입력이 있으면 -->
 <script src="js/modal-drag.js"></script>     <!-- 모달을 쓰면 -->
 <script src="js/overlay-scroll.js"></script> <!-- 표에 떠 있는 스크롤 막대를 쓰면 -->
+<script src="js/table-tools.js"></script>    <!-- 표 정렬·열 너비 조절을 쓰면 -->
 ```
+
+새 화면은 **`template.html` 을 복사해서 시작하세요** — 위 순서와 셸 마크업이 이미 들어 있고,
+그대로 열면 GNB·레일·작업 탭·검색 필터·표·페이징·모달이 동작합니다.
 
 `modal-overrides.css` 를 빠뜨리면 공통 모달의 표 헤더 톤과 여백이 화면과 달라집니다.
 순서가 중요합니다 — `common.css` 다음에 와야 보정 규칙이 얹힙니다.
@@ -574,3 +601,74 @@ KCMS.openModal('myModal');    // .modal-ov 에 .open 을 붙인다
 KCMS.closeModal('myModal');
 KCMS.bindModals();            // 오버레이 클릭 · Esc · ✕ 로 닫히도록 일괄 연결
 ```
+
+**표 — 정렬 · 열 너비 조절**
+
+```js
+KCMS.initTableTools('table.grid', {
+  sort:   { onSort: function(key, dir){ /* dir 은 'asc' | 'desc' — 정렬은 여기서 */ },
+            initial: { key:'name', dir:'asc' } },
+  resize: { min: 32, onResize: function(key, w){ /* 폭 저장이 필요하면 */ } }
+});
+KCMS.initSort(table, opt);        // 정렬만
+KCMS.initColResize(table, opt);   // 폭 조절만. opt.auto:true 면 th[data-k] 에 손잡이를 만들어 붙인다
+```
+
+`colgroup` 이 있으면 `<col>` 폭까지 함께 맞춥니다 — 없는 표도 그대로 동작합니다.
+
+**셀렉트 · 트리 셀렉트 · 도움말 — 나중에 만든 DOM 에 다시 걸 때**
+
+`initLayout()` 이 처음 한 번 걸어 주지만, 모달을 열거나 행을 새로 그린 뒤에는
+그 안의 요소가 아직 배선되지 않았습니다. 그 부분만 다시 부릅니다.
+
+```js
+KCMS.initCsel(root);           // root 안 <select> → 커스텀 셀렉트
+KCMS.syncSelectWidths(root);   // 옵션이 바뀌어 폭을 다시 재야 할 때
+KCMS.initTreeSelect(root);     // 단일 선택 트리
+KCMS.initCTree(root);          // 체크박스 트리
+KCMS.initHelpPop(root);        // .helpwrap 의 ? 팝오버
+KCMS.makeDraggable(box, handle);   // 모달 박스를 헤더로 끌어 옮기기
+```
+
+**포맷 — 표에 값을 넣을 때**
+
+문자열은 **반드시 `esc()`** 를 거칩니다. 날짜는 하이픈, 전화는 `phone()` 하나로 통일합니다.
+
+```js
+KCMS.num(1284)             // '1,284'      문자열도 받습니다. null 은 ''
+KCMS.pct(73.4, 1)          // '73.4%'      ★ 이미 백분율인 수를 받습니다. 0.734 를 넣으면 '0.7%'
+KCMS.pctHtml(73.4, 1)      // '73.4<span class="pcts">%</span>'  % 만 작게
+KCMS.date('20260812')      // '2026-08-12' '2026/08/12' 도 하이픈으로 바꿉니다
+KCMS.date('20260812','/')  // '2026/08/12' 구분자를 바꿀 때만
+KCMS.phone('01012341234')  // '010-1234-1234'
+KCMS.mask('홍길동', 2)      // '홍길*'      앞 keep 글자만 남기고 나머지를 * 로. 기본 keep=1
+KCMS.esc(s)                // HTML 이스케이프
+```
+
+**차트 — Chart.js 를 쓸 때**
+
+색은 CSS 변수에서 읽어 옵니다. hex 를 직접 적지 않습니다.
+
+```js
+KCMS.setChartDefaults();         // 서체·격자·툴팁을 화면과 같게
+KCMS.getChartColors();           // 6색 배열 — --pb 원색 + 투명도 5단계
+KCMS.cssVar('--pb', '#0066FF');  // 토큰 하나 읽기. 두 번째 인자는 못 읽었을 때의 값
+KCMS.ruleColor(73.4, 70);        // 기준 이상이면 파랑, 미만이면 레드 — 지표 규칙(§색) 그대로
+```
+
+`getChartColors()` 가 돌려주는 것은 **한 계열(파랑)의 농도 5단계**입니다. 계열이 다른 색을
+섞지 않습니다 — 차트에 시맨틱 색(성공·경고·위험)을 쓰지 않는다는 규칙과 짝입니다.
+
+**떠 있는 스크롤 막대**
+
+파일을 불러오기만 하면 켜집니다 — 문서를 훑어 대상 표에 스스로 붙고, DOM 이 바뀌면
+다시 훑습니다. 직접 부를 일은 거의 없습니다.
+
+```js
+PcmsOverlayScroll.scan(root);   // 새로 그린 영역만 다시 훑고 싶을 때
+```
+
+**토스트 문구 분류**
+
+`KCMS.toast(msg)` 는 문구를 보고 색을 고릅니다. 직접 고르려면 두 번째 인자를 줍니다.
+분류 규칙을 확인하려면 `KCMS.guessType(msg)` 가 같은 판단을 돌려줍니다.
